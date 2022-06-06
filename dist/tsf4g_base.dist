@@ -1,0 +1,216 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_tconnd_01_0001 "
+}
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+APPNAME=`echo $0 | sed -e 's:.dist$::g'`
+TSF4G_RELEASE_PACK=$APPNAME`date +%Y%m%d`.tgz
+TSF4G_RELEASE_TEMP=$APPNAME`date +%Y%m%d`
+echo "distPackName $TSF4G_RELEASE_PACK"
+if [ -d $TSF4G_RELEASE_TEMP ];then
+	echo "删除旧目录"
+	rm -rf $TSF4G_RELEASE_TEMP
+fi
+
+mkdirIfne()
+{
+	if [ ! -d $1 ];then
+		mkdir -p $1
+	fi
+}
+
+checkAndrm()
+{
+	if [ -d $1 ];then
+		rm -rf $1
+	fi
+	
+	if [ -f $1 ];then
+		rm -f $1
+	fi
+}
+
+mkbasedir()
+{
+	echo "创建新目录${TSF4G_RELEASE_TEMP}"
+	checkAndrm $TSF4G_RELEASE_TEMP
+	mkdirIfne $TSF4G_RELEASE_TEMP
+	baseDir="include lib services tools docs deps examples win32_lib misc"
+	for dir in $baseDir
+	do
+		mkdirIfne $TSF4G_RELEASE_TEMP/$dir
+	done
+}
+
+copydoc()
+{
+	liblist="comm pal taa tapp tbus tdr tlog tloghelp  tmng tsec"
+	
+	if [ ! -d ${TSF4G_RELEASE_TEMP}/docs ];then
+		mkdir ${TSF4G_RELEASE_TEMP}/docs
+	fi
+	
+	for lib in $liblist
+	do
+		if [ -d ${TSF4G_DIR}/docs/$lib/dist ];then
+			if [ ! -d ${TSF4G_RELEASE_TEMP}/docs/$lib ];then
+				mkdir ${TSF4G_RELEASE_TEMP}/docs/$lib
+			fi
+			cp -P -rf ${TSF4G_DIR}/docs/$lib/dist/* ${TSF4G_RELEASE_TEMP}/docs/$lib/
+		fi
+	done
+	
+	cp -P ${TSF4G_DIR}/docs/introduction/TSF4G-Bus-介绍.ppt ${TSF4G_RELEASE_TEMP}/docs/tbus/
+	cp -P ${TSF4G_DIR}/docs/introduction/TSF4G_DR-介绍.ppt ${TSF4G_RELEASE_TEMP}/docs/tdr/
+}
+
+fixlib()
+{
+	cp  -P ${TSF4G_DIR}/lib/libtconnapi.a ${TSF4G_RELEASE_TEMP}/lib/
+	cp  -P ${TSF4G_DIR}/lib/libtcltapi.a ${TSF4G_RELEASE_TEMP}/lib/
+	cp  -P ${TSF4G_DIR}/lib/libexpat* ${TSF4G_RELEASE_TEMP}/lib/
+	cp  -P ${TSF4G_DIR}/lib/libscew* ${TSF4G_RELEASE_TEMP}/lib/
+	cp  -P ${TSF4G_DIR}/lib/libtagentapi* ${TSF4G_RELEASE_TEMP}/lib/
+	
+	cp  -P ${TSF4G_DIR}/lib/libtsf4g* ${TSF4G_RELEASE_TEMP}/lib/
+}
+
+distlib()
+{
+	echo "正在发布lib"
+	
+	mkdirIfne $TSF4G_RELEASE_TEMP/include
+	mkdirIfne $TSF4G_RELEASE_TEMP/lib
+	liblist="comm pal taa tapp tbus tdr tlog tloghelp  tmng tsec"
+	for lib in $liblist
+	do
+		cp -rf ${TSF4G_DIR}/include/$lib ${TSF4G_RELEASE_TEMP}/include/
+		cp -P  ${TSF4G_DIR}/lib/lib${lib}* ${TSF4G_RELEASE_TEMP}/lib/
+	done
+	
+	copydoc
+	cp ${TSF4G_DIR}/docs/release_readme.doc ${TSF4G_RELEASE_TEMP}/docs/	
+	
+	echo "copy win32 Lib files"
+	cp -P  -rf ${TSF4G_DIR}/win32_lib/*  ${TSF4G_RELEASE_TEMP}/win32_lib/	
+	
+	fixlib
+}
+
+distTools()
+{
+	echo "disting tools"
+	echo "copy tools"
+	cp -P -rf ${TSF4G_DIR}/tools/* ${TSF4G_RELEASE_TEMP}/tools/
+}
+
+distService()
+{
+	echo "disting service"
+	echo "copy services"
+	serviceList="tlog tbus"
+	for service in $serviceList
+	do
+		cp -rf ${TSF4G_DIR}/services/${service}_service ${TSF4G_RELEASE_TEMP}/services/
+	done
+}
+
+distExample()
+{
+	echo "Disting example"
+
+
+    mkdir -p ${TSF4G_RELEASE_TEMP}/win32/vc7
+    mkdir -p ${TSF4G_RELEASE_TEMP}/win32/vc8
+    mkdir -p ${TSF4G_RELEASE_TEMP}/win32/vc9
+
+    
+	cp  -rf ${TSF4G_DIR}/win32/vc7/examples ${TSF4G_RELEASE_TEMP}/win32/vc7/
+	cp  -rf ${TSF4G_DIR}/win32/vc8/examples ${TSF4G_RELEASE_TEMP}/win32/vc8/
+	cp  -rf ${TSF4G_DIR}/win32/vc9/examples ${TSF4G_RELEASE_TEMP}/win32/vc9/
+	cp  -rf ${TSF4G_DIR}/lib/examples ${TSF4G_RELEASE_TEMP}/examples/
+	cp  -rf ${TSF4G_DIR}/lib/examples ${TSF4G_RELEASE_TEMP}/lib/
+}
+
+distBenchmark()
+{
+	echo "copy benchmark"
+	mkdir ${TSF4G_RELEASE_TEMP}/examples/benchmark
+	mkdir ${TSF4G_RELEASE_TEMP}/examples/benchmark/tdr
+	cp  ${TSF4G_DIR}/lib/benchmark/tdr/test_tdr_proformance/tdrnetpro  ${TSF4G_RELEASE_TEMP}/examples/benchmark/tdr
+	cp  -rf ${TSF4G_DIR}/lib/benchmark/tdr/tdr_dbormapping_proformance  ${TSF4G_RELEASE_TEMP}/examples/benchmark/tdr
+
+	cp -P  ${TSF4G_DIR}/services/tbus_service/tbusd  ${TSF4G_DIR}/lib/benchmark/tbus/tbusd/
+	cp -P  ${TSF4G_DIR}/tools/tbusmgr ${TSF4G_DIR}/lib/benchmark/tbus
+	cp -P  ${TSF4G_DIR}/tools/trelaymgr  ${TSF4G_DIR}/lib/benchmark/tbus
+	cp -P -rf ${TSF4G_DIR}/lib/benchmark/tbus  ${TSF4G_RELEASE_TEMP}/examples/benchmark
+}
+
+distDeps()
+{
+	echo "copy deps"
+	cp -P  ${TSF4G_DIR}/deps/expat-2.0.0.tar.gz   ${TSF4G_RELEASE_TEMP}/deps
+	cp -P  ${TSF4G_DIR}/deps/scew-0.4.0.tar.gz   ${TSF4G_RELEASE_TEMP}/deps
+#cp -P  ${TSF4G_DIR}/deps/Python-2.6.tar   ${TSF4G_RELEASE_TEMP}/deps	
+}
+
+distMisc()
+{
+	echo "copy makefile"
+	cp  build/*  ${TSF4G_RELEASE_TEMP}/
+	cp  base_dist/Makefile.in   ${TSF4G_RELEASE_TEMP}/
+	cp  base_dist/README   ${TSF4G_RELEASE_TEMP}/
+	cp  base_dist/install.bat   ${TSF4G_RELEASE_TEMP}/
+
+	echo "copy install shell"
+	cp -P ./tsf4g_base.install  ${TSF4G_RELEASE_TEMP}/
+	cp ../tsf4g.mk.tpl ${TSF4G_RELEASE_TEMP}/ 
+	echo "Generate Version"
+	echo "$1 build at `date +%Y%m%d`">${TSF4G_RELEASE_TEMP}/version	
+}
+
+packDist()
+{
+	echo "删除SVN目录"
+	find ${TSF4G_RELEASE_TEMP} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+	echo "打包"
+	tar czf ${TSF4G_RELEASE_PACK} ${TSF4G_RELEASE_TEMP}
+	echo "删除临时目录"
+	rm -rf ${TSF4G_RELEASE_TEMP}	
+}
+
+mkbasedir
+distlib
+distTools
+distService
+distExample
+distBenchmark
+distDeps
+distMisc
+packDist
+
+
+
+
+
+
+
+
+
+
+
+

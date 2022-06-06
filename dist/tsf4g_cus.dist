@@ -1,0 +1,85 @@
+#/bin/bash
+TSF4G_DIR=../
+TCUS_HOME=${TSF4G_DIR}apps/tversionsvr
+TSF4G_CUS_RELEASE=tsf4g_versionsvr`date +%Y%m%d`.tgz
+TCUS_RELEASE_DIR=tsf4g_versionsvr`date +%Y%m%d`
+
+
+echo "mkdir ${TCUS_RELEASE_DIR}"
+mkdir ${TCUS_RELEASE_DIR}
+mkdir ${TCUS_RELEASE_DIR}/bin
+mkdir ${TCUS_RELEASE_DIR}/cfg
+mkdir ${TCUS_RELEASE_DIR}/example
+mkdir ${TCUS_RELEASE_DIR}/include
+mkdir ${TCUS_RELEASE_DIR}/include/apps
+mkdir ${TCUS_RELEASE_DIR}/include/apps/tcusapi
+mkdir ${TCUS_RELEASE_DIR}/lib
+mkdir ${TCUS_RELEASE_DIR}/win32_lib
+mkdir ${TCUS_RELEASE_DIR}/win32_lib/vc6
+mkdir ${TCUS_RELEASE_DIR}/win32_lib/vc6/debug
+mkdir ${TCUS_RELEASE_DIR}/win32_lib/vc6/release
+mkdir ${TCUS_RELEASE_DIR}/tools
+mkdir ${TCUS_RELEASE_DIR}/docs
+
+echo "cp include files"
+cp  ${TSF4G_DIR}include/apps/tcusapi/*.h ${TCUS_RELEASE_DIR}/include/apps/tcusapi/
+
+
+echo "cp lib files"
+cp -rf ${TSF4G_DIR}lib/libcus*.a  ${TCUS_RELEASE_DIR}/lib/
+cp -rf ${TSF4G_DIR}lib/libcus*.so ${TCUS_RELEASE_DIR}/lib/
+
+echo "cp win32_lib files"
+cp -rf ${TSF4G_DIR}win32_lib/vc6/debug/cus_protocol_d.*     ${TCUS_RELEASE_DIR}/win32_lib/vc6/debug/
+cp -rf ${TSF4G_DIR}win32_lib/vc6/release/cus_protocol.*     ${TCUS_RELEASE_DIR}/win32_lib/vc6/release/
+
+echo "cp cus bin"
+cp  ${TCUS_HOME}/bin/tconnd ${TCUS_RELEASE_DIR}/bin
+cp  ${TCUS_HOME}/bin/tconnd_start ${TCUS_RELEASE_DIR}/bin
+cp  ${TCUS_HOME}/bin/tconnd_stop ${TCUS_RELEASE_DIR}/bin
+cp  ${TCUS_HOME}/bin/tversionsvr ${TCUS_RELEASE_DIR}/bin
+cp  ${TCUS_HOME}/bin/versionserver_start ${TCUS_RELEASE_DIR}/bin
+cp  ${TCUS_HOME}/bin/versionserver_stop ${TCUS_RELEASE_DIR}/bin
+cp  ${TCUS_HOME}/bin/versionserver_reload ${TCUS_RELEASE_DIR}/bin
+
+echo "cp cus cfg"
+cp  ${TCUS_HOME}/cfg/tconnd.xml ${TCUS_RELEASE_DIR}/cfg
+cp  ${TCUS_HOME}/cfg/cusprotocol.tdr ${TCUS_RELEASE_DIR}/cfg
+cp  ${TCUS_HOME}/cfg/versionserver.xml ${TCUS_RELEASE_DIR}/cfg
+cp  ${TCUS_HOME}/cfg/libcusmmogbusiness.so ${TCUS_RELEASE_DIR}/cfg
+cp  ${TCUS_HOME}/cfg/mmogbusinessconf.xml ${TCUS_RELEASE_DIR}/cfg
+cp  ${TCUS_HOME}/cfg/mmog_data.tdr ${TCUS_RELEASE_DIR}/cfg
+
+
+echo "cp cusclient"
+cp -rf ${TCUS_HOME}/example/*  ${TCUS_RELEASE_DIR}/example/
+
+echo "cp docs"
+cp   ${TSF4G_DIR}docs/apps/tversionsvr/*.doc ${TCUS_RELEASE_DIR}/docs/
+cp   ${TSF4G_DIR}docs/apps/tversionsvr/*.pdf ${TCUS_RELEASE_DIR}/docs/
+cp   ${TSF4G_DIR}docs/apps/tversionsvr/*.ppt ${TCUS_RELEASE_DIR}/docs/
+
+
+echo "cp tools"
+cp ${TSF4G_DIR}tools/tdr     ${TCUS_RELEASE_DIR}/tools
+cp ${TSF4G_DIR}tools/tbusmgr ${TCUS_RELEASE_DIR}/tools
+cp ${TSF4G_DIR}apps/tversionsvr/tools/tversionsvr_init_bus.sh ${TCUS_RELEASE_DIR}/tools/
+cp ${TSF4G_DIR}apps/tversionsvr/tools/tbusmgr.xml.cus         ${TCUS_RELEASE_DIR}/tools/
+
+
+
+echo "copy installshell"
+cp  ./tsf4g_cus.install ${TCUS_RELEASE_DIR}/
+cp  ./tsf4g_cus.dependency ${TCUS_RELEASE_DIR}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TCUS_RELEASE_DIR}/version
+
+
+find ${TCUS_RELEASE_DIR} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+find ${TCUS_RELEASE_DIR} -name "\*.d" -exec rm -rf {} \;>/dev/null 2>&1
+find ${TCUS_RELEASE_DIR} -name "\*.o" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_CUS_RELEASE} ${TCUS_RELEASE_DIR}
+rm -rf ${TCUS_RELEASE_DIR}
+
+

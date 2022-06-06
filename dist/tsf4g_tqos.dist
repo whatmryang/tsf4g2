@@ -1,0 +1,147 @@
+#/bin/bash
+
+usage()
+{
+	echo "Usage: "
+	echo "  $0 LabelName"
+	echo " "
+	echo "Example: "
+	echo "  $0  tsf4g_qos_01_0001"
+}
+
+if [ $# -ne 1 ]; then
+	echo "paramter list uncorrect"
+	usage
+	exit 1
+fi	
+
+TSF4G_DIR=../
+TSF4G_QOS_DIR=${TSF4G_DIR}/apps/tqos
+TSF4G_RELEASE_DIR=/usr/local/tsf4g_release
+TSF4G_QOS_RELEASE=tsf4g_tqos`date +%Y%m%d%H`.tgz
+TSF4G_QOS_DEV_RELEASE=tsf4g_qos_cliapi`date +%Y%m%d%H`.tgz
+
+echo "mkdir tmpdeploy/tsf4g_qos"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g_qos
+mkdir tmpdeploy/tsf4g_qos/include
+mkdir tmpdeploy/tsf4g_qos/lib
+mkdir tmpdeploy/tsf4g_qos/bin
+mkdir tmpdeploy/tsf4g_qos/bin/tbusd
+mkdir tmpdeploy/tsf4g_qos/bin/tqosconnd
+mkdir tmpdeploy/tsf4g_qos/bin/tqossvr
+mkdir tmpdeploy/tsf4g_qos/bin/tqosproxy
+mkdir tmpdeploy/tsf4g_qos/bin/tqosadapter
+mkdir tmpdeploy/tsf4g_qos/cfg
+mkdir tmpdeploy/tsf4g_qos/cfg/tqosconnd
+mkdir tmpdeploy/tsf4g_qos/cfg/tqossvr
+mkdir tmpdeploy/tsf4g_qos/cfg/tqosproxy
+mkdir tmpdeploy/tsf4g_qos/cfg/tqosadapter
+mkdir tmpdeploy/tsf4g_qos/example
+mkdir tmpdeploy/tsf4g_qos/example/cli
+mkdir tmpdeploy/tsf4g_qos/example/svr
+mkdir tmpdeploy/tsf4g_qos/doc
+mkdir tmpdeploy/tsf4g_qos/tools
+mkdir tmpdeploy/qos_cli_api
+mkdir tmpdeploy/qos_cli_api/doc
+mkdir tmpdeploy/qos_cli_api/include
+mkdir tmpdeploy/qos_cli_api/include/tqos
+mkdir tmpdeploy/qos_cli_api/example
+mkdir tmpdeploy/qos_cli_api/vc6
+mkdir tmpdeploy/qos_cli_api/vc6/lib
+mkdir tmpdeploy/qos_cli_api/vc7
+mkdir tmpdeploy/qos_cli_api/vc7/lib
+mkdir tmpdeploy/qos_cli_api/vc8
+mkdir tmpdeploy/qos_cli_api/vc8/lib
+
+echo "cp include files"
+cp ${TSF4G_QOS_DIR}/include/*.h tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/pal tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/tdr tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/tbus tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/tapp tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/tlog tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/tloghelp tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/comm tmpdeploy/tsf4g_qos/include/
+cp -rf ${TSF4G_DIR}/include/pal tmpdeploy/qos_cli_api/include
+cp -rf ${TSF4G_DIR}/include/tdr tmpdeploy/qos_cli_api/include
+cp -rf ${TSF4G_QOS_DIR}/include/*.h tmpdeploy/qos_cli_api/include/tqos/
+
+echo "cp lib files"
+cp ${TSF4G_DIR}/lib/*.a tmpdeploy/tsf4g_qos/lib/
+cp /usr/lib/libexpat.a tmpdeploy/tsf4g_qos/lib/
+cp /usr/local/lib/libscew.a tmpdeploy/tsf4g_qos/lib/
+cp ${TSF4G_DIR}/win32_lib/vc6/debug/* tmpdeploy/qos_cli_api/vc6/lib/
+cp ${TSF4G_DIR}/win32_lib/vc6/release/* tmpdeploy/qos_cli_api/vc6/lib/
+cp qos_dist/vc6/* tmpdeploy/qos_cli_api/vc6/
+cp ${TSF4G_DIR}/win32_lib/vc7/debug/* tmpdeploy/qos_cli_api/vc7/lib/
+cp ${TSF4G_DIR}/win32_lib/vc7/release/* tmpdeploy/qos_cli_api/vc7/lib/
+cp qos_dist/vc7/* tmpdeploy/qos_cli_api/vc7/
+cp ${TSF4G_DIR}/win32_lib/vc8/debug/* tmpdeploy/qos_cli_api/vc8/lib/
+cp ${TSF4G_DIR}/win32_lib/vc8/release/* tmpdeploy/qos_cli_api/vc8/lib/
+cp qos_dist/vc8/* tmpdeploy/qos_cli_api/vc8/
+
+echo "cp bin files"
+cp ${TSF4G_QOS_DIR}/tqosconnd/tqosconnd tmpdeploy/tsf4g_qos/bin/tqosconnd/
+cp ${TSF4G_QOS_DIR}/tqossvr/tqossvr tmpdeploy/tsf4g_qos/bin/tqossvr/
+cp ${TSF4G_QOS_DIR}/tqosproxy/tqosproxy tmpdeploy/tsf4g_qos/bin/tqosproxy/
+cp ${TSF4G_QOS_DIR}/tqos_adapter/qqgame/billsvr/tqos_adp_qqgame_billsvr tmpdeploy/tsf4g_qos/bin/tqosadapter/
+cp ${TSF4G_QOS_DIR}/tqos_adapter/qqgame/gamesvr/tqos_adp_qqgame_gamesvr tmpdeploy/tsf4g_qos/bin/tqosadapter/
+cp ${TSF4G_QOS_DIR}/tqos_adapter/qqgame/gamesvr/get_day_stat.* tmpdeploy/tsf4g_qos/bin/tqosadapter/
+cp qos_dist/*qosconnd*.sh tmpdeploy/tsf4g_qos/bin/tqosconnd/
+cp qos_dist/*qossvr*.sh tmpdeploy/tsf4g_qos/bin/tqossvr/
+cp qos_dist/*qosproxy*.sh tmpdeploy/tsf4g_qos/bin/tqosproxy/
+cp qos_dist/*adapter*.sh tmpdeploy/tsf4g_qos/bin/tqosadapter/ 
+
+echo "cp cfg files"
+cp qos_dist/tqosconnd.xml tmpdeploy/tsf4g_qos/cfg/tqosconnd/
+cp ${TSF4G_QOS_DIR}/xml/tqos_connd_iplist.xml tmpdeploy/tsf4g_qos/cfg/tqosconnd/
+cp ${TSF4G_QOS_DIR}/tqosapi/city_ip_region.txt tmpdeploy/tsf4g_qos/cfg/tqosconnd/
+cp ${TSF4G_QOS_DIR}/tqosapi/city_ip_region.txt tmpdeploy/tsf4g_qos/cfg/tqossvr/
+cp ${TSF4G_QOS_DIR}/tqosapi/IPDatabase.cfg tmpdeploy/tsf4g_qos/cfg/tqosconnd/
+cp ${TSF4G_QOS_DIR}/tqosapi/IPDatabase.cfg tmpdeploy/tsf4g_qos/cfg/tqossvr/
+cp ${TSF4G_QOS_DIR}/tqosso/tqos_spd_result.so tmpdeploy/tsf4g_qos/cfg/tqosconnd/
+cp ${TSF4G_QOS_DIR}/xml/tqos.xml tmpdeploy/tsf4g_qos/cfg/tqossvr/
+cp qos_dist/*adp*.xml tmpdeploy/tsf4g_qos/cfg/tqosadapter/
+cp qos_dist/*qosproxy*.xml tmpdeploy/tsf4g_qos/cfg/tqosproxy/
+cp qos_dist/*tqosconnd*.xml tmpdeploy/tsf4g_qos/cfg/tqosconnd/
+cp qos_dist/*tqossvr*.xml tmpdeploy/tsf4g_qos/cfg/tqossvr/
+
+echo "cp example files"
+cp qos_dist/ex_cli_makefile tmpdeploy/tsf4g_qos/example/cli/Makefile
+cp ${TSF4G_QOS_DIR}/example/cli_ex/tqos_cli_ex.c tmpdeploy/tsf4g_qos/example/cli/
+cp qos_dist/ex_svr_makefile tmpdeploy/tsf4g_qos/example/svr/Makefile
+cp ${TSF4G_QOS_DIR}/example/gamesvr_ex/tqos_gamesvr_ex.c tmpdeploy/tsf4g_qos/example/svr/
+cp ${TSF4G_QOS_DIR}/example/cli_ex/tqos_cli_ex.c tmpdeploy/qos_cli_api/example/
+
+echo "cp doc files"
+cp ${TSF4G_QOS_DIR}/doc/*.doc tmpdeploy/tsf4g_qos/doc/
+cp ${TSF4G_QOS_DIR}/doc/*Develop* tmpdeploy/qos_cli_api/doc/
+cp ${TSF4G_DIR}/docs/tbus/TSF-G-tbus-*.doc tmpdeploy/tsf4g_qos/doc/
+
+echo "cp tools files"
+cp -rf ${TSF4G_DIR}/tools/* tmpdeploy/tsf4g_qos/tools/
+
+echo "cp tbusd files"
+cp -rf ${TSF4G_DIR}/services/tbus_service/* tmpdeploy/tsf4g_qos/bin/tbusd/
+
+echo "copy installshell"
+cp ./tsf4g_qos.install tmpdeploy/tsf4g_qos/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">tmpdeploy/tsf4g_qos/version
+
+cd tmpdeploy
+find ./tsf4g_qos -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_QOS_RELEASE} tsf4g_qos 
+mv ${TSF4G_QOS_RELEASE} ${TSF4G_RELEASE_DIR}/
+find ./qos_cli_api -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_QOS_DEV_RELEASE} qos_cli_api
+mv ${TSF4G_QOS_DEV_RELEASE} ${TSF4G_RELEASE_DIR}/
+cd ../
+rm -rf tmpdeploy
+
+cd ${TSF4G_QOS_DIR}
+cd ..
+tar czf ${TSF4G_QOS_RELEASE}.src.tgz tqos
+mv ${TSF4G_QOS_RELEASE}.src.tgz ${TSF4G_RELEASE_DIR}/

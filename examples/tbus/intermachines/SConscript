@@ -1,0 +1,3 @@
+SConscript('send/SConscript')
+SConscript('trsf/SConscript')
+SConscript('recv/SConscript')

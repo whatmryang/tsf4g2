@@ -1,0 +1,232 @@
+root:
+    -
+        desc: 架构平台组介绍
+        uri: introduce\introduce.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 架构平台组愿景
+            uri: introduce\tsf4g_vision.htm
+            src: _no_needs_
+        -
+            desc: 产品介绍
+            uri: introduce\tsf4gintro.htm
+            src: _no_needs_
+        -
+            desc: 使用指南
+            uri: introduce\tsf4g_guide.htm
+            src: _no_needs_
+    -
+        desc: 基础库
+        uri: lib\lib.htm
+        src: _no_needs_
+        children:
+        -
+            desc: TBUS
+            uri: lib\tbus.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: lib\tbus\general.htm
+                src: docs\tbus\TSF-G-tbus-概要设计说明书.doc
+            -
+                desc: 维护使用文档
+                uri: lib\tbus\maintence.htm
+                src: docs\tbus\TSF-G-bus_maintence.doc
+            -
+                desc: 用户使用文档
+                uri: lib\tbus\userguider.htm
+                src: docs\tbus\TSF-G-bus-User_Guide.doc
+        -
+            desc: TDR
+            uri: lib\tdr.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: lib\tdr\general.htm
+                src: docs\tdr\TSF-G-DR-概要设计说明书.doc
+            -
+                desc: 元数据描述文档
+                uri: lib\tdr\meta.htm
+                src: docs\tdr\TSF-G-DR-元数据描述.doc
+            -
+                desc: 运行控制工具使用文档
+                uri: lib\tdr\tools.htm
+                src: docs\tdr\TSF-G-DR-运行控制工具使用说明书.doc
+            -
+                desc: FAQ
+                uri: lib\tdr\FAQ.htm
+                src: docs\tdr\TSF-G-DR-FAQ.doc
+        -
+            desc: TAPP
+            uri: lib\tapp\tapp.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 用户使用文档
+                uri: lib\tapp\userguide.htm
+                src: docs\tapp\tapp_user_guide.doc
+    -
+        desc: 统一登录组件
+        uri: unifiedenroll\unifiedenroll.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 网络接入组件(TCONND)
+            uri: unifiedenroll\tconnd.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 协议说明文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Develop.htm
+                src: docs\tconnd\TSF4G_TCONND_Develop.doc
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Maintenance.htm
+                src: docs\tconnd\TSF4G_TCONND_Maintenance.doc
+            -
+                desc: 性能参考文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Performance.htm
+                src: docs\release_readme.doc
+            -
+                desc: 下载发布包
+                uri: ..\Publish\Publish.aspx
+                src: _no_needs_
+    -
+        desc: 通用逻辑组件
+        uri: apps\apps.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 名字服务器(tnamesvr)
+            uri: apps\namesvr\tnamesvr.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\namesvr\namesvrgeneral.htm
+                src: apps\tnamesvr\doc\TSF4G-Namesvr-General.doc
+            -
+                desc: 维护使用文档
+                uri: apps\namesvr\doc\maintain.htm
+                src: apps\tnamesvr\doc\TSF4G-Namesvr-Maintenance.doc
+            -
+                desc: 性能参考文档
+                uri: apps\namesvr\namesvrbenchmark.htm
+                src: apps\tnamesvr\doc\TSF4G-Namesvr-Benchmark.doc
+        -
+            desc: 日志组件（tlog）
+            uri: apps\tlog\tlog.htm
+            src: _no_needs_
+            children:
+            -
+                desc: tlog用户指南
+                uri: apps\tlog\tloguserguide.htm
+                src: docs\log\tlog_user_guide.doc
+        -
+            desc: 敏感词系统 (tdirty)
+            uri: apps\tdirty\tdirty.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\tdirty\general.htm
+                src: apps\tdirty\doc\TSF4G-Dirty-General.doc
+            -
+                desc: 接口说明文档
+                uri: apps\tdirty\develop.htm
+                src: apps\tdirty\doc\TSF4G-Dirty-Develop.doc
+            -
+                desc: 接口说明文档-kr
+                uri: apps\tdirty\develop-kr.htm
+                src: apps\tdirty\doc\TSF4G-Dirty-Develop-kr.doc
+        -
+            desc: 通用邮件系统 (tmail)
+            uri: apps\tmail\tmail.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\tmail\general.htm
+                src: apps\mail\doc\TSF4G-Mail-General.doc
+            -
+                desc: 开发指导文档
+                uri: apps\tmail\develop.htm
+                src: apps\mail\doc\TSF4G-Mail-Develop.doc
+        -
+            desc: 通用商城系统 (tmart)
+            uri: apps\tmart\tmart.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\tmart\general.htm
+                src: apps\tmart\doc\TSF4G-Mart-General.doc
+            -
+                desc: 维护使用文档
+                uri: apps\tmart\maintenance.htm
+                src: apps\tmart\doc\TSF4G-Mart-Maintenance.doc
+    -
+        desc: 数据存储组件
+        uri: storage\storage.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 对象关系映射(torm)
+            uri: storage\torm\torm.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 维护使用文档
+                uri: storage\torm\torm_maintence.htm
+                src: apps\orm\doc\TSF-G-ORMSVR-Maintence.doc
+            -
+                desc: 问题解答(FAQ)
+                uri: storage\torm\torm_faq.htm
+                src: apps\orm\doc\TSF-G-ORM-FAQ.doc
+            -
+                desc: 客户端API使用简介
+                uri: storage\torm\api_introduction.htm
+                src: apps\orm\doc\TSF-G-ORM-CLIENT-API-Introduction.doc
+            -
+                desc: 概要设计文档
+                uri: storage\torm\torm_design.htm
+                src: apps\orm\doc\TSF-G-ORMSVR_Design.doc
+            -
+                desc: 性能参考文档
+                uri: storage\torm\performance.htm
+                src: apps\orm\doc\TSF-G-ORM-Performance.doc
+    -
+        desc: 系统管理组件
+        uri: sysmng\sysmng.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 集中管理系统(tcm)
+            uri: sysmng\tcm\tcm.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: sysmng\tcm\tcm_design.htm
+                src: _no_needs_
+        -
+            desc: tagent
+            uri: sysmng\tagent\tagent.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计文档
+                uri: sysmng\tagent\general.htm
+                src: apps\tagent\doc\TSF4G-Agent-Centerd-General.doc
+        -
+            desc: tcenterd
+            uri: sysmng\tcenterd\tcenterd.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 概要设计
+                uri: sysmng\tcenterd\general.htm
+                src: apps\tcenterd\doc\TSF4G-Centerd-General.doc

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+TSF4G_BASE_RELEASE=tsf4g_base`date +%Y%m%d`.tgz
+TSF4G_BASE_HOME=tsf4g_base`date +%Y%m%d`
+
+./tsf4g_base.dist tsf4b_base_01_0011
+
+tar -zxvf $TSF4G_BASE_RELEASE
+cd  $TSF4G_BASE_HOME
+
+#config
+
+./configure --prefix=$HOME/tsf4g_install
+make
+if [ $? -ne 0 ];then
+	echo "base±‡“Î ß∞‹"
+	exit -1
+fi
+
+cd lib/examples && make && make test
+if [ $? -ne 0 ];then
+	echo "base≤‚ ‘ ß∞‹"
+	exit -1
+fi
+
+cd ../../
+rm -rf ~/tsf4g_install
+make install 
+if [ $? -ne 0 ];then
+	echo "base∞≤◊∞ ß∞‹"
+	exit -1
+fi
+
+cd ~/tsf4g_install
+cd examples/examples && make
+if [ $? -ne 0 ];then
+	echo "∞≤◊∞∫Û±‡“Î ß∞‹"
+	exit -1
+fi
+

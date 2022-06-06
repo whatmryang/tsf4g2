@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./tcmcenter  --id=##TCMID## --business-id=##USER_ID## stop

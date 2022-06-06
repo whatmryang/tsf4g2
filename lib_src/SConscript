@@ -1,0 +1,25 @@
+import os
+Import('buildenv')
+
+tdrSrcList=list()
+tdrSrcList_mt=list()
+
+
+
+liblist="pal tdr comm taa  tapp  tbus  tlog  tloghelp  tmng  tqqsig  tsec"
+
+
+for lib in Split(liblist):
+	singleSrc = SConscript(os.path.join(buildenv.libPath,lib,'SConscript'))
+	tdrSrcList+= singleSrc
+	tdrSrcList_mt+= singleSrc
+
+libtsf4g_st_s=buildenv.buildStaticLib('tsf4g',tdrSrcList,OBJPREFIX="tsf4g",MODULE='base',CPPPATH=Split("./"),CPPDEFINES=['TBUS_OPTIMIZE_ENCODING_HEAD','_TSF4G_LARGE_LIB_', '_FILE_OFFSET_BITS=64'])
+
+if buildenv._isLinux:
+	libtsf4g_st_d=buildenv.buildSharedLib('tsf4g',tdrSrcList,MODULE='base',a_tsf4g_static_lib='scew expat',LIBS='pthread mysqlclient',OBJPREFIX="tsf4g_s",a_major="2",a_minor="0",a_build="0",CPPPATH=Split('./'), CPPDEFINES=['TBUS_OPTIMIZE_ENCODING_HEAD','_TSF4G_LARGE_LIB_', '_FILE_OFFSET_BITS=64'])
+
+libtsf4g_st_s=buildenv.buildStaticLib('tsf4g_r',tdrSrcList_mt,OBJPREFIX="tsf4g_mt",MODULE='base',CPPPATH=Split("./"),CPPDEFINES=['TBUS_OPTIMIZE_ENCODING_HEAD','_TSF4G_LARGE_LIB_','TSF4G_THREAD_SAFE', '_FILE_OFFSET_BITS=64'])
+
+if buildenv._isLinux:
+	libtsf4g_st_d=buildenv.buildSharedLib('tsf4g_r',tdrSrcList_mt,a_tsf4g_static_lib='scew expat',LIBS='pthread mysqlclient',OBJPREFIX="tsf4g_mt_s",a_major="2",MODULE='base',a_minor="0",a_build="0",CPPPATH=Split('./'),CPPDEFINES=['TBUS_OPTIMIZE_ENCODING_HEAD','_TSF4G_LARGE_LIB_','TSF4G_THREAD_SAFE', '_FILE_OFFSET_BITS=64'])

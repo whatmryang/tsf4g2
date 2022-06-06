@@ -1,0 +1,27 @@
+# The set of source files associated with this SConscript file.
+import os
+
+
+Import('buildenv')
+
+
+buildenv.xml2h(Split('tbustestserver_conf_desc.xml'))
+
+buildenv.xml2h(Split('tbustestCS.xml'))
+
+buildenv.xml2c('tbustestserver_conf_desc','tbustestserver_conf_desc.xml')
+
+buildenv.xml2c('tbustestCS','tbustestCS.xml')
+
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+
+if buildenv._isLinux:
+	buildenv.buildExec('tbustestserver',src_local,a_tsf4g_static_lib='tsf4g',LIBS='pthread')
+else:
+	buildenv.buildExec('tbustestserver',src_local,a_tsf4g_static_lib='tsf4g',CPPDEFINES=['_TSF4G_LARGE_LIB_'])
+
+
+

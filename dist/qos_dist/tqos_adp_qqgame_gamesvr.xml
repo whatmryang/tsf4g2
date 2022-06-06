@@ -1,0 +1,7 @@
+<tqos_adp_qqgame_gamesvr_conf version="10">
+	<ProxyIP>10.1.44.60</ProxyIP>
+	<ProxyPort>42332</ProxyPort>
+	<LocalIP>10.1.44.60</LocalIP>
+	<QosIP>10.1.44.60</QosIP>
+	<QosPort>34577</QosPort>
+</tqos_adp_qqgame_gamesvr_conf>	

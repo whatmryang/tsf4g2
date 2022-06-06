@@ -1,0 +1,68 @@
+#/bin/bash
+TSF4G_HOME=~/tsf4g
+TSF4G_BUSSRC_RELEASE=tsf4g_bussrc`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g
+mkdir tmpdeploy/tsf4g/include
+mkdir tmpdeploy/tsf4g/deps/
+mkdir -p tmpdeploy/tsf4g/lib_src/
+mkdir -p tmpdeploy/tsf4g/services_src/
+mkdir -p tmpdeploy/tsf4g/tools_src/
+mkdir -p tmpdeploy/tsf4g/docs/
+mkdir -p tmpdeploy/tsf4g/build/
+
+echo "cp tsf4g include"
+cp -rf ${TSF4G_HOME}/include/tbus  tmpdeploy/tsf4g/include
+
+
+echo "cp lib_src"
+cp -rf ${TSF4G_HOME}/lib_src/tbus tmpdeploy/tsf4g/lib_src
+
+
+echo "cp tsf4g docs"
+cp -rf ${TSF4G_HOME}/docs/tbus  tmpdeploy/tsf4g/docs
+ 
+ echo "cp services_src"
+cp -rf ${TSF4G_HOME}/services_src/tbus_service  tmpdeploy/tsf4g/services_src
+
+ echo "cp tools_src"
+cp -rf ${TSF4G_HOME}/tools_src/tbus  tmpdeploy/tsf4g/tools_src
+
+
+ echo "cp build"
+cp -rf ${TSF4G_HOME}/build  tmpdeploy/tsf4g/
+
+echo "cp Makefile"
+cp ${TSF4G_HOME}/configure  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/configure.in  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/INSTALL  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/README  tmpdeploy/tsf4g/
+
+
+cd tmpdeploy
+find . -name ".svn" -exec rm -rf {} \;
+find . -name "\*.o" -exec rm -rf {} \;
+find . -name "\*.d" -exec rm -rf {} \;
+
+tar czvf ${TSF4G_BUSSRC_RELEASE} tsf4g 
+mv ${TSF4G_BUSSRC_RELEASE}   ../
+cd ../
+rm -rf tmpdeploy
+

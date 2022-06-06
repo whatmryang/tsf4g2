@@ -1,0 +1,84 @@
+#/bin/bash
+TSF4G_HOME=~/tsf4g
+TSF4G_SRC=tsf4g_src`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g
+mkdir tmpdeploy/tsf4g/include
+mkdir tmpdeploy/tsf4g/deps/
+mkdir -p tmpdeploy/tsf4g/lib_src/
+mkdir -p tmpdeploy/tsf4g/services_src/
+mkdir -p tmpdeploy/tsf4g/tools_src/
+mkdir -p tmpdeploy/tsf4g/unittests_src/
+mkdir -p tmpdeploy/tsf4g/apps/
+mkdir -p tmpdeploy/tsf4g/win32/
+mkdir -p tmpdeploy/tsf4g/docs/
+mkdir -p tmpdeploy/tsf4g/build/
+
+echo "cp tsf4g include"
+cp -rf ${TSF4G_HOME}/include  tmpdeploy/tsf4g
+
+
+echo "cp dr deps"
+cp -rf ${TSF4G_HOME}/deps  tmpdeploy/tsf4g
+
+echo "cp lib_src"
+cp -rf ${TSF4G_HOME}/lib_src tmpdeploy/tsf4g/
+
+
+echo "cp tsf4g docs"
+cp -rf ${TSF4G_HOME}/docs  tmpdeploy/tsf4g/
+ 
+ echo "cp services_src"
+cp -rf ${TSF4G_HOME}/services_src  tmpdeploy/tsf4g/
+
+ echo "cp tools_src"
+cp -rf ${TSF4G_HOME}/tools_src  tmpdeploy/tsf4g/
+
+ echo "cp unittests_src"
+cp -rf ${TSF4G_HOME}/unittests_src  tmpdeploy/tsf4g/
+
+ echo "cp apps"
+cp -rf ${TSF4G_HOME}/apps  tmpdeploy/tsf4g/
+
+ echo "cp win32"
+cp -rf ${TSF4G_HOME}/win32  tmpdeploy/tsf4g/
+
+ echo "cp build"
+cp -rf ${TSF4G_HOME}/build  tmpdeploy/tsf4g/
+
+echo "cp Makefile"
+cp ${TSF4G_HOME}/tsf4g.mk  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/Makefile  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/configure  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/configure.in  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/INSTALL  tmpdeploy/tsf4g/
+cp ${TSF4G_HOME}/README  tmpdeploy/tsf4g/
+
+
+cd tmpdeploy
+find . -name ".svn" -exec rm -rf {} \;
+find . -name "\*.o" -exec rm -rf {} \;
+find . -name "\*.d" -exec rm -rf {} \;
+
+tar czvf ${TSF4G_SRC} tsf4g 
+mv ${TSF4G_SRC}   ../
+cd ../
+rm -rf tmpdeploy
+

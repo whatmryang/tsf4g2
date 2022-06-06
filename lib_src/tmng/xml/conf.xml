@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="tormsvr" version="14" >
+	
+	<macro name="TORMSVR_STRING_LEN" value="256" />
+	<macro name="TORM_MAX_CHANNEL" value="256" />
+	<macro name="TORM_MAX_THREAD" value="256" />
+	<macro name="TORM_MAX_DBCONN" value="32" />
+	<macro name="TORM_MAX_TABLE" value="1024" />
+	<macro name="TORM_MAX_DBMETALIB" value="128" />
+	<macro name="TORM_MAX_CACHEMETA" value="128" />
+  <macro name="TORM_MAX_RECORDS_NUM_PERSELECT" value="100" desc="单个select查询能检索出的记录行最大数目" />
+  <macro name="TORM_MAX_CACHE_PERCENT_SYN_SCTMSLCT_RES" value="80" 
+         desc="当将自定义查询条件中的记录添加的cache中时，如果cache使用比例超过此值时停止添加记录到cache中" />
+
+	<struct name="TORMConnectDBInfo" version="10" desc="数据库信息">
+		<entry name="IDX" type="int" defaultvalue="1" desc="定义TableConf时根据IDX索引到数据库"/>
+		<entry name="MajorVersion" type="int" desc="默认0"/>
+		<entry name="MinVersion" type="int" desc="默认0" />
+		<entry name="DBMSName" type="string" size="TORMSVR_STRING_LEN" defaultvalue="mysql" desc="默认值mysql,目前只支持mysql"/>
+		<entry name="DBMSConnectionInfo" type="string" size="TORMSVR_STRING_LEN" defaultvalue="localhost" desc="默认localhost"/>
+		<entry name="DBMSCurDatabaseName" type="string" size="TORMSVR_STRING_LEN" defaultvalue="testdb" />
+		<entry name="DBMSUser" type="string" size="TORMSVR_STRING_LEN" defaultvalue="user" />
+		<entry name="DBMSPassword" type="string" size="TORMSVR_STRING_LEN" defaultvalue="passwd" />
+		<entry name="DBMSConnCharset" type="string" size="TORMSVR_STRING_LEN" defaultvalue="latin1" desc="默认latin1"/>
+		<entry name="DBMSSock" type="string" size="TORMSVR_STRING_LEN" defaultvalue="/tmp/mysql.sock" desc="默认/tmp/mysql.sock" />
+	</struct>
+	
+	<struct name="TORMShmConf" version ="10" >
+		<entry name="Key" type="string" size="TORMSVR_STRING_LEN" defaultvalue="0" />
+		<entry name="Size" type="int" defaultvalue="0" />
+	</struct>
+	
+	<struct name="TORMMetaLibInfo" version ="10" >
+		<entry name="MetaLibNum" type="int" defaultvalue="1" desc="MetaLib个数"/>
+		<entry name="MetaLibName" type="string" size="TORMSVR_STRING_LEN" defaultvalue="testlib" count="TORM_MAX_DBMETALIB" refer="MetaLibNum" />
+	</struct>
+
+    <!--
+	<struct name="TORMChannelConf" version ="10" >
+		<entry name="ChannelKey" type="string" size="TORMSVR_STRING_LEN" defaultvalue="0x201" />
+		<entry name="UpSize" type="int" defaultvalue="1048576" />
+		<entry name="DownSize" type="int" defaultvalue="1048576" />
+	</struct>
+	-->
+	
+	<struct name="TORMTableConf" version ="10" >
+		<entry name="TableName" type="string" size="TORMSVR_STRING_LEN" defaultvalue="testinfo" 
+				desc="支持以下格式:1) testinfo ; 2) testinfo from=0 to=255 ; 3) testinfo from=0 to=255 div=4 remain=1"/>
+		<entry name="TableDBConnIdx" type="int" defaultvalue="1" desc="ConnectDBInfo中的IDX,默认值1"/>
+	</struct>
+	
+	<struct name="TORMCacheVar" version ="10" >
+		<entry name="TableMetaName" type="string" defaultvalue="testinfo" size="TORMSVR_STRING_LEN" 
+				desc="cache的元数据名称"/>
+		<entry name="AsynUpdateDB" type="int" defaultvalue="1"
+				desc="更新的时候是否异步更新数据库，默认值1为异步更新" version="13"/>
+		<entry name="CacheNum" type="int" defaultvalue="1000" desc="cache记录最大数目,默认值1000" />
+		<entry name="ScanNum" type="int" defaultvalue="10" desc="默认值10, 每次tick的时候最大检查记录数目，配合SyncNum使用，tick时，从上次检查点开始检查，直到检查到SyncNum个脏数据或者总共检查了ScanNum个数据即结束，下次从结束点继续检查。如果需要在tick的时候不回写脏数据，将此配置项配为0即可。注意，在进程停止的时候，此参数无效，如果有脏数据，会回写到数据库，如果在进程停止的时候不想回写脏数据到数据库，使用kill命令代替stop命令即可。可以reload"/>
+		<entry name="SyncNum" type="int" defaultvalue="5" desc="默认值5, 每次tick时候最大同步脏数据记录条数，不能配置太大，否则单次tick会占用很长时间。在进程停止的时候该参数有效，即收到stop命令以后，进程并不会马上停止，只是标记为开始停止状态，然后在每次tick的时候回写该配置数量的脏数据，直到所以的脏数据回写之后才会停止进程。如果进程停止的时候不想回写脏数据，使用kill命令替换stop命令即可。可以reload"/>
+		<entry name="EliminateNum" type="int" defaultvalue="5" desc="默认值5, 当cache满的时候需要插入新的纪录到cache中时，从cache中删除旧记录的条数.可以reload"/>
+	</struct>
+	
+	<struct name="TORMCacheConf" version ="10" >
+		<entry name="CacheShm" type="TORMShmConf" desc="cache使用的共享内存配置信息,配置Key即可，大小自动计算"/>
+		<entry name="CacheVarNum" type="int" defaultvalue="0" desc="cache的元数据类型个数,默认值0"/>
+		<entry name="CacheVar" type="TORMCacheVar" count="TORM_MAX_CACHEMETA" refer="CacheVarNum" />
+	</struct>
+		
+	<struct name="tormsvrconf" version ="10" desc="需要完整tormsvr配置,请备份tormsvr.xml后使用参数generate运行tormsvr生成tormsvr.xml">
+		<entry name="MaxProcessTime" type="int" defaultvalue="100" 
+			desc="数据库慢操作最小时间,单位为毫秒，默认值100,可以reload"/>
+	
+		<entry name="Mode" type="int" defaultvalue="0" version="12" 
+			desc="0:正常模式, 1:cachesrv模式,默认值0" />
+			
+		<entry name="ProcessCount" type="int" defaultvalue="10" version="12" 
+			desc="每个主循环最大处理消息数,默认值10,可以reload" />
+     
+		<entry name="MetaLibInfo" type="TORMMetaLibInfo" desc="使用的元数据库，需要运行前先通过tmng工具加载"/>
+		<entry name="DispFuncSOFile" type="string" size="TORMSVR_STRING_LEN" defaultvalue="" desc="线程分配so文件，默认为空,可以reload"/>
+		<entry name="DispFunc" type="string" size="TORMSVR_STRING_LEN" defaultvalue="" desc="线程分配函数，默认为空,可以reload"/>
+		<!--<entry name="ProtoVerHashShm" type="TORMShmConf" />-->
+	
+		<entry name="ChannelNum" type="int" defaultvalue="0" desc="处理线程(通道)个数，使用单线程版本请配置为0，默认为0"/>
+        	<entry name="ChannelSize" type="int" defaultvalue="10485760" desc="主线程与处理线程通道大小(byte)，默认为10兆"/>
+        	<entry name="ReplyBusyMsg" type="int" defaultvalue="1" desc="处理忙得时候是否返回服务忙的消息，默认返回(1),不需要返回请配置为0,可以reload"/>
+
+        	<!--
+        	<entry name="ChannelDownSize" type="int" defaultvalue="404800" desc="处理线程发往主线程的管道大小"/>
+            	-->
+
+		<!--
+		<entry name="ChannelConf" type="TORMChannelConf" count="TORM_MAX_CHANNEL" refer="ChannelNum" />
+		-->
+		<entry name="ConnectDBNum" type="int" defaultvalue="1" desc="需要访问的数据库个数,"/>
+		<entry name="ConnectDBInfo" type="TORMConnectDBInfo" count="TORM_MAX_DBCONN" refer="ConnectDBNum" />
+		
+		<entry name="TableNum" type="int" defaultvalue="1" desc="访问的数据表(描述)个数,一个描述可以包含多个表"/>
+		<entry name="TableConf" type="TORMTableConf" count="TORM_MAX_TABLE" refer="TableNum" />
+
+		<entry name="CacheConf" type="TORMCacheConf" />
+		<entry name="SynCstmSlctRes2Cache" type="int" defaultvalue="0" version="11" 
+			desc="是否将自定义查询条件检索出的记录同步到cache中，缺省不同步,默认值0,可以reload" />
+    <entry name="SynCstmSlctResMaxPercent" type="int" defaultvalue="TORM_MAX_CACHE_PERCENT_SYN_SCTMSLCT_RES" version="11"
+			desc="当将自定义查询条件中的记录添加的cache中时，如果cache使用比例超过此值时停止添加记录到cache中,默认值80, 可以reload" />
+    <entry name="MaxRowsNumPerSelect" type="int" defaultvalue="TORM_MAX_RECORDS_NUM_PERSELECT" version="11" 
+           desc="配置单个select查询能检索出的记录行最大数目,默认值100, 可以reload" />
+	</struct>
+
+
+	<struct name="TORMThreadInfo" version ="10" >
+		<entry name="ProcessInsertMsg" type="bigint" />
+		<entry name="ProcessUpdateMsg" type="bigint" />
+		<entry name="UpdateHitCache" type="bigint" />
+		<entry name="ProcessDeleteMsg" type="bigint" />
+		<entry name="ProcessSelectMsg" type="bigint" />
+		<entry name="SelectHitCache" type="bigint" />
+		<entry name="DbSelectCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="DbInsertCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="DbUpdateCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="DbDeleteCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="TotalCacheRecords" type="bigint" defaultvalue="0" version="12"/>
+		
+	</struct>
+
+	<struct name="TORMThreadStatInfo" version ="14" >
+		<entry name="CachekeyCmp" type="bigint" defaultvalue="0" version="14"/>
+		<entry name="CacheContentCmp" type="bigint" defaultvalue="0" version="14"/>
+		<entry name="ProcessCount_1" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="ProcessTotalTime_1" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="DealMsgCount_2" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="DealMsgTotalTime_2" type="bigint"  defaultvalue="0" version="14" />	
+		<entry name="UnpackMsgCount_3" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="UnpackMsgTotalTime_3" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="TormQueryCount_3" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="TormQueryTotalTime_3" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="Ope2SQLCount_4" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="Ope2SQLTotalTime_4" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="TdrQueryCount_4" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="TdrQueryTotalTime_4" type="bigint"  defaultvalue="0" version="14" />	
+		<entry name="PackMsgCount_2" type="bigint"  defaultvalue="0" version="14" />
+		<entry name="PackMsgTotalTime_2" type="bigint"  defaultvalue="0" version="14" />
+	</struct>
+
+	<struct name="TORMTotalInfo" version ="10" >
+		<entry name="RecvMsg" type="bigint" />
+		<entry name="RecvByte" type="bigint" />
+		<entry name="RecvInsertMsg" type="bigint" />
+		<entry name="RecvUpdateMsg" type="bigint" />
+		<entry name="RecvUpdateHitCache" type="bigint" />
+		<entry name="RecvDeleteMsg" type="bigint" />
+		<entry name="RecvSelectMsg" type="bigint" />
+		<entry name="RecvSelectHitCache" type="bigint" />
+		<entry name="LostMsg" type="bigint" />
+		<entry name="SendMsg" type="bigint" />
+		<entry name="SendByte" type="bigint" />
+		<entry name="DbSelectCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="DbInsertCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="DbUpdateCount" type="bigint" defaultvalue="0" version="12"/>
+		<entry name="DbDeleteCount" type="bigint" defaultvalue="0" version="12"/>	
+		<entry name="BusRcvCount" type="bigint"  defaultvalue="0" version="13" />
+		<entry name="BusRcvTotalTime" type="bigint"  defaultvalue="0" version="13" />
+		<entry name="BackMsgCount" type="bigint"  defaultvalue="0" version="13" />
+		<entry name="BackMsgTotalTime" type="bigint"  defaultvalue="0" version="13" />	
+	</struct>
+
+	
+	<struct name="tormsvrrun_cumulate" version ="10" >
+	    <entry name="TotalInfo" type="TORMTotalInfo" />
+		<entry name="ThreadCount" type="int" defaultvalue="1" />
+		<entry name="ThreadInfo" type="TORMThreadInfo" count="TORM_MAX_THREAD" refer="ThreadCount" />
+		<entry name="ThreadStatCount" type="int" defaultvalue="0" />
+		<entry name="ThreadStatInfo" type="TORMThreadStatInfo" count="TORM_MAX_THREAD" refer="ThreadStatCount" version="14"/>
+	</struct>
+	
+</metalib>

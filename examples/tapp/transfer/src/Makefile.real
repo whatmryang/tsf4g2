@@ -1,0 +1,45 @@
+include ../transfer.mk
+
+TRANSFER=transfer
+
+
+TRANSFER_INCLUDE=-I$(TSF4G_INCLUDE) -I$(TSF4G_INCLUDE)/apps -I../protocol
+
+TRANSFER_DEP_LIBS= $(TSF4G_LIB)/libtconnapi.a $(TSF4G_LIB)/libtsf4g.a $(COMMLIBS)
+
+.PHONY: all clean
+
+all: $(TRANSFER)
+
+CPLUSPLUS=g++
+
+TRANSFER_CFILE=$(wildcard *.c)
+TRANSFER_CPPFILE=$(wildcard *.cpp)
+TRANSFER_COBJ=$(TRANSFER_CFILE:.c=.o)
+TRANSFER_CPPOBJ=$(TRANSFER_CPPFILE:.cpp=.o)
+
+-include $(TRANSFER_CFILE:.c=.d)
+-include $(TRANSFER_CPPFILE:.cpp=.d)
+
+%.d: %.c
+	$(CC) -MM $(TRANSFER_INCLUDE) $(CFLAGES) $< -o $@
+
+%.o: %.c
+	$(CC) -c $(TRANSFER_INCLUDE) $(CFLAGES) $<
+
+%.d: %.cpp
+	$(CPLUSPLUS) -MM $(TRANSFER_INCLUDE) $(CFLAGES) $< -o $@
+
+%.o: %.cpp
+	$(CPLUSPLUS) -c $(TRANSFER_INCLUDE) $(CFLAGES) $<
+
+
+$(TRANSFER): $(TRANSFER_COBJ) $(TRANSFER_CPPOBJ)
+	$(CPLUSPLUS) -o $(TRANSFER) $(TRANSFER_COBJ) $(TRANSFER_CPPOBJ) $(TRANSFER_DEP_LIBS)
+	@mv $(TRANSFER) ../bin/
+
+
+clean:
+	rm -f *.d
+	rm -f *.o
+	rm -f $(TRANSFER)

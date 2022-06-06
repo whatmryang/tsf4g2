@@ -1,0 +1,18 @@
+Version 1.0.2
+-------------
+
+2010-02-25  sean <sean@tencent.com>
+
+   * tagentapi for x64
+   	
+2009-09-01  sean <sean@tencent.com>
+
+   * tagentapi for win32
+   
+2008-11-18  sean <sean@tencent.com>
+
+   * busid equal 0 can be registered
+   
+2008-10-29  sean <sean@tencent.com>
+
+   * fix a bug in agent_api_get_blocks

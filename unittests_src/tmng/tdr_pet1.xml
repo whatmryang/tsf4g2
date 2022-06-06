@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="pet1" version="125" >
+	<macro name="MAX_PET_NAME_LEN" value="13" desc="宠物名字的长度" />
+
+	<macro name="CS_MAX_PET_LEARN_SKILL" value="6" desc="宠物后天所学的最大技能数量" />
+
+	<macro name="CS_MAX_ARM_BASE_ATTR_NUM" value="8" />
+	<macro name="CS_MAX_ARM_ADD_ATTR_NUM" value="3" />
+	<macro name="CS_MAX_ARM_SUIT_ATTR_NUM" value="6" />
+	<macro name="CS_MAX_ARM_OWN_CARD" value="3" desc="装备最多镶嵌的卡片个数" />
+	<macro name="CS_MAX_CARD_ATTR_NUM" value="3" desc="卡片带的最多属性个数" />
+
+	<macro name="CS_RES_ITEM" value="0" />
+	<macro name="CS_RES_ARM" value="1" />
+	<macro name="CS_RES_CARD" value="2" />
+	<macro name="CS_RES_PET" value="3" />
+
+	<struct name="PetAttrMisc" version="1" >
+		<entry name="Level" type="int" />
+		<entry name="XP" type="int" />
+		<entry name="LeftPoints" type="int" />
+		<entry name="GrowthRate" type="short" desc="成长率" />
+		<entry name="Loyalty" type="int" desc="忠诚度" />
+		<entry name="FruitTimes" type="int" desc="资质果实使用次数" />
+		<entry name="StrengthenTimes" type="int" desc="强化次数" />
+		<entry name="BaseHP" type="int" desc="基础HP" />
+		<entry name="BaseMP" type="int" desc="基础MP" />
+		<entry name="PetBldStar" type="int" desc="气血星级" />
+		<entry name="PetHabStar" type="int" desc="体质星级" />
+		<entry name="PetStrStar" type="int" desc="力量星级" />
+		<entry name="PetIntStar" type="int" desc="智慧星级" />
+	</struct>
+
+	<struct name="PetPrimAttr" version="1" >
+		<entry name="Bld" type="int" desc="气血" />
+		<entry name="BldAptitude" type="int" desc="气血资质" />
+		<entry name="CurrBldAptitude" type="int" desc="当前值" />
+		<entry name="Hab" type="int" desc="精神" />
+		<entry name="HabAptitude" type="int" desc="精神资质" />
+		<entry name="CurrHabAptitude" type="int" desc="当前值" />
+		<entry name="Str" type="int" desc="力量" />
+		<entry name="StrAptitude" type="int" desc="力量资质" />
+		<entry name="CurrStrAptitude" type="int" desc="当前值" />
+		<entry name="Int" type="int" desc="智慧" />
+		<entry name="IntAptitude" type="int" desc="智慧资质" />
+		<entry name="CurrIntAptitude" type="int" desc="当前值" />
+	</struct>
+
+	<struct name="PetSkillGrid" version="1" >
+		<entry name="GridIndex" type="char" desc="技能格的位置1-6" />
+		<entry name="GridType" type="char" desc="技能格的类型4种" />
+		<entry name="GridStatus" type="char" desc="技能格状态3种" />
+		<entry name="SkillID" type="int" desc="技能ID" />
+	</struct>
+
+	<struct name="PetSkillAttr" version="1" >
+		<entry name="SkillNum" type="char" desc="宠物后天学习技能数量" />
+		<entry name="Skills" type="PetSkillGrid" count="CS_MAX_PET_LEARN_SKILL" desc="宠物后天学习技能" />
+	</struct>
+
+	<struct name="PetBaseAttr" version="1" >
+		<entry name="Nick" type="string" size="MAX_PET_NAME_LEN" />
+		<entry name="Color" type="char" desc="宠物颜色" />
+		<entry name="GID" type="ulonglong" />
+		<entry name="PetAttrMisc" type="PetAttrMisc" />
+		<entry name="PetPrimAttr" type="PetPrimAttr" />
+		<entry name="PetSkillAttr" type="PetSkillAttr" />
+	</struct>
+
+	<struct name="ArmAttrUnit" version="1" desc="装备的属性修改单元" >
+		<entry name="AttrName" type="char" />
+		<entry name="RevisedType" type="char" />
+		<entry name="Value" type="ushort" />
+		<entry name="Active" type="char" desc="是否激活 只有铸魂属性才检查此项" />
+	</struct>
+
+	<struct name="ItemBaseAttr" version="1" >
+		<entry name="RecvrType" type="char" desc="大药瓶对应属性" />
+		<entry name="CurRecvrValue" type="int" desc="当前剩余的可恢复量" />
+		<entry name="TimeType" type="uchar" desc="限时道具：时间类型" />
+		<entry name="LeftTime" type="int" desc="限时道具：剩余的时间" />
+		<entry name="BeginTime" type="int" desc="限时道具：开始时间" />
+		<entry name="DeadLine" type="int" desc="限时道具：截止时间" />
+	</struct>
+
+	<struct name="CardAttr" version="1" >
+		<entry name="ID" type="int" desc="卡片的资源ID" />
+		<entry name="SecondCategory" type="char" desc="卡片的类型" />
+		<entry name="Total" type="char" desc="卡片带的属性个数" />
+		<entry name="AttrList" type="ArmAttrUnit" count="CS_MAX_CARD_ATTR_NUM" refer="Total" />
+	</struct>
+
+	<struct name="ZoneCardAttr" version="1" >
+		<entry name="GridIndex" type="char" desc="卡片存放的位置索引" />
+		<entry name="CardAttr" type="CardAttr" desc="卡片的属性" />
+	</struct>
+
+	<struct name="ArmAttr" version="1" >
+		<entry name="UpLevelLimit" type="short" desc="使用等级上限" />
+		<entry name="DownLevelLimit" type="short" desc="使用等级下限" />
+		<entry name="BidPrice" type="int" desc="买入价格" />
+		<entry name="AskPrice" type="int" desc="卖出价格" />
+		<entry name="CurDurableDegree" type="int" desc="装备的耐久度" />
+		<entry name="Color" type="char" desc="装备颜色" />
+		<entry name="RefineNum" type="char" desc="精练次数" />
+		<entry name="BaseAttr" type="ArmAttrUnit" count="CS_MAX_ARM_BASE_ATTR_NUM" />
+		<entry name="AdditionAttrNum" type="char" desc="附加属性个数" />
+		<entry name="AdditionAttrList" type="ArmAttrUnit" count="CS_MAX_ARM_ADD_ATTR_NUM" refer="AdditionAttrNum" />
+		<entry name="BindType" type="char" desc="装备绑定的类型" />
+		<entry name="ArmSrc" type="char" desc="装备来源" />
+		<entry name="SuitAttrID" type="int" desc="套装属性ID" />
+		<entry name="HoleNum" type="char" desc="该装备拥有的孔数" />
+		<entry name="CardTotal" type="char" desc="镶嵌的卡片总数" />
+		<entry name="CardAttrList" type="ZoneCardAttr" count="CS_MAX_ARM_OWN_CARD" refer="CardTotal" />
+		<entry name="TimeType" type="uchar" desc="限时道具：时间类型" />
+		<entry name="LeftTime" type="int" desc="限时道具：剩余的时间" />
+		<entry name="BeginTime" type="int" desc="限时道具：开始时间" />
+		<entry name="DeadLine" type="int" desc="限时道具：截止时间" />
+	</struct>
+
+	<union name="ItemAttr" version="1" desc="物品或者装备的动态属性" >
+		<entry name="ItemBaseAttr" type="ItemBaseAttr" id="CS_RES_ITEM" />
+		<entry name="ArmAttr" type="ArmAttr" id="CS_RES_ARM" />
+		<entry name="CardAttr" type="CardAttr" id="CS_RES_CARD" />
+		<entry name="PetBaseAttr" type="PetBaseAttr" id="CS_RES_PET" />
+	</union>
+
+</metalib>

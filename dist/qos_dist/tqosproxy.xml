@@ -1,0 +1,13 @@
+<tqosproxyconf version="10">
+	<RouteNum>2</RouteNum>
+	<RouteList>
+		<BusinessIDStart>100</BusinessIDStart>
+		<BusinessIDEnd>108</BusinessIDEnd>
+		<QosSvrID>1.0.113.2</QosSvrID>
+	</RouteList>
+	<RouteList>
+		<BusinessIDStart>109</BusinessIDStart>
+		<BusinessIDEnd>118</BusinessIDEnd>
+		<QosSvrID>1.0.113.3</QosSvrID>
+	</RouteList>
+</tqosproxyconf>	

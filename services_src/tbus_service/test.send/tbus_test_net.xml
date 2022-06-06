@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- This file is for tbus test tool network protocol -->
+
+<metalib tagsetversion="1" name="Tbustest_net" version="1.0">
+
+  <macro name="PKG_VERSION" value="1.0" />
+  <macro name="MAX_PKG_LEN" value="8192" />
+
+  <!-- tbus test tool network protocol magic defined -->
+  <macro name="PKG_MAGIC"  value="0x0130" />
+
+  <!-- minimum uin defined -->
+  <macro name="MIN_UIN"  value="10000" />
+
+  <!-- client/server command defined -->
+  <macro name="PKG_CS_CMD"  value="0x0001" />
+  <macro name="PKG_SC_CMD"  value="0x8001" />
+
+  <!-- client/server error response defined -->
+  <macro name="PKG_OK"           value="0x0000" />
+  <macro name="PKG_ERR_SYS"      value="0x0001" />
+  <macro name="PKG_ERR_BUSY"     value="0x0002" />
+  <macro name="PKG_ERR_PKG"      value="0x0003" />
+  <macro name="PKG_ERR_CMD"      value="0x0004" />
+  <macro name="PKG_ERR_CHECKSUM" value="0x0005" />
+  <macro name="PKG_ERR_MAGIC"    value="0x0006" />
+  <macro name="PKG_ERR_OP"       value="0x0007" />
+  <macro name="PKG_ERR_KEYVALUE" value="0x0008" />
+
+  <!-- client/server request package header -->
+  <struct name="PkgHead" version="1.0" versionindicator="Version" >
+    <entry name="Version" type="tinyuint" defaultvalue="1.0" />
+    <entry name="HeadLen" type="tinyuint" />
+    <entry name="BodyLen" type="smalluint" />
+    <entry name="CmdID" type="smalluint" />
+    <entry name="Magic" type="smalluint" defaultvalue="PKG_MAGIC" />
+    <entry name="Sequence" type="uint" desc="message id" />
+    <entry name="Reserved" type="tinyuint" count="2"/>
+    <entry name="HeadChkSum" type="smalluint" />
+  </struct>
+
+  <!-- client/server package body -->
+  <struct name="PkgBody" version="1.0">
+    <entry name="Uin"       type="uint" />
+    <entry name="count"     type="uint" />
+    <entry name="bigint"    type="biguint" />
+    <entry name="buffer"    type="string" size="16" />
+    <entry name="Reserved"  type="tinyuint" count="8"/>
+  </struct>
+
+  <!-- client/server package -->
+  <struct name="TbusTestPkg" version="1.0" >
+    <entry name="Head" type="PkgHead" />
+    <entry name="Body" type="PkgBody" />
+  </struct>
+
+</metalib>
+

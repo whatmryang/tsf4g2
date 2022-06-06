@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<!--tormsvrconf: 需要完整tormsvr配置,请备份tormsvr.xml后使用参数generate运行tormsvr生成tormsvr.xml-->
+<tormsvrconf __version="13">
+
+    <!--MaxProcessTime: 数据库慢操作最小时间,单位为毫秒，默认值100-->
+    <MaxProcessTime>100 </MaxProcessTime>
+
+    <!--Mode: 0:正常模式, 1:cachesrv模式,默认值0-->
+    <Mode>0 </Mode>
+
+    <!--ProcessCount: 每个主循环最大处理消息数,默认值10-->
+    <ProcessCount>10 </ProcessCount>
+
+    <!--MetaLibInfo: 使用的元数据库，需要运行前先通过tmng工具加载-->
+    <MetaLibInfo>
+
+        <!--MetaLibNum: MetaLib个数-->
+        <MetaLibNum>1 </MetaLibNum>
+
+        <!--MetaLibName 是数组类型-->
+        <!--可容纳 128 个元素-->
+        <!--MetaLibNum 指示了当前的有效元素个数-->
+        <MetaLibName>testlib</MetaLibName>
+
+    </MetaLibInfo>
+
+    <!--DispFuncSOFile: 线程分配so文件，默认为空-->
+    <DispFuncSOFile></DispFuncSOFile>
+
+    <!--DispFunc: 线程分配函数，默认为空-->
+    <DispFunc></DispFunc>
+
+    <!--ChannelNum: 处理线程(通道)个数，使用单线程版本请配置为0，默认为0-->
+    <ChannelNum>0 </ChannelNum>
+
+    <!--ChannelSize: 主线程与处理线程通道大小(byte)，默认为10兆-->
+    <ChannelSize>10485760 </ChannelSize>
+
+    <!--ReplyBusyMsg: 处理忙得时候是否返回服务忙的消息，默认返回(1),不需要返回请配置为0-->
+    <ReplyBusyMsg>1 </ReplyBusyMsg>
+
+    <!--ConnectDBNum: 需要访问的数据库个数-->
+    <ConnectDBNum>1 </ConnectDBNum>
+
+    <!--ConnectDBInfo 是数组类型-->
+    <!--可容纳 32 个元素-->
+    <!--ConnectDBNum 指示了当前的有效元素个数-->
+    <ConnectDBInfo>
+
+        <!--IDX: 定义TableConf时根据IDX索引到数据库-->
+        <IDX>1 </IDX>
+
+        <!--MajorVersion: 默认0-->
+        <MajorVersion>0 </MajorVersion>
+
+        <!--MinVersion: 默认0-->
+        <MinVersion>0 </MinVersion>
+
+        <!--DBMSName: 默认值mysql,目前只支持mysql-->
+        <DBMSName>mysql</DBMSName>
+
+        <!--DBMSConnectionInfo: 默认localhost-->
+        <DBMSConnectionInfo>localhost</DBMSConnectionInfo>
+
+        <DBMSCurDatabaseName>testdb</DBMSCurDatabaseName>
+
+        <DBMSUser>user</DBMSUser>
+
+        <DBMSPassword>passwd</DBMSPassword>
+
+        <!--DBMSConnCharset: 默认latin1-->
+        <DBMSConnCharset>latin1</DBMSConnCharset>
+
+        <!--DBMSSock: 默认/tmp/mysql.sock-->
+        <DBMSSock>/tmp/mysql.sock</DBMSSock>
+
+    </ConnectDBInfo>
+
+    <!--TableNum: 访问的数据表(描述)个数,一个描述可以包含多个表-->
+    <TableNum>1 </TableNum>
+
+    <!--TableConf 是数组类型-->
+    <!--可容纳 1024 个元素-->
+    <!--TableNum 指示了当前的有效元素个数-->
+    <TableConf>
+
+        <!--TableName: 支持以下格式:1) testinfo ; 2) testinfo from=0 to=255 ; 3) testinfo from=0 to=255 div=4 remain=1-->
+        <TableName>testinfo</TableName>
+
+        <!--TableDBConnIdx: ConnectDBInfo中的IDX,默认值1-->
+        <TableDBConnIdx>1 </TableDBConnIdx>
+
+    </TableConf>
+
+    <CacheConf>
+
+        <!--CacheShm: cache使用的共享内存配置信息,配置Key即可，大小自动计算-->
+        <CacheShm>
+
+            <Key>0x1234</Key>
+
+            <Size>0 </Size>
+
+        </CacheShm>
+
+        <!--CacheVarNum: cache的元数据类型个数,默认值0-->
+        <CacheVarNum>1 </CacheVarNum>
+
+        <!--CacheVar 是数组类型-->
+        <!--可容纳 128 个元素-->
+        <!--CacheVarNum 指示了当前的有效元素个数-->
+        <CacheVar>
+
+            <!--TableMetaName: cache的元数据名称-->
+            <TableMetaName>testinfo</TableMetaName>
+
+            <!--AsynUpdateDB: 更新的时候是否异步更新数据库，默认值1为异步更新-->
+            <AsynUpdateDB>1 </AsynUpdateDB>
+
+            <!--CacheNum: cache记录最大数目,默认值1000-->
+            <CacheNum>1000 </CacheNum>
+
+            <!--ScanNum: 默认值10, 每次tick的时候最大检查记录数目，配合SyncNum使用，tick时，从上次检查点开始检查，直到检查到SyncNum个脏数据或者总共检查了ScanNum个数据即结束，下次从结束点继续检查。如果需要在tick的时候不回写脏数据，将此配置项配为0即可。注意，在进程停止的时候，此参数无效，如果有脏数据，会回写到数据库，如果在进程停止的时候不想回写脏数据到数据库，使用kill命令代替stop命令即可。-->
+            <ScanNum>10 </ScanNum>
+
+            <!--SyncNum: 默认值5, 每次tick时候最大同步脏数据记录条数，不能配置太大，否则单次tick会占用很长时间。在进程停止的时候该参数有效，即收到stop命令以后，进程并不会马上停止，只是标记为开始停止状态，然后在每次tick的时候回写该配置数量的脏数据，直到所以的脏数据回写之后才会停止进程。如果进程停止的时候不想回写脏数据，使用kill命令替换stop命令即可。-->
+            <SyncNum>5 </SyncNum>
+
+            <!--EliminateNum: 默认值5, 当cache满的时候需要插入新的纪录到cache中时，从cache中删除旧记录的条数-->
+            <EliminateNum>5 </EliminateNum>
+
+        </CacheVar>
+
+    </CacheConf>
+
+    <!--SynCstmSlctRes2Cache: 是否将自定义查询条件检索出的记录同步到cache中，缺省不同步,默认值0-->
+    <SynCstmSlctRes2Cache>0 </SynCstmSlctRes2Cache>
+
+    <!--SynCstmSlctResMaxPercent: 当将自定义查询条件中的记录添加的cache中时，如果cache使用比例超过此值时停止添加记录到cache中,默认值80-->
+    <SynCstmSlctResMaxPercent>80 </SynCstmSlctResMaxPercent>
+
+    <!--MaxRowsNumPerSelect: 配置单个select查询能检索出的记录行最大数目,默认值100-->
+    <MaxRowsNumPerSelect>100 </MaxRowsNumPerSelect>
+
+</tormsvrconf>

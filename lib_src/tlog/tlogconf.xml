@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib name="tlogdef" tagsetversion="1" version="2"  >
+<include file="tlog_priority_def.xml" />
+  <include file="tlog_category_def.xml" />
+<macro name="TLOG_MAX_CATEGORY" value="128" />
+<macro name="TLOG_CONF_MAGIC" value="1548" />
+
+<struct name="TLOGConf" version="1" >
+<entry name="Magic" type="int" defaultvalue="TLOG_CONF_MAGIC" version="2" />
+	<entry name="PriorityHigh" type="int" bindmacrosgroup="TLOG_PRIORITY" defaultvalue="TLOG_PRIORITY_NULL" />
+	<entry name="PriorityLow" type="int" bindmacrosgroup="TLOG_PRIORITY" defaultvalue="TLOG_PRIORITY_NULL" />
+	<entry name="DelayInit" type="int" />
+	<entry name="SuppressError" type="int" />
+	<entry name="Count" type="int" />
+	<entry name="CategoryList" type="TLOGCategory" count="TLOG_MAX_CATEGORY" refer="Count" />
+</struct>
+
+</metalib>

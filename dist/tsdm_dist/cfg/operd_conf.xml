@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- This file is for operd module -->
+
+<OperConf>
+  <Verbose>1</Verbose>
+
+  <SdmOPLimit>../cfg/operlimit.xml</SdmOPLimit>
+
+  <!-- file for store oper limit counter -->
+  <MasterFile>../data/operd/counter.master</MasterFile>
+  <SlaveFile>../data/operd/counter.slave</SlaveFile>
+  <SyncTime>300</SyncTime> <!-- in seconds, 0 means no need to sync limit counter to file -->
+
+  <TransLayer>
+    <BusID>100.1.3.1</BusID>
+  </TransLayer>
+</OperConf>
+

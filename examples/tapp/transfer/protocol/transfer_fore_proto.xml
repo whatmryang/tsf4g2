@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="ForeProto"  version="1">
+
+<!--本文档定义了transfer服务器与前端服务器(通过tconnd)通信的协议格式-->
+
+<macro name="FOREMAX_BODY_LEN" value="4096" />
+<macro name="FOREMAX_DIRTYCHECK_LEN" value="2048" />
+
+<macrosgroup name="RESULTCODE">
+    <macro name="FORE_NO_ERROR" value="1" />
+    <macro name="FORE_TIMEOUT"  value="2" />
+</macrosgroup>
+
+
+<macrosgroup name="FOREMSGCMD">
+    <macro name="FORE_CMD_TIMEOUT"  value="1" />
+	<macro name="FORE_CMD_DIRTYCHECK_REQ" value="101" />
+	<macro name="FORE_CMD_DIRTYCHECK_RES" value="102" />
+    <!--TODO-->
+    <!--add macros for other types of msg here-->
+</macrosgroup>
+
+
+
+
+<struct name="ForePkgHead" version="1" >
+	<entry name="magic"     type="smallint" defaultvalue="0x7749" />
+	<entry name="version"   type="smallint" defaultvalue="1" version="1" />
+	<entry name="cmd"       type="smallint" bindmacrosgroup="FOREMSGCMD"/>
+	<entry name="pkglen"    type="smallint" />
+    <entry name="msgID"     type="ulonglong" />
+    <!--TODO-->
+    <!--add entries for msg head here-->
+</struct>
+
+
+
+
+<struct name="ForeDirtyCheckReq" version="1" >
+    <entry name="msgLen"    type="uint" />
+    <entry name="msg"       type="string" size="FOREMAX_DIRTYCHECK_LEN" refer="msgLen" />
+</struct>
+
+<struct name="ForeDirtyCheckResNoError" version="1" >
+    <entry name="msgLen"    type="uint" />
+    <entry name="msg"       type="string" size="FOREMAX_DIRTYCHECK_LEN" refer="msgLen" />
+</struct>
+
+<union name="ForeDirtyCheckResResults" version="1" >
+    <entry name="noError"   type="ForeDirtyCheckResNoError" id="FORE_NO_ERROR" />
+    <entry name="errorCode" type="uint" />
+</union>
+
+<struct name="ForeDirtyCheckRes" version="1" >
+    <entry name="resultCode"    type="uint" />
+    <entry name="result"        type="ForeDirtyCheckResResults" select="resultCode" />
+</struct>
+
+<!--TODO-->
+<!--add struct definition for other types of msg here-->
+
+<union name="ForePkgBody" version="1" >
+	<entry name="dirtyCheckReq"  type="ForeDirtyCheckReq"  id="FORE_CMD_DIRTYCHECK_REQ" />
+	<entry name="dirtyCheckRes"  type="ForeDirtyCheckRes"  id="FORE_CMD_DIRTYCHECK_RES" />
+    <!--TODO-->
+    <!--add entries for other types of msg here-->
+</union>
+
+
+
+
+
+<struct name="ForePkg" version="1" versionindicator="head.version" sizeinfo="head.pkglen">
+	<entry name="head" type="ForePkgHead" />
+	<entry name="body" type="ForePkgBody" select="head.cmd"  />
+</struct>
+
+
+</metalib>

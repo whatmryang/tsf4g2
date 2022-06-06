@@ -1,0 +1,47 @@
+<TLOGConf>
+	<PriorityHigh>NULL</PriorityHigh>
+	<PriorityLow>UNKNOWN</PriorityLow>
+	<Count>2</Count>
+	<CategoryList>
+		<Name>test</Name>
+		<PriorityHigh>NULL</PriorityHigh>
+		<PriorityLow>UNKNOWN</PriorityLow>
+		<Format>[%d]%p%m%n</Format>
+		<ForwardCat>test2</ForwardCat>
+		<Device>
+			<Type>FILE</Type>
+			<Device>
+				<File>
+					<Pattern>./65535_%Y%m%d_%H.log</Pattern>
+					<BuffSize> 1024000 </BuffSize>
+					<SizeLimit> 51200000 </SizeLimit>
+					<Precision> 1 </Precision>
+					<MaxRotate> 10 </MaxRotate>
+					<SyncTime> 0 </SyncTime>
+					<NoFindLatest> 0 </NoFindLatest>
+				</File>
+			</Device>
+		</Device>
+	</CategoryList>
+	<CategoryList>
+		<Name>test2</Name>
+		<PriorityHigh>NULL</PriorityHigh>
+		<PriorityLow>UNKNOWN</PriorityLow>
+		<Format>[%d]%p%m%n</Format>
+		<ForwardCat></ForwardCat>
+		<Device>
+			<Type>FILE</Type>
+			<Device>
+				<File>
+					<Pattern>./test2file.log</Pattern>
+					<BuffSize> 1024000 </BuffSize>
+					<SizeLimit> 51200000 </SizeLimit>
+					<Precision> 1 </Precision>
+					<MaxRotate> 10 </MaxRotate>
+					<SyncTime> 0 </SyncTime>
+					<NoFindLatest> 0 </NoFindLatest>
+				</File>
+			</Device>
+		</Device>
+	</CategoryList>
+</TLOGConf>

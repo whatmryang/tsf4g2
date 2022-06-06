@@ -1,0 +1,78 @@
+#!/bin/bash
+
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcm ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcm
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcm/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcm/bin
+fi
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcm/cfg ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcm/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include ];then
+  mkdir $TSF4G_INSTALL_HOME/include
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tcmapi ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/tcmapi
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/lib ];then
+  mkdir $TSF4G_INSTALL_HOME/lib
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcm/docs ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcm/docs
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcm/log ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcm/log
+fi
+
+echo "Install tcm...."
+cp -rf ./version             $TSF4G_INSTALL_HOME/apps/tcm/
+
+cp -rf ./apps/tcm/bin/       $TSF4G_INSTALL_HOME/apps/tcm/
+cp -rf ./apps/tcm/cfg/       $TSF4G_INSTALL_HOME/apps/tcm/
+cp -rf ./include/apps/tcmapi/ ${TSF4G_INSTALL_HOME}/include/apps/
+
+#chmod 777 ./lib/*.config
+cp -rf ./lib/*  ${TSF4G_INSTALL_HOME}/lib/
+cp -rf ./apps/tcm/lib/   ${TSF4G_INSTALL_HOME}/apps/tcm/
+cp -rf ./apps/tcm/example/   ${TSF4G_INSTALL_HOME}/apps/tcm/
+cp -rf ./apps/tcm/docs/   ${TSF4G_INSTALL_HOME}/apps/tcm/
+cp -rf ./apps/tcm/lib/mmogxyz_config.so $TSF4G_INSTALL_HOME/apps/tcm/cfg/
+cp -rf ./apps/tcm/lib/mmogxyz_config.so $TSF4G_INSTALL_HOME/apps/tcm/example/cfg/
+cp -rf ./apps/tcm/bin/tcmcenter ./apps/tcm/example/bin/
+cp -rf ./apps/tcm/bin/tcmconsole ./apps/tcm/example/bin/
+cp -rf ./apps/tcm/lib/mod*   ${TSF4G_INSTALL_HOME}/apps/tcm/example/depends/tagent/lib/
+cp -rf ./apps/tcm/protocol/tcm_proto.tdr ${TSF4G_INSTALL_HOME}/apps/tcm/example/depends/tconnd/cfg/
+
+echo "Install tcm  done"

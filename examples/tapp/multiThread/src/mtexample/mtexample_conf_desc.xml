@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="example" version="10" >
+
+	<struct name="mtexampleconf" version ="10" >
+		<entry name="Res" type="int" />
+		<entry name="Timeout" type="uint32" defaultvalue="100" desc="The timeout time of a task"/>
+	</struct>
+
+	<struct name="mtexamplerun_cumulate" version ="10" >
+		<entry name="Cumulate" type="int" />
+	</struct>
+
+	<struct name="mtexamplerun_status" version ="10" >
+		<entry name="Status" type="int" />
+	</struct>
+
+</metalib>

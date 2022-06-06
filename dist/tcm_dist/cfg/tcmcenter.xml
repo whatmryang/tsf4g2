@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<!--
+该文件为进程集中管理系统配置文件,主要包括以下几部分:
+1) tcmcenter基础配置
+2) 业务系统进程描述:描述整个业务系统各个架构层次的进程信息
+3) 业务系统进程组定义:将2中不同进程组合成不同的功能组
+4) 业务系统主机描述:描述业务系统用到的主机信息
+5) 业务系统进程组部署:将3中定义的进程组部署在4中的主机上
+6) 业务系统进程间bus通信关系:描述各进程之间的通信关系从而生成tbus通信管道信息
+以上2，3，4，5, 6各部分配置可以在本文件中，也可以独立在其他文件中配置，
+如果在其他文件中配置，请在1部分配置中指定具体的文件
+参数详细介绍请参考<<进程集中管理系统维护文档.doc>>相关部分的介绍
+-->
+
+<!--
+1)tcmcenter基础配置
+-->
+
+<!--
+BussinessID: 业务编号,如果需要tcm同时管理多个业务,可以使用该配置,否则采用0即可
+AddrTemple: 业务进程地址描述,该配置表示地址前8字节表示world编号，9-16字节表示zone编号,
+业务可以自定义地址层次名称，但最后两段必须为function和instance
+ConfigSoName: 业务用来生成业务进程配置文件的so文件,如果不需要自动生成配置文件的功能，使用系统自带so即可
+ConfigBaseDir: 自动生成的业务进程配置文件存放根目录
+TbusConfOutputDir: 自动生成的tbus相关配置文件存放目录
+CenterdAddr: tcmcenter连接的tcenterd进程地址
+TconndAddr: tcmcenter前端连接的tconnd进程地址
+-->  
+<tcmcenter CenterdAddr="1.1.1" TconndAddr="1.3.1" BussinessID="0"
+           AddrTemple="world:8.zone:8.function:8.instance:8"
+		   ConfigSoName="../cfg/mmogxyz_config.so"
+		   ConfigBaseDir="../conf/confcreated">
+    
+  
+<!--
+2)业务系统进程描述:请在以下部分描述业务系统进程
+-->
+<cluster WorkPath="/data/test/tcm_example/mmogxyz/" AutoTimeGap="10" OpTimeout="5">
+    <Proc FuncName="tbusd" WorkPath="tbusd/bin" Agrs="--conf-file=../conf/tbusd.xml" FuncID="151" IsCommon="1" Seq="1" AutoTimeGap="2" />
+    
+    <world Isolated="1" OpTimeout="5">
+    
+	    <Proc FuncName="role_db" WorkPath="bin/tormsvr" Flag="start|stop|check|auto|reload" ConfigPath="../../etc/tormsvr/" Agrs="--conf-file=../../etc/tormsvr/tormsvr.xml --tlogconf=../../etc/tormsvr/tormsvr_log.xml --metabase-key=52001" FuncID="1" ProcName="tormsvr" Seq="5"/>    
+        
+        <zone Isolated="1" OpTimeout="10">
+
+            <Proc FuncName="game_svr"  Flag="start|stop|check|reload" WorkPath="bin/gamesvr" ConfigPath="../../etc/gamesvr/"  Agrs="--conf-file=../../etc/gamesvr/gamesvrd.xml --tlogconf=../../etc/gamesvr/gamesvrd_log.xml  --metabase-key=52001"  FuncID="10"  ProcName="gamesvrd" Seq="10"/>        
+            
+        <Proc FuncName="game_connect" Flag="start|stop|check|reload"  WorkPath="bin/connector_gamesvr" ConfigPath="../../etc/tconnd"  Agrs="--conf-file=../../etc/tconnd/tconnd.xml --tlogconf=../../etc/tconnd/tconnd_log.xml  --metabase-key=52001"  ProcName="tconnd" FuncID="11" Seq="12" />
+    </zone>
+    </world>
+</cluster>
+
+
+<!--
+3)业务系统进程组定义:请在以下部分将业务系统进程根据功能定义成不同的进程组
+请确保进程组中的进程在<业务系统进程描述>部分中定义
+-->
+<ProcGroup Name="world" Layer="world">
+	<Proc FuncName="role_db" ConfigPath="../../etc/tormsvr/" />    
+</ProcGroup>    
+
+<ProcGroup Name="tbusd" Layer="cluster">
+    <Proc FuncName="tbusd" />
+</ProcGroup>
+    
+<ProcGroup Name="zone" Layer="zone">
+    <Proc FuncName="game_connect" />
+    <Proc FuncName="game_svr" />    
+</ProcGroup>
+
+<!--
+4)业务系统主机描述:请将业务系统用到的主机在下面进行描述
+-->
+<HostTab >
+    <Host Name="Host97" InnerIP="127.0.0.1" >
+        <OuterIP>10.6.221.106</OuterIP>
+    </Host>    
+</HostTab>
+
+
+<!--
+5)业务系统进程组部署:请在以下部分描述各进程组在各主机上的部署情况
+请确保进程组和主机都已经在相应的各部分定义
+-->
+<ClusterDeploy>
+     
+     <!--
+     <DeloyGroup Group="tbusd" Host="Host97" />
+     -->
+
+    <world ID="10" CustomAttr="test200">
+              
+        <DeloyGroup Group="world" Host="Host97" />
+              
+        <zone ID="1">
+            <DeloyGroup Group="zone" Host="Host97" />
+        </zone>
+              
+    </world>
+    
+</ClusterDeploy>
+
+<!--
+6)业务系统进程间bus通信关系:请在以下部分描述各进程tbus通信关系
+请确保进程已经在进程描述部分定义
+-->
+
+<TbusConf BussinessID="0" GCIMShmKey="5678" GRMShmKey="6789" TbusdServicePort="9020" ChannelSize="204800" TbusdConfPath="/data/test/tcm_example/mmogxyz/tbusd/conf"  >
+    <Channel ProcSet1="game_svr" ProcSet2="role_db" Mask="255.0.0.0" />  
+    <Channel ProcSet1="game_svr" ProcSet2="game_connect" Mask="255.255.0.255" RecvQueSize="10240" SendQueSize="204800" />            
+        
+    <LocalConf Host="Host97"  TbusdServicePort="9022" />
+</TbusConf>
+
+
+</tcmcenter>

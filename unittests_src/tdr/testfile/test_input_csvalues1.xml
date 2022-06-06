@@ -1,0 +1,15 @@
+<TestCSStatus>
+        <Type> 1</Type>
+        <Valuenum>2</Valuenum>
+        <Value type="CSStatusValue">
+        	<Dummy> 1234</Dummy>
+        </Value>
+				<Value type="CSStatusValue">
+        	<Dummy> 5678</Dummy>
+        </Value>
+        <Value type="CSStatusValue">
+        	<Dummy> 90</Dummy>
+        </Value>
+				<idsnum>0 </idsnum>
+				<ids>1234 5678 90</ids>
+</TestCSStatus>

@@ -1,0 +1,12 @@
+#!/usr/local/bin/python
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+
+buildenv.buildExec("tlog",src_local,CPPPATH=Split('../../lib_src'),a_tsf4g_static_lib='tlog cutest')
+
+if buildenv.isLinux():
+    SConscript("OnlyFileApi/SConscript")

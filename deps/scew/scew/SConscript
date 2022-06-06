@@ -1,0 +1,16 @@
+import os
+
+Import('buildenv')
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+objs = buildenv.buildStaticObj(src_local,CPPDEFINES=Split('XML_STATIC'),MODULE="base");
+
+buildenv.buildStaticLib('scew',objs,MODULE='base')
+if buildenv.isWindows():
+    if buildenv._isDebug:
+        InstallAs(buildenv.libInstallPath+"\libscew_sd.lib", buildenv.libBinPath+"\libscew_d.lib")
+    else:
+        InstallAs(buildenv.libInstallPath+"\libscew_s.lib", buildenv.libBinPath+"\libscew.lib")
+
+Return('src_local')

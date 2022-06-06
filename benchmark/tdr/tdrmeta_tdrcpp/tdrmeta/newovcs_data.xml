@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<DispContent version="348">
+    <From>49 46 49 46 </From>
+    <Object>3897654 </Object>
+    <Type>1 </Type>
+    <Data type="DispContentData">
+        <Svr type="DispSvr">
+            <Cmd>45 </Cmd>
+            <Body type="CSSvrPkgBody">
+                <Family type="CSFamilyS">
+                    <Operator>0 </Operator>
+                    <FmDesc type="CSFmDesc">
+                        <FmInfo type="CSFmInfo">
+                            <ResultID>0 </ResultID>
+                            <Family type="ZoneFamily">
+                                <Basic type="ZoneFmBasic">
+                                    <FamilyName>dragon family</FamilyName>
+                                    <FmIdx type="ZoneFamiIdx">
+                                        <Pos>101 </Pos>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>2647875 </CreateTime>
+                                            <CreateID>100 </CreateID>
+                                        </FamilyID>
+                                    </FmIdx>
+                                    <FmPrestige>102 </FmPrestige>
+                                    <FmLevel>97 </FmLevel>
+                                    <FmGrade>66 </FmGrade>
+                                    <FmMemNum>10 </FmMemNum>
+                                    <FmLeader>king</FmLeader>
+                                    <FmStatus>48 </FmStatus>
+                                    <FmDismTime>287643 </FmDismTime>
+                                    <FmLogo>ICE</FmLogo>
+                                    <FmEmblem type="CSFmEmblem">
+                                        <Size>16 </Size>
+                                        <Emblem>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 </Emblem>
+                                    </FmEmblem>
+                                    <StashVaild>1 </StashVaild>
+                                    <HouseValid>1 </HouseValid>
+                                    <FmProperty>34567890000 </FmProperty>
+                                    <TaskTitle>go home</TaskTitle>
+                                    <VoteNum>100 </VoteNum>
+                                    <BonusNum>10000000 </BonusNum>
+                                    <UsedBonusNum>10000 </UsedBonusNum>
+                                    <FmLabel>102 </FmLabel>
+                                    <TotalBonus>1243452626757 </TotalBonus>
+                                    <LineNo>109 </LineNo>
+                                    <MapIdx>108 </MapIdx>
+                                    <MaxEnterNum>9456 </MaxEnterNum>
+                                    <CurEnterNum>788 </CurEnterNum>
+                                    <FmMaterial>3435462777 </FmMaterial>
+                                    <FmPopular>12345 </FmPopular>
+                                    <FmExtStatus>34646 </FmExtStatus>
+                                    <QuasiLeader>leader</QuasiLeader>
+                                    <FmLandVote>200 </FmLandVote>
+                                </Basic>
+                                <MemList type="CSFmMemberList">
+                                    <FmMemCount>2 </FmMemCount>
+                                    <FmMemInfo type="FmMemInfo">
+                                        <MemberName>member0</MemberName>
+                                        <Prof>30 </Prof>
+                                        <Level>100 </Level>
+                                        <Contribution>10000 </Contribution>
+                                        <Grade>60 </Grade>
+                                        <Position>100 </Position>
+                                        <PosName>pos0</PosName>
+                                        <LastQuit>1099999 </LastQuit>
+                                        <Uin>99887766 </Uin>
+                                        <Status>0x0 </Status>
+                                        <Gender>26 </Gender>
+                                        <MemBonus>32768 </MemBonus>
+                                        <ExtStatus>4 </ExtStatus>
+                                        <OnlineTime>10000000 </OnlineTime>
+                                    </FmMemInfo>
+                                    <FmMemInfo type="FmMemInfo">
+                                        <MemberName>member1</MemberName>
+                                        <Prof>31 </Prof>
+                                        <Level>101 </Level>
+                                        <Contribution>10001 </Contribution>
+                                        <Grade>61 </Grade>
+                                        <Position>101 </Position>
+                                        <PosName>pos1</PosName>
+                                        <LastQuit>1100000 </LastQuit>
+                                        <Uin>99887767 </Uin>
+                                        <Status>0x0 </Status>
+                                        <Gender>27 </Gender>
+                                        <MemBonus>32769 </MemBonus>
+                                        <ExtStatus>5 </ExtStatus>
+                                        <OnlineTime>10000001 </OnlineTime>
+                                    </FmMemInfo>
+                                </MemList>
+                                <AmiableFmList type="CSFamilyList">
+                                    <FmCount>10 </FmCount>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family0</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>100 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family1</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>101 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family2</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>102 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family3</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>103 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family4</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>104 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family5</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>105 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family6</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>106 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family7</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>107 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family8</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>108 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>family9</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>109 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                </AmiableFmList>
+                                <HostileFmList type="CSFamilyList">
+                                    <FmCount>8 </FmCount>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily0</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>100 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily1</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>101 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily2</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>102 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily3</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>103 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily4</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>104 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily5</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>105 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily6</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>106 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                    <FmProf type="FmBrief">
+                                        <FamilyName>Hostilefamily7</FamilyName>
+                                        <FamilyID type="FmID">
+                                            <CreateTime>32768 </CreateTime>
+                                            <CreateID>107 </CreateID>
+                                        </FamilyID>
+                                    </FmProf>
+                                </HostileFmList>
+                                <SelfPosList type="CSPosList">
+                                    <PosCount>2 </PosCount>
+                                    <FmPosInfo type="CSPosInfo">
+                                        <PosID>100 </PosID>
+                                        <PosName>pos0</PosName>
+                                        <Right>0 </Right>
+                                    </FmPosInfo>
+                                    <FmPosInfo type="CSPosInfo">
+                                        <PosID>101 </PosID>
+                                        <PosName>pos1</PosName>
+                                        <Right>1 </Right>
+                                    </FmPosInfo>
+                                </SelfPosList>
+                                <RegMemList type="CSRegMemList">
+                                    <Total>10 </Total>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem0</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem1</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem2</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem3</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem4</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem5</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem6</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem7</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem8</MemberName>
+                                    </RegMember>
+                                    <RegMember type="CJRegMem">
+                                        <MemberName>CJREGMem9</MemberName>
+                                    </RegMember>
+                                </RegMemList>
+                            </Family>
+                        </FmInfo>
+                    </FmDesc>
+                </Family>
+            </Body>
+        </Svr>
+    </Data>
+</DispContent>

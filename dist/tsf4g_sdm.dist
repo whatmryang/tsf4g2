@@ -1,0 +1,91 @@
+#/bin/bash
+
+
+TSF4G_DIR=../
+
+TSF4G_SDM_RELEASE=tsf4g_tsdm`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy/tsf4g_sdm"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g_sdm
+mkdir tmpdeploy/tsf4g_sdm/apps
+mkdir tmpdeploy/tsf4g_sdm/apps/tsdm
+mkdir tmpdeploy/tsf4g_sdm/apps/tsdm/docs
+#mkdir tmpdeploy/tsf4g_sdm/apps/tsdm/example
+mkdir tmpdeploy/tsf4g_sdm/include
+mkdir tmpdeploy/tsf4g_sdm/include/apps
+mkdir tmpdeploy/tsf4g_sdm/lib
+
+
+echo "copy tsdm lib files"
+cp  -P  ${TSF4G_DIR}/lib/libsdm* tmpdeploy/tsf4g_sdm/lib/
+
+echo "cp tsdm include"
+cp -P -rf ${TSF4G_DIR}/include/apps/tsdmapi  tmpdeploy/tsf4g_sdm/include/apps/
+
+echo "cp tsdm bin"
+cp -P -rf ${TSF4G_DIR}/apps/tsdm/bin  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+#echo "cp tsdm log"
+#cp -P -rf ${TSF4G_DIR}/apps/tsdm/log  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+echo "cp tsdm cfg"
+cp -P -rf ${TSF4G_DIR}/apps/tsdm/cfg  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+#echo "cp tsdm data"
+#cp -P -rf ${TSF4G_DIR}/apps/tsdm/data  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+echo "cp tsdm sql"
+cp -P -rf ${TSF4G_DIR}/apps/tsdm/sql  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+echo "cp tsdm example"
+cp -P -rf ${TSF4G_DIR}/apps/tsdm/example_tcp  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+echo "cp tsdm depends"
+cp -P -rf ${TSF4G_DIR}/apps/tsdm/depends  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+#echo "cp tsdmapi dist package"
+#cp -P -rf ./tsdm_dist/*  tmpdeploy/tsf4g_sdm/apps/tsdm/
+
+#echo "cp tsdm bin"
+#cp -P ${TSF4G_DIR}/apps/tsdm/bin/operd tmpdeploy/tsf4g_sdm/apps/tsdm/bin/
+#cp -P ${TSF4G_DIR}/apps/tsdm/bin/transd tmpdeploy/tsf4g_sdm/apps/tsdm/bin/
+#cp -P ${TSF4G_DIR}/apps/tsdm/bin/dmsd tmpdeploy/tsf4g_sdm/apps/tsdm/bin/
+
+#echo "cp tsdm example"
+#cp -rf -P ${TSF4G_DIR}/apps/tsdm/example/* tmpdeploy/tsf4g_sdm/apps/tsdm/example/
+#rm -rf tmpdeploy/tsf4g_sdm/apps/tsdm/example/src/Makefile
+#rm -rf tmpdeploy/tsf4g_sdm/apps/tsdm/example/src/Makefile.real
+#mv tmpdeploy/tsf4g_sdm/apps/tsdm/example/src/Makefile.release tmpdeploy/tsf4g_sdm/apps/tsdm/example/src/Makefile
+#mv tmpdeploy/tsf4g_sdm/apps/tsdm/example/src/Makefile.real.release tmpdeploy/tsf4g_sdm/apps/tsdm/example/src/Makefile.real
+
+echo "cp tsdm doc"
+cp -P -rf  ${TSF4G_DIR}/docs/apps/tsdm/* tmpdeploy/tsf4g_sdm/apps/tsdm/docs/
+
+cp -P ./tsf4g_sdm.install tmpdeploy/tsf4g_sdm/
+
+cd tmpdeploy
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">tsf4g_sdm/version
+
+find ./  -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_SDM_RELEASE} tsf4g_sdm 
+mv ${TSF4G_SDM_RELEASE} ../
+cd ../
+rm -rf tmpdeploy
+

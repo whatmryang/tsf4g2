@@ -1,0 +1,71 @@
+import os
+
+Import('buildenv')
+
+
+#if buildenv.vcVariant == "vc6" or buildenv.vcVariant == "vc7":
+#	src_local = list()
+#	Return("src_local")
+
+
+buildenv.xml2h(Split('xml/conf.xml'))
+buildenv.xml2c('xml/conf', 'xml/conf.xml')
+buildenv.xml2dr('xml/conf', 'xml/conf.xml')
+
+buildenv.xml2h(Split('xml/ctrl.xml'))
+buildenv.xml2c('xml/ctrl', 'xml/ctrl.xml')
+buildenv.xml2dr('xml/ctrl', 'xml/ctrl.xml')
+
+def _sub_array(a, b):
+    r = []
+    for i in a:
+        if i not in b:
+            r.append(i)
+    return r
+
+src_all_c    = _sub_array(Glob('*.c'), Glob('py_*.c'))
+src_all_c    = _sub_array(src_all_c, Glob('tpy_*.c'))
+src_all_cpp  = Glob('*.cpp')
+src_all      = src_all_c + src_all_cpp
+
+src_test_c   = Glob('test_*.c')
+src_test_cpp = Glob('test_*.cpp')
+src_test     = src_test_c + src_test_cpp
+
+src_lib_c    = _sub_array(src_all_c, src_test_c)
+src_lib_cpp  = _sub_array(src_all_cpp, src_test_cpp)
+src_lib      = src_lib_c + src_lib_cpp
+
+src_tmng_c   = Glob('tm*.c')
+src_tmng_cpp = Glob('tm*.cpp')
+
+#src_lib_c    = _sub_array(src_lib_c, src_tmng_c)
+#src_lib_cpp  = _sub_array(src_lib_cpp, src_tmng_cpp)
+
+#src_local = Glob('*.c')
+#src_local += Glob('*.cpp')
+
+
+'''
+buildenv.buildExec('test_tsm_handle',
+        ['test_tsm_handle.c', '../tdr/libtdr.a', '../pal/libpal.a'],
+        CPPPATH=['../../include'],
+        LIBS=[],
+        a_tsf4g_static_lib="tdr comm pal")
+
+buildenv.buildExec('test_tsm_data',
+        ['test_tsm_data.c'],
+        CPPPATH=['../../include'],
+        LIBS=["pthread"],
+        a_tsf4g_static_lib="tdr comm pal")
+'''
+
+
+Import('buildenv')
+
+buildenv.buildStaticLib('tmng', src_lib_c, MODULE='base', LIBS=["pal"], CPPPATH=['..'], CPPDEFINES=['TSF4GS_SMALL_LIB'])
+
+# buildenv.buildSharedLib('tsm_dump', ['py_tsm_dump.c'], CPPPATH=["/usr/local/include/python2.6"], LIBS=["python"])
+# InstallAs("tsm_dump.so", "libtsm_dump.so")
+
+Return('src_lib_c')

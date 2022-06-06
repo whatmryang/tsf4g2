@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- This file is for operd module -->
+
+<OperLimit>
+
+  <!-- **************************** -->
+  <!-- access IP list begin         -->
+  <!-- **************************** -->
+  <Access>
+    <ClientIP></ClientIP>
+  </Access>
+  <!-- **************************** -->
+  <!-- access IP list end           -->
+  <!-- **************************** -->
+
+
+  <!-- **************************** -->
+  <!-- access user list begin       -->
+  <!-- **************************** -->
+  <Users>
+  	<OperID>1</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+  	<OperID>2</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+
+  <Users>
+  	<OperID>3</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+
+  <Users>
+  	<OperID>4</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>		
+  
+  <Users>
+  	<OperID>10</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+  	<OperID>11</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+  	<OperID>12</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+  	<OperID>13</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+  	<OperID>14</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+  	<OperID>20</OperID>
+	<Passwd>dnftest</Passwd>
+	<IsValid>1</IsValid>
+	<CreateTime>2008-04-11 15:25:30</CreateTime>
+  </Users>
+  
+  <Users>
+    <OperID>100</OperID>
+    <Passwd>dnftest</Passwd>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2008-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Users>	
+
+   <Users>
+    <OperID>101</OperID>
+    <Passwd>pmtest</Passwd>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2008-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Users>
+
+   <Users>
+    <OperID>102</OperID>
+    <Passwd>qqxytest</Passwd>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2008-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Users>
+ 
+  <Users>
+    <OperID>1000</OperID>
+    <Passwd>plain_passwd_now</Passwd>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2008-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Users>
+  <!-- **************************** -->
+  <!-- access user list end         -->
+  <!-- **************************** -->
+
+
+  <!-- **************************** -->
+  <!-- access operator list begin -->
+  <!-- **************************** -->
+  <Opers>
+  	<ActionID>1</ActionID>
+	<OperID>1</OperID>
+	<PrivID>3</PrivID>
+	<IsValid>1</IsValid>
+	<CreateTime>2007-04-11 15:25:30</CreateTime>
+  </Opers>	
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>2</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+
+  <Opers>
+  	<ActionID>1</ActionID>
+	<OperID>3</OperID>
+	<PrivID>3</PrivID>
+	<IsValid>1</IsValid>
+	<CreateTime>2007-04-11 15:25:30</CreateTime>
+  </Opers>
+
+  <Opers>
+  	<ActionID>1</ActionID>
+	<OperID>4</OperID>
+	<PrivID>3</PrivID>
+	<IsValid>1</IsValid>
+	<CreateTime>2007-04-11 15:25:30</CreateTime>
+  </Opers>	
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>10</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>11</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>12</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>13</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>14</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>20</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  
+  <Opers>
+    <ActionID>1</ActionID>
+    <OperID>100</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>	
+
+   <Opers>
+    <ActionID>1</ActionID>
+    <OperID>101</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+
+   <Opers>
+    <ActionID>1</ActionID>
+    <OperID>102</OperID>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+ 
+  <Opers>
+    <ActionID>2</ActionID>
+    <OperID>1000</OperID>
+    <PrivID>4</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <CreateTime>2007-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+  </Opers>
+  <!-- **************************** -->
+  <!-- access operator list end     -->
+  <!-- **************************** -->
+
+
+  <!-- **************************** -->
+  <!-- various privilege list begin -->
+  <!-- **************************** -->
+  <Privs>
+    <PrivID>3</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <OperIP></OperIP> <!-- access IP associated with PrivID, marked by bracket "()" -->
+    <OperCmd>3</OperCmd> <!-- 1: increase, 2: decrease, 3: increase and decrease -->
+    <EndTime>2030-07-18 12:25:30</EndTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+    <OnceIncMax>1000000</OnceIncMax>
+    <OnceDecMax>0</OnceDecMax>
+    <AllIncMax>0</AllIncMax>
+    <AllDecMax>0</AllDecMax>
+    <IncTimeLimit>0</IncTimeLimit> <!-- duration limit -->
+    <IncDuration>0</IncDuration> <!-- in seconds, for value increase limit time check duration -->
+    <DecTimeLimit>0</DecTimeLimit>
+    <DecDuration>0</DecDuration> <!-- in seconds, for value decrease limit time check duration -->
+    <CreateTime>2008-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+    <Remark>privilege for DNF test</Remark>
+  </Privs>
+  
+  <Privs>
+    <PrivID>4</PrivID>
+    <IsValid>1</IsValid> <!-- 0: not valid, 1: valid -->
+    <OperIP></OperIP> <!-- access IP associated with PrivID, marked by bracket "()" -->
+    <OperCmd>3</OperCmd> <!-- 1: increase, 2: decrease, 3: increase and decrease -->
+    <EndTime>2030-07-18 12:25:30</EndTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+    <OnceIncMax>100000</OnceIncMax>
+    <OnceDecMax>0</OnceDecMax>
+    <AllIncMax>0</AllIncMax>
+    <AllDecMax>0</AllDecMax>
+    <IncTimeLimit>0</IncTimeLimit> <!-- duration limit -->
+    <IncDuration>0</IncDuration> <!-- in seconds, for value increase limit time check duration -->
+    <DecTimeLimit>0</DecTimeLimit>
+    <DecDuration>0</DecDuration> <!-- in seconds, for value decrease limit time check duration -->
+    <CreateTime>2008-04-11 15:25:30</CreateTime> <!-- format: yyyy-MM-dd hh:mm:ss, for example: 2007-06-18 12:25:30 -->
+    <Remark>privilege for demo_r test</Remark>
+  </Privs>
+  <!-- **************************** -->
+  <!-- various privilege list end   -->
+  <!-- **************************** -->
+
+</OperLimit>
+

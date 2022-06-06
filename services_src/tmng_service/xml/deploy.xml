@@ -1,0 +1,18 @@
+
+<HostDeploy version="1">
+	<AgentId>10.6.1.1</AgentId>
+	<ProcessList>
+		<ProcName>appex</ProcName>
+		<ProcId>10.6.2.1</ProcId>
+		<WorkDir>/home/johnsun/tsf/bin</WorkDir>
+		<StartCmd>appex start</StartCmd>  
+	</ProcessList>
+	<ProcessList>
+		<ProcName>app_connect</ProcName>
+		<ProcId>10.6.2.2</ProcId>
+	</ProcessList>
+	<ProcessList>
+		<ProcName>app_server</ProcName>
+		<ProcId>10.6.2.3</ProcId>
+	</ProcessList>
+</HostDeploy>

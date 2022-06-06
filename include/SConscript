@@ -1,0 +1,21 @@
+import os
+
+Import('buildenv')
+
+
+buildenv.VersionHeader(["baseversion.h"],major=buildenv.getMajor('base'),minor=buildenv.getMinor('base'))
+
+Libs = Split('tdr tbus taa tmng tlog tapp tsec comm pal tloghelp')
+
+for lib in Libs:
+	baseHeaders = Glob(lib+"/*.h")
+
+	if buildenv.isInstall("base"):
+		target = list()
+		source = list()
+		for file in baseHeaders:
+			#print str(file)
+			if str(file).count('.svn') == 0:
+				targtPath = os.path.abspath(os.path.join(buildenv.getInstallBase(),os.path.relpath(os.path.abspath(str(file)),buildenv.baseDir)))
+				sourcePath = os.path.abspath(os.path.join(buildenv.baseDir,'include',str(file)))
+				buildenv.env.InstallAs(targtPath,sourcePath)

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="tdrsort"  version="3">
+
+<!--  本示例文档定义了一个基本的网络协议 -->
+
+
+<macro name="MAX_NUM_OF_ARRAY" value="  6" />
+
+<union name="sorttinyintArr" version="1" id ="1">
+	<entry name="tinyintArr"  type="tinyint    " count="MAX_NUM_OF_ARRAY" id="0" sortmethod="Asc"/>
+	<entry name="tinyuintArr"  type="tinyuint" count="MAX_NUM_OF_ARRAY" id="1" sortmethod="Desc"/>
+</union>
+
+<union name="sortsmallintArr" version="1" id="2">
+	<entry name="smallintArr"  type="smallint" count="MAX_NUM_OF_ARRAY" id="0" sortmethod="Desc"/>
+	<entry name="smalluintArr"  type="smalluint" count="MAX_NUM_OF_ARRAY" id="1" sortmethod="Asc"/>
+</union>
+
+<union name="sortlongArr" version="1" >
+	<entry name="longArr"  type="long" count="MAX_NUM_OF_ARRAY" id="0" sortmethod="Asc"/>
+	<entry name="ulongArr"  type="ulong" count="MAX_NUM_OF_ARRAY" id="1" sortmethod="Desc"/>
+</union>
+
+<union name="longlongArr" version="1" >
+	<entry name="longlongArr"  type="longlong" count="MAX_NUM_OF_ARRAY" id="0" sortmethod="Desc"/>
+	<entry name="ulonglongArr"  type="ulonglong" count="MAX_NUM_OF_ARRAY" id="1" sortmethod="Asc"/>
+</union>
+
+<struct name="composeArr" version="1" sortkey="this.strArr">
+	<entry name="strArrNum" type="smallint" />
+	<entry name="strArr" type="string" count="MAX_NUM_OF_ARRAY" size="MAX_NUM_OF_ARRAY" sortmethod="Asc" refer="strArrNum"/>
+	<entry name="floatArrNum" type="smallint" />
+	<entry name="floatArr" type="float" count="MAX_NUM_OF_ARRAY" sortmethod="Asc" refer="floatArrNum" />
+	<entry name="doubleArr" type="double" count="MAX_NUM_OF_ARRAY" sortmethod="Desc"/>
+</struct>
+
+<struct name="SimpleSort" version="1"  align="4">
+	<entry name="intArrCount" type="tinyint" />
+	<entry name="sortint" type="int" count="MAX_NUM_OF_ARRAY" refer="intArrCount" sortmethod="Asc"/>
+	<entry name="select1" type="smallint" />
+	<entry name="sorttinyint" type="sorttinyintArr"  select="select1"/>
+	<entry name="select2" type="smallint" />
+	<entry name="sortsmallint" type="sortsmallintArr" select="select2"/>
+	<entry name="sortuint" type="uint" count="MAX_NUM_OF_ARRAY" sortmethod="Desc"/>
+	<entry name="select3" type="smallint" />
+	<entry name="sortlong" type="sortlongArr" select="select3"/>
+	<entry name="select4" type="smallint" />
+	<entry name="sortlonglong" type="longlongArr" select="select4"/>
+	<entry name="sortMetaArr"  type="composeArr" />
+</struct>
+
+
+<struct name="ComposeSort" version="2"  align="4">
+	<entry name="select1" type="smallint" />
+	<entry name="sorttinyint" type="sorttinyintArr"  select="select1"  count="MAX_NUM_OF_ARRAY" sortmethod="Desc" unique="true"/>
+	<entry name="sortMetaArr1"  type="composeArr" count = "MAX_NUM_OF_ARRAY" sortmethod="Asc" />
+	<entry name="sortMetaArr2"  type="composeArr" count = "MAX_NUM_OF_ARRAY" sortmethod="Desc" />
+		<entry name="sortMetaArr3"  type="composeArr" count = "MAX_NUM_OF_ARRAY" sortmethod="Desc" />
+	<entry name="sortSimpleSort1"  type="SimpleSort" count = "MAX_NUM_OF_ARRAY" sortmethod="Asc" />
+	<entry name="sortSimpleSort2"  type="SimpleSort" count = "MAX_NUM_OF_ARRAY" sortmethod="Desc" unique="true"/>
+</struct>
+
+
+<struct name="CustomTypeData" version="3"  align="4">
+	<entry name="datetimerefer" type="tinyint" />
+	<entry name="sortdatetime" type="datetime" count="MAX_NUM_OF_ARRAY" refer="datetimerefer" sortmethod="Asc"/>
+	<entry name="daterefer" type="tinyint" />
+	<entry name="sortdate" type="date" count="MAX_NUM_OF_ARRAY" refer="daterefer" sortmethod="Desc"/>
+	<entry name="sorttime" type="time" count="MAX_NUM_OF_ARRAY" sortmethod="Desc"/>
+	<entry name="sortip" type="ip" count="MAX_NUM_OF_ARRAY" sortmethod="ASC"/>
+	<entry name="sortwchar" type="wchar" count="MAX_NUM_OF_ARRAY" sortmethod="ASC" />
+	<entry name="sortwstring" type="wstring" count="MAX_NUM_OF_ARRAY" size="MAX_NUM_OF_ARRAY" sortmethod="Desc" io="3"/>
+</struct>
+
+</metalib>

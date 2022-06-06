@@ -1,0 +1,53 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+#Check dependency
+#
+./tsf4g_mart.check
+if [ $? -ne 0 ];then
+	echo "Dependency check failed."
+	exit 1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmart ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmart
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmart/martsvr ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmart/martsvr
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmart/tools ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmart/tools
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/ ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/
+fi
+
+echo "Install tmart...."
+pwd
+echo $TSF4G_INSTALL_HOME
+cp ./version					$TSF4G_INSTALL_HOME/apps/tmart/
+cp -rf ./martsvr				$TSF4G_INSTALL_HOME/apps/tmart/
+cp -rf ./tools					$TSF4G_INSTALL_HOME/apps/tmart/
+cp -rf ./protocol				$TSF4G_INSTALL_HOME/apps/tmart/
+cp -rf ./example				$TSF4G_INSTALL_HOME/apps/tmart/
+cp -rf ./include				$TSF4G_INSTALL_HOME/apps/tmart/
+cp -rf ./lib					$TSF4G_INSTALL_HOME/apps/tmart/
+
+echo "Install tmart done"

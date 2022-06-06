@@ -1,0 +1,7 @@
+Import("buildenv")
+Export('buildenv')
+SConscript("src/SConscript")
+import os
+
+if buildenv._isLinux:
+	os.system("chmod 777 bin/*.sh")

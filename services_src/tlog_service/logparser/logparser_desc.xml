@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="logparserconf" version="1" >
+
+	<struct name="logparserconf" version ="1" >
+		<entry name="LogFile"					type="string" size="128" defaultvalue="./tlogcenter.log" />
+		<entry name="LogFormat"				type="string" size="128" defaultvalue="[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n" />
+		<entry name="DBMSName"				type="string" size="128" defaultvalue="mysql" />
+		<entry name="DBMSConnectionInfo"		type="string" size="128" defaultvalue="localhost" />
+		<entry name="DBMSCurDatabaseName"	type="string" size="128" defaultvalue="tlog" />
+		<entry name="DBMSUser"				type="string" size="128" defaultvalue="root" />
+		<entry name="DBMSPassword"			type="string" size="128" defaultvalue="" />
+	</struct>
+	
+	<struct name="logparser_run_cumulate" version ="1" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="logparser_run_status" version ="1" >
+		<entry name="Res" type="int" />
+	</struct>	
+	
+</metalib>

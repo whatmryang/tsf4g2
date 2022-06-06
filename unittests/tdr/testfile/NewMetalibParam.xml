@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="net" version="17" >
+	<macro name="VERSION" value="100" />
+	<macro name="MAX_BODY_LEN" value="32000" />
+	<macro name="MAX_NAME_LEN" value="32" />
+	<macro name="MAX_PASS_LEN" value="32" />
+	<macro name="MAX_ATTR_SIZE" value="128" />
+	<macro name="NUM_BUDDY_ADVANCE" value="500" />
+	<macro name="MAX_NAME_LENGTH" value="32" />
+	<macrosgroup name="MsgID" desc="id of net message" >
+		<macro name="CMD_LOGIN" value="0" desc="id of login message body" />
+		<macro name="CMD_LOGOUT" value="1" />
+	</macrosgroup>
+	<macrosgroup name="Status" desc="status of cs" >
+		<macro name="STATUS_DUMMY" value="1" />
+		<macro name="STATUS_FUNNY" value="2" desc="funy status" />
+	</macrosgroup>
+
+	<struct name="PkgHead" version="1" versionindicator="version" >
+		<entry name="magic" type="smallint" defaultvalue="13124" />
+		<entry name="version" type="smallint" defaultvalue="1" />
+		<entry name="time" type="datetime" />
+		<entry name="cmd" type="smallint" />
+		<entry name="bodylen" type="smallint" />
+		<entry name="msgid" type="uint" desc="message id" bindmacrosgroup="MsgID" />
+	</struct>
+
+	<struct name="CmdLogin" version="10" id="2" desc="登录消息体" size="200" sizeinfo="smallint" >
+		<entry name="name" type="string" size="MAX_NAME_LEN" cname="登录用户名" sizeinfo="tinyint" />
+		<entry name="pass" type="string" id="6" size="MAX_PASS_LEN" sizeinfo="smallint" />
+		<entry name="zone" type="string" count="2" size="MAX_PASS_LEN" />
+	</struct>
+
+	<struct name="CmdLogout" version="10" cname="注销消息结构" >
+		<entry name="reason" type="int" />
+		<entry name="attr" type="tinyint" count="MAX_ATTR_SIZE" />
+	</struct>
+
+	<union name="PkgBody" version="10" >
+		<entry name="bodyBuff" type="char" count="MAX_BODY_LEN" />
+		<entry name="login" type="CmdLogin" count="2" id="CMD_LOGIN" />
+		<entry name="logout" type="CmdLogout" id="CMD_LOGOUT" />
+	</union>
+
+	<struct name="testAlignA" version="10" size="16" align="4" >
+		<entry name="a" type="int" />
+		<entry name="b" type="tinyint" />
+		<entry name="c" type="smallint" />
+	</struct>
+
+	<struct name="testAlignB" version="10" align="4" sizeinfo="len" >
+		<entry name="len" type="tinyint" />
+		<entry name="a" type="int" />
+		<entry name="namenum" type="smallint" version="12" />
+		<entry name="name" type="string" count="4" version="12" size="32" refer="namenum" />
+		<entry name="magic" type="float" />
+	</struct>
+
+	<union name="CSStatusValue" version="10" >
+		<entry name="Dummy" type="int" id="STATUS_DUMMY" />
+		<entry name="funny" type="testAlignA" id="STATUS_FUNNY" />
+	</union>
+
+	<struct name="CSStatus" version="10" sizeinfo="uchar" >
+		<entry name="Type" type="short" bindmacrosgroup="Status" />
+		<entry name="Value" type="CSStatusValue" select="Type" />
+	</struct>
+
+	<struct name="Pkg" version="10" versionindicator="head.version" >
+		<entry name="head" type="PkgHead" />
+		<entry name="bodycount" type="smallint" />
+		<entry name="body" type="PkgBody" sizeinfo="head.bodylen" select="head.cmd" />
+		<entry name="body2num" type="short" />
+		<entry name="body2" type="testAlignB" count="2" refer="body2num" />
+		<entry name="statusnum" type="short" version="12" />
+		<entry name="status" type="CSStatus" count="2" version="12" refer="statusnum" />
+		<entry name="ntstatus" type="CSStatus" version="12" />
+		<entry name="checksum" type="int" />
+	</struct>
+
+	<struct name="Conf" version="17" >
+		<entry name="SvrURL" type="string" size="128" />
+		<entry name="TrustIPNum" type="int" />
+		<entry name="TrustIP" type="string" count="16" size="32" refer="TrustIPNum" />
+		<entry name="MngID" type="int" count="8" />
+		<entry name="statusnum" type="short" />
+		<entry name="status" type="CSStatus" count="2" refer="statusnum" />
+	</struct>
+
+	<struct name="NetHead" version="10" >
+		<entry name="version" type="smallint" />
+		<entry name="head" type="@PkgHead" />
+		<entry name="body" type="*PkgBody" select="version" />
+		<entry name="DstIP" type="uint" />
+		<entry name="checksum" type="int" defaultvalue="6886" />
+	</struct>
+
+	<struct name="TestIO" version="10" >
+		<entry name="ntstatus" type="CSStatus" />
+		<entry name="iostatus" type="CSStatus" />
+	</struct>
+
+	<struct name="TestCSStatus" version="10" sizeinfo="uchar" >
+		<entry name="Type" type="short" />
+		<entry name="Valuenum" type="int" />
+		<entry name="Value" type="CSStatusValue" count="3" refer="Valuenum" select="Type" />
+		<entry name="idsnum" type="int" />
+		<entry name="ids" type="int" count="3" refer="idsnum" />
+	</struct>
+
+	<union name="testUnion" version="10" >
+		<entry name="d" type="smallint" />
+		<entry name="a" type="int" id="1" />
+		<entry name="b" type="tinyint" minid="3" maxid="15" />
+		<entry name="c" type="smallint" minid="4" maxid="8" />
+		<entry name="e" type="smallint" id="6" />
+		<entry name="c" type="smallint" minid="20" maxid="20" />
+	</union>
+
+	<struct name="TestUnsizedArr" version="10" >
+		<entry name="count" type="int" />
+		<entry name="data" type="testAlignA" count="0" refer="count" />
+	</struct>
+
+	<struct name="TestAlign" version="10" >
+		<entry name="shortData" type="short" />
+		<entry name="intData" type="int" />
+	</struct>
+
+	<struct name="TestVarArr" version="10" >
+		<entry name="shortData" type="short" />
+		<entry name="count" type="int" />
+		<entry name="intArr" type="int" count="0" refer="count" />
+	</struct>
+
+	<struct name="NameID" version="1" >
+		<entry name="Gid" type="ulonglong" desc="角色GID" customattr="scope[10000000-99999999]" />
+		<entry name="Size" type="uchar" desc="角色昵称长度，含0结束符" />
+		<entry name="Name" type="uchar" count="MAX_NAME_LENGTH" desc="角色昵称" refer="Size" />
+	</struct>
+
+	<struct name="UserInfo" version="1" >
+		<entry name="NameId" type="NameID" />
+		<entry name="GroupId" type="ushort" />
+	</struct>
+
+	<struct name="BuddyListRes" version="1" >
+		<entry name="ListNum" type="int" desc="好友个数" />
+		<entry name="NameIdList" type="UserInfo" count="NUM_BUDDY_ADVANCE" refer="ListNum" />
+	</struct>
+
+	<struct name="TestAutoIncrement" version="14" >
+		<entry name="ID" type="uint" defaultvalue="10000000" autoincrement="true" />
+		<entry name="name" type="string" size="128" />
+	</struct>
+
+	<struct name="TestEsc" version="15" >
+		<entry name="Str1" type="string" size="32" />
+		<entry name="str2" type="string" size="32" />
+	</struct>
+
+	<struct name="SimpleMsg" version="16" >
+		<entry name="count" type="int" />
+		<entry name="DstID" type="int" count="2" refer="count" />
+		<entry name="Msg" type="string" size="16" />
+	</struct>
+
+</metalib>

@@ -1,0 +1,14 @@
+import os
+
+Import('buildenv')
+
+src_local=Glob('*.cpp')
+src_local+=Glob('../tgetopt.cpp')
+src_local+=Glob('../tdr_tools.cpp')
+
+buildenv.VersionHeader(target = ["version.h"],major=buildenv.getMajor('base'),minor=buildenv.getMinor('base'))
+
+if buildenv.isLinux():
+	buildenv.buildTools('tdr',src_local,a_tsf4g_static_lib='tdr_xml tdr pal scew expat')
+else:
+	buildenv.buildTools('tdr',src_local,CPPDEFINES=Split("TDR_WITH_XML"),a_tsf4g_static_lib='tdr_xml tdr pal scew expat')

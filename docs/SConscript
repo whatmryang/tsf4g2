@@ -1,0 +1,49 @@
+import os
+import shutil
+Import('buildenv')
+
+def doxygenWebFiles():
+	for root,dirs,files in os.walk('.',topdown=True):
+		for f in files:
+			if f == 'DoxyfileWeb':
+				pwd = os.getcwd()
+				os.chdir(root)
+				os.system('doxygen')
+				os.chdir(pwd)
+				
+def webFiles():
+	pwd = os.getcwd()
+	os.chdir(str(os.path.abspath(os.path.join(buildenv.baseDir,'docs/tools/tsf4gweb'))))
+	os.system('python publish.py -p1 -m%s'%buildenv.InstallModuleName)
+	os.chdir(pwd)	
+
+def DistFiles():
+	for root,dirs,files in os.walk('index_html',topdown=True):
+		if str(root).count('.svn') == 0:
+			targetDir = os.path.abspath(os.path.join('\\\\10.1.252.49\\TSF4GOnLine',os.path.relpath(root,os.path.abspath('index_html'))))
+			for f in files:
+				shutil.copy(os.path.join(root,f),targetDir)
+
+#print 	buildenv._publish_webfiles			
+if buildenv._publish_webfiles == 1:
+	buildenv.genDoxyFile('include','docs/tsf4g_htm/','docs/TSF4G_API.chm')
+
+	libs="comm tbus tdr tlog tapp tloghelp tmng pal"
+	for lib in Split(libs):
+		buildenv.genDoxyFile('include/'+lib,'\\\\10.1.252.49\\TSF4GOnLine/lib/%s/api'%lib,'docs/%s/dist/TSF4G_%s_API.chm'%(lib,lib),lib)
+	webFiles()		
+if buildenv._isInstall:
+	docs = Glob("dist/*.doc")
+	docs += Glob("dist/*.ppt")
+	docsPath = buildenv.getInstallBase() + "/docs"
+	Install(docsPath,docs)
+	
+if buildenv.isInstall("base"):
+
+	liblist="comm pal taa tapp tbus tdr tlog tloghelp  tmng tsec"
+	for lib in Split(liblist):
+		docs = Glob(lib+'/dist/*')
+		Install(buildenv.getInstallBase()+'/docs/'+lib,docs)		
+	
+	docs=Glob("base/dist/*")
+	Install(buildenv.getInstallBase()+'/docs/',docs)

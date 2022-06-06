@@ -1,0 +1,38 @@
+TSF4G(Tencent Software Framework for Game) 1.0 README
+	
+    For a description of what this distribution contains, see the
+    ANNOUNCEMENT file in this directory.
+    
+    For a description of  coding  criterion of this distribution, 
+    see the CODINGCRITETION file in this directory. 
+    
+    For a description of changes from previous releases, 
+    see the CHANGES file in this directory.
+
+    
+
+REQUIRED SOFTWARE
+    Building TSF4G Software requires a number of software packages
+    to be preinstalled:
+        Standard C compiler (required)
+        Expat 2.0.0+ (recommended),  its homepage is http://www.libexpat.org/
+        SCEW(Simple C Expat Wrapper) 0.2.0+ (recommended), its homepage is http://www.nongnu.org/scew/
+        Mysql 4.0.x+(recommended), its homepage is http://www.mysql.com/
+        OpenSSL 0.9.7+ (recommended), if you need tsec compoment. Homepage of OpenSSL is http://www.openssl.org/   
+
+MAKING AND INSTALLING THE DISTRIBUTION
+    Please see the INSTALL file for basic instructions. 
+
+
+DOCUMENTATION
+    
+
+SUPPORT / FEEDBACK / PROBLEM REPORTS / DISCUSSIONS
+   
+
+
+CONTRIBUTING
+  
+
+Copyright 2007-2008 IRED TENCENT.
+All rights reserved.

@@ -1,0 +1,13 @@
+import os
+Import('buildenv')
+
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+if buildenv.isLinux():
+	buildenv.buildExamples("tlog","HelloWorld",src_local,a_tsf4g_static_lib='tsf4g')
+else:
+	buildenv.buildExamples("tlog","HelloWorld",src_local,CPPDEFINES=Split('_TSF4G_LARGE_LIB_'),a_tsf4g_static_lib='tsf4g')
+
+buildenv.ttest('HelloWorld.txml','HelloWorld',TESTRETV=0)

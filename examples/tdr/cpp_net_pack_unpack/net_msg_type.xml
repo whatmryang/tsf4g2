@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="" >
+
+    <macro name="MAX_NAME_LEN" value="32" />
+    <macro name="MAX_PASS_LEN" value="32" />
+
+    <macrosgroup name="LOGIN_TYPE" >
+        <macro name="LOGIN_BY_ID"   value="1" />
+        <macro name="LOGIN_BY_NAME" value="2" />
+    </macrosgroup>
+
+    <struct name="CmdLogin" version="1" id = "2" sizeinfo="smallint" size="200">
+        <entry name="name" type="string" size="MAX_NAME_LEN" />
+        <entry name="pass" type="string" size="MAX_PASS_LEN" id = "6" />
+        <entry name="zone" type="string" size="MAX_PASS_LEN" />
+        <entry name="dest" type="ip" defaultvalue="10.6.221.149" version="3" />
+    </struct>
+
+    <macro name="MAX_ATTR_SIZE" value="128" />
+
+    <struct name="CmdLogout" version="1" >
+        <entry name="reason" type="int" />
+        <entry name="count" type="int" />
+        <entry name="attr" type="smalluint" count="MAX_ATTR_SIZE" refer="count" />
+    </struct>
+
+</metalib>

@@ -1,0 +1,108 @@
+#/bin/sh
+
+deploy()
+{
+    echo "#/bin/sh"
+    echo 
+    echo "#spawn_tagent.sh"
+    echo 
+    echo "TAGENT_DIR=\"##TSF4G_INSTALL_HOME##/apps/tagent/bin/\""
+    echo "TAGENT_NUM=\`ps -efL | grep tagent | grep -v grep | grep -v rtagent | grep -v agent -c\`"
+    echo 
+    echo "if [ \$TAGENT_NUM -le 0 ]"
+    echo "then"
+    echo "	cd \$TAGENT_DIR"
+    echo "	./start_tagent.sh"
+    echo "fi"
+    echo 
+}
+
+echo "Please enter the ip addr of centerd"
+IP_ADDR="127.0.0.1"
+while false #true
+do
+	read IP_ADDR
+	#echo $IP_ADDR
+	t_ip=`echo $IP_ADDR | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | wc -l`
+	if [ $t_ip -eq 1 ];then
+		break
+	else
+		echo "Error! Wrong IP addr format, It should be 127.0.0.1" 
+		echo "Please try again"
+	fi
+done
+
+echo $IP_ADDR
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tagent ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tagent
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tagent/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tagent/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tagent/cfg ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tagent/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tagent/lib ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tagent/lib
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/ ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/
+fi
+
+echo "Stop tagent"
+#killall -9 tagent
+
+sleep 1
+
+echo "Install tagent...."
+cp -f ./version					$TSF4G_INSTALL_HOME/apps/tagent/
+cp -f ./bin/tagent					$TSF4G_INSTALL_HOME/apps/tagent/bin/
+cp -f ./bin/*.sh					$TSF4G_INSTALL_HOME/apps/tagent/bin/
+cp -f ./cfg/*						$TSF4G_INSTALL_HOME/apps/tagent/cfg/
+cp -f ./lib/*						$TSF4G_INSTALL_HOME/apps/tagent/lib/
+
+#deploy tagent.cfg
+cat $TSF4G_INSTALL_HOME/apps/tagent/cfg/tagent.cfg.tpl | 
+	sed "s:##IP##:${IP_ADDR}:g" > $TSF4G_INSTALL_HOME/apps/tagent/cfg/tagent.cfg
+
+#deploy spawn_tagent.sh
+#deploy > .spawn_tagent.tpl
+
+#cat .spawn_tagent.tpl | sed -e "s:##TSF4G_INSTALL_HOME##:${TSF4G_INSTALL_HOME}:g" .spawn_tagent.tpl > $TSF4G_INSTALL_HOME/apps/tagent/bin/spawn_tagent.sh 
+#chmod a+x $TSF4G_INSTALL_HOME/apps/tagent/bin/spawn_tagent.sh 
+
+#add2crontab
+#crontab -l > .crontab.tmp
+#result=`cat .crontab.tmp | grep "$TSF4G_INSTALL_HOME/apps/tagent/bin/spawn_tagent.sh"`
+
+#if [ -z "$result" ];then
+#	echo "* * * * * ($TSF4G_INSTALL_HOME/apps/tagent/bin/spawn_tagent.sh > /dev/null 2>&1)" >> .crontab.tmp
+#	crontab .crontab.tmp
+#fi
+
+#start tagent
+
+cd $TSF4G_INSTALL_HOME/apps/tagent/bin/
+#./start_tagent.sh
+
+echo "Install tagent done"

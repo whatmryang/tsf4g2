@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="gbk" standalone="yes" ?>
+<!-- This file is for tbus relay manager tool application-->
+
+<metalib tagsetversion="1" name="TbusConf" version="9">
+
+    <!-- global relay information share memory macros defined -->
+    <macro name="TBUS_RELAY_GLOBAL_COUNT"  value="1024" desc="" />
+
+    <!-- bit-set used by relay enable macros defined -->
+    <macrosgroup name="TBUSD_FLAG">
+        <macro name="TBUSD_FLAG_NONE"   value="0" />
+        <macro name="TBUSD_FLAG_ENABLE" value="0x00000001"     />
+        <macro name="TBUSD_FLAG_NOT_IN_CONF" value="0x00000002"     />
+    </macrosgroup>
+
+    <!-- relay connection status macros defined -->
+    <macro name="TBUSD_STATUS_NO_CONNECTION"             value="0" desc="relay通道尚未建立连接" />
+    <macro name="TBUSD_STATUS_CONNECTING" value="1" desc="relay通道连接建立过程中,主动与对方建立连接" />
+    <macro name="TBUSD_STATUS_CLIENT_SYN_SEND" value="2" desc="relay通道握手过程：以客户端的方式发送了SYN包" />
+    <macro name="TBUSD_STATUS_SERVER_INIT"   value="3" desc="relay通道握手过程：确认了服务器身份" />
+    <macro name="TBUSD_STATUS_SERVER_SYN_RECV"   value="4" desc="relay通道握手过程：服务器收到了SYN包并发送了ACK" />
+    <macro name="TBUSD_STATUS_ESTABLISHED"           value="5" desc="relay通道已经建立，可以收发数据包" />
+
+    <macro name="TBUSD_DEFAULT_PKG_MIN_SIZE" value="16384"  desc="缺省支持的数据包最小长度64K" />
+    <macro name="RELAY_DEFAULT_TIMEOUT" value="5" desc="in seconds" />
+
+    <!-- connection compare macros -->
+    <macro name="RELAY_CONN_DUPLICATED"  value="1" desc="" />
+
+    <!-- error code -->
+    <macro name="RELAY_ERROR_ALREADY_CONNECTED" value="-101" desc="" />
+    <macro name="RELAY_ERROR_SOCKET_FAILED"     value="-102" desc="" />
+
+    <!-- limits -->
+    <macro name="TBUSD_DEFAULT_SOCKET_BUFF" value="131072" desc="socket链接缺省缓冲区大小"/>
+    <macro name="RELAY_LOG_NAME_MAX_LEN" value="64" desc="日志类名字字符串最大长度" />
+    <macro name="RELAY_MAX_LISTENER_LEN" value="512" desc="max length of listener" />
+    <macro name="TBUSD_DEFAULT_PKG_MAX_SIZE" value="131072" desc="缺省支持的数据包最大长度64K" />
+    <macro name="TBUSD_DEFAULT_SYN_SEQ_GAP" value="1" desc="缺省同步序列号的时间间隔，单位为秒" />
+    <macro name="TBUSD_DEFAULT_HANDSHAKE_TIMEOUT" value="30" desc="缺省握手过程超时值，单位为秒"  />
+    <macro name="TBUSD_DEFAULT_HEART_BEAT_GAP" value="6" desc="缺省心跳最大时间间隔，单位为秒"  />
+    <macro name="TBUSD_DEFAULT_RECONNECT_GAP" value="3" desc="缺省重建握手过程的间隔，单位为秒"/>
+    <macro name="TBUSD_DEFAULT_IDLE_COUNT" value="2" />
+
+    <struct name="Tbusd" version="1">
+        <entry name="BussinessID" type="int" defaultvalue="0" desc="TCM系统分配的业务ID,不使用TCM系统的,配置成0" io="nooutput"/>
+        <entry name="RelayShmKey" type="string" size="TBUS_MAX_KEY_STRING_LEN" defaultvalue="2688"
+            desc="tbus中转路由信息所在共享内存的key"/>
+        <entry name="GCIMShmKey" type="string" size="TBUS_MAX_KEY_STRING_LEN" defaultvalue="1688"
+            desc="tbus通道配置信息所在共享内存的key"/>
+
+
+        <entry name="Listen"    type="string" size="RELAY_MAX_LISTENER_LEN" defaultvalue="tcp://127.0.0.1:1027?reuse=1"
+            desc="本tbusd服务进程监听的地址和端口"/>
+        <entry name="BackLog"   type="uint"   defaultvalue="32"     desc="内核为此套接口排队的最大连接个数" io="nooutput" />
+
+        <entry name="PkgMaxSize" type="int" version="4" defaultvalue="TBUSD_DEFAULT_PKG_MAX_SIZE" desc="中转数据包最大字节数" />
+        <entry name="SendBuff" type="int" version="2" defaultvalue="TBUSD_DEFAULT_SOCKET_BUFF" desc="relay连接的发送缓冲区大小" />
+        <entry name="RecvBuff" type="int" version="2" defaultvalue="TBUSD_DEFAULT_SOCKET_BUFF" desc="relay连接的发送缓冲区大小" />
+
+        <entry name="StatGap" type="int" version="3" defaultvalue="60" desc="统计信息输出间隔，单位为秒"/>
+        <entry name="ReconnectGap" type="int" version="3" defaultvalue="TBUSD_DEFAULT_RECONNECT_GAP"
+            desc="对于尚未建立握手过程的relay通道，重建握手过程的间隔，单位为秒" io="nooutput" />
+        <entry name="SynSeqGap" type="int" version="3" defaultvalue="TBUSD_DEFAULT_SYN_SEQ_GAP"
+            desc="同步序列号的时间间隔，单位为秒" io="nooutput" />
+        <entry name="HandShakeTimeout" type="int" version="3" defaultvalue="TBUSD_DEFAULT_HANDSHAKE_TIMEOUT"
+            desc="握手过程超时值，即如果握手过程时间超过这个阀值，则中断握手过程，单位秒" io="nooutput"/>
+        <entry name="MaxHeartBeatGap" type="int" version="7" defaultvalue="TBUSD_DEFAULT_HEART_BEAT_GAP"
+            desc="对于已经连接已建立的中转通道，没有心跳同步的最大时间间隔，但没有心跳时间超过此阀值时，tbusd会重建连接"
+            io="nooutput"/>
+        <entry name="MaxSendPerloop" type="int" version="4" defaultvalue="500"
+            desc="单个处理循环最多发送数据包的个数" io="nooutput"/>
+        <entry name="MaxRecvPerloop" type="int" version="4" defaultvalue="500"
+            desc="单个处理循环最多接收数据包的个数" io="nooutput"/>
+
+
+
+        <entry name="NeedAckPkg" type="int"  defaultvalue="1" version="5"
+            desc="是否需要对发送的数据包做确认" />
+
+        <entry name="ControlUnackedPkgNum" type="int" version="4" defaultvalue="0"
+            desc="是否对未确认的包数做控制,其值为0表示不控制,其值为非0表示要控制" io="nooutput"/>
+        <entry name="SvrLogName" type="string" size="RELAY_LOG_NAME_MAX_LEN"  version="3"
+            defaultvalue="" desc="服务器一般日志信息输出类名字" io="nooutput"/>
+        <entry name="StatLogName" type="string" size="RELAY_LOG_NAME_MAX_LEN" version="3"
+            defaultvalue="" desc="服务器统计日志信息输出类名字" io="nooutput"/>
+        <entry name="RefreshTbusConfGap" type="int" defaultvalue="60"
+            desc="TBUSD刷新TBUS配置的时间间隔，单位秒" version="6"  />
+        <entry name="EnableCheckPeerIP" type="int" defaultvalue="1"
+            desc="是否验证中转通道对方tbusd服务的ip地址与本地配置信息是否一致"
+            version="7"  />
+
+        <entry name="DisabledChannelTimeGap" type="int" version="8" defaultvalue="604800"
+            desc="被disabled的通道的生存时间,单位秒,-1表示不删除" />
+
+        <entry name="IdleTickNumBeforeSleep" type="int" version="9" defaultvalue="TBUSD_DEFAULT_IDLE_COUNT"
+            desc="持续空转计数到该值后，进程sleep一次，默认 sleep 10ms" />
+
+    </struct>
+
+    <struct name="TbusRelayConnStat" version="3" desc="单条relay链接链路运行统计信息">
+        <entry name="RecvPkgCount" type="uint" desc="接收数据包数目" />
+        <entry name="SendPkgCount"    type="uint" desc="发送数据包数目"/>
+
+        <entry name="RecvPkgBytes" type="biguint" desc="接收的数据包字节数" />
+        <entry name="SendPkgBytes" type="biguint" desc="发送的数据字节数" />
+
+        <entry name="ReconnectCount" type="uint" desc="重新链接对方tbusd的次数" />
+        <entry name="RecvSynPkgCount" type="uint" desc="接收数据包数目" />
+        <entry name="SendSynPkgCount"    type="uint" desc="发送数据包数目"/>
+
+        <entry name="MaxRecvCountPerloop" type="uint" desc="单循环接收数据包的最大数目" />
+        <entry name="MaxSendCountPerloop"    type="uint" desc="单循环发送数据包的最大数目"/>
+    </struct>
+
+    <struct name="TbusRelayConnStatList" version="3" desc="relay链接链路运行统计信息">
+        <entry name="RelayCnt"    type="uint" />
+        <entry name="RelayConnStat" type="TbusRelayConnStat" count="TBUS_MAX_RELAY_NUM_PREHOST" refer="RelayCnt" />
+    </struct>
+
+    <struct name="TbusdStat" version="3" desc="记录relay服务器运行统计信息">
+        <entry name="LoopTimes" type="uint" desc="统计周期内主循环次数" />
+        <entry name="SecPreloop" type="int" desc="单个循环最大执行时间所用秒数" />
+        <entry name="UsecPreloop" type="int" desc="单个循环最大执行时间所用毫秒数" />
+        <entry name="AcceptFailed" type="uint" desc="统计周期内accept链接失败的次数" />
+
+        <entry name="RecvPkgCount" type="uint" desc="接收数据包数目" />
+        <entry name="SendPkgCount"    type="uint" desc="发送数据包数目"/>
+        <entry name="RecvPkgBytes" type="biguint" desc="接收的数据包字节数" />
+        <entry name="SendPkgBytes" type="biguint" desc="发送的数据字节数" />
+        <entry name="RecvSynPkgCount" type="uint" desc="接收数据包数目" />
+        <entry name="SendSynPkgCount"    type="uint" desc="发送数据包数目"/>
+
+        <entry name="RelayConnStatList" type="TbusRelayConnStatList" extendtotable="false" />
+     </struct>
+
+</metalib>
+

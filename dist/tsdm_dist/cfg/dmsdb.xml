@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- This file is for dms database info module -->
+
+<DmsDB>
+  <DataCnt>3</DataCnt>
+
+  <DmsInfo>
+    <DataType>100</DataType>
+
+    <UinMod>100</UinMod>
+
+    <DBInfo>
+      <UinStart>00</UinStart>
+      <UinEnd>99</UinEnd>
+      <DBHost>localhost</DBHost>
+      <DBPort>3306</DBPort>
+      <DBUser>sdms</DBUser>
+      <DBPwd>sdms</DBPwd>
+      <DBSocket>/var/lib/mysql/mysql.sock</DBSocket>
+      <HeartBeat>60</HeartBeat> <!-- in seconds, duration to keep mysql keep connection at idle time -->
+      <AutoCreate>1</AutoCreate> <!-- if no data at DB, whether auto create after update failed -->
+      <InsertSQL>INSERT INTO sdms.userdata_%d ( uin, data_type, keyvalue, activate_time,mtime,last_plus_time,day_plus_amt,last_plus_amt ) VALUES ( %u, 100, %llu, NOW(),NOW(),NOW(),%llu,%llu)</InsertSQL>
+      <SelectSQL>SELECT uin, data_type, status, pwd_type, passwd, static_ip, keyvalue, day_plus_amt, day_minus_amt, UNIX_TIMESTAMP(mtime), single_plus, day_plus, single_minus, day_minus, last_plus_amt, UNIX_TIMESTAMP(last_plus_time), last_minus_amt, UNIX_TIMESTAMP(last_minus_time), UNIX_TIMESTAMP(activate_time), remark FROM sdms.userdata_%d WHERE uin=%u AND data_type=100 %s LIMIT 1</SelectSQL>
+      <UpdateSQL>UPDATE sdms.userdata_%d SET %s WHERE uin=%u AND data_type=100 %s LIMIT 1</UpdateSQL>
+      <DeleteSQL>DELETE FROM sdms.userdata_%d WHERE uin=%u AND data_type=100 LIMIT 1</DeleteSQL>
+    </DBInfo>
+
+  </DmsInfo>
+
+  <DmsInfo>
+    <DataType>101</DataType>
+
+    <UinMod>100</UinMod>
+
+    <DBInfo>
+      <UinStart>00</UinStart>
+      <UinEnd>99</UinEnd>
+      <DBHost>localhost</DBHost>
+      <DBPort>3306</DBPort>
+      <DBUser>sdms</DBUser>
+      <DBPwd>sdms</DBPwd>
+      <DBSocket>/var/lib/mysql/mysql.sock</DBSocket>
+      <HeartBeat>60</HeartBeat> <!-- in seconds, duration to keep mysql keep connection at idle time -->
+      <AutoCreate>1</AutoCreate> <!-- if no data at DB, whether auto create after update failed -->
+      <InsertSQL>INSERT INTO sdms.userdata_%d ( uin, data_type, keyvalue, activate_time,mtime,last_plus_time,day_plus_amt,last_plus_amt ) VALUES ( %u, 101, %llu, NOW(),NOW(),NOW(),%llu,%llu)</InsertSQL>
+      <SelectSQL>SELECT uin, data_type, status, pwd_type, passwd, static_ip, keyvalue, day_plus_amt, day_minus_amt, UNIX_TIMESTAMP(mtime), single_plus, day_plus, single_minus, day_minus, last_plus_amt, UNIX_TIMESTAMP(last_plus_time), last_minus_amt, UNIX_TIMESTAMP(last_minus_time), UNIX_TIMESTAMP(activate_time), remark FROM sdms.userdata_%d WHERE uin=%u AND data_type=101 %s LIMIT 1</SelectSQL>
+      <UpdateSQL>UPDATE sdms.userdata_%d SET %s WHERE uin=%u AND data_type=101 %s LIMIT 1</UpdateSQL>
+      <DeleteSQL>DELETE FROM sdms.userdata_%d WHERE uin=%u AND data_type=101 LIMIT 1</DeleteSQL>
+    </DBInfo>
+
+  </DmsInfo>
+
+  <DmsInfo>
+    <DataType>102</DataType>
+
+    <UinMod>100</UinMod>
+
+    <DBInfo>
+      <UinStart>00</UinStart>
+      <UinEnd>99</UinEnd>
+      <DBHost>localhost</DBHost>
+      <DBPort>3306</DBPort>
+      <DBUser>sdms</DBUser>
+      <DBPwd>sdms</DBPwd>
+      <DBSocket>/var/lib/mysql/mysql.sock</DBSocket>
+      <HeartBeat>60</HeartBeat> <!-- in seconds, duration to keep mysql keep connection at idle time -->
+      <AutoCreate>1</AutoCreate> <!-- if no data at DB, whether auto create after update failed -->
+      <InsertSQL>INSERT INTO sdms.userdata_%d ( uin, data_type, keyvalue, activate_time,mtime,last_plus_time,day_plus_amt,last_plus_amt ) VALUES ( %u, 102, %llu, NOW(),NOW(),NOW(),%llu,%llu)</InsertSQL>
+      <SelectSQL>SELECT uin, data_type, status, pwd_type, passwd, static_ip, keyvalue, day_plus_amt, day_minus_amt, UNIX_TIMESTAMP(mtime), single_plus, day_plus, single_minus, day_minus, last_plus_amt, UNIX_TIMESTAMP(last_plus_time), last_minus_amt, UNIX_TIMESTAMP(last_minus_time), UNIX_TIMESTAMP(activate_time), remark FROM sdms.userdata_%d WHERE uin=%u AND data_type=102 %s LIMIT 1</SelectSQL>
+      <UpdateSQL>UPDATE sdms.userdata_%d SET %s WHERE uin=%u AND data_type=102 %s LIMIT 1</UpdateSQL>
+      <DeleteSQL>DELETE FROM sdms.userdata_%d WHERE uin=%u AND data_type=102 LIMIT 1</DeleteSQL>
+    </DBInfo>
+
+  </DmsInfo>
+
+</DmsDB>
+

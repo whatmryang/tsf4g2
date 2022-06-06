@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="mtclient" version="10" >
+	
+	<struct name="mtclientconf" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="mtclientrun_cumulate" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="mtclientrun_status" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+</metalib>

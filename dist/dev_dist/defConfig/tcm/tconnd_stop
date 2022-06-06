@@ -1,0 +1,5 @@
+#!/bin/sh
+
+./tconnd --id=##TCONNDID## stop
+
+

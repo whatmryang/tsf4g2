@@ -1,0 +1,43 @@
+#!/usr/local/bin/python
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+
+buildenv.xml2h('testfile/ov_cs.xml',XML2HFLAGS='-f')
+buildenv.xml2c('ov_cs','testfile/ov_cs.xml',XML2CFLAGS='-f')
+Install('.','testfile/ov_cs.h')
+
+
+buildenv.xml2h('testfile/tdr_database.xml')
+InstallAs('./ut_tdr_db.h','testfile/tdr_database.h')
+
+
+buildenv.xml2h('testfile/testMetalibParam.xml')
+InstallAs('simpleMetalibV1.h','testfile/testMetalibParam.h')
+
+buildenv.xml2h('testfile/tdr_dbms.xml')
+InstallAs('./tdr_dbms.h','testfile/tdr_dbms.h')
+
+buildenv.xml2h('testfile/test_defaultvalue.xml')
+InstallAs('./ut_test_defaultvalue.h','testfile/test_defaultvalue.h')
+
+buildenv.xml2h('testfile/test_escape_characters.xml')
+InstallAs('./ut_test_escape_characters.h','testfile/test_escape_characters.h')
+
+buildenv.xml2h('testfile/test_json_inoutput.xml')
+InstallAs('./ut_test_json_inoutput.h','testfile/test_json_inoutput.h')
+
+buildenv.xml2h('testfile/tdr_sort.xml')
+InstallAs('./ut_tdr_sort.h', 'testfile/tdr_sort.h')
+
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+if buildenv._isLinux:
+	buildenv.buildUnittests("tdr","ut_tdr",src_local,a_tsf4g_static_lib='pal tdr_dbms_xml tdr_xml tdr',LIBS=' mysqlclient' ,LINKFLAGS=Split('-lcunit'),CPPPATH=Split("../../lib_src/tdr ../../lib_src/tdr/xml_metalib ../../lib_src"))
+else:
+	print "Ignoring ut tdr"
+#	buildenv.buildUnittests("tdr","ut_tdr",src_local,CPPPATH=Split('../../deps/CUnit/CUnit/Headers ../../lib_src/tdr ../../lib_src/tdr/xml_metalib ../../lib_src/'),CPPDEFINES=Split('TDR_WITH_XML TDR_WITH_DBMS'),a_tsf4g_static_lib="cunit")
+
+Return('src_local')

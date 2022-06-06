@@ -1,0 +1,6 @@
+<!-- a metalib without any struct or union is not allowed -->
+<metalib name = "" version = "1">
+	<macro name="TDR_TEST" define="1"/>
+	<macro name="TDR_TRY" define="2"/>
+	<macro name="TDR_BENCH" define="3"/>
+</metalib>

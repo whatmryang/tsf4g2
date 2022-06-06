@@ -1,0 +1,10 @@
+import os
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Import('buildenv')
+
+buildenv.buildStaticLib('comm',src_local,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB'])
+
+Return('src_local')

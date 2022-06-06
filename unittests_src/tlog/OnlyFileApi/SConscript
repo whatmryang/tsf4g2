@@ -1,0 +1,8 @@
+import os
+Import('buildenv')
+
+
+#src_local = Glob('*.c')
+src_local = Glob('*.cpp')
+if buildenv._isLinux:
+	buildenv.buildExec("OnlyFileApi",src_local,LIBS='gtest tsf4g')

@@ -1,0 +1,41 @@
+#  @file $RCSfile: Makefile.demo,v $
+#  general description of this module
+#  $Id: Makefile.demo,v 1.1 2009-03-26 10:20:57 jacky Exp $
+#  @author $Author: jacky $
+#  @date $Date: 2009-03-26 10:20:57 $
+#  @version 1.0
+#  @note Editor: Vim 6.1, Gcc 4.0.1, tab=4
+#  @note Platform: Linux
+
+include ../tsf4g.mk
+
+CLEANTARGET = clean
+
+
+
+MODS = examples
+MODSCLEAN =$(patsubst %, %.$(CLEANTARGET), $(MODS))
+
+
+
+all: $(MODS)
+
+.PHONY:  all clean $(MODS) $(MODSCLEAN) 
+
+$(MODS): 
+	@echo "Begin to make  module: '$@' ......" 
+	cd $@ && $(MAKE);
+	@echo "Finish to  make  module: '$@'" 
+
+$(MODSCLEAN):
+	@echo "Begin to clean  module: '$(patsubst %.$(CLEANTARGET),%, $@)' ......" 
+	cd $(patsubst %.$(CLEANTARGET),%, $@) && $(MAKE) $(CLEANTARGET);
+	@echo "Finish to clean  module: '$(patsubst %.$(CLEANTARGET),%, $@)'" 
+
+$(CLEANTARGET): $(MODSCLEAN)
+
+
+
+
+
+

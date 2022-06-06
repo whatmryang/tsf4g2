@@ -1,0 +1,78 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_mail_01_0001 "
+}
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+TSF4G_DEV_RELEASE=tsf4g_dev`date +%Y%m%d`.tgz
+DEV_HOME=tsf4g_dev`date +%Y%m%d`
+
+echo "mkdir ${DEV_HOME}"
+rm -rf ${DEV_HOME}
+cp -r dev_dist ${DEV_HOME}
+mkdir -p ${DEV_HOME}/docs
+cp -r ../docs/dev/* ${DEV_HOME}/docs/
+mkdir -p ${DEV_HOME}
+mkdir ${DEV_HOME}/res
+#mkdir ${DEV_HOME}/src
+#mkdir ${DEV_HOME}/bin
+
+#apps=`cat project.cfg | grep -v '#$' | grep project= |sed -n -e 's/^[ ]*project[ ]*=//p' | sed -n -e 's/[ ]*dev[ ]*/ /p'|sed -n -e 's/tqos//p' | sed -n -e 's/tacc//p' | sed -n -e 's/agent//p'|sed -n -e 's/centerd//p'`
+apps='base tconnd  tdir torm tcm resconv mmogxyz  cus   mail dirty tsvd mart namesvr tproxy  '
+#distribut compoment
+rm apps.cfg
+echo "project=$apps" >> apps.cfg
+for app in ${apps}
+do
+	echo distributing $app $1
+	echo "#===$app======" >> apps.cfg
+	distScript=`cat project.cfg|grep -v "#"|grep -i "${app}.release"|sed -n -e "s/^[ ]*${app}.release[ ]*=//p" `
+	appnamescript=`cat ${distScript} | grep -v "#"|grep date| grep tgz|sed -n -e 's/[a-zA-Z0-9_]*=//p'`
+	packName=tsf4g_${app}`date +%Y%m%d`.tgz
+	echo "Dist script Name:${distScript}"
+	
+	./${distScript}   $1
+	if [ $? -ne 0 ] ;then
+		echo "Failed to make release"
+		exit 1
+	fi
+	
+	echo ${app}.packName=${packName} >> apps.cfg
+	echo ${app}.dirName=`tar -tvf ${packName} | awk '{print $6}'|sed -n '1p'` >> apps.cfg
+
+	installScript=tsf4g_${app}.install
+	echo ${app}.installScript=${installScript} >> apps.cfg
+	cp $packName ${DEV_HOME}/res/
+	
+	if [ $? -ne 0 ]; then
+		exit 1
+	fi
+	
+	echo "#===$app======" 
+done
+
+
+echo "Copy install Script"
+
+cp tsf4g_dev.install ${DEV_HOME}
+#cp project.cfg ${DEV_HOME}
+cp apps.cfg ${DEV_HOME}/res
+#cp tsf4g_dev/setup.sh ${DEV_HOME}
+svn info ../ >> ${DEV_HOME}/Readme.txt
+find ${DEV_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+
+
+tar czvf ${TSF4G_DEV_RELEASE} ${DEV_HOME}

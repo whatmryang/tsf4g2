@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="mng_protocol"  version="1">
+
+<macro name="MAX_BODY_LEN" value="32000" />
+<macro name="MNG_ALERT" value="1" />
+<macro name="MNG_TRACE" value="2" />
+<macro name="RDO_DATA_SIZE" value="4092" />
+
+
+<struct name="PkgHead" version="1" versionindicator="Version" >
+	<entry name="MsgType" type="tinyuint"  />
+	<entry name="Version" type="tinyuint" defaultvalue="1" />
+	<entry name="Sequence" type="int" />
+	<entry name="SrcID"  type="int" />
+	<entry name="DestID" type="int" />
+	<entry name="BodyLen" type="smallint" />
+</struct>
+
+<macro name="ALERT_TITLE_LEN" value="64" />
+<macro name="ALERT_DETAIL_LEN" value="512" />
+
+<struct name="MngAlert" version="1" sizetype="tinyuint" >
+	<entry name="AlertType" type="int"  />
+	<entry name="Priority" 	type="int"  />
+	<entry name="CreateTime" type="int"  />
+	<entry name="Title" type="string" size="ALERT_TITLE_LEN" />
+	<entry name="Detail" type="string" size="ALERT_DETAIL_LEN" />
+</struct>
+
+<struct name="MngTrace" version="1" sizetype="tinyuint" >
+	<entry name="Detail" type="string" size="ALERT_DETAIL_LEN" />
+</struct>
+
+
+<union name="PkgBody" version="1" >
+	<entry name="Alert" type="MngAlert" id="MNG_ALERT" />
+	<entry name="Trace" type="MngTrace" id="MNG_TRACE" />
+</union>
+
+
+<struct name="MngPkg" version="1" >
+	<entry name="head" type="PkgHead" />
+	<entry name="body" type="PkgBody" select="head.MsgType" sizeinfo="head.BodyLen" />	
+</struct>
+
+<struct name="RDO" version="1" >
+	<entry name="timestamp" type="uint" />
+	<entry name="rdata" type="string" size="RDO_DATA_SIZE" />	
+</struct>
+
+</metalib>

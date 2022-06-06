@@ -1,0 +1,7 @@
+#! /bin/sh
+
+tsf4g_package=TSF4G
+tsf4g_major=1
+tsf4g_minor=0
+tsf4g_patch=0
+

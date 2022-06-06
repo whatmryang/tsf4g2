@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloworld", "helloworld\helloworld.vcproj", "{AFECFE3C-A2C8-4645-9834-8306E2055951}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "onlyfileapi", "onlyfileapi\onlyfileapi.vcproj", "{C38F03D5-2FE5-4457-95EF-861E7620313E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFECFE3C-A2C8-4645-9834-8306E2055951}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AFECFE3C-A2C8-4645-9834-8306E2055951}.Debug|Win32.Build.0 = Debug|Win32
+		{AFECFE3C-A2C8-4645-9834-8306E2055951}.Release|Win32.ActiveCfg = Release|Win32
+		{AFECFE3C-A2C8-4645-9834-8306E2055951}.Release|Win32.Build.0 = Release|Win32
+		{C38F03D5-2FE5-4457-95EF-861E7620313E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C38F03D5-2FE5-4457-95EF-861E7620313E}.Debug|Win32.Build.0 = Debug|Win32
+		{C38F03D5-2FE5-4457-95EF-861E7620313E}.Release|Win32.ActiveCfg = Release|Win32
+		{C38F03D5-2FE5-4457-95EF-861E7620313E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

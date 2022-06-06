@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="MultiThread" version="10" >
+	
+	<struct name="MultiThreadconf" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="MultiThreadrun_cumulate" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="MultiThreadrun_status" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+</metalib>

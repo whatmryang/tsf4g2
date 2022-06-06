@@ -1,0 +1,10 @@
+# The set of source files associated with this SConscript file.
+import os
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Import('buildenv')
+buildenv.buildStaticLib('taa',src_local,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB'])
+
+Return('src_local')

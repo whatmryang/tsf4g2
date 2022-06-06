@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shtable", "shtable\shtable.vcproj", "{7313E405-47EA-4F1D-A7C6-132EF6562631}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tmempool", "tmempool\tmempool.vcproj", "{72FE1599-7F8D-4A81-9642-A9F5E59D0C45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7313E405-47EA-4F1D-A7C6-132EF6562631}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7313E405-47EA-4F1D-A7C6-132EF6562631}.Debug|Win32.Build.0 = Debug|Win32
+		{7313E405-47EA-4F1D-A7C6-132EF6562631}.Release|Win32.ActiveCfg = Release|Win32
+		{7313E405-47EA-4F1D-A7C6-132EF6562631}.Release|Win32.Build.0 = Release|Win32
+		{72FE1599-7F8D-4A81-9642-A9F5E59D0C45}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72FE1599-7F8D-4A81-9642-A9F5E59D0C45}.Debug|Win32.Build.0 = Debug|Win32
+		{72FE1599-7F8D-4A81-9642-A9F5E59D0C45}.Release|Win32.ActiveCfg = Release|Win32
+		{72FE1599-7F8D-4A81-9642-A9F5E59D0C45}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,20 @@
+#!/bin/python
+
+import os
+Import('buildenv')
+
+buildenv.xml2h("tbus_comm_relation_desc.xml")
+buildenv.xml2c("tbus_comm_relation_desc", "./tbus_comm_relation_desc.xml")
+InstallAs("tbus_comm_relation_desc.cpp", "tbus_comm_relation_desc.c");
+
+buildenv.VersionHeader(target = ["version.h"],major=buildenv.getMajor('base'),minor=buildenv.getMinor('base'))
+
+src_local  =  Glob('*.cpp')
+src_local += Glob('../../lib_src/tbus_i/*.c')
+
+if buildenv.isLinux():
+	buildenv.buildTools('tbusconf',src_local,CPPDEFINES=Split("TDR_WITH_XML"),
+            a_tsf4g_static_lib='tsf4g scew expat',OBJPREFIX="conf")
+else:
+	buildenv.buildTools('tbusconf',src_local,CPPDEFINES=Split("_TSF4G_LARGE_LIB_"),
+            a_tsf4g_static_lib='tsf4g scew expat',OBJPREFIX="conf")

@@ -1,0 +1,29 @@
+<TransConf version="1">
+    <StatLogPath>../log/transd/</StatLogPath>
+    <Verbose> 1</Verbose>
+    <TransShmKey> 2138</TransShmKey>
+    <TransNodeCnt> 200000</TransNodeCnt>
+    <TransBucket> 500000</TransBucket>
+    <TransScanTime> 60</TransScanTime>
+    <TransTimeout> 0x10</TransTimeout>
+    <EnableUinsTable> 0x1</EnableUinsTable>
+    <UinsShmKey> 3249</UinsShmKey>
+    <UinsNodeCnt> 15000</UinsNodeCnt>
+    <UinsBucket> 50000</UinsBucket>
+	<UinsFakeShmKey> 79342</UinsFakeShmKey>
+	<UinsFakeNodeCnt> 300000</UinsFakeNodeCnt>
+    <FullRate> 0x50</FullRate>
+    <UinsTimeout> 7200</UinsTimeout>
+    <TidFile>../data/transd/tid.counter</TidFile>
+    <TidSync> 500</TidSync>
+    <DBCnt> 1</DBCnt>
+    <DBLayer type="HostInfo">
+        <BusID>100.1.4.1</BusID>
+    </DBLayer>
+    <GlobalUinLimit type="GlobalUinLimit">
+        <SinglePlus> 0</SinglePlus>
+        <DayPlus> 0</DayPlus>
+        <SingleMinus> 0</SingleMinus>
+        <DayMinus> 0</DayMinus>
+    </GlobalUinLimit>
+</TransConf>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<AllBaseTypeData version="3">
+    <charDate>127 </charDate>
+    <ucharDate>143 </ucharDate>
+    <shortDate>32767 </shortDate>
+    <ushortDate>36863 </ushortDate>
+    <intDate>2147483647 </intDate>
+    <uintDate>2415919103 </uintDate>
+    <bigintDate>9223372036854775807 </bigintDate>
+    <biguintDate>10376293541461622783 </biguintDate>
+</AllBaseTypeData>

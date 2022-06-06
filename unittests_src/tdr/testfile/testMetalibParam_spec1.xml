@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="net"  version="3">
+
+<!--  本示例文档定义了一个基本的网络协议 -->
+
+<macro name="VERSION" value="100" />
+
+
+<macro name="MAX_BODY_LEN" value="32000" />
+<macrosgroup name="MsgID" desc="id of net message" >
+	<macro name="CMD_LOGOUT" value="1" />
+	<macro name="CMD_LOGIN" value="0" desc="id of login message body" />
+</macrosgroup>
+
+<macro name="MAX_NAME_LEN" value="32" />
+<macro name="MAX_PASS_LEN" value="32" />
+
+
+<macro name="MAX_ATTR_SIZE" value="128" />
+
+<struct name="PkgHead" version="1" versionindicator="version" >
+	<entry name="magic" type="smallint" defaultvalue="0x3344" />
+	<entry name="version" type="smallint" />
+	<entry name="time" type="datetime" />
+	<entry name="cmd" type="smallint" />
+	<entry name="bodylen" type="smallint" />
+	<entry name="msgid" type="uint" desc = "message id" />
+</struct>
+
+</metalib>

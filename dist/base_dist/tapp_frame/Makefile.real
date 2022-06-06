@@ -1,0 +1,48 @@
+#  @file $RCSfile: Makefile.real,v $
+#  general description of this module
+#  $Id: Makefile.real,v 1.2 2009-09-15 11:10:37 flyma Exp $
+#  @author $Author: flyma $
+#  @date $Date: 2009-09-15 11:10:37 $
+#  @version $Revision: 1.2 $
+#  @note Editor: Vim 6.1, Gcc 4.0.1, tab=4
+#  @note Platform: Linux
+#
+
+TSF4G_HOME=${TSF4G_INSTALL_HOME}
+TSF4G_INC  = $(TSF4G_HOME)/include
+TSF4G_SERVICES = $(TSF4G_HOME)/services
+TSF4G_LIB  = $(TSF4G_HOME)/lib
+TSF4G_TOOLS = $(TSF4G_HOME)/tools
+
+
+APP_NAME=TEMPLE_ORI
+
+APP_FLAGS=-Wall -Wextra -pipe -g -I${TSF4G_INC}
+APP_CFILE=$(wildcard *.c)
+APP_OBJ=$(APP_CFILE:.c=.o)
+APP_EXE=$(APP_NAME)
+
+APP_IMPORT_LIBS= $(LDPATH) $(TSF4G_LIB)/libtapp.a $(TSF4G_LIB)/libtcltapi.a $(TSF4G_LIB)/libtsec.a $(TSF4G_LIB)/libtloghelp.a $(TSF4G_LIB)/libtmng.a \
+	  $(TSF4G_LIB)/libtbus.a  $(TSF4G_LIB)/libtconnapi.a $(TSF4G_LIB)/libtlog.a $(TSF4G_LIB)/libtdr_xml.a \
+	$(TSF4G_LIB)/libtagentapi.a $(TSF4G_LIB)/libpal.a $(TSF4G_LIB)/libcomm.a -Wl,-Bstatic -lscew -lexpat -Wl,-Bdynamic  -lpthread
+
+.PHONY: all clean
+
+all: $(APP_EXE)
+
+-include $(APP_CFILE:.c=.d)
+
+%.d: %.c
+	$(CC) -MM $(APP_FLAGS) $< -o $@
+
+%.o: %.c %.d
+	$(CC) -c $(APP_FLAGS) $<
+
+$(APP_EXE): $(APP_OBJ)
+	$(CC)  -o $(APP_EXE) $(APP_FLAGS)  $^ $(APP_IMPORT_LIBS) 
+	
+clean:
+	$(RM) *.o  *.d
+	$(RM) $(APP_EXE)
+	$(RM) gmon.out
+

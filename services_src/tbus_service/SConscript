@@ -1,0 +1,38 @@
+# The set of source files associated with this SConscript file.
+import os
+import shutil
+
+Import('buildenv')
+
+buildenv.VersionHeader(target = ["version.h"],
+                       major=buildenv.getMajor('base'),
+                       minor=buildenv.getMinor('base'))
+
+
+buildenv.xml2h(Split('tbusd_ctrl_proto.xml'))
+buildenv.xml2c('tbusd_ctrl_proto',Split('tbusd_ctrl_proto.xml'))
+
+src_local = Glob('*.c')
+src_local += Glob('../../lib_src/tbus_i/*.c')
+
+if buildenv.isLinux():
+	buildenv.buildServices('tbus','tbusd',src_local,
+    CPPPATH=Split('../../lib_src'), OBJPREFIX="tbusd",
+    a_tsf4g_static_lib="tsf4g", CPPDEFINES=Split("TDR_WITH_XML"),LIBS=' pthread')
+else:
+	buildenv.buildServices('tbus','tbusd',src_local,
+    CPPPATH=Split('../../lib_src'),OBJPREFIX="tbusd",
+    a_tsf4g_static_lib="tsf4g",CPPDEFINES=Split("_TSF4G_LARGE_LIB_"))
+
+if buildenv._isWindows:
+	print "Windows"
+	exteraFiles=Split("tbusd.xml tbusd.xml.complete tbusd_log.xml.windows")
+	if buildenv.isInstall('base'):
+		Install(buildenv.getServicesPath('tbus'),exteraFiles)
+		Install(buildenv.getServicesInstallPath('tbus'),exteraFiles)
+else:
+	print "Linux"
+	exteraFiles=Split("start_tbusd stop_tbusd tbusd.xml tbusd.xml.complete tbusd_log.xml.linux")
+	if buildenv.isInstall('base'):
+		Install(buildenv.getServicesPath('tbus'),exteraFiles)
+		Install(buildenv.getServicesInstallPath('tbus'),exteraFiles)

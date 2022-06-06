@@ -1,0 +1,13 @@
+import os
+
+Import('buildenv')
+src_local=Glob('tdr_meta2tab.cpp')
+src_local+=Glob('../tgetopt.cpp')
+src_local+=Glob('../tdr_tools.cpp')
+
+buildenv.VersionHeader(target = ["version.h"],major=buildenv.getMajor('base'),minor=buildenv.getMinor('base'))
+
+if buildenv.isLinux():
+	buildenv.buildTools('tmeta2tab',src_local,CPPDEFINES=Split("TDR_WITH_XML"),LIBS='mysqlclient',OBJPREFIX='meta2tab',a_tsf4g_static_lib='tdr_xml tdr_dbms_xml tdr pal scew expat')
+elif buildenv.isWin32:
+	buildenv.buildTools('tmeta2tab',src_local,CPPDEFINES=Split("_TSF4G_LARGE_LIB_"),OBJPREFIX='meta2tab',a_tsf4g_static_lib='tsf4g scew expat')

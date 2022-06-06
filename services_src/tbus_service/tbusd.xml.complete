@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<Tbusd __version="9">
+
+    <!--BussinessID: bussiness id for appications using this bus system-->
+    <!--DEFAULT VALUE: '0'-->
+    <BussinessID>0 </BussinessID>
+
+    <!--RelayShmKey: tbus中转路由信息所在共享内存的key-->
+    <!--DEFAULT VALUE: '2688'-->
+    <RelayShmKey>2688</RelayShmKey>
+
+    <!--GCIMShmKey: tbus通道配置信息所在共享内存的key-->
+    <!--DEFAULT VALUE: '1688'-->
+    <GCIMShmKey>1688</GCIMShmKey>
+
+    <!--Listen: 本tbusd服务进程监听的地址和端口-->
+    <!--DEFAULT VALUE: 'tcp://127.0.0.1:1027?reuse=1'-->
+    <Listen>tcp://127.0.0.1:1027?reuse=1</Listen>
+
+    <!--BackLog: 内核为此套接口排队的最大连接个数-->
+    <BackLog>32 </BackLog>
+
+    <!--PkgMaxSize: 中转数据包最大字节数-->
+    <!--DEFAULT VALUE: '131072'-->
+    <PkgMaxSize>131072 </PkgMaxSize>
+
+    <!--SendBuff: relay连接的发送缓冲区大小-->
+    <!--DEFAULT VALUE: '131072'-->
+    <SendBuff>131072 </SendBuff>
+
+    <!--RecvBuff: relay连接的发送缓冲区大小-->
+    <!--DEFAULT VALUE: '131072'-->
+    <RecvBuff>131072 </RecvBuff>
+
+    <!--StatGap: 统计信息输出间隔，单位为秒-->
+    <!--DEFAULT VALUE: '60'-->
+    <StatGap>60 </StatGap>
+
+
+    <!--ReconnectGap: 对于尚未建立握手过程的relay通道，重建握手过程的间隔，单位为秒-->
+    <ReconnectGap>3 </ReconnectGap>
+
+    <!--SynSeqGap: 同步序列号的时间间隔，单位为秒-->
+    <SynSeqGap>1 </SynSeqGap>
+
+    <!--HandShakeTimeout: 握手过程超时值，即如果握手过程时间超过这个阀值，则中断握手过程，单位秒-->
+    <HandShakeTimeout>30 </HandShakeTimeout>
+
+    <!--MaxHeartBeatGap: 对于已经连接已建立的中转通道，没有心跳同步的最大时间间隔，但没有心跳时间超过此阀值时，tbusd会重建连接-->
+    <MaxHeartBeatGap>90 </MaxHeartBeatGap>
+
+    <!--MaxSendPerloop: 单个处理循环最多发送数据包的个数-->
+    <MaxSendPerloop>500 </MaxSendPerloop>
+
+    <!--MaxRecvPerloop: 单个处理循环最多接收数据包的个数-->
+    <MaxRecvPerloop>500 </MaxRecvPerloop>
+
+    <!--NeedAckPkg: 是否需要对发送的数据包做确认，其值为0表示不需要对发送包做控制，其值为非0表示需要对发送包做控制-->
+    <!--DEFAULT VALUE: '1'-->
+    <NeedAckPkg>1 </NeedAckPkg>
+
+    <!--ControlUnackedPkgNum: 是否对未确认的包数做控制,其值为0表示不控制,其值为非0表示要控制-->
+    <ControlUnackedPkgNum>0 </ControlUnackedPkgNum>
+
+    <!--SvrLogName: 服务器一般日志信息输出类名字-->
+    <SvrLogName></SvrLogName>
+
+    <!--StatLogName: 服务器统计日志信息输出类名字-->
+    <StatLogName></StatLogName>
+
+    <!--RefreshTbusConfGap: the default timer used by tapp to refresh tbus configure-->
+    <!--DEFAULT VALUE: '60'-->
+    <RefreshTbusConfGap>60 </RefreshTbusConfGap>
+
+    <!--EnableCheckPeerIP: 是否验证 中转通道对方tbusd服务的ip地址与本地配置信息是否一致，其值为0表示不验证，其值为非零值，则要验证-->
+    <!--DEFAULT VALUE: '1'-->
+    <EnableCheckPeerIP>1 </EnableCheckPeerIP>
+
+    <!--DisabledChannelTimeGap: 被disabled的通道的生存时间,单位秒,-1表示不删除-->
+    <!--DEFAULT VALUE: '604800'-->
+    <DisabledChannelTimeGap>604800 </DisabledChannelTimeGap>
+
+    <!--IdleTickNumBeforeSleep: 持续空转计数到该值后，进程sleep一次，sleep的时间可以通过命令行参数idle-sleep指定，默认10ms-->
+    <!--DEFAULT VALUE: '2'-->
+    <IdleTickNumBeforeSleep>2 </IdleTickNumBeforeSleep>
+
+</Tbusd>

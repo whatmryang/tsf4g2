@@ -1,0 +1,16 @@
+Import("buildenv")
+
+import os
+buildenv.xml2h('example_conf_desc.xml')
+buildenv.xml2c('example_conf_desc','example_conf_desc.xml')
+
+
+src = Glob('*.c')
+
+if buildenv._isLinux:
+	buildenv.buildExec('multithread',src,a_tsf4g_static_lib='tsf4g_r',LIBS='pthread', CPPDEFINES=['_TSF4G_LARGE_LIB_'])
+else:
+	buildenv.buildExec('multithread',src,a_tsf4g_static_lib='tsf4g_r',CPPDEFINES=['_TSF4G_LARGE_LIB_'])
+if buildenv._isLinux:
+	os.system("chmod 777 *.sh")
+

@@ -1,0 +1,53 @@
+#  @file $RCSfile: Makefile.real,v $
+#    Makefile for tsf4g-tbus module
+#  $Id: Makefile.real,v 1.7 2009-08-18 11:23:53 jacky Exp $
+#  @author $Author: jacky $
+#  @date $Date: 2009-08-18 11:23:53 $
+#  @version $Revision: 1.7 $
+#  @note Editor: Vim 6.3, Gcc 4.0.2, tab=4
+#  @note Platform: Linux
+
+include Makefile.pub
+
+
+TBUS_OBJ_DIR=$(TSF4G_HOME)/.obj/lib/tbus
+TBUS_LIB_OBJ_DIR=$(TBUS_OBJ_DIR)/static
+
+MAKE_OBJ_PATH := $(shell mkdir -p $(TBUS_OBJ_DIR) $(TBUS_LIB_OBJ_DIR))
+
+TBUS_CFILE=$(wildcard *.c)
+TBUS_OBJ=$(addprefix $(TBUS_LIB_OBJ_DIR)/, $(subst .c,.o, ${TBUS_CFILE}))
+TBUS_LIB=$(TSF4G_LIB)/libtbus.a
+
+
+ifeq ($(build), debug)
+CFLAGS+=-D_DEBUG_
+endif
+
+CFLAGS += -DTBUS_OPTIMIZE_ENCODING_HEAD
+
+.PHONY: all clean
+
+all: $(TBUS_LIB) 
+	@cp $(TBUS_LIB_OBJ_DIR)/*  $(TSF4G_ST_LIB_OBJ_DIR)
+
+
+
+$(TBUS_LIB_OBJ_DIR)/%.d: %.c
+	$(CC)  $< $(CFLAGS)  -MM -MD -MQ'$(TBUS_LIB_OBJ_DIR)/$*.o' -o $@
+
+$(TBUS_LIB_OBJ_DIR)/%.o: %.c $(TBUS_LIB_OBJ_DIR)/%.d
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+$(TBUS_LIB): $(TBUS_OBJ)
+	ar r $(TBUS_LIB) $^
+
+
+
+clean:
+	$(RM) $(TBUS_LIB_OBJ_DIR)/*.o  
+	$(RM)	$(TBUS_LIB_OBJ_DIR)/*.d
+	$(RM) $(TBUS_LIB) 
+	
+
+-include $(TBUS_OBJ:.o=.d)

@@ -1,0 +1,5 @@
+dependency=base tconnd
+
+base_min=01_0007
+
+tconnd_min=01_0007

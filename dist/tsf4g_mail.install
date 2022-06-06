@@ -1,0 +1,53 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmail ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmail
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmail/mailsvr ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmail/mailsvr
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmail/tools ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmail/tools
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tmail/tormsvr ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tmail/tormsvr
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/ ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tmailapi ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/tmailapi
+fi
+
+echo "Install mail...."
+cp ./version					$TSF4G_INSTALL_HOME/apps/tmail/
+cp -rf ./mailsvr				$TSF4G_INSTALL_HOME/apps/tmail/
+cp -rf ./tools					$TSF4G_INSTALL_HOME/apps/tmail/
+cp -rf ./tormsvr				$TSF4G_INSTALL_HOME/apps/tmail/
+cp -rf ./protocol				$TSF4G_INSTALL_HOME/apps/tmail/
+
+cp -f ./include/apps/tmailapi/*	${TSF4G_INSTALL_HOME}/include/apps/tmailapi
+cp ./lib/libmailapi.*			${TSF4G_INSTALL_HOME}/lib/
+cp ./Readme						$TSF4G_INSTALL_HOME/apps/tmail/
+
+echo "Install tmail done"

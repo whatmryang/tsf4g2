@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="gb2312" standalone="yes" ?>
+<!-- This file is for tormsvr module -->
+
+<metalib tagsetversion="1" name="tormsvrctrl" version="1">
+
+
+  <macrosgroup name="TormsvrCtrlCmd">
+    <macro name="TORMSVRCTRLCMD_GET_VERSION_RES" value="1"  />
+    <macro name="TORMSVRCTRLCMD_GET_CHANNEL_RES" value="2"  />
+    <macro name="TORMSVRCTRLCMD_GET_CACHE_RES" value="3"  />
+    <macro name="TORMSVRCTRLCMD_GET_THREAD_RES" value="4"  />
+  </macrosgroup>
+
+  <macro name="TORMSVR_CTRL_MAX_PKG_LEN"  value="65535" />
+  <macro name="TORMSVR_CTRL_PROTO_MAGIC" value="0x44555343" />
+
+  <macro name="TORMSVR_CTRL_GENERAL_STRING_LEN" value="1024" />
+  <macro name="TORMSVR_CTRL_MAX_THREADS" value="32" />
+  <macro name="TORMSVR_CTRL_MAX_META_NAME" value="32" />
+
+  <macro name="TORMSVR_CTRL_MAX_METAS" value="128" />
+  
+ 
+  <struct name="TormsvrCtrlHead" version="1" >
+    <entry name="Magic" type="uint" defaultvalue="TORMSVR_CTRL_PROTO_MAGIC" />
+    <entry name="Version"      type="uint" />
+    <entry name="Cmd"     type="uint"  bindmacrosgroup="TormsvrCtrlCmd" />
+  </struct>
+
+   <struct name="TormsvrCtrlGetVersionRes" version="1" >
+    <entry name="Version" type="string" size="TORMSVR_CTRL_GENERAL_STRING_LEN" />
+  </struct>
+    
+
+   <struct name="TormsvrChannel" version="1" >
+    <entry name="ShmKey" type="string" size="32" />
+    <entry name="ChannelSize" type="uint" />
+  </struct>
+
+   <struct name="TormsvrCtrlGetChannelRes" version="1" >
+     <entry name="Count" type="uint"  />
+    <entry name="Channels" type="TormsvrChannel" count="TORMSVR_CTRL_MAX_THREADS" refer="Count" />
+  </struct>
+
+  <struct name="TormsvrProcessThread" version="1" >
+    <entry name="ConfVersion" type="uint" />
+    <entry name="MaxProcessTime" type="uint" />
+    <entry name="Mode" type="int" />
+    <entry name="SynCstmSlctRes2Cache" type="int" />
+    <entry name="SynCstmSlctResMaxPercent" type="int" />
+    <entry name="MaxRowsNumPerSelect" type="int" />
+    <entry name="Cache" type="int" />
+    <entry name="CacheAddr" type="*void" />
+    <entry name="TotalChannelNum" type="int" />
+  </struct>
+
+  <struct name="TormsvrMainThread" version="1" >
+    <entry name="ConfVersion" type="uint" />
+    <entry name="MaxProcessTime" type="uint" />
+    <entry name="Mode" type="int" />
+    <entry name="SynCstmSlctRes2Cache" type="int" />
+    <entry name="SynCstmSlctResMaxPercent" type="int" />
+    <entry name="MaxRowsNumPerSelect" type="int" />
+    <entry name="Cache" type="int" />
+    <entry name="CacheAddr" type="*void" />
+    <entry name="TotalChannelNum" type="int" />
+  </struct>
+
+   <struct name="TormsvrCtrlGetThreadsInfoRes" version="1" >
+     <entry name="Count" type="uint"  />
+    <entry name="Threads" type="TormsvrProcessThread" count="TORMSVR_CTRL_MAX_THREADS" refer="Count" />
+    <entry name="MainThread" type="TormsvrMainThread" />
+  </struct>
+
+
+   <struct name="TormsvrCacheMeta" version="1" >
+     <entry name="Valid" type="int"  />
+    <entry name="TableMetaName" type="string" size="TORMSVR_CTRL_MAX_META_NAME"/>
+    <entry name="MetaVer" type="int"  />
+    <entry name="MetaSize" type="int"  />
+    <entry name="MetaNum" type="int"  />
+    <entry name="MetaShtabOff" type="int"  />
+    <entry name="MetaShtabSize" type="int"  />
+    <entry name="ScanNum" type="int"  />
+    <entry name="SyncPtr" type="int"  />
+    <entry name="SyncNum" type="int"  />
+    <entry name="EliminateNum" type="int"  />
+    <entry name="EliminatePtr" type="int"  />
+    <!--
+    <entry name="CacheHit" type="int"  />
+    <entry name="CacheMiss" type="int"  /> -->
+    <entry name="StopCachePtr" type="int"  />
+    <entry name="StopStat" type="int"  />
+    <entry name="Dirty" type="int"  />
+  </struct>
+
+   <struct name="TormsvrThCache" version="1" >
+    <entry name="CacheAddr" type="*void"  />
+     <entry name="Magic" type="int"  />
+    <entry name="Size" type="int"  />
+    <entry name="TailOff" type="int"  />
+    <entry name="MetaCacheNum" type="int"  />
+    <entry name="Metas" type="TormsvrCacheMeta" count="TORMSVR_CTRL_MAX_METAS" refer="MetaCacheNum" />
+  </struct>
+
+   <struct name="TormsvrCtrlGetCacheRes" version="1" >
+    <entry name="CacheAddr" type="*void"  />
+     <entry name="Magic" type="int"  />
+    <entry name="Version" type="int"  />
+    <entry name="Size" type="int"  />
+    <entry name="ThNum" type="int"  />
+    <entry name="ThCaches" type="TormsvrThCache" count="TORMSVR_CTRL_MAX_THREADS" refer="ThNum" />
+  </struct>
+
+  <union name="TormsvrCtrlBody" version="1" >
+    <entry name="VersionInfo" type="TormsvrCtrlGetVersionRes" id="TORMSVRCTRLCMD_GET_VERSION_RES" />
+    <entry name="ChannelInfo" type="TormsvrCtrlGetChannelRes" id="TORMSVRCTRLCMD_GET_CHANNEL_RES" />
+    <entry name="ThreadInfo" type="TormsvrCtrlGetThreadsInfoRes" id="TORMSVRCTRLCMD_GET_THREAD_RES" />
+    <entry name="CacheInfo" type="TormsvrCtrlGetCacheRes" id="TORMSVRCTRLCMD_GET_CACHE_RES" />
+  </union>
+
+
+  <struct name="TormsvrCtrlPkg" versionindicator="Head.Version"  version="1" >
+    <entry name="Head" type="TormsvrCtrlHead" />
+    <entry name="Body" type="TormsvrCtrlBody" select="Head.Cmd"  />
+  </struct>
+
+</metalib>

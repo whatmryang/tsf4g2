@@ -1,0 +1,35 @@
+import os
+
+Import('buildenv')
+
+if buildenv.isLinux():
+    src_local = Glob('t*_tool.c')
+else:
+    src_local = Glob('tsm_tool.c')
+
+buildenv.VersionHeader(
+    target=["version.h"],
+    major=buildenv.getMajor('base'),
+    minor=buildenv.getMinor('base')
+)
+
+for i in src_local:
+    name = i.name[:-7]
+
+    if buildenv.isLinux():
+        buildenv.buildTools(
+            name,
+            [i],
+            CPPPATH=['../../lib_src/tdr', '../../lib_src/tmng'],
+            LIBS=["pthread"],
+            a_tsf4g_static_lib='tmng tdr_xml scew expat tdr comm pal')
+    else:
+        buildenv.buildTools(
+            name,
+            [i],
+            CPPPATH=['../../lib_src/tdr', '../../lib_src/tmng'],
+            CPPDEFINES=Split("TDR_WITH_XML"),
+            a_tsf4g_static_lib='tmng tdr_xml scew expat tdr comm pal')
+
+    #Install("../../tools", name)
+

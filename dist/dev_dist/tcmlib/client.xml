@@ -1,0 +1,18 @@
+<xyz_client version="1">
+    <GameSvrUrl>tcp://##IP_ZONECONND##:##PORT_ZONETCONNDPORT##</GameSvrUrl>
+    <DirSvrUrl>tcp://##IP_DIRCONND##:##PORT_TCONND1PORT##</DirSvrUrl>
+    <CusSvrUrl>tcp://##IP_CUSCONND##:##PORT_TCUSPORT##</CusSvrUrl>
+    
+    <ClientLogName>clientlog </ClientLogName>
+    <ClientStatName>clientstat </ClientStatName>
+    <SvrKey>aaaabbbbccccdddd </SvrKey>
+    <EncMethod>3 </EncMethod>
+    <AuthType>3</AuthType>
+
+    <SayHellpGap>0 </SayHellpGap>
+    <DirTdr>../../etc/tdir/tdir_def_level3.tdr </DirTdr>
+    <CusTdr>../../etc/tcus/mmog_data.tdr </CusTdr>
+    <CusCli>../../etc/tcus/Client2.xml </CusCli>
+    <MartTdr>../../etc/protocol/mart_cs.tdr</MartTdr>
+    <MailTdr>../../etc/protocol/mail_cs.tdr</MailTdr>
+</xyz_client>

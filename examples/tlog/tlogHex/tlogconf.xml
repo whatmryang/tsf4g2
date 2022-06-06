@@ -1,0 +1,47 @@
+<TLOGConf>
+	<PriorityHigh>NULL</PriorityHigh>
+	<PriorityLow>UNKNOWN</PriorityLow>
+	<Count>2</Count>
+	<CategoryList>
+		<Name>test</Name>
+		<PriorityHigh>NULL</PriorityHigh>
+		<PriorityLow>UNKNOWN</PriorityLow>
+		<Format>[%d]%p%m%n</Format>
+		<ForwardCat>test2</ForwardCat>
+		<Device>
+			<Type>FILE</Type>
+			<Device>
+				<File>
+					<Pattern>./65535_%Y%m%d_%H.log</Pattern>
+					<BuffSize> 1024000 </BuffSize>
+					<SizeLimit> 51200000 </SizeLimit>
+					<Precision> 1 </Precision>
+					<MaxRotate> 10 </MaxRotate>
+					<SyncTime> 0 </SyncTime>
+					<NoFindLatest> 0 </NoFindLatest>
+				</File>
+			</Device>
+		</Device>
+	</CategoryList>
+	<CategoryList>
+		<Name>test2</Name>
+		<PriorityHigh>NULL</PriorityHigh>
+		<PriorityLow>UNKNOWN</PriorityLow>
+		<Format>[%d]%p%m%n</Format>
+		<ForwardCat></ForwardCat>
+		<Device>
+						<Type>NET</Type>
+						<Device>
+							<Net>
+								<Url>udp://127.0.0.1:6666</Url>
+								<Sendbuff>0</Sendbuff>
+								<RecvBuff>32768</RecvBuff>
+								<AutoReconnect>10</AutoReconnect>
+								<iMaxRetry>20</iMaxRetry>                 
+								<iConnTimeout>1000</iConnTimeout>                     
+								<iSendTimeout>1000</iSendTimeout>  
+							</Net>
+						</Device>
+		</Device>
+	</CategoryList>
+</TLOGConf>

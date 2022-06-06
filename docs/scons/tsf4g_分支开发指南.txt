@@ -1,0 +1,8 @@
+1. mkdir branchbuild
+2. cd branchbuild
+3. svn cat https://10.6.16.223/ied/ied_tsf4g_rep/tsf4g_proj/trunk/checkout.py > checkout.py
+4. python checkout.py -m tmart
+5. scons
+6. 根据错误提示，下载相应的依赖包，安装依赖包
+7. 循环5.6,直到编译通过。
+

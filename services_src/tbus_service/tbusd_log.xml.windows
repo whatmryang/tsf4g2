@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<TLOGConf version="1">
+    <PriorityHigh>NULL </PriorityHigh>
+    <PriorityLow>INFO</PriorityLow>
+    <Count>5 </Count>
+    <CategoryList type="TLOGCategory">
+        <Name>text</Name>       
+        <Filter type="TLOGFilterVec">
+            <Count>1 </Count>
+            <Filters type="TLOGFilter">
+                <IDFilter type="IntFilter">
+                    <Start>0 </Start>
+                    <Count>100000000 </Count>
+                    <Mod>0 </Mod>
+                    <ModStart>0 </ModStart>
+                    <ModCount>0 </ModCount>
+                </IDFilter>
+                <ClsFilter type="IntFilter">
+                    <Start>0 </Start>
+                    <Count>100 </Count>                   
+                </ClsFilter>
+            </Filters>
+        </Filter>        
+        <ForwardCat>texttrace</ForwardCat>
+        <Device type="TLOGDevAny">
+            <Type>NO </Type>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>texttrace</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>TRACE </PriorityLow>       
+        <MaxMsgSize>0 </MaxMsgSize>
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>
+        <ForwardCat>texterr</ForwardCat>
+        <Device type="TLOGDevAny">
+            <Type>FILE </Type>
+            <Device type="TLOGDevSelector">
+                <File type="TLOGDevFile">
+                    <Pattern>c:\temp\tbusd.log</Pattern>                    
+                    <SizeLimit>10485760 </SizeLimit>                    
+                    <MaxRotate>2 </MaxRotate>                   
+                </File>
+            </Device>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>texterr</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>ERROR </PriorityLow>        
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>
+        <ForwardCat></ForwardCat>
+        <Device type="TLOGDevAny">
+            <Type>FILE </Type>
+            <Device type="TLOGDevSelector">
+                <File type="TLOGDevFile">
+                    <Pattern>c:\temp\tbusd.error</Pattern>                    
+                    <SizeLimit>10485760 </SizeLimit>
+                    <Precision>1 </Precision>
+                    <MaxRotate>2 </MaxRotate>                  
+                </File>
+            </Device>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>texttrace.bus</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>INFO </PriorityLow>        
+        <LevelDispatch>1 </LevelDispatch>
+        <Format>[%d%u]%p %m %F:%l%n</Format>
+        <ForwardCat></ForwardCat>
+        <Device type="TLOGDevAny">
+            <Type>FILE </Type>
+            <Device type="TLOGDevSelector">
+                <File type="TLOGDevFile">
+                    <Pattern>c:\temp\tbusd_tbus.log</Pattern>                    
+                    <SizeLimit>5242880 </SizeLimit>                    
+                    <MaxRotate>3 </MaxRotate>                   
+                </File>
+            </Device>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>data</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>TRACE </PriorityLow>       
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>        
+        <Device type="TLOGDevAny">
+            <Type>FILE </Type>
+            <Device type="TLOGDevSelector">
+                <File type="TLOGDevFile">
+                    <Pattern>c:\temp\tbusd_rundata.log</Pattern>         
+                    <Precision>1 </Precision>
+                    <MaxRotate>3 </MaxRotate>                    
+                </File>
+            </Device>
+        </Device>
+    </CategoryList>
+</TLOGConf>

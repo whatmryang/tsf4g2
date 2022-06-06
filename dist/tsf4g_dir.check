@@ -1,0 +1,76 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release
+else
+  TSF4G_INSTALL_HOME=$1
+fi  
+
+
+
+CheckDependency()
+{   
+     echo "$1"
+	 if [ $1 = "base" ];then
+       SearchPath=$TSF4G_INSTALL_HOME/version        
+     elif [ $1 = "tconnd" ];then
+       SearchPath=$TSF4G_INSTALL_HOME/apps/tconnd/version   
+     else
+       echo "unknown dependency module"
+       return 0
+     fi
+	 
+	 if [ -a $BasePath/tsf4g_dir.dependency ];then
+		 DependencyVersion=`cat $BasePath/tsf4g_dir.dependency|grep -v "#"|grep -i "$1_min"|sed -n -e "s/^[ ]*$1_min[ ]*=//p" `
+     else
+		 return 0
+	 fi	 
+
+	 
+     if [ -a $SearchPath ];then
+       CurrentVersion=`cat $SearchPath|grep -v "#"|grep -i "tsf4g"|awk '{ print $1; }'|sed -n -e "s/[a-zA-Z0-9]*_[a-zA-Z0-9]*_\(.*\)/\1/p" `
+     else
+       echo "Warning:module $1 was not installed in standard path,pls make sure version of $var installed  higher than dependent version:$DependencyVersion"
+       return 1  
+     fi
+     
+     echo "$DependencyVersion"
+	 echo "$CurrentVersion"
+     if [[ $DependencyVersion > $CurrentVersion ]];then
+        echo "Warning:module $1 current installed is $CurrentVersion ;less than installed required:$DependencyVersion,pelease check version"
+        return 1
+     else
+        return 0
+     fi       
+}
+
+
+BasePath=`echo $0|sed -n -e "s/\(.*\)\/[^\/]*$/\1/p" ` 
+
+Dependencys=` cat $BasePath/tsf4g_dir.dependency|grep -v "#"|grep -i "dependency"|sed -n -e "s/^[ ]*dependency[ ]*=//p" `
+ 
+echo "$Dependencys"
+for var in $Dependencys
+do 
+   echo "$var"
+   CheckDependency $var
+   if [ $? != 0 ];then
+     echo "Warning:module $var current installed version check unsuccess! ,Do you want to continue install Anyall?[yes/no]"
+     read input
+     case "$input" in
+     yes|Yes|Y|y)
+        continue
+        ;;
+     no|No|N|n)
+        exit 1
+        ;;
+     *)
+        exit 0
+        ;;
+     esac
+   fi
+done
+
+echo "done"
+
+   

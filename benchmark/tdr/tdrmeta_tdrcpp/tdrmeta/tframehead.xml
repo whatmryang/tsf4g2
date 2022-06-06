@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<tframehead version="10">
+    <Ver>0 </Ver>
+    <Cmd>2 </Cmd>
+    <ExtraType>0 </ExtraType>
+    <TimeStampType>0 </TimeStampType>
+    <ID>10240 </ID>
+    <ConnIdx>1025 </ConnIdx>
+    <CmdData type="TFrameCmdData">
+        <InProc type="TFrameCmdInProc">
+            <Valid>0 </Valid>
+            <NoEnc>0 </NoEnc>
+            <Count>0 </Count>
+        </InProc>
+    </CmdData>
+</tframehead>

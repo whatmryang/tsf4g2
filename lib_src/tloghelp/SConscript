@@ -1,0 +1,10 @@
+import os
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Import('buildenv')
+buildenv.buildStaticLib('tloghelp',src_local,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB', '_FILE_OFFSET_BITS=64'])
+#buildenv.buildStaticLib('tloghelp_r',src_local,MODULE='base',OBJPREFIX='mt_',CPPDEFINES=['TSF4G_SMALL_LIB', 'TSF4G_TLOG_THREAD_SAFE','_FILE_OFFSET_BITS=64'])
+
+Return('src_local')

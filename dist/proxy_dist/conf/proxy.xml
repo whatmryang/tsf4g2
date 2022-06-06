@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<ProxyConf __version="1">
+
+    <AddrTemple>world:8.zone:8.function:8.instance:8</AddrTemple>
+
+    <Clients>
+
+        <ClientNum>1 </ClientNum>
+
+        <!--Clients 是数组类型-->
+        <!--可容纳 1024 个元素-->
+        <!--ClientNum 指示了当前的有效元素个数-->
+        <Clients>
+
+            <IDs>2.6.6.1, 2.6.5.*</IDs>
+
+	    <Type>0 </Type>
+
+            <ServicName>AntiInfo</ServicName>
+
+        </Clients>
+
+    </Clients>
+
+    <Services>
+
+        <ServiceNum>1 </ServiceNum>
+
+        <!--Services 是数组类型-->
+        <!--可容纳 50 个元素-->
+        <!--ServiceNum 指示了当前的有效元素个数-->
+        <Services>
+
+            <ServiceName>AntiInfo</ServiceName>
+
+            <Type>0 </Type>
+
+            <BypassIDs></BypassIDs>
+
+            <RouterName>uint_hash</RouterName>
+
+            <ServerNum>2 </ServerNum>
+
+            <!--Servers 是数组类型-->
+            <!--可容纳 50 个元素-->
+            <!--ServerNum 指示了当前的有效元素个数-->
+            <Servers>
+
+		<ID>2.6.8.1</ID>
+
+                <BypassIDs></BypassIDs>
+
+	    </Servers>
+
+            <Servers>
+
+                <ID>2.6.8.2</ID>
+
+                <BypassIDs></BypassIDs>
+
+            </Servers>
+
+
+        </Services>
+
+    </Services>
+
+    <Routers>
+
+        <RouterNum>1 </RouterNum>
+
+        <!--Routers 是数组类型-->
+        <!--可容纳 10 个元素-->
+        <!--RouterNum 指示了当前的有效元素个数-->
+        <Routers>
+
+            <RouterName>uint_hash</RouterName>
+
+	    <SoFile>./uint_hash.so</SoFile>
+
+            <CustomAttr></CustomAttr>
+
+        </Routers>
+
+    </Routers>
+
+</ProxyConf>

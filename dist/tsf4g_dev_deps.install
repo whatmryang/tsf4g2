@@ -1,0 +1,110 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  echo "Installing tsf4g_dev_deps"
+else
+  echo "$0 should not run with any params" 
+fi
+
+##You should be root to run deps install
+echo "Checking are you root"
+MYNAME=`whoami`
+if [ "$MYNAME" == root ];then
+	echo "OK you are root"
+else
+	echo "Error:: tsf4g_dev_deps should be installed with root only."
+	echo "Please login as root and run this script."
+	exit -1;
+fi
+####Done checking user 
+
+TSF4G_INSTALL_HOME=/usr/local/tsf4g_release
+TSF4G_INSTALL_HOME_BACK=/usr/local/tsf4g_backup`date +%Y%m%d%H%M%S`
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+else
+	mv ${TSF4G_INSTALL_HOME} ${TSF4G_INSTALL_HOME_BACK}
+	mkdir -p ${TSF4G_INSTALL_HOME} 
+fi
+
+
+# 1 extract all the compoments.
+# 
+cd res
+currentPWD=`pwd`
+apps=`cat apps.cfg | grep -v '#$' | grep project=|sed -n -e 's/^[ ]*project[ ]*=//p'`
+for app in ${apps}
+do
+		appPack=`cat apps.cfg|grep -v '#$'|grep ${app}|grep packName|sed -n -e "s/^[ ]*${app}.packName[ ]*=//p"`
+		tar -zxf ${appPack} 
+		dirName=`cat apps.cfg|grep -v '#$'|grep ${app}|grep dirName|sed -n -e "s/^[ ]*${app}.dirName[ ]*=//p"`
+		#installScript=`cat apps.cfg|grep -v '#'|grep ${app}|grep installScript|sed -n -e "s/^[ ]*${app}.installScript[ ]*=//p"`
+		cd ${dirName}
+		if [ $? -ne 0 ]; then
+			pwd
+			exit 1
+		fi
+		installScript=`ls|grep .install`
+		
+		./${installScript} ${TSF4G_INSTALL_HOME} 
+		
+		if [ $? -ne 0 ]; then
+			pwd
+			exit 1
+		fi
+		cd ..
+done
+
+cd ..
+
+echo "Copying new cfgs to install dir"
+
+cp defConfig/tagent/* ${TSF4G_INSTALL_HOME}/apps/tagent/cfg/
+
+cp defConfig/tcenterd/* ${TSF4G_INSTALL_HOME}/apps/tcenterd/cfg/
+chmod 666 ${TSF4G_INSTALL_HOME}/apps/tcenterd/cfg/tbus.xml
+#chmod 777 ${TSF4G_INSTALL_HOME}/apps/tcenterd/bin/
+# We use the shm with key 1000. 
+echo "Copying tcm modules to tagent lib path"
+cp ${TSF4G_INSTALL_HOME}/apps/tcm/lib/* ${TSF4G_INSTALL_HOME}/apps/tagent/lib/
+echo "Done"
+
+echo "Creating user tsf4g with group USR"
+useradd tsf4g
+RETV=$?
+if [ $RETV -ne 0 ];then
+	if [ $RETV -ne 9 ];then
+		echo "Failed to add user tsf4g"
+		exit $? 
+	fi
+fi
+
+usermod tsf4g -g 100
+RETV=$?
+if [ $RETV -ne 0 ];then
+	echo "Failed to change group"
+	exit 1
+fi
+
+echo "Removing old shm"
+ipcrm -M 1000
+echo "Creating new shm for tsf4g"
+cd ${TSF4G_INSTALL_HOME}
+su -c "${TSF4G_INSTALL_HOME}/tools/tbusmgr --conf-file=${TSF4G_INSTALL_HOME}/apps/tcenterd/cfg/tbus.xml --write" tsf4g >> .log 
+cd -
+echo "Done"
+
+echo "Starting tcenterd using tsf4g"
+cd ${TSF4G_INSTALL_HOME}/apps/tcenterd/bin
+./stop_tcenterd.sh
+sh start_tcenterd.sh
+cd -
+echo "Done"
+
+echo "Starting tagent using root"
+cd ${TSF4G_INSTALL_HOME}/apps/tagent/bin 
+./stop_tagent.sh
+./start_tagent.sh
+echo "Done"
+
+echo "tsf4g_dev_deps install done"

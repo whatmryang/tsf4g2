@@ -1,0 +1,24 @@
+1	通知组员提交所有更新
+
+2	cvs export -D #date export_tsf4g
+
+3	cp -rf /data/cvs/cvsroot/ local_cvsroot
+
+4	删除local_cvsroot目录下的如下目录:
+		tsf4g/apps/clientupdatesystem/doc
+		tsf4g/apps/configmngsystem/docs
+		tsf4g/apps/tbusconfigsystem/include
+		tsf4g/apps/orm/doc
+		tsf4g/apps/ResConvertBasedDR/docs
+		tsf4g/docs
+		tsf4g/apps/tmart/protocol
+		tsf4g/apps/tsvd/doc
+		tsf4g/apps/tacc/docs
+		tsf4g/apps/tapp
+
+5	./cvs2svn --dumpfile=tsf4g_dump local_cvsroot
+    可以指定目标的目录，详见 cvs2svn 帮助．
+
+6	cat dumpfile | svnadmin load resp_name
+
+7	手工恢复 4 中删除的文件

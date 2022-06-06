@@ -1,0 +1,6 @@
+import os
+Import('buildenv')
+
+SConscript('test_tdr/SConscript')
+SConscript('test_comm/SConscript')
+SConscript('test_tbus_i/SConscript')

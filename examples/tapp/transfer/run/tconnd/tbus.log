@@ -1,0 +1,12 @@
+[20100610 18:14:07.812971][0.0.0.0][(tbus_log.c:58) (tbus_init_log)][unknown][FATAL   ] init log system ok
+
+[20100610 18:14:07.813029][0.0.0.0][(tbus_config_mng.c:246) (tbus_gen_shmkey)][unknown][DEBUG   ] gen shmkey<34324> by  info shmkey<34324> and bussid<0>
+[20100610 18:14:07.813067][0.0.0.0][(tbus.c:1711) (tbus_init_ex)][unknown][DEBUG   ] tbus_init_ex successfully, shmkey(34324) size(53616) channelnum(2)
+[20100610 18:15:48.532940][0.0.0.0][(tbus_log.c:58) (tbus_init_log)][unknown][FATAL   ] init log system ok
+
+[20100610 18:15:48.532990][0.0.0.0][(tbus_config_mng.c:246) (tbus_gen_shmkey)][unknown][DEBUG   ] gen shmkey<34324> by  info shmkey<34324> and bussid<0>
+[20100610 18:15:48.533035][0.0.0.0][(tbus.c:1711) (tbus_init_ex)][unknown][DEBUG   ] tbus_init_ex successfully, shmkey(34324) size(53616) channelnum(2)
+[20100610 18:15:52.743983][0.0.0.0][(tbus_log.c:58) (tbus_init_log)][unknown][FATAL   ] init log system ok
+
+[20100610 18:15:52.744030][0.0.0.0][(tbus_config_mng.c:246) (tbus_gen_shmkey)][unknown][DEBUG   ] gen shmkey<34324> by  info shmkey<34324> and bussid<0>
+[20100610 18:15:52.744075][0.0.0.0][(tbus.c:1711) (tbus_init_ex)][unknown][DEBUG   ] tbus_init_ex successfully, shmkey(34324) size(53616) channelnum(2)

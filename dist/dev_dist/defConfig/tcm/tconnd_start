@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./tconnd --id=##TCONNDID## --use-bus --bus-key=1000 --conf-file=../conf/tconnd.xml  --tlogconf=../conf/tconnd_log.xml --daemon start
+
+

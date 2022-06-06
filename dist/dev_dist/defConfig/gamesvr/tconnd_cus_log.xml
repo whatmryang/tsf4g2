@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<TLOGConf version="1">
+    <PriorityHigh>NULL </PriorityHigh>
+    <PriorityLow>NOTSET </PriorityLow>
+    <DelayInit>0 </DelayInit>
+    <SuppressError>1 </SuppressError>
+    <Count>5 </Count>
+    <CategoryList type="TLOGCategory">
+        <Name>text</Name>
+        <PriorityHigh>FATAL </PriorityHigh>
+        <PriorityLow>FATAL </PriorityLow>
+        <LevelDispatch>0 </LevelDispatch>
+        <MustSucc>0 </MustSucc>
+        <MaxMsgSize>0 </MaxMsgSize>
+        <Format></Format>
+        <ForwardCat>texttrace</ForwardCat>
+        <Device type="TLOGDevAny">
+            <Type>NO </Type>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>texttrace</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>TRACE </PriorityLow>
+        <LevelDispatch>0 </LevelDispatch>
+        <MustSucc>0 </MustSucc>
+        <MaxMsgSize>0 </MaxMsgSize>
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>
+        <ForwardCat>texterr</ForwardCat>
+        <Device type="TLOGDevAny">
+			<Type>NET</Type>
+			<Device>
+				<Net>
+					<Url>udp://127.0.0.1:##TLOGDPORT##</Url>
+					<Sendbuff>0</Sendbuff>
+					<RecvBuff>32768</RecvBuff>
+					<AutoReconnect>10</AutoReconnect>
+					<MaxRetry>20</MaxRetry>                 
+					<ConnTimeout>1000</ConnTimeout>                     
+					<SendTimeout>1000</SendTimeout>  
+				</Net>
+			</Device>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>texterr</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>ERROR </PriorityLow>
+        <LevelDispatch>0 </LevelDispatch>
+        <MustSucc>0 </MustSucc>
+        <MaxMsgSize>0 </MaxMsgSize>
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>
+        <ForwardCat></ForwardCat>
+        <Device type="TLOGDevAny">
+			<Type>NET</Type>
+			<Device>
+				<Net>
+					<Url>udp://127.0.0.1:##TLOGDPORT##</Url>
+					<Sendbuff>0</Sendbuff>
+					<RecvBuff>32768</RecvBuff>
+					<AutoReconnect>10</AutoReconnect>
+					<MaxRetry>20</MaxRetry>                 
+					<ConnTimeout>1000</ConnTimeout>                     
+					<SendTimeout>1000</SendTimeout>  
+				</Net>
+			</Device>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>texttrace.bus</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>DEBUG </PriorityLow>
+        <LevelDispatch>1 </LevelDispatch>
+        <MustSucc>0 </MustSucc>
+        <MaxMsgSize>0 </MaxMsgSize>
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>
+        <ForwardCat></ForwardCat>
+        <Device type="TLOGDevAny">
+			<Type>NET</Type>
+			<Device>
+				<Net>
+					<Url>udp://127.0.0.1:##TLOGDPORT##</Url>
+					<Sendbuff>0</Sendbuff>
+					<RecvBuff>32768</RecvBuff>
+					<AutoReconnect>10</AutoReconnect>
+					<MaxRetry>20</MaxRetry>                 
+					<ConnTimeout>1000</ConnTimeout>                     
+					<SendTimeout>1000</SendTimeout>  
+				</Net>
+			</Device>
+        </Device>
+    </CategoryList>
+    <CategoryList type="TLOGCategory">
+        <Name>data</Name>
+        <PriorityHigh>NULL </PriorityHigh>
+        <PriorityLow>TRACE </PriorityLow>
+        <LevelDispatch>0 </LevelDispatch>
+        <MustSucc>0 </MustSucc>
+        <MaxMsgSize>0 </MaxMsgSize>
+        <Format>[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n</Format>
+        <ForwardCat></ForwardCat>
+        <Device type="TLOGDevAny">
+			<Type>NET</Type>
+			<Device>
+				<Net>
+					<Url>udp://127.0.0.1:##TLOGDPORT##</Url>
+					<Sendbuff>0</Sendbuff>
+					<RecvBuff>32768</RecvBuff>
+					<AutoReconnect>10</AutoReconnect>
+					<MaxRetry>20</MaxRetry>                 
+					<ConnTimeout>1000</ConnTimeout>                     
+					<SendTimeout>1000</SendTimeout>  
+				</Net>
+			</Device>
+        </Device>
+    </CategoryList>
+</TLOGConf>

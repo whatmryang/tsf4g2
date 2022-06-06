@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="BackProto"  version="1">
+
+    <!--本文档定义了transfer服务器与后端服务器通信的协议格式-->
+
+<macro name="BACKMAX_BODY_LEN" value="4096" />
+<macro name="BACKMAX_DIRTYCHECK_LEN" value="2048" />
+
+
+
+<macrosgroup name="BACKMSGCMD">
+	<macro name="BACK_CMD_DIRTYCHECK_REQ" value="1" />
+	<macro name="BACK_CMD_DIRTYCHECK_RES" value="2" />
+    <!--TODO-->
+    <!--add macros for other types of msg here-->
+</macrosgroup>
+
+
+
+
+<struct name="BackPkgHead" version="1" >
+	<entry name="magic"     type="smallint" defaultvalue="0x6636" />
+	<entry name="version"   type="smallint" defaultvalue="1" version="1" />
+	<entry name="cmd"       type="smallint" bindmacrosgroup="BACKMSGCMD"/>
+	<entry name="bodylen"   type="smallint" />
+	<entry name="sessionID" type="int" desc = "session id" />
+    <!--TODO-->
+    <!--add entries for msg head here-->
+</struct>
+
+
+
+
+<struct name="BackDirtyCheckReq" version="1" >
+    <entry name="msgLen"    type="uint" />
+    <entry name="msg"       type="string" size="BACKMAX_DIRTYCHECK_LEN" refer="msgLen" />
+</struct>
+
+<struct name="BackDirtyCheckRes" version="1" >
+    <entry name="msgLen"    type="uint" />
+    <entry name="msg"       type="string" size="BACKMAX_DIRTYCHECK_LEN" refer="msgLen" />
+</struct>
+
+<!--TODO-->
+<!--add struct definition for other types of msg here-->
+
+<union name="BackPkgBody" version="1" >
+	<entry name="dirtyCheckReq"  type="BackDirtyCheckReq"  id="BACK_CMD_DIRTYCHECK_REQ" />
+	<entry name="dirtyCheckRes"  type="BackDirtyCheckRes"  id="BACK_CMD_DIRTYCHECK_RES" />
+    <!--TODO-->
+    <!--add entries for other types of msg here-->
+</union>
+
+
+
+
+
+<struct name="BackPkg" version="1" versionindicator="head.version" >
+	<entry name="head" type="BackPkgHead" />
+	<entry name="body" type="BackPkgBody" select="head.cmd" sizeinfo="head.bodylen" />
+</struct>
+
+
+</metalib>

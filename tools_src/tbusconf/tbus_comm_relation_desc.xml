@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="tbus_conf"  version="1">
+
+    <macro name="MAX_TBUS_ID_LEN"          value="16" />
+    <macro name="MAX_TBUS_IP_LEN"          value="16" />
+    <macro name="MAX_PROCESS_NUM"          value="32" />
+    <macro name="MAX_PROCESS_NAME_LEN"     value="60" />
+    <macro name="MAX_MACHINE_NAME_LEN"     value="128" />
+    <macro name="MAX_KEY_STRING_LEN"       value="256" />
+    <macro name="MAX_ADDR_TEMPLET_LEN"     value="256" />
+    <macro name="MAX_MACHINE_NUM"          value="2048" />
+    <macro name="MAX_CONNECTION_NUM"       value="8192" />
+
+    <macro name="DEFAULT_BUFFER_SIZE"      value="20480000" />
+
+    <struct name="process_desc" version="1" >
+        <entry name="name" type="string" size="MAX_PROCESS_NAME_LEN" desc="MUST be UNIQUE" />
+        <entry name="id"   type="string" size="MAX_TBUS_ID_LEN"
+            defaultvalue="1.1.1.1" desc="MUST be UNIQUE, example: 2.0.0.2" />
+    </struct>
+
+    <struct name="process_array" version="1" >
+        <entry name="processCount" type="uint" defaultvalue="2" io="nooutput" />
+        <entry name="process"      type="process_desc" count="MAX_PROCESS_NUM" refer="processCount" />
+    </struct>
+
+    <struct name="connection_desc" version="1" >
+        <entry name="nameOfProcessA"   type="string"  size="MAX_PROCESS_NUM" />
+        <entry name="nameOfProcessB"   type="string"  size="MAX_PROCESS_NUM" />
+        <entry name="bufferSize"       type="uint"    defaultvalue="DEFAULT_BUFFER_SIZE" />
+    </struct>
+
+    <struct name="communication_relation" version="1" >
+        <entry name="connectionCount" type="uint" defaultvalue="1" io="nooutput" />
+        <entry name="connection"      type="connection_desc" count="MAX_CONNECTION_NUM"
+            refer="connectionCount" desc="every communication MUST be UNIQUE"/>
+    </struct>
+
+    <!-- single_machine communication relation description -->
+    <struct name="single_machine" version="1" >
+        <!--entry name="machineName"    type="string" size="MAX_MACHINE_NAME_LEN"  defaultvalue="localhost" /-->
+        <entry name="AddrTemplet"    type="string" size="MAX_ADDR_TEMPLET_LEN"  defaultvalue="8.8.8.8" />
+        <entry name="GCIMShmKey"     type="string" size="MAX_KEY_STRING_LEN"    defaultvalue="1688" />
+        <entry name="processList"    type="process_array" />
+        <entry name="communication"  type="communication_relation" />
+    </struct>
+
+
+    <struct name="machine_desc" version="1" >
+        <entry name="machineName"    type="string" size="MAX_MACHINE_NAME_LEN" />
+        <entry name="AddrTemplet"    type="string" size="MAX_ADDR_TEMPLET_LEN"  defaultvalue="8.8.8.8" />
+        <entry name="IP"       type="string" size="MAX_TBUS_IP_LEN"
+            defaultvalue="10.6.221.149" desc="MUST be UNIQUE and NOT be a lookback IP" />
+        <entry name="GCIMShmKey"     type="string" size="MAX_KEY_STRING_LEN"    defaultvalue="1688" />
+        <entry name="relayShmKey"    type="string" size="MAX_KEY_STRING_LEN"    defaultvalue="2688" />
+        <entry name="listenPort"     type="smalluint" defaultvalue="8899" desc="SHOULD be bigger than 1024" />
+        <entry name="processList"    type="process_array" />
+    </struct>
+
+    <struct name="machine_array" version="1" >
+        <entry name="machineCount" type="uint" defaultvalue="2" io="nooutput" />
+        <entry name="machine"      type="machine_desc" count="MAX_MACHINE_NUM" refer="machineCount" />
+    </struct>
+
+    <!-- multi_machines communication relation description -->
+    <struct name="multi_machines" version="1" >
+        <entry name="machineList"    type="machine_array" />
+        <entry name="communication"  type="communication_relation" />
+    </struct>
+
+</metalib>

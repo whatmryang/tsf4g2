@@ -1,0 +1,21 @@
+Import('buildenv')
+import os
+import shutil
+import os.path
+if buildenv.isInstall('base'):
+	fileExt=Split("*.c *.cpp *.h *.xml *.sh *.bat Makefile *.real *.mk")
+	benchmarkList = Split('tsec')
+	t = list()
+	for ext in fileExt:
+		t += Glob(''+ext)
+		for item in benchmarkList:
+			t += Glob(item+'/'+ext)
+			t += Glob(item+'/*/'+ext)
+			t += Glob(item+'/*/*/'+ext)
+			t += Glob(item+'/*/*/*/'+ext)
+
+	for example in t:
+		if os.path.basename(str(example)) != 'SConscript':
+			if str(example).count('.svn') == 0 and (not os.path.isdir(str(example))):
+				relDir = os.path.relpath(os.path.abspath(os.path.dirname(str(example))),buildenv.baseDir)
+				Install(os.path.join(buildenv.getInstallBase(),relDir),example )

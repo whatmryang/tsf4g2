@@ -1,0 +1,13 @@
+Import('buildenv')
+
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+if buildenv.isLinux():
+	buildenv.buildExec("tmempool",src_local,a_tsf4g_static_lib='tsf4g')
+else:
+	buildenv.buildExec("tmempool",src_local,a_tsf4g_static_lib='comm')
+
+Return('src_local')
+

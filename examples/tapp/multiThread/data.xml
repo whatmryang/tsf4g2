@@ -1,0 +1,18 @@
+<Pkg version="10">
+   <body>
+   <login type="CmdLogin" version="10">
+    <name>haha</name>
+    <pass>secret</pass>
+    <zone>shenzhen</zone>
+    <zone>beijing</zone>
+   </login>
+ </body>
+  <head type="PkgHead" version="9">
+   <magic> 13124   </magic>
+   <version> 9   </version>
+   <bodylen> 0   </bodylen>
+   <msgid> 100   </msgid>
+   <time>2007-05-21 12:23:45</time>
+   <cmd> 0   </cmd>
+  </head>
+</Pkg>

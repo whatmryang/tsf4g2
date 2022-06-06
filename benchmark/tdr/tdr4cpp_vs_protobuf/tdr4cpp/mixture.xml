@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="performance"  version="1">
+
+    <struct name="Point"  version="1" >
+        <entry name="x" type="uint" />
+        <entry name="y" type="uint" />
+    </struct>
+
+    <struct name="Attach" version="1" >
+        <entry name="profit"  type="float" />
+        <entry name="money"   type="double" />
+        <entry name="hasDesc" type="uint" defaultvalue="0" />
+        <entry name="desc"    type="string" size="200" refer="hasDesc" />
+        <entry name="count"   type="uint" defaultvalue="0" />
+        <entry name="points"  type="Point" count="100" refer="count" />
+    </struct>
+
+    <struct name="Mixture" sizeinfo="length" version="1" versionindicator="version" >
+        <entry name="length"  type="uint" />
+        <entry name="version" type="uint" />
+        <entry name="command" type="int" />
+
+        <entry name="magic"   type="uint" />
+        <entry name="src"     type="biguint" />
+        <entry name="dst"     type="biguint" />
+
+        <entry name="hasAttach" type="int" defaultvalue="0" />
+        <entry name="attach"  type="Attach" refer="hasAttach" />
+    </struct>
+
+</metalib>

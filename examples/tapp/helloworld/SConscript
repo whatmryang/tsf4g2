@@ -1,0 +1,21 @@
+Import("buildenv")
+Export('buildenv')
+
+import os
+if buildenv._isLinux:
+	os.system('chmod 777 *.sh')
+"""
+tdr --xml2h  example_conf_desc.xml
+tdr --xml2c  -o example_conf_desc.c example_conf_desc.xml
+tdr --xml2dr desc.xml -o desc.tdr
+"""
+
+buildenv.xml2h("example_conf_desc.xml")
+buildenv.xml2c("example_conf_desc","example_conf_desc.xml")
+buildenv.xml2dr("desc","desc.xml")
+
+src = Glob('*.c')
+if buildenv._isLinux:
+	buildenv.buildExec('example',src,a_tsf4g_static_lib="tsf4g",LIBS="pthread ")
+else:
+	buildenv.buildExec('example',src,a_tsf4g_static_lib="tsf4g",CPPDEFINES=["_TSF4G_LARGE_LIB_"])

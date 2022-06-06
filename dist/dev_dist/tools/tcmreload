@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cp applist2tcmconfig/tcmcenter.xml ../mmog_deps/tsf4g_install/apps/tcm/conf/
+cd ../mmog_deps/tsf4g_install/apps/tcm/bin
+./tconnd_stop
+./tconnd_start
+./tcmcenter_stop
+./tcmcenter_start

@@ -1,0 +1,129 @@
+
+Metalib("net"): ID=-1 ver=3 Metas 7/7 Macros:7/7 
+	 StringBuf<BeginPtr= 4436 EndPtr= 4478 FreeSize=0
+
+Macro Name="VERSION" id=100
+Macro Name="MAX_BODY_LEN" id=32000
+Macro Name="CMD_LOGIN" id=0
+Macro Name="CMD_LOGOUT" id=1
+Macro Name="MAX_NAME_LEN" id=32
+Macro Name="MAX_PASS_LEN" id=32
+Macro Name="MAX_ATTR_SIZE" id=128
+Meta(name="PkgHead")  version<idx:-1, 1, CurVer:1> ID<idx:-1, -1> cnamePtr: -1 descPtr: -1
+		 EntriesNum: 6 Type<idx: 1 1> UnitSize: 18 Flag: 1140
+		 idxSizeType: -1 SizeType<Off: -1 Unit: 0> ptr: 616
+		 iAlign: 1 VersionIndicator<Off: 2 Unit> Size<idx: 4 -1>
+	Entry:	Name="magic" ID<idx:-1 -1> type<idx: 4 4> version<idx: -1>
+		 iRealSize: 2 ExpectedUnit<idx: -1 0> iUnit: 2 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: 4449
+	Entry:	Name="version" ID<idx:-1 -1> type<idx: 4 4> version<idx: -1>
+		 iRealSize: 4 ExpectedUnit<idx: -1 0> iUnit: 4 count<idx: -1 1>
+		 Off: 2 chFlag: 2 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="time" ID<idx:-1 -1> type<idx: 15 14> version<idx: -1>
+		 iRealSize: 4 ExpectedUnit<idx: -1 0> iUnit: 4 count<idx: -1 1>
+		 Off: 6 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="cmd" ID<idx:-1 -1> type<idx: 4 4> version<idx: -1>
+		 iRealSize: 2 ExpectedUnit<idx: -1 0> iUnit: 2 count<idx: -1 1>
+		 Off: 10 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="bodylen" ID<idx:-1 -1> type<idx: 4 4> version<idx: -1>
+		 iRealSize: 2 ExpectedUnit<idx: -1 0> iUnit: 2 count<idx: -1 1>
+		 Off: 12 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="msgid" ID<idx:-1 -1> type<idx: 7 7> version<idx: -1>
+		 iRealSize: 4 ExpectedUnit<idx: -1 0> iUnit: 4 count<idx: -1 1>
+		 Off: 14 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: 4456 defualtPtr: -1
+Meta(name="CmdLogin")  version<idx:-1, 10, CurVer:10> ID<idx:-1, -1> cnamePtr: -1 descPtr: -1
+		 EntriesNum: 2 Type<idx: 1 1> UnitSize: 64 Flag: 1100
+		 idxSizeType: -1 SizeType<Off: -1 Unit: 0> ptr: 1724
+		 iAlign: 1 VersionIndicator<Off: -1 Unit> Size<idx: 0 -1>
+	Entry:	Name="name" ID<idx:-1 -1> type<idx: 16 18> version<idx: -1>
+		 iRealSize: 32 ExpectedUnit<idx: 4 32> iUnit: 1 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: 4467 descPtr: -1 defualtPtr: -1
+	Entry:	Name="pass" ID<idx:-1 -1> type<idx: 16 18> version<idx: -1>
+		 iRealSize: 32 ExpectedUnit<idx: 5 32> iUnit: 1 count<idx: -1 1>
+		 Off: 32 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+Meta(name="CmdLogout")  version<idx:-1, 10, CurVer:10> ID<idx:-1, -1> cnamePtr: 4436 descPtr: -1
+		 EntriesNum: 2 Type<idx: 1 1> UnitSize: 132 Flag: 1140
+		 idxSizeType: -1 SizeType<Off: -1 Unit: 0> ptr: 2176
+		 iAlign: 1 VersionIndicator<Off: -1 Unit> Size<idx: 0 -1>
+	Entry:	Name="reason" ID<idx:-1 -1> type<idx: 6 6> version<idx: -1>
+		 iRealSize: 4 ExpectedUnit<idx: -1 0> iUnit: 4 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="attr" ID<idx:-1 -1> type<idx: 2 2> version<idx: -1>
+		 iRealSize: 128 ExpectedUnit<idx: -1 0> iUnit: 1 count<idx: 6 128>
+		 Off: 4 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+Meta(name="PkgBody")  version<idx:-1, 10, CurVer:10> ID<idx:-1, -1> cnamePtr: -1 descPtr: -1
+		 EntriesNum: 2 Type<idx: 0 0> UnitSize: 132 Flag: 1100
+		 idxSizeType: -1 SizeType<Off: -1 Unit: 0> ptr: 2628
+	Entry:	Name="logout" ID<idx:3 1> type<idx: 1 1> version<idx: -1>
+		 iRealSize: 132 ExpectedUnit<idx: -1 0> iUnit: 132 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: 2176 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="login" ID<idx:2 0> type<idx: 1 1> version<idx: -1>
+		 iRealSize: 64 ExpectedUnit<idx: -1 0> iUnit: 64 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: 1724 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+Meta(name="Pkg")  version<idx:-1, 10, CurVer:10> ID<idx:-1, -1> cnamePtr: -1 descPtr: -1
+		 EntriesNum: 2 Type<idx: 1 1> UnitSize: 150 Flag: 1100
+		 idxSizeType: -1 SizeType<Off: -1 Unit: 0> ptr: 3080
+		 iAlign: 1 VersionIndicator<Off: -1 Unit> Size<idx: 0 -1>
+	Entry:	Name="head" ID<idx:-1 -1> type<idx: 1 1> version<idx: -1>
+		 iRealSize: 18 ExpectedUnit<idx: -1 0> iUnit: 18 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: 616 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="body" ID<idx:-1 -1> type<idx: 0 0> version<idx: -1>
+		 iRealSize: 132 ExpectedUnit<idx: -1 0> iUnit: 132 count<idx: -1 1>
+		 Off: 18 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: 12 Unit: 2>
+		 IO<idx: -1 0> ptrMeta: 2628 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+		 Select<Off: 10 Unit: 2> maxID<idx: 0 0> minid<idx: 0 1>
+Meta(name="CSStatusValue")  version<idx:-1, 10, CurVer:10> ID<idx:-1, -1> cnamePtr: -1 descPtr: -1
+		 EntriesNum: 2 Type<idx: 0 0> UnitSize: 4 Flag: 1140
+		 idxSizeType: -1 SizeType<Off: -1 Unit: 0> ptr: 3532
+	Entry:	Name="Str" ID<idx:-1 2> type<idx: 19 4> version<idx: -1>
+		 iRealSize: 2 ExpectedUnit<idx: -1 0> iUnit: 2 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="Dummy" ID<idx:-1 1> type<idx: 6 6> version<idx: -1>
+		 iRealSize: 4 ExpectedUnit<idx: -1 0> iUnit: 4 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+Meta(name="CSStatus")  version<idx:-1, 10, CurVer:10> ID<idx:-1, -1> cnamePtr: -1 descPtr: -1
+		 EntriesNum: 2 Type<idx: 1 1> UnitSize: 6 Flag: 1100
+		 idxSizeType: 18 SizeType<Off: -1 Unit: 0> ptr: 3984
+		 iAlign: 1 VersionIndicator<Off: -1 Unit> Size<idx: 0 -1>
+	Entry:	Name="Type" ID<idx:-1 -1> type<idx: 19 4> version<idx: -1>
+		 iRealSize: 2 ExpectedUnit<idx: -1 0> iUnit: 2 count<idx: -1 1>
+		 Off: 0 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: -1 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+	Entry:	Name="Value" ID<idx:-1 -1> type<idx: 0 0> version<idx: -1>
+		 iRealSize: 4 ExpectedUnit<idx: -1 0> iUnit: 4 count<idx: -1 1>
+		 Off: 2 chFlag: 0 chUnique: 0 chNotnull: 0 chOrder: 0
+		 sortKey<Off: -1 ptrMeta: -1 idxEntry: -1> Refer<Off: -1 Unit: 0> SizeInfo<off: -1 Unit: 0>
+		 IO<idx: -1 0> ptrMeta: 3532 cnamePtr: -1 descPtr: -1 defualtPtr: -1
+		 Select<Off: 0 Unit: 2> maxID<idx: 0 0> minid<idx: 0 1>

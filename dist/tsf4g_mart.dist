@@ -1,0 +1,80 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_mart_01_0001 "
+}
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+TSF4G_MART_RELEASE=tsf4g_mart`date +%Y%m%d`.tgz
+MART_HOME=tsf4g_mart`date +%Y%m%d`
+
+echo "mkdir ${MART_HOME}"
+mkdir -p ${MART_HOME}
+mkdir ${MART_HOME}/martsvr
+mkdir ${MART_HOME}/protocol
+mkdir ${MART_HOME}/include
+mkdir ${MART_HOME}/lib
+mkdir ${MART_HOME}/example
+mkdir ${MART_HOME}/tools
+mkdir ${MART_HOME}/doc
+
+
+echo "copy protocol files"
+cp   ${TSF4G_DIR}/apps/tmart/include/martapi.h			${MART_HOME}/include/
+cp   ${TSF4G_DIR}/apps/tmart/include/mart_ss.h			${MART_HOME}/include/
+cp   ${TSF4G_DIR}/apps/tmart/lib/libmartapi.a			${MART_HOME}/lib/
+
+cp   ${TSF4G_DIR}/apps/tmart/protocol/*.tdr				${MART_HOME}/protocol/
+cp   ${TSF4G_DIR}/apps/tmart/protocol/*.bin				${MART_HOME}/protocol/
+cp   ${TSF4G_DIR}/apps/tmart/protocol/*.xml				${MART_HOME}/protocol/
+
+echo "copy bin"
+cp   ${TSF4G_DIR}/apps/tmart/martsvr/tmartsvr			${MART_HOME}/martsvr/
+cp   ${TSF4G_DIR}/apps/tmart/martsvr/*.xml				${MART_HOME}/martsvr/
+cp   ${TSF4G_DIR}/apps/tmart/martsvr/*.sh				${MART_HOME}/martsvr/
+
+echo "copy tools"
+cp   ${TSF4G_DIR}/apps/tmart/example/					${MART_HOME}/martsvr/
+
+echo "copy tools"
+cp   ${TSF4G_DIR}/tools/tbusmgr							${MART_HOME}/tools/
+cp	 ${TSF4G_DIR}/apps/tmart/example/tbus/tbusmgr.xml	${MART_HOME}/tools/
+cp	 ${TSF4G_DIR}/apps/tmart/tools/portal				${MART_HOME}/tools/
+cp	 ${TSF4G_DIR}/apps/tmart/tools/sys_svr.conf			${MART_HOME}/tools/
+
+echo "copy docs"
+cp   ${TSF4G_DIR}/apps/tmart/doc/*.doc					${MART_HOME}/doc/
+
+echo "copy example"
+cp   ${TSF4G_DIR}/apps/tmart/example/tsf4g.mk			${MART_HOME}/example/
+cp   ${TSF4G_DIR}/apps/tmart/example/Makefile.dev		${MART_HOME}/example/Makefile
+cp   ${TSF4G_DIR}/apps/tmart/example/mart_cli.c			${MART_HOME}/example/
+cp   ${TSF4G_DIR}/apps/tmart/example/start_mart_cli.sh	${MART_HOME}/example/
+
+echo "copy installshell"
+cp  ./tsf4g_mart.install								${MART_HOME}/
+cp  ./tsf4g_mart.check 									${MART_HOME}/
+cp  ./tsf4g_mart.dependency 							${MART_HOME}/
+
+cp	 ${TSF4G_DIR}/apps/tmart/Readme						${MART_HOME}/
+
+cp  -r ${TSF4G_DIR}/apps/tmart/resource_conv           	${MART_HOME}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${MART_HOME}/version
+
+find ${MART_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_MART_RELEASE} ${MART_HOME}
+#rm -rf ${MART_HOME}

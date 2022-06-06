@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="mtexamplecs"  version="1">
+
+	<macrosgroup name="MTCMDIDS">
+		<macro name="MT_ONLYMAIN_REQ" value="0x0C01" desc="" />
+		<macro name="MT_ONLYMAIN_RES" value="0x0C02" desc="" />
+
+		<macro name="MT_ONLYTHREAD_REQ" value="0x0C03" desc="" />
+		<macro name="MT_ONLYTHREAD_RES" value="0x0C04" desc="" />
+
+	</macrosgroup>
+
+	<macrosgroup name="MTErrorCodes">
+		<macro name="MT_NOERR" value="0"   desc="no error, success"/>
+		<macro name="MT_ERROR_TIMEOUT" value="-1"  desc="timeout"/>
+		<macro name="MT_ERROR_SYSTEM" value="-2"  desc="system error"/>
+	</macrosgroup>
+
+	<struct name="MTOnlyMainReq" version="1">
+		<entry name="add1"  type="int" desc="The first adder" />
+		<entry name="add2"  type="int" desc="The second adder" />
+	</struct>
+
+	<struct name="MTOnlyMainRes" version="1">
+		<entry name="Result" type="int" bindmacrosgroup="MTErrorCodes" desc="" />
+		<entry name="res" type="int" desc="The sum of the req" />
+		<entry name="req" type="MTOnlyMainReq" desc="The original req" />
+	</struct>
+
+	<!-- 2.tns_rolemod -->
+	<struct name="MTOnlyThreadReq" version="1">
+		<entry name="mult1"  type="int" desc="mut1" />
+		<entry name="mult2"  type="int" desc="mut2" />
+	</struct>
+
+	<struct name="MTOnlyThreadRes" version="1">
+		<entry name="Result"  bindmacrosgroup="MTErrorCodes" type="int" desc="" />
+		<entry name="res" type="int" desc="The multply of mut1 and mut2" />
+		<entry name="req" type="MTOnlyThreadReq" desc="The multply of mut1 and mut2" />
+	</struct>
+
+	<struct name="MTMsgHead"  version="1">
+		<entry name="Version"    type="ushort" desc="通信协议版本"   />
+		<entry name="PkgLen"     type="ushort" desc="消息总体的长度" />
+		<entry name="CmdID"      type="ushort" bindmacrosgroup="MTCMDIDS" desc="命令号"         />
+		<entry name="Magic"      type="ushort" desc="通信协议魔数"   />
+		<entry name="Sequence"   type="uint"   desc="Sequence"       />
+		<entry name="AsynBufLen" type="ushort" desc=""               />
+		<entry name="AsynBuffer" type="uchar"  count="242" refer="AsynBufLen" desc="" />
+	</struct>
+
+	<union name="MTMsgBody" version="1">
+		<entry name="OnlyMainReq" type="MTOnlyMainReq" id="MT_ONLYMAIN_REQ" desc=""/>
+		<entry name="OnlyMainRes" type="MTOnlyMainRes" id="MT_ONLYMAIN_RES" desc=""/>
+
+		<entry name="OnlyThreadReq" type="MTOnlyThreadReq" id="MT_ONLYTHREAD_REQ" desc=""/>
+		<entry name="OnlyThreadRes" type="MTOnlyThreadRes" id="MT_ONLYTHREAD_RES" desc=""/>
+	</union>
+
+	<struct name="MTExampleMsg"  version="1" sizeinfo="Head.PkgLen" versionindicator="Head.Version" desc="">
+		<entry name="Head" type="MTMsgHead" />
+		<entry name="Body" type="MTMsgBody" select="Head.CmdID" sizeinfo="Head.PkgLen" />
+	</struct>
+
+</metalib>

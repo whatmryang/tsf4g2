@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<tcmconsole version="1">
+    <TbusconfigcenterUrl>127.0.0.1:##TCONNDPORT##</TbusconfigcenterUrl>
+    <SayHellpGap>30 </SayHellpGap>
+</tcmconsole>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib name="" tagsetversion="1" version="2"  >
+  <include file="tlog_priority_def.xml"/>
+  <include file="tloganydef.xml" />
+
+  <macro name="TLOG_NAME_LEN" value="64" />
+  <macro name="TLOG_FORMAT_LEN" value="128" />
+  <macro name="TLOG_DEFAULT_MAX_MSG_SIZE" value="8192" />
+  <struct name="TLOGCategory" version="1" >
+    <entry name="Name" type="string" size="TLOG_NAME_LEN" defaultvalue="default"/>
+    <entry name="PriorityHigh" type="int" bindmacrosgroup="TLOG_PRIORITY" defaultvalue="TLOG_PRIORITY_NULL" />
+    <entry name="PriorityLow" type="int" bindmacrosgroup="TLOG_PRIORITY" defaultvalue="TLOG_PRIORITY_NULL" />
+
+    <!-- Add filter  opitons -->
+    <entry name="Filter" type="TLOGFilterVec" />
+
+    <entry name="LevelDispatch" type="int" defaultvalue="0"/>
+    <entry name="MustSucc" type="int" defaultvalue="0"/>
+    <entry name="MaxMsgSize" type="int" defaultvalue="TLOG_DEFAULT_MAX_MSG_SIZE"/>
+    <entry name="Format" type="string" size="TLOG_FORMAT_LEN" defaultvalue="[%d.%u][%h][(%f:%l) (%F)][%M][%p] %m%n"/>
+    <entry name="ForwardCat" type="string" size="TLOG_FORMAT_LEN" defaultvalue=""/>
+    <entry name="Device" type="TLOGDevAny" />
+  </struct>
+
+</metalib>
+

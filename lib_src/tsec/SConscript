@@ -1,0 +1,16 @@
+
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+
+#buildenv.xml2h('tsecbasedef.xml')
+#Install('../../include/tsec','tsecbasedef.h')
+
+src_local = Glob('*.c')
+if buildenv._isWindows:
+	src_local += Glob('*.cpp')
+
+Import('buildenv')
+buildenv.buildStaticLib('tsec',src_local,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB'])
+
+Return('src_local')

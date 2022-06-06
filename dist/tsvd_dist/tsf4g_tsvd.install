@@ -1,0 +1,47 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi  
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsvd ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsvd
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsvd/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsvd/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsvd/conf ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsvd/conf
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsvd/tools ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsvd/tools
+fi
+
+
+echo "Install tsvd...."
+cp ./bin/*                        $TSF4G_INSTALL_HOME/apps/tsvd/bin/
+cp ./conf/*                        $TSF4G_INSTALL_HOME/apps/tsvd/conf/
+cp ./tools/*                                  $TSF4G_INSTALL_HOME/apps/tsvd/tools/
+
+
+
+echo "Install tsvd done"
+
+
+
+
+

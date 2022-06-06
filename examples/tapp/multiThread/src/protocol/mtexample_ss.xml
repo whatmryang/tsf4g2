@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="mtexampless"  version="1">
+		
+	<macro name="MT_MAX_DATA_LEN" value="1024" desc=""/>
+	<struct name="mtssdata" version="1">
+		<entry name="iIdx" type="int" desc="Session id"/>
+		<entry name="Len"  type="int" />
+		<entry name="Data" type="char" count="MT_MAX_DATA_LEN" refer="Len" />
+	</struct>
+</metalib>

@@ -1,0 +1,102 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_mail_01_0001 "
+}
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+TSF4G_MAIL_RELEASE=tsf4g_mail`date +%Y%m%d`.tgz
+MAIL_HOME=tsf4g_mail`date +%Y%m%d`
+
+echo "mkdir ${MAIL_HOME}"
+mkdir -p ${MAIL_HOME}
+mkdir ${MAIL_HOME}/mailsvr
+mkdir ${MAIL_HOME}/tormsvr
+mkdir ${MAIL_HOME}/include
+mkdir ${MAIL_HOME}/include/apps/
+mkdir ${MAIL_HOME}/include/apps/tmailapi
+mkdir ${MAIL_HOME}/protocol
+mkdir ${MAIL_HOME}/example
+mkdir ${MAIL_HOME}/tools
+mkdir ${MAIL_HOME}/lib
+mkdir ${MAIL_HOME}/doc
+
+echo "copy include files"
+cp   ${TSF4G_DIR}/include/apps/tmailapi/*.h			${MAIL_HOME}/include/apps/tmailapi/
+#cp  -rf ${TSF4G_DIR}/include/comm					${MAIL_HOME}/include/
+#cp  -rf ${TSF4G_DIR}/include/pal					${MAIL_HOME}/include/
+#cp  -rf ${TSF4G_DIR}/include/tdr					${MAIL_HOME}/include/
+#cp  -rf ${TSF4G_DIR}/include/tlog					${MAIL_HOME}/include/
+#cp  -rf ${TSF4G_DIR}/include/tbus					${MAIL_HOME}/include/
+#cp  -rf ${TSF4G_DIR}/include/tapp					${MAIL_HOME}/include/
+#cp  -rf ${TSF4G_DIR}/include/tsec					${MAIL_HOME}/include/
+
+echo "copy tmailapi files"
+cp    ${TSF4G_DIR}/apps/tmail/mailapi/libmailapi.*	${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libcomm*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libpal*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtdr*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtbus*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtdr*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtmng*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtapp*						${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtlog.*					${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtsec.*					${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libobus.*					${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtloghelp.*				${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libtagentapi.*				${MAIL_HOME}/lib/
+#cp   ${TSF4G_DIR}/lib/libcenterdapi.*				${MAIL_HOME}/lib/
+
+echo "copy protocol files"
+cp   ${TSF4G_DIR}/apps/tmail/protocol/*.tdr			${MAIL_HOME}/protocol/
+cp   ${TSF4G_DIR}/apps/tmail/protocol/*.xml			${MAIL_HOME}/protocol/
+cp   ${TSF4G_DIR}/apps/tmail/protocol/conv.sh		${MAIL_HOME}/protocol/
+
+echo "copy bin"
+cp   ${TSF4G_DIR}/apps/tmail/mailsvr/tmailsvr		${MAIL_HOME}/mailsvr/
+cp   ${TSF4G_DIR}/apps/tmail/mailsvr/*.xml			${MAIL_HOME}/mailsvr/
+cp   ${TSF4G_DIR}/apps/tmail/mailsvr/*.sh			${MAIL_HOME}/mailsvr/
+
+cp   ${TSF4G_DIR}/apps/tmail/tools/tmail_expire		${MAIL_HOME}/tools/
+cp   ${TSF4G_DIR}/apps/tmail/tools/*.sh				${MAIL_HOME}/tools/
+cp   ${TSF4G_DIR}/apps/tmail/tools/*.xml			${MAIL_HOME}/tools/
+
+cp   ${TSF4G_DIR}/apps/tmail/tormsvr/*.sh			${MAIL_HOME}/tormsvr/
+cp   ${TSF4G_DIR}/apps/mttorm/tormsvr/tormsvr		${MAIL_HOME}/tormsvr/
+cp   ${TSF4G_DIR}/apps/tmail/tormsvr/*.xml			${MAIL_HOME}/tormsvr/
+cp   ${TSF4G_DIR}/apps/tmail/tormsvr/tmng.conf		${MAIL_HOME}/tormsvr/
+
+echo "copy cfg"
+cp   ${TSF4G_DIR}/apps/tmail/mailsvr/*.xml			${MAIL_HOME}/mailsvr/
+
+echo "copy tools"
+
+echo "copy docs"
+cp   ${TSF4G_DIR}/apps/tmail/doc/*.doc				${MAIL_HOME}/doc/
+
+echo "copy example"
+cp   ${TSF4G_DIR}/apps/tmail/example/*				${MAIL_HOME}/example/
+mv	 ${MAIL_HOME}/example/Makefile.dev				${MAIL_HOME}/example/Makefile
+
+echo "copy installshell"
+cp  ./tsf4g_mail.install							${MAIL_HOME}/
+cp	${TSF4G_DIR}/apps/tmail/Readme					${MAIL_HOME}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${MAIL_HOME}/version
+
+find ${MAIL_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_MAIL_RELEASE} ${MAIL_HOME}
+#rm -rf ${MAIL_HOME}

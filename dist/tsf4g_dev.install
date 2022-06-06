@@ -1,0 +1,79 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_DEV_INSTALL_HOME=${HOME}/tsf4g_dev_install
+else
+  TSF4G_DEV_INSTALL_HOME=$1
+fi
+
+TSF4G_INSTALL_HOME=${TSF4G_DEV_INSTALL_HOME}/mmog_deps/tsf4g_install
+
+
+if [ ! -d ${TSF4G_DEV_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_DEV_INSTALL_HOME
+  
+  mkdir -p $TSF4G_DEV_INSTALL_HOME/mmog_dev
+  mkdir -p $TSF4G_DEV_INSTALL_HOME/mmog_run
+  mkdir -p $TSF4G_DEV_INSTALL_HOME/mmog_mng
+  mkdir -p $TSF4G_DEV_INSTALL_HOME/mmog_deps
+fi
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+fi
+
+# 1 extract all the compoments.
+# 
+
+cd res
+currentPWD=`pwd`
+apps=`cat apps.cfg | grep -v '#$' | grep project=|sed -n -e 's/^[ ]*project[ ]*=//p'`
+for app in ${apps}
+do
+		appPack=`cat apps.cfg|grep -v '#$'|grep ${app}|grep packName|sed -n -e "s/^[ ]*${app}.packName[ ]*=//p"`
+		tar -zxf ${appPack} 
+		dirName=`cat apps.cfg|grep -v '#$'|grep ${app}|grep dirName|sed -n -e "s/^[ ]*${app}.dirName[ ]*=//p"`
+		#installScript=`cat apps.cfg|grep -v '#'|grep ${app}|grep installScript|sed -n -e "s/^[ ]*${app}.installScript[ ]*=//p"`
+		cd ${dirName}
+		if [ $? -ne 0 ]; then
+			pwd
+			exit 1
+		fi
+		installScript=`ls|grep .install`
+		if [ "${installScript}" = "" ];then
+			if [ "${app}" = "mmogxyz" ];then
+				cp -r ../${dirName}/* ${TSF4G_DEV_INSTALL_HOME}/mmog_dev/
+				cp -r ../${dirName}/run/* ${TSF4G_DEV_INSTALL_HOME}/mmog_run/
+#				cd  ${TSF4G_INSTALL_HOME}/../gamesvr
+#				./configure
+#				make
+				cd ${currentPWD}/${dirName}
+			fi
+			cd ..
+			continue
+		fi
+		
+	    echo "${installScript}"	
+		./${installScript} ${TSF4G_INSTALL_HOME} >/dev/null
+		
+		if [ $? -ne 0 ]; then
+			pwd
+			exit 1
+		fi
+		cd ..
+done
+
+cd ..
+
+cp tools/setup.sh ${TSF4G_DEV_INSTALL_HOME}
+cp -r defConfig ${TSF4G_DEV_INSTALL_HOME}/mmog_deps
+cp -r tools ${TSF4G_DEV_INSTALL_HOME}/mmog_deps
+cp -r docs  ${TSF4G_DEV_INSTALL_HOME}
+cp Readme.txt ${TSF4G_DEV_INSTALL_HOME}/
+mkdir -p ${TSF4G_DEV_INSTALL_HOME}/mmog_mng
+cp -r tools/* ${TSF4G_DEV_INSTALL_HOME}/mmog_mng
+rm ${TSF4G_DEV_INSTALL_HOME}/mmog_mng/setup.sh
+# Install all the compoments.
+
+echo "tsf4g_dev install done"

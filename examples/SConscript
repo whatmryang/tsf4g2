@@ -1,0 +1,22 @@
+Import('buildenv')
+SConscript("tbus_tdr_tsec/SConscript")
+import os
+import shutil
+import os.path
+if buildenv.isInstall('base'):
+	fileExt=Split("*.c *.cpp *.h *.xml *.sh *.bat Makefile *.real *.mk *.tdr")
+	exampleList = Split('comm pal tapp tbus tbus_tdr_tsec tlog tdr')
+	t = list()
+	for ext in fileExt:
+		t += Glob(''+ext)
+		for item in exampleList:
+			t += Glob(item+'/'+ext)
+			t += Glob(item+'/*/'+ext)
+			t += Glob(item+'/*/*/'+ext)
+			t += Glob(item+'/*/*/*/'+ext)
+
+	for example in t:
+		if os.path.basename(str(example)) != 'SConscript':
+			if str(example).count('.svn') == 0 and (not os.path.isdir(str(example))):
+				relDir = os.path.relpath(os.path.abspath(os.path.dirname(str(example))),buildenv.baseDir)
+				Install(os.path.join(buildenv.getInstallBase(),relDir),example )

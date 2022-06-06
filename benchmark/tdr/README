@@ -1,0 +1,28 @@
+本目录 包含两个测试tdr API接口的性能测试程序；
+
+1.test_tdr_proformance
+	本目录下的程序主要用于测试 tdr 网络消息编解码接口 tdr_hotn/tdr_ntoh 性能
+	在这个目录编译后会生成一个testtdrproformance的程序，执行testtdrproformance -h可以获得相关帮助
+	此程序测试相关接口的基本方法是：
+	a)测试者通过命令行参数 制定 待测试数据的元数据描述库文件、测试
+	数据的元数据描述名及xml格式的数据文件
+	b)元数据描述库文件可以利用xml描述文件通过tdr工具生成
+	c)调用tdr_output_file接口可以将内存数据导出到xml格式的数据文件
+
+	
+2.tdr_dbormapping_proformance
+	本目录下的测试程序主要用于测试 tdr 数据库存储相关api的性能
+	在这个目录下编译会生成一个tdr_dbormapping程序，指定tdr_dbormapping -h 可以获取相关帮助
+	这个程序通过 向dbms发送 insert、update、select、delete操作来测试tdr相关接口的性能。
+	本程序使用方法如下：
+	a) 修改tdr_dbms_conf.xml中的配置，将dbms的相关连接信息及帐号信息
+	b) 通过mysql将 tdr_createtable.sql导入，以创建相关的数据库表
+	c）执行tdr_dbormapping进行测试
+	
+	
+    
+    
+    
+    
+    
+

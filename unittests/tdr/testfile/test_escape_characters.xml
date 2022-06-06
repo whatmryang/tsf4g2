@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="tdrunittest"  version="1">
+
+<struct name="StringSet" version="1" >
+	<!--entry name="" type="string"  size="1024" defaultvalue="" desc="" /-->
+
+	<!--entry name="Oct" type="string"  size="1024" defaultvalue="begin tail" desc="begin tail" /-->
+	<entry name="OctA" type="string"  size="1024" defaultvalue="begin\101tail" desc="beginAtail"/>
+	<entry name="OctTable1" type="string"  size="1024" defaultvalue="begin\011tail" desc="begin\ttail" />
+    <entry name="OctTable2" type="string"  size="1024" defaultvalue="begin\11tail" desc="begin\ttail" />
+	<entry name="OctReturn" type="string"  size="1024" defaultvalue="begin\012tail" desc="begin\ntail" />
+	<entry name="OctNul1" type="string"  size="1024" defaultvalue="begin\0tail" desc="begin"/>
+	<entry name="OctNul2" type="string"  size="1024" defaultvalue="begin\00tail" desc="begin"/>
+	<entry name="OctNul3" type="string"  size="1024" defaultvalue="begin\000tail" desc="begin"/>
+	<entry name="OctNul4" type="string"  size="1024" defaultvalue="begin\0000tail" desc="begin"/>
+
+	<!--entry name="Hex" type="string"  size="1024" defaultvalue="begin tail" desc="begin tail" /-->
+	<!--entry name="HexA" type="string"  size="1024" defaultvalue="begin\x111141tail" desc="beginAtail" /-->
+	<!--entry name="HexTable" type="string"  size="1024" defaultvalue="begin\x09tail" desc="begin\ttail" /-->
+	<!--entry name="HexNul" type="string"  size="1024" defaultvalue="begin\x00tail" desc="begin" /-->
+	<!--entry name="HexReturn1" type="string"  size="1024" defaultvalue="begin\x0Atail" desc="begin\ntail" /-->
+	<!--entry name="HexReturn2" type="string"  size="1024" defaultvalue="begin\x0atail" desc="begin\ntail" /-->
+
+	<!--entry name="Direct" type="string"  size="1024" defaultvalue="begin tail" desc="begin tail" /-->
+	<!--entry name="DirectTable" type="string"  size="1024" defaultvalue="begin\ttail" desc="begin\ttail" /-->
+	<!--entry name="DirectReturn" type="string"  size="1024" defaultvalue="begin\ntail" desc="begin\ntail" /-->
+	<!--entry name="DirectFake" type="string"  size="1024" defaultvalue="begin\ptail" desc="beginptail" /-->
+
+	<entry name="DoubleSlash" type="string"  size="1024" defaultvalue="begin\\040tail" desc="begin\040tail" />
+</struct>
+
+</metalib>

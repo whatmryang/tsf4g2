@@ -1,0 +1,24 @@
+package performance;
+
+message Point {
+    required fixed32 x = 1;
+    required fixed32 y = 2;
+}
+
+message Attach {
+    required    float   profit = 1;
+    required    double  money  = 2;
+    optional    string  desc   = 3;
+    repeated    Point   points = 4;
+}
+
+message Mixture {
+    required fixed32  length  = 1;
+    required fixed32  version = 2;
+    required sfixed32 command = 3;
+    required fixed32  magic   = 4;
+    required fixed64  src   = 5;
+    required fixed64  dst   = 6;
+
+    optional Attach attach = 7;
+}

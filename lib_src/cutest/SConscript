@@ -1,0 +1,16 @@
+
+# The set of source files associated with this SConscript file.
+import os
+
+if os.path.isfile('conv.py'):
+	#Cd to the dir and exec conv.bat
+	os.system('conv.py')
+	#
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Import('buildenv')
+buildenv.buildStaticLib('cutest',src_local)
+#buildenv.buildSharedLib('pal',src_local)
+Return('src_local')

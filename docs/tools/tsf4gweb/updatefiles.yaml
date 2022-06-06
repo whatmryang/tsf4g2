@@ -1,0 +1,63 @@
+#本地Home目录
+srchome: E:\project\tconnd文档
+#服务器发布Home目录
+dsthome: E:\python
+
+#tconnd project
+tconnd: 
+      -
+        src: TSF4G_TCONND_Maintenance.doc
+        dst: unifiedenroll\tconnd\TSF4G_TCONND_Maintenance.htm 
+        loc:
+           -
+             - 主页
+             - index.htm
+           -
+             - 统一登录组件
+             - unifiedenroll.htm  
+           -
+             - 网络接入组件(tconnd)
+             - unifiedenroll\tconnd.htm
+      -
+        src: TSF4G_TCONND_Develop.doc
+        dst: unifiedenroll\tconnd\TSF4G_TCONND_Develop.htm
+        loc: 
+           -           
+             - 主页
+             - index.htm
+           -
+             - 统一登录组件
+             - unifiedenroll.htm  
+           -
+             - 网络接入组件(tconnd)
+             - unifiedenroll\tconnd.htm
+      -
+        src: TSF4G_TCONND_性能测试数据.doc
+        dst: unifiedenroll\tconnd\TSF4G_TCONND_Performance.htm
+        loc: 
+           -           
+             - 主页
+             - index.htm
+           -
+             - 统一登录组件
+             - unifiedenroll.htm  
+           -
+             - 网络接入组件(tconnd)
+             - unifiedenroll\tconnd.htm
+      -
+        src: TSF4G_TCONND_FAQ.doc
+        dst: unifiedenroll\tconnd\TSF4G_TCONND_FAQ.htm
+        loc: 
+           -           
+             - 主页
+             - index.htm
+           -
+             - 统一登录组件
+             - unifiedenroll.htm  
+           -
+             - 网络接入组件(tconnd)
+             - unifiedenroll\tconnd.htm
+                  
+           
+
+

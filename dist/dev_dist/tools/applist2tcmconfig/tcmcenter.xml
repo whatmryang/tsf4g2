@@ -1,0 +1,146 @@
+<?xml version="1.0" ?>
+<tcmcenter AddrTemple="world:8.zone:8.function:8.instance:8" BussinessID="12" CenterdAddr="1.1.1" ConfigBaseDir="../conf/confcreated" ConfigSoName="../lib/config_test.so" TconndAddr="1.3.12">
+	<cluster AutoTimeGap="30" OpTimeout="5" WorkPath="/data/mickey/tsf4g_dev_install/mmog_deps/tsf4g_install/apps/">
+				
+		<world>
+			
+			
+			<zone>
+				
+
+			
+			</zone>
+			
+		
+		</world>
+		<Proc Agrs="--tlogconf=../../../../../mmog_run/etc/martsvr/martsvr_log.xml  --conf-file=../../../../../mmog_run/etc/martsvr/martsvr.xml" ConfigFileName="martsvr.xml" ConfigPath="../../../../../mmog_run/etc/martsvr/" FuncID="2" FuncName="mart_tmartsvr" ProcName="tmartsvr" WorkPath="tmart/martsvr" enable="true"/>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tnamesvr/tnamesvr.xml --tlogconf=../../../../../mmog_run/etc/tnamesvr/tnamesvr_log.xml  --metabase-key=2201" ConfigFileName="tnamesvr.xml" ConfigPath="../../../../../mmog_run/etc/tnamesvr/" FuncID="3" FuncName="namesvr_tnamesvr" ProcName="tnamesvr" WorkPath="tnamesvr/namesvr" enable="true"/>
+		<Proc Agrs="--tlogconf=../../../../../mmog_run/etc/tconnd/tconnd_log.xml --conf-file=../../../../../mmog_run/etc/tconnd/tconnd.xml --log-level 1000000 " ConfigFileName="tconnd.xml" ConfigPath="../../../../../mmog_run/etc/tconnd/" FuncID="4" FuncName="tconnd_tconnd" ProcName="tconnd" WorkPath="tconnd/bin"/>
+		<Proc Agrs="--conf-file=../../etc/gamesvr/gamesvrd.xml --tlogconf=../../etc/gamesvr/gamesvrd_log.xml  --metabase-key=2201 " ConfigFileName="gamesvrd.xml" ConfigPath="../../etc/gamesvr/" FuncID="5" FuncName="zone_gamesvrd" ProcName="gamesvrd" WorkPath="../../../mmog_run/bin/gamesvr/"/>
+		<Proc Agrs="stop" ConfigFileName="client.xml" ConfigPath="etc/" Flag="stop" FuncID="6" FuncName="client1_client1" ProcName="client" WorkPath="../../../mmog_run/bin/client1/"/>
+		<Proc Agrs="stop" ConfigFileName="client.xml" ConfigPath="etc/" Flag="stop" FuncID="7" FuncName="client2_client2" ProcName="client" WorkPath="../../../mmog_run/bin/client2/"/>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tormsvr/tormsvr.xml --tlogconf=../../../../../mmog_run/etc/tormsvr/tormsvr_log.xml --metabase-key=2201 " ConfigFileName="tormsvr.xml" ConfigPath="../../../../../mmog_run/etc/tormsvr/" FuncID="8" FuncName="zonetorm_tormsvr" ProcName="tormsvr" WorkPath="torm/bin" enable="true">
+			
+		
+			<!-- reletive dir to tsf4g_dev_install_home -->
+			
+			
+			<db dir="../mmog_run/etc/tormsvr/" name="xyz_db">
+					
+				
+				<createSql name="namesvr" script="role_info.sql"/>
+				
+				
+				<createSql name="mailsvr" script="mail_info.sql"/>
+				
+				
+				<createSql name="xyz" script="xyz_create_table.sql"/>
+				
+				
+				<createSql name="role_name" script="role_name.sql"/>
+				
+			
+			</db>
+			
+		
+		
+		</Proc>
+		<Proc Agrs="--tlogconf=../../../../../mmog_run/etc/mailsvr/mailsvr_log.xml --conf-file=../../../../../mmog_run/etc/mailsvr/mailsvr.xml --metabase-key=2201 " ConfigFileName="mailsvr.xml" ConfigPath="../../../../../mmog_run/etc/mailsvr/" FuncID="9" FuncName="mailsvr_mailsvr" ProcName="mailsvr" WorkPath="mail/mailsvr" enable="true"/>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tcus/tconnd_cus.xml --tlogconf=../../../../../mmog_run/etc/tconnd/tconnd_cus_log.xml" ConfigFileName="tconnd_cus.xml" ConfigPath="../../../../../mmog_run/etc/tcus/" FuncID="10" FuncName="tcussvr_tconnd_cus" ProcName="tconnd" WorkPath="/tconnd/bin">
+			
+			
+			<BindIP name="cusconnd" type="innerIP"/>
+			
+		
+		</Proc>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tcus/versionserver.xml" ConfigFileName="versionserver.xml" ConfigPath="../../../../../mmog_run/etc/tcus/" FuncID="11" FuncName="tcussvr_versionserver" ProcName="versionserver" WorkPath="/tcus/bin"/>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tdir/tconnd_dir.xml --tlogconf=../../../../../mmog_run/etc/tdir/tconnd_dir_log.xml" ConfigFileName="tconnd_dir.xml" ConfigPath="../../../../../mmog_run/etc/tdir/" FuncID="12" FuncName="tdirsvr_tconnd_dir" ProcName="tconnd" WorkPath="/tconnd/bin">
+			
+			
+			<BindIP name="dirconnd" type="innerIP"/>
+			
+		
+		</Proc>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tdir/tconnd_udp.xml --tlogconf=../../../../../mmog_run/etc/tdir/tconnd_udp_log.xml" ConfigFileName="tconnd_udp.xml" ConfigPath="../../../../../mmog_run/etc/tdir/" FuncID="13" FuncName="tdirsvr_tconnd_dir_udp" ProcName="tconnd" WorkPath="/tconnd/bin">
+				
+			
+			<BindIP name="udpconnd" type="innerIP"/>
+			
+		
+		</Proc>
+		<Proc Agrs="--conf-file=../../../../../mmog_run/etc/tdir/tdir_data_level3.xml --tlogconf=../../../../../mmog_run/etc/tdir/tdir_svrd_log.xml --sys-file=../../../../../mmog_run/etc/tdir/tdir.cfg --tdr-file=../../../../../mmog_run/etc/tdir/tdir_def_level3.tdr " ConfigFileName="tdir_data_level3.xml#tdir.cfg" ConfigPath="../../../../../mmog_run/etc/tdir/" FuncID="14" FuncName="tdirsvr_tdir_svrd" ProcName="tdir_svrd" WorkPath="/tdir/bin"/>
+	</cluster>
+	<ProcGroup Layer="cluster" Name="mart">
+		<Proc FuncName="mart_tmartsvr"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="namesvr">
+		<Proc FuncName="namesvr_tnamesvr"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="tconnd">
+		<Proc FuncName="tconnd_tconnd"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="zone">
+		<Proc FuncName="zone_gamesvrd"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="client1">
+		<Proc FuncName="client1_client1"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="client2">
+		<Proc FuncName="client2_client2"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="zonetorm">
+		<Proc FuncName="zonetorm_tormsvr"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="mailsvr">
+		<Proc FuncName="mailsvr_mailsvr"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="tcussvr">
+		<Proc FuncName="tcussvr_tconnd_cus"/>
+		<Proc FuncName="tcussvr_versionserver"/>
+	</ProcGroup>
+	<ProcGroup Layer="cluster" Name="tdirsvr">
+		<Proc FuncName="tdirsvr_tconnd_dir"/>
+		<Proc FuncName="tdirsvr_tconnd_dir_udp"/>
+		<Proc FuncName="tdirsvr_tdir_svrd"/>
+	</ProcGroup>
+	<HostTab>
+		<Host InnerIP="127.0.0.1" Name="localhost"/>
+	</HostTab>
+	<ClusterDeploy>
+				
+		<world ID="12">
+			
+			
+			<zone ID="2">
+				
+			
+			</zone>
+			
+		
+			<DeloyGroup Group="mart" Host="localhost"/>
+			<DeloyGroup Group="namesvr" Host="localhost"/>
+			<DeloyGroup Group="tconnd" Host="localhost"/>
+			<DeloyGroup Group="zone" Host="localhost"/>
+			<DeloyGroup Group="client1" Host="localhost"/>
+			<DeloyGroup Group="client2" Host="localhost"/>
+			<DeloyGroup Group="zonetorm" Host="localhost"/>
+			<DeloyGroup Group="mailsvr" Host="localhost"/>
+			<DeloyGroup Group="tcussvr" Host="localhost"/>
+			<DeloyGroup Group="tdirsvr" Host="localhost"/>
+		</world>
+	</ClusterDeploy>
+	<TbusConf BussinessID="0" ChannelSize="204800" GCIMShmKey="2204" GRMShmKey="2205" TbusdServicePort="10204">
+		<Channel Mask="0.0.0.0" ProcSet1="tcussvr_tconnd_cus" ProcSet2="tcussvr_versionserver"/>
+		<Channel Mask="0.0.0.0" ProcSet1="tdirsvr_tconnd_dir" ProcSet2="tdirsvr_tdir_svrd"/>
+		<Channel Mask="0.0.0.0" ProcSet1="tdirsvr_tconnd_dir_udp" ProcSet2="tdirsvr_tdir_svrd"/>
+		<Channel Mask="0.0.0.0" ProcSet1="namesvr_tnamesvr" ProcSet2="zone_gamesvrd"/>
+		<Channel Mask="0.0.0.0" ProcSet1="zone_gamesvrd" ProcSet2="tconnd_tconnd"/>
+		<Channel Mask="0.0.0.0" ProcSet1="zone_gamesvrd" ProcSet2="mart_tmartsvr"/>
+		<Channel Mask="0.0.0.0" ProcSet1="zone_gamesvrd" ProcSet2="zonetorm_tormsvr"/>
+		<Channel Mask="0.0.0.0" ProcSet1="namesvr_tnamesvr" ProcSet2="zonetorm_tormsvr"/>
+		<Channel Mask="0.0.0.0" ProcSet1="zone_gamesvrd" ProcSet2="mailsvr_mailsvr"/>
+		<Channel Mask="0.0.0.0" ProcSet1="zone_gamesvrd" ProcSet2="tcussvr_versionserver"/>
+		<Channel Mask="0.0.0.0" ProcSet1="zone_gamesvrd" ProcSet2="tdirsvr_tdir_svrd"/>
+		<Channel Mask="0.0.0.0" ProcSet1="mailsvr_mailsvr" ProcSet2="zonetorm_tormsvr"/>
+	</TbusConf>
+</tcmcenter>

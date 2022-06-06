@@ -1,0 +1,10 @@
+此目录包含两个程序：
+c_program目录中的是一个c程序，
+as3_program目录中的是一个as3程序，
+这两个程序用于测试tdr工具生成的as3语言的类文件的正确性。
+
+使用方法：
+1, 编译并启动c_program目录下生成的server4as程序，此程序监听在2048端口。
+2, 使用flush builder创建名称为InterTest的actionscript项目，解压src.rar到项目的src对应的目录。
+3, 修改InterTest.as文件中connectByHost的IP参数为server4as程序运行的机器IP，启动项目即可测试。
+

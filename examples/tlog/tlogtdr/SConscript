@@ -1,0 +1,16 @@
+import os
+Import('buildenv')
+
+buildenv.xml2h('tlogtest_conf_desc.xml')
+buildenv.xml2c('tlogtest_conf_desc','tlogtest_conf_desc.xml')
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+if buildenv.isLinux():
+	buildenv.buildExamples("tlog","tlogtest",src_local,a_tsf4g_static_lib='tsf4g',LIBS=' pthread')
+else:
+	buildenv.buildExamples("tlog","tlogtest",src_local,CPPDEFINES=Split('_TSF4G_LARGE_LIB_'),a_tsf4g_static_lib='tsf4g')
+
+Return('src_local')
+

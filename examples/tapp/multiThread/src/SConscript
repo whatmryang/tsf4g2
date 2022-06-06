@@ -1,0 +1,6 @@
+Import("buildenv")
+
+SConscript("protocol/SConscript")
+SConscript("mtexample/SConscript")
+SConscript("client/SConscript")
+

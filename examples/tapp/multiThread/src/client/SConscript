@@ -1,0 +1,15 @@
+Import("buildenv")
+
+import os
+buildenv.xml2h('mtclient_conf_desc.xml')
+buildenv.xml2c('mtclient_conf_desc','mtclient_conf_desc.xml')
+
+
+src = Glob('*.c')
+
+if buildenv._isLinux:
+	buildenv.buildExec('mtclient',src,a_tsf4g_static_lib='tsf4g',LIBS='pthread')
+	Install('../../bin/','mtclient')
+else:
+	buildenv.buildExec('mtclient',src,a_tsf4g_static_lib='tsf4g',CPPDEFINES=['_TSF4G_LARGE_LIB_'])
+	Install('../../bin/','mtclient.exe')

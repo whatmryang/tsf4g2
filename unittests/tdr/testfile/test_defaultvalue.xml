@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="tdrunittest"  version="3">
+
+<macrosgroup name="DEFAULT" >
+	<macro name="DEFAULT_VALUE1" value="1" />
+	<macro name="DEFAULT_VALUE2" value="-1" />
+	<macro name="DEFAULT_VALUE3" value="100" />
+</macrosgroup>
+
+<macrosgroup name="test" >
+	<macro name="SET_VALUE1" value="1" />
+	<macro name="SET_VALUE2" value="-1" />
+	<macro name="SET_VALUE3" value="100" />
+</macrosgroup>
+
+<macro name="DEFAULT_INT_VALUE" value="100" />
+
+<struct name="AllBaseTypeData" version="1" >
+	<entry name="charDate" type="tinyint" defaultvalue="-66" />
+	<entry name="ucharDate" type="tinyuint" defaultvalue="0xee" />
+	<entry name="shortDate" type="smallint" defaultvalue="-6688" />
+	<entry name="ushortDate" type="smalluint" defaultvalue="0x8fde" />
+	<entry name="intDate" type="int" defaultvalue="-2146290688" />
+	<entry name="uintDate" type="uint" defaultvalue="0xF7236000" />
+	<entry name="bigintDate" type="bigint" defaultvalue="-5146290688" />
+	<entry name="biguintDate" type="biguint" defaultvalue="0x16E58F400" />
+	<entry name="floatDate" type="float" defaultvalue="34.678" />
+	<entry name="doubleDate" type="double" defaultvalue="67.67890878" />
+	<entry name="datetimeDate" type="datetime" defaultvalue="2007-06-13 11:53:43" />
+	<entry name="dateDate" type="date" defaultvalue="2007-09-13" />
+	<entry name="timeDate" type="time" defaultvalue="-879:07:34" />
+	<entry name="ipDate" type="ip" defaultvalue="192.168.1.66" />
+	<entry name="wcharDate" type="wchar" defaultvalue="腾" />
+	<entry name="byteDate" type="byte" defaultvalue="0xFE" />
+	<entry name="stringDate" type="string" size="32" defaultvalue="hello" />
+	<entry name="wstringDate" type="wstring" size="32" defaultvalue="hell你好o" />
+	<entry name="macrodefault" type="int" bindmacrosgroup="DEFAULT" defaultvalue="VALUE2" version="2" />
+	<entry name="macrodefault1" type="int" bindmacrosgroup="DEFAULT" defaultvalue="DEFAULT_VALUE3"  version="2" />
+	<entry name="macrodefault3" type="int" bindmacrosgroup="DEFAULT" defaultvalue="8"  version="3" />
+	<entry name="macrodefault4" type="int" bindmacrosgroup="test" defaultvalue="8"  version="3" />
+	<entry name="macrodefault5" type="int" bindmacrosgroup="test" defaultvalue="SET_VALUE3"  version="3" />
+	<entry name="char" type="char"  defaultvalue="49"   />
+	<entry name="defaultint" type="int"  defaultvalue="DEFAULT_INT_VALUE"   />
+</struct>
+
+</metalib>

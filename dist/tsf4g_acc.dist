@@ -1,0 +1,85 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_dir_01_0001 "
+}
+
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+
+TSF4G_DIR=../
+TSF4G_DIR_RELEASE=tsf4g_tacc`date +%Y%m%d`.tgz
+TACC_HOME=tsf4g_tacc`date +%Y%m%d`
+
+echo "mkdir ${TACC_HOME}"
+mkdir -p ${TACC_HOME}
+mkdir -p ${TACC_HOME}/bin
+mkdir -p ${TACC_HOME}/cfg
+mkdir -p ${TACC_HOME}/include
+mkdir -p ${TACC_HOME}/lib
+mkdir -p ${TACC_HOME}/tools
+mkdir -p ${TACC_HOME}/example
+mkdir -p ${TACC_HOME}/docs
+
+
+
+
+echo "copy include files"
+cp  -rf ${TSF4G_DIR}/include/apps/taccapi/*.h  ${TACC_HOME}/include
+
+
+echo "copy tacc lib files"
+cp   ${TSF4G_DIR}/lib/libtaccsvrapi.*        ${TACC_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtacccliapi.*        ${TACC_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtaccapi.*           ${TACC_HOME}/lib/
+
+
+echo "copy bin"
+cp   ${TSF4G_DIR}/apps/tacc/bin/tconnd            ${TACC_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tacc/bin/taccsvr           ${TACC_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tacc/bin/tormsvr           ${TACC_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tacc/bin/*.sh              ${TACC_HOME}/bin/
+
+
+echo "copy cfg"
+cp   ${TSF4G_DIR}/apps/tacc/cfg/*.tdr             ${TACC_HOME}/cfg/
+cp   ${TSF4G_DIR}/apps/tacc/cfg/*.xml             ${TACC_HOME}/cfg/
+
+
+echo "copy tools"
+cp ${TSF4G_DIR}/apps/tacc/tools/*                                   ${TACC_HOME}/tools/
+cp ${TSF4G_DIR}/tools/tmng                                           ${TACC_HOME}/tools/  
+cp ${TSF4G_DIR}/tools/tmeta2tab                                          ${TACC_HOME}/tools/  
+cp ${TSF4G_DIR}/tools/tdr                                          ${TACC_HOME}/tools/  
+cp ${TSF4G_DIR}/tools/tbusmgr                                          ${TACC_HOME}/tools/  
+
+echo "copy docs"
+cp  ${TSF4G_DIR}/docs/apps/tacc/*   ${TACC_HOME}/docs/
+
+
+echo "copy sample"
+
+cp   -rf ${TSF4G_DIR}/apps/tacc/example            ${TACC_HOME}/
+
+
+echo "copy installshell"
+cp  ./tsf4g_acc.install ${TACC_HOME}/
+cp  ./tsf4g_acc.dependency ${TACC_HOME}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TACC_HOME}/version
+
+find ${TACC_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_DIR_RELEASE} ${TACC_HOME}
+rm -rf ${TACC_HOME}

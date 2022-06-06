@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Layer1Node version="1">
+	<BaseData>
+		<Id>0.0.0.0</Id>
+		<Name>MMOGXYZ-DIR-TREE </Name>
+		<BranchNumber>8</BranchNumber>
+		<Status>1</Status>
+		<Attr>0</Attr>
+	</BaseData>
+	<AppData>
+		<Attr>0</Attr>
+	</AppData>
+	<TreeDepth>3</TreeDepth>
+	
+	<!-- level1:1 begin-->  
+	<AllBranchNodes>
+			<BaseData>
+				<Id>1.2.3.4</Id>
+				<Name>MMOGXYZ-BAND-1</Name>
+				<BranchNumber>12</BranchNumber>
+				<Status>1</Status>
+				<Attr>1</Attr>
+			</BaseData>
+			
+			<AppData>
+				<Attr>1</Attr>
+			</AppData>
+			
+			<!-- level2.1.1  --> 
+			<AllBranchNodes>
+				<GameSvrID>1.2.3.5</GameSvrID>
+				<Name>MMOGXYZ-BAND-1-ZONE-1 </Name>
+				<Status>3</Status>
+				<Attr>4</Attr>
+				
+				<Base>
+					<MaxOnline>2500</MaxOnline>
+					<CurrentOnline>0</CurrentOnline>
+					<ConnectUrl>127.0.0.1:8500</ConnectUrl>
+				</Base>
+				
+				<AppData>
+					<Attr>1</Attr>
+				</AppData>
+			</AllBranchNodes>
+			
+			<!-- level2:1.2 -->
+			<AllBranchNodes>
+				<GameSvrID>##GAMESVRD##</GameSvrID>
+				<Name>MMOGXYZ-BAND-1-ZONE-2 </Name>
+				<Status>1</Status>
+				<Attr>4</Attr>
+				
+				<Base>
+					<MaxOnline>2500</MaxOnline>
+					<CurrentOnline>0</CurrentOnline>
+					<ConnectUrl>##IP_ZONECONND##:##PORT_ZONETCONNDPORT##</ConnectUrl>
+				</Base>
+				
+				<AppData>
+					<Attr>1</Attr>
+				</AppData>
+			</AllBranchNodes> 
+	</AllBranchNodes>
+	
+</Layer1Node>

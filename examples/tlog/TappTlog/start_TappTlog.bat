@@ -1,0 +1,1 @@
+TappTlog.exe  --conf-file TappTlog.xml --log-file TappTlog -D start

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- This file is for tbus routes tool application-->
+
+<metalib tagsetversion="1" name="TbusTest" version="1.0">
+
+  <struct name="TbusTest" version="1.0">
+    <entry name="RoutesShmKey" type="uint" />
+    <entry name="TotalCnt" type="uint" />
+  </struct>
+
+</metalib>
+

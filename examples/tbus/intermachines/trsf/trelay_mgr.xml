@@ -1,0 +1,21 @@
+<RelayMnger>
+  <RelayShmKey>6101</RelayShmKey>
+
+  <Relays>
+    <Addr>0.0.0.1</Addr>  <!-- ip format: xxx.xxx.xxx.xxx, primary key, should be unique in share memory -->
+    <Priority>8</Priority>
+    <MConn>tcp://127.0.0.1:25001</MConn>  <!-- master connection information -->
+    <Strategy>1</Strategy> <!-- strategy between master and slave connection, not implemented yet -->
+    <Desc>Some description for this relay</Desc>
+  </Relays> 
+  
+ <Relays>
+    <Addr>0.0.0.3</Addr>  <!-- ip format: xxx.xxx.xxx.xxx, primary key, should be unique in share memory -->
+    <Priority>8</Priority>
+    <MConn>tcp://127.0.0.1:27001</MConn>  <!-- master connection information -->
+    <Strategy>1</Strategy> <!-- strategy between master and slave connection, not implemented yet -->
+    <Desc>Some description for this relay</Desc>
+  </Relays>  
+
+</RelayMnger>
+

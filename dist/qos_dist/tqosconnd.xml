@@ -1,0 +1,26 @@
+<tqosconndconf version="10">
+    <QosConnectID>1.0.113.1</QosConnectID>	
+    <BindIP>10.1.44.60</BindIP>
+	<BindPort>8000</BindPort>
+	<GroupID>1</GroupID>
+	<GameSvrList type="QosGameSvrList">
+		<Mask> 255.255.255.0</Mask>
+	</GameSvrList>	
+	<ConndIPListCfgPath>../../cfg/tqosconnd/tqos_connd_iplist.xml</ConndIPListCfgPath>
+    <IpCityCfgPath>../../cfg/tqosconnd/city_ip_region.txt</IpCityCfgPath>
+    <IpISPCfgPath>../../cfg/tqosconnd/IPDatabase.cfg</IpISPCfgPath>
+	<Spdtst type="Spdtst">
+		<HandleNum>1</HandleNum>
+		<SpdtstHandle type="SpdtstHandle">
+			<SpdHandleID>1</SpdHandleID>
+			<HandleDesc>default spd data handle</HandleDesc>
+			<BusinessID>0</BusinessID>
+			<Aggregation>3</Aggregation>
+			<TimeSlotNum>8</TimeSlotNum>
+			<TimeSlotInterval>600</TimeSlotInterval>
+			<SoPath>../../cfg/tqosconnd/tqos_spd_result.so</SoPath>
+			<SpdResultFuncName>tqos_spd_result</SpdResultFuncName>
+			<StatLogPathPatern>./tqos_log/spdtst/default/%F/stat-%F-%H.dat</StatLogPathPatern>
+		</SpdtstHandle>
+	</Spdtst>
+</tqosconndconf>

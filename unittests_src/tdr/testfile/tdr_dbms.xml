@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib name="tdrdb"  version="4" tagsetversion="1" >
+
+<macro name="NAME_LEN" value="32" />
+<macro name="DBMS_CONNECTION_INFO_LEN" value="256" />
+<macro name="DBMS_DATABASE_NAME_LEN" value="64" />
+<macro name="DBMS_USER_LEN" value="256" />
+<macro name="DBMS_PASSWORD_LEN" value="64" />
+  <macro name="TDR_DBMS_SOCK_FILE_LEN" value="256" />
+
+<struct name="DBMSInfo" version ="1" >
+	<entry name="MajorVersion" type="int" />
+	<entry name="MinVersion" type="int" />
+	<entry name="ReconnectOpt" type="int" defaultvalue="1" />
+	<entry name="DBMSName" type="string" size="NAME_LEN" />
+	<entry name="DBMSConnectionInfo" type="string" size="DBMS_CONNECTION_INFO_LEN" />
+	<entry name="DBMSCurDatabaseName" type="string" size="DBMS_DATABASE_NAME_LEN" />
+	<entry name="DBMSUser" type="string" size="DBMS_USER_LEN" />
+	<entry name="DBMSPassword" type="string" size="DBMS_PASSWORD_LEN" />
+  <entry name="DBMSSock" type="string" size="TDR_DBMS_SOCK_FILE_LEN" />
+</struct>
+
+</metalib>

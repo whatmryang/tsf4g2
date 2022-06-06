@@ -1,0 +1,33 @@
+#  @file $RCSfile: ex_svr_makefile,v $
+#  general description of this module
+#  $Id: ex_svr_makefile,v 1.2 2008-11-21 06:46:45 kent Exp $
+#  @author $Author: kent $
+#  @date $Date: 2008-11-21 06:46:45 $
+#  @version $Revision: 1.2 $
+#  @note Editor: Vim 6.1, Gcc 4.0.1, tab=4
+#  @note Platform: Linux
+#
+
+APP_NAME=tqos_gamesvr_ex
+
+APP_OBJ=tqos_gamesvr_ex.o
+
+TQOS_INCLUDE = -I ../../include  
+TQOS_CFLAGS = -g  $(TQOS_INCLUDE)
+TQOS_LIB = -L ../../lib ../../lib/libtqosapi.a  ../../lib/libtapp.a ../../lib/libtbus.a ../../lib/libtloghelp.a ../../lib/libtlog.a ../../lib/libcomm.a ../../lib/libtmng.a  ../../lib/libpal.a ../../lib/libtdr_dbms_xml.a ../../lib/libtagentapi.a ../../lib/libscew.a ../../lib/libexpat.a  -lm  
+
+.PHONY: all clean 
+
+all: $(APP_NAME)
+
+%.o: %.c
+	$(CC) -c $(TQOS_CFLAGS) $<
+	
+$(APP_NAME): $(APP_OBJ)
+	$(CC) -O3 -o $(APP_NAME) $(TQOS_CFLAGS)  $(DEBUG) $^ $(TQOS_LIB) 
+
+clean:
+	$(RM) *.o  
+	$(RM) $(APP_NAME)
+	
+

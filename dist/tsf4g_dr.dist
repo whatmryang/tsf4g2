@@ -1,0 +1,71 @@
+#/bin/bash
+TSF4G_DIR=~/tsf4g
+TSF4G_DR_RELEASE=tsf4g_dr`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g
+mkdir tmpdeploy/tsf4g/include
+mkdir tmpdeploy/tsf4g/include/comm
+mkdir tmpdeploy/tsf4g/include/tdr
+mkdir tmpdeploy/tsf4g/include/pal
+mkdir tmpdeploy/tsf4g/deps/
+mkdir tmpdeploy/tsf4g/deps/CUnit
+mkdir tmpdeploy/tsf4g/deps/expat
+mkdir tmpdeploy/tsf4g/deps/scew
+mkdir -p tmpdeploy/tsf4g/lib_src/tdr
+mkdir -p tmpdeploy/tsf4g/docs/tdr
+mkdir tmpdeploy/tsf4g/lib
+mkdir tmpdeploy/tsf4g/tools
+mkdir -p tmpdeploy/tsf4g/example/tdr
+mkdir -p tmpdeploy/tsf4g/win32/vc8
+
+echo "cp tsf4g include"
+cp  ${TSF4G_DIR}/include/comm/*  tmpdeploy/tsf4g/include/comm/
+cp ${TSF4G_DIR}/include/tdr/* tmpdeploy/tsf4g/include/tdr/
+cp ${TSF4G_DIR}/include/pal/* tmpdeploy/tsf4g/include/pal
+
+echo "cp dr deps"
+cp -r ${TSF4G_DIR}/deps/CUnit/* tmpdeploy/tsf4g/deps/CUnit
+cp -r ${TSF4G_DIR}/deps/expat/* tmpdeploy/tsf4g/deps/expat
+cp -r ${TSF4G_DIR}/deps/scew/* tmpdeploy/tsf4g/deps/scew/
+
+echo "cp dr"
+cp -r ${TSF4G_DIR}/lib_src/tdr/* tmpdeploy/tsf4g/lib_src/tdr
+
+
+echo "cp tsf4g docs"
+cp ${TSF4G_DIR}/docs/tdr/*  tmpdeploy/tsf4g/docs/tdr/
+ 
+
+echo "cp Makefile"
+cp ${TSF4G_DIR}/Makefile.dr tmpdeploy/tsf4g/
+cp ${TSF4G_DIR}/tsf4g.mk  tmpdeploy/tsf4g/
+
+echo "cp example"
+cp -r ${TSF4G_DIR}/lib/example/tdr  tmpdeploy/tsf4g/example/tdr
+
+cp -r ${TSF4G_DIR}/win32/vc8/* tmpdeploy/tsf4g/win32/vc8
+
+cd tmpdeploy
+find . -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_DR_RELEASE} tsf4g 
+mv ${TSF4G_DR_RELEASE}   ../
+cd ../
+rm -rf tmpdeploy
+

@@ -1,0 +1,2 @@
+memlog.exe
+pause

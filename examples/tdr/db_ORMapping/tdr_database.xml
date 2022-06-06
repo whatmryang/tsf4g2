@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib name="itemdb"  version="3" tagsetversion="1" >
+
+    <!--  本示例文档定义了数据存储于数据库中的描述 -->
+
+    <macro name="NAME_LEN" value="128" />
+    <macro name="DBMS_CONNECTION_INFO_LEN" value="256" />
+    <macro name="DBMS_DATABASE_NAME_LEN" value="64" />
+    <macro name="DBMS_USER_LEN" value="256" />
+    <macro name="DBMS_PASSWORD_LEN" value="64" />
+    <macro name="TDR_DBMS_SOCK_FILE_LEN" value="256" />
+
+    <struct name="DBMSInfo" version ="1" >
+        <entry name="MajorVersion" type="int" />
+        <entry name="MinVersion" type="int" />
+        <entry name="ReconnectOpt" type="int" defaultvalue="1" />
+        <entry name="DBMSName" type="string" size="NAME_LEN" />
+        <entry name="DBMSConnectionInfo" type="string" size="DBMS_CONNECTION_INFO_LEN" />
+        <entry name="DBMSCurDatabaseName" type="string" size="DBMS_DATABASE_NAME_LEN" />
+        <entry name="DBMSUser" type="string" size="DBMS_USER_LEN" />
+        <entry name="DBMSPassword" type="string" size="DBMS_PASSWORD_LEN" />
+        <entry name="DBMSSock" type="string" size="TDR_DBMS_SOCK_FILE_LEN" />
+    </struct>
+
+
+    <macro name="MAX_GAME_NUM" value="256" />
+    <macro name="USER_TABLE_SPLIT_FACTOR" value="2" />
+    <macro name="ITEM_TABLE_SPLIT_FACTOR" value="4" />
+
+    <struct name="GameItem" version="1" primarykey=",gameid,itemid,,," splittablefactor=" ITEM_TABLE_SPLIT_FACTOR" splittablekey="gameid" >
+        <entry name="gameid" type="uint" />
+        <entry name="itemid" type="uint" />
+        <entry name="buytime" type="Datetime" />
+        <entry name="validtime" type="Datetime" />
+    </struct>
+
+
+    <struct name="UserItemInfo" version="1" primarykey="uin,"  splittablefactor="USER_TABLE_SPLIT_FACTOR" splittablekey ="uin" splittablerule=" modulebyfactor" >
+        <entry name="uin" type="uint"  />
+        <entry name="money" type="bigint" defaultvalue="10000" />
+        <entry name="longnum" type="int" />
+        <entry name="OffLineNum" type="int" />
+        <entry name="lastlogintime" type="Datetime" />
+        <entry name="items" type="GameItem"   extendtotable="true" />
+    </struct>
+
+    <struct name="GameInfo" version="2" >
+        <entry name="gameid" type="int" />
+        <entry name="gamepoint" type="int" />
+        <entry name="reserve" type="byte" count="247" />
+    </struct>
+
+    <struct name="AttachInfo" version="2" >
+        <entry name="level" type="int" />
+        <entry name="age" type="int" />
+        <entry name="reserver" type="int" count="4" version="3" />
+    </struct>
+
+    <struct name="TestExtendTable" version="2" primarykey="item.uin,item.items.gameid,item.items.itemid,seq">
+        <entry name="seq" type="int" unique="true" version="3"/>
+        <entry name="UserAttachInfo" type="AttachInfo" extendtotable="true"/>
+        <entry name="game" type="GameInfo" />
+        <entry name="item" type="UserItemInfo" extendtotable="true"/>
+
+    </struct>
+
+    <struct name="primarykey"  version="2">
+        <entry name="uin" type="uint" />
+        <entry name="gameid" type="uint" />
+        <entry name="itemid" type="uint" />
+        <entry name="seq" type="int" unique="true" />
+    </struct>
+
+    <struct name="UserlonginInfo" dependonstruct="TestExtendTable" version="2">
+        <entry name="longnum" type="int" />
+        <entry name="OffLineNum" type="int" />
+        <entry name="lastlogintime" type="Datetime" />
+        <entry name="pri" type="primarykey" extendtotable="true" />
+    </struct>
+
+
+</metalib>

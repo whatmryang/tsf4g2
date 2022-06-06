@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include ];then
+  mkdir $TSF4G_INSTALL_HOME/include
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/proxy ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/proxy
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/proxy/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/proxy/bin
+fi
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/proxy/conf ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/proxy/conf
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tproxy/ ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/tproxy
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/proxy/plugin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/proxy/plugin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/proxy/docs ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/proxy/docs
+fi
+
+echo "Install proxy...."
+cp -rf ./version             $TSF4G_INSTALL_HOME/apps/proxy/
+cp -rf ./bin/       $TSF4G_INSTALL_HOME/apps/proxy/
+cp -rf ./conf/       $TSF4G_INSTALL_HOME/apps/proxy/
+cp -rf ./include/* ${TSF4G_INSTALL_HOME}/include/apps/
+cp -rf ./plugin/   ${TSF4G_INSTALL_HOME}/apps/proxy/
+cp -rf ./docs/   ${TSF4G_INSTALL_HOME}/apps/proxy/
+
+echo "Install proxy  done"

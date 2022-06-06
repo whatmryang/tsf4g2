@@ -1,0 +1,55 @@
+#  @file $RCSfile: Makefile.real,v $
+#    Makefile for tsf4g-tbus relay module
+#  $Id: Makefile.real,v 1.12 2009-08-17 06:42:21 jacky Exp $
+#  @author $Author: jacky $
+#  @date $Date: 2009-08-17 06:42:21 $
+#  @version $Revision: 1.12 $
+#  @note Editor: Vim 6.3, Gcc 4.0.2, tab=4
+#  @note Platform: Linux
+
+include ../../tsf4g.mk
+
+TBUS_RELAY_CFILE=$(wildcard *.c)
+TBUS_RELAY_OBJ=$(TBUS_RELAY_CFILE:.c=.o)
+TBUSD=tbusd
+TBUSD_XML=tbusd.xml
+TBUSD_LOG_XML= tlog.xml
+
+CINC += -I../
+CINC += -I$(TSF4G_LIBSRC)
+
+
+DEP_LIBS=$(TSF4G_LIB)/libtsf4g.a -Wl,-Bstatic -lscew -lexpat Wl,-Bdynamic  -lgcov - $(LIBS)
+
+
+.PHONY: all clean
+
+all:	$(TBUSD)
+
+
+-include $(TBUS_RELAY_CFILE:.c=.d)
+
+%.d: %.c
+	$(CC) -MM $(CFLAGS) $< -o $@
+
+%.o: %.c %.d
+	$(CC) -c $(CFLAGS) $(DEBUG) $<
+
+$(TBUSD): $(TBUS_RELAY_OBJ)
+	echo $(RELAY_MGR)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDPATH) $(DEP_LIBS)
+	@/bin/cp $(TBUSD) $(TSF4G_SERVICES)/tbus_service/$(TBUSD)
+#@/bin/cp $(TBUSD_XML)  $(TSF4G_SERVICES)/tbus_service/$(TBUSD_XML)
+	#@/bin/cp $(TBUSD_LOG_XML)  $(TSF4G_SERVICES)/tbus_service/$(TBUSD_LOG_XML)
+
+
+
+
+
+clean:
+	$(RM) core *.o  *.d
+	$(RM) $(TBUSD) $(TSF4G_SERVICES)/tbus_service/$(TBUSD) $(TSF4G_SERVICES)/tbus_service/$(TBUSD_XML)
+	#$(RM) $(TBUSD) $(TSF4G_SERVICES)/tbus_service/$(TBUSD_LOG_XML)
+
+
+

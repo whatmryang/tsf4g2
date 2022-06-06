@@ -1,0 +1,67 @@
+<tconnd version="11">
+    <MaxFD>1024 </MaxFD>
+    <TDRList type="TDRList">
+        <Count>1 </Count>
+        <TDRs type="TDR">
+            <Name>default </Name>
+            <Path> ../../../../gamesvr/run/etc/protocol/xyz_proto.tdr</Path>
+        </TDRs>
+    </TDRList>
+    <PDUList type="PDUList">
+        <Count>1 </Count>
+        <PDUs type="PDU">
+            <Name>default </Name>
+            <UpSize> 65535 </UpSize>
+            <LenParsertype>PDULENPARSERID_BY_QQ </LenParsertype>
+            <LenParser type="PDULenParser">
+                <QQParser type="PDULenQQParser">
+                		<TDR>default </TDR>
+                		<SendPkg>CSPkg</SendPkg>
+                		<RecvPkg>CSPkg</RecvPkg>
+                    <CheckCltIP> 0 </CheckCltIP>
+                    <SigValidSec>1800</SigValidSec>
+                    <EncMethod>3</EncMethod>
+                    <AuthType>3</AuthType>
+                    <SvrSKeyLen>16</SvrSKeyLen>
+                    <SvrSKey>aaaabbbbccccdddd</SvrSKey>
+					<SvrSKey2Len>16</SvrSKey2Len>
+					<SvrSKey2>aaaabbbbccccdddd</SvrSKey2>
+                </QQParser>
+            </LenParser>
+        </PDUs>       
+    </PDUList>
+    <ListenerList type="ListenerList">
+        <Count>1 </Count>
+        <Listeners type="Listener">
+            <Name>default </Name>
+            <Url>tcp://127.0.0.1:8500?reuse=1 </Url>
+            <SendBuff>65535 </SendBuff>
+            <RecvBuff>65535 </RecvBuff>           
+        </Listeners>
+    </ListenerList>
+    <SerializerList type="SerializerList">
+        <Count>1 </Count>
+        <Serializers type="Serializer">
+            <Name>default </Name>
+            <Url>3.0.4.1 </Url>         
+        </Serializers>
+    </SerializerList>
+    <NetTransList type="NetTransList">
+        <Count>1 </Count>
+        <NetTrans type="NetTrans">
+            <Name>default </Name>
+            <UseTimeStamp>0 </UseTimeStamp>
+            <UseWaitQueue>0 </UseWaitQueue>
+            <QueueNotifyInterval>1 </QueueNotifyInterval>
+            <PDU>default </PDU>
+            <Listener>default </Listener>
+            <Serializer>default </Serializer>
+            <LisViewer> </LisViewer>
+            <SerViewer> </SerViewer>
+            <ConnLimit type="ConnLimit">             
+                <Permit>0 </Permit>
+                <Speed>0 </Speed>
+            </ConnLimit>        
+        </NetTrans>
+    </NetTransList>
+</tconnd>

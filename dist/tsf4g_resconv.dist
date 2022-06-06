@@ -1,0 +1,71 @@
+#/bin/bash
+TSF4G_HOME=../
+RESCONV_SRC=../apps/ResConvertBasedDR
+TSF4G_RESCONV_RELEASE=tsf4g_resconv`date +%Y%m%d`.tgz
+RESCONV_HOME=tsf4g_resconv`date +%Y%m%d`
+
+echo ${RESCONV_HOME}
+cp_dir()
+{
+		src_dir=$1
+		dst_dir=$2
+		cp -a ${src_dir}/* ${dst_dir}/
+		shift
+		shift
+		for i in "$@"
+		do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+		done	
+}
+
+#main()
+echo "mkdir ${RESCONV_HOME}"
+mkdir ${RESCONV_HOME}
+mkdir ${RESCONV_HOME}/examples
+mkdir ${RESCONV_HOME}/examples/uselibresloader
+mkdir ${RESCONV_HOME}/examples/VFileLoad
+mkdir ${RESCONV_HOME}/include
+mkdir ${RESCONV_HOME}/lib
+mkdir ${RESCONV_HOME}/win32_lib
+mkdir ${RESCONV_HOME}/bin
+mkdir ${RESCONV_HOME}/docs
+mkdir ${RESCONV_HOME}/tools
+
+
+
+
+echo "cp include files"
+cp  -rf ${RESCONV_SRC}/include/* ${RESCONV_HOME}/include/
+
+echo "cp lib files"
+cp   ${RESCONV_SRC}/lib/* ${RESCONV_HOME}/lib/
+cp   -rf ${RESCONV_SRC}/win32_lib/* ${RESCONV_HOME}/win32_lib/
+
+echo "cp bin"
+cp ${RESCONV_SRC}/bin/* ${RESCONV_HOME}/bin/
+
+
+echo "cp docs"
+cp  -rf ${RESCONV_SRC}/docs/TSF-G-Resloader-API.chm ${RESCONV_HOME}/docs
+cp  -rf ${RESCONV_SRC}/docs/TSF-G-表转换工具使用说明.doc ${RESCONV_HOME}/docs
+
+echo "cp example"
+cp  -rf ${RESCONV_SRC}/example/* ${RESCONV_HOME}/examples
+cp  ${RESCONV_SRC}/bin/ResConvert.exe.manifest ${RESCONV_HOME}/examples/develop/
+cp  ${RESCONV_SRC}/bin/ResConvert.exe ${RESCONV_HOME}/examples/develop/
+cp  -rf ${RESCONV_SRC}/testlibresloader/*  ${RESCONV_HOME}/examples/uselibresloader
+cp  -rf ${RESCONV_SRC}/VFileLoad/*  ${RESCONV_HOME}/examples/VFileLoad
+cp ./resconv_dist/makefile ${RESCONV_HOME}/examples/uselibresloader
+
+echo "cp tools"
+cp ${TSF4G_HOME}/tools/tdr ${RESCONV_HOME}/tools
+cp ${TSF4G_HOME}/tools/tdr.exe ${RESCONV_HOME}/tools
+
+
+find ${RESCONV_HOME} -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_RESCONV_RELEASE} ${RESCONV_HOME}
+rm -rf ${RESCONV_HOME}
+
+
+

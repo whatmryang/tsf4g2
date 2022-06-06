@@ -1,0 +1,110 @@
+# @file $RCSfile: Makefile.so,v $
+#  general description of this module
+#  $Id: Makefile.so,v 1.6 2009-09-16 06:38:00 flyma Exp $
+#  @author $Author: flyma $
+#  @date $Date: 2009-09-16 06:38:00 $
+#  @version 1.0
+#  @note Editor: Vim 6.1, Gcc 4.0.2, tab=4
+#  @note Platform: Linux
+
+include ../../tsf4g.mk
+include Makefile.pub
+
+
+TDR_OBJ_DIR=$(TSF4G_HOME)/.obj/lib/tdr
+TDR_SO_OBJ_DIR=$(TDR_OBJ_DIR)/so
+
+################################ libtdr.a ###################################
+TDR_SO_CFILE=$(wildcard *.c)
+TDR_SO_OBJ=$(addprefix $(TDR_SO_OBJ_DIR)/,$(subst .c,.o, ${TDR_SO_CFILE})) 
+TDR_SO_DEPS =  $(TDR_SO_OBJ:.o=.d)
+
+
+TDR_DBMS_WRAPPER_PATH = dbms
+TDR_DBMS_WRAPPER_CFILE = $(wildcard $(TDR_DBMS_WRAPPER_PATH)/*.c)
+TDR_DBMS_WRAPPER_OBJ =$(addprefix $(TDR_SO_OBJ_DIR)/,$(subst .c,.o, ${TDR_DBMS_WRAPPER_CFILE}))  
+
+TDR_XML_WRAPPER_PATH = xml_metalib
+TDR_XML_WRAPPER_CFILE = $(wildcard $(TDR_XML_WRAPPER_PATH)/*.c)
+TDR_XML_WRAPPER_OBJ = $(addprefix $(TDR_SO_OBJ_DIR)/,$(subst .c,.o, ${TDR_XML_WRAPPER_CFILE}))  
+
+
+
+
+TDR_CFLAGS = $(CFLAGS)  -I$(TSF4G_LIBSRC) -fPIC -lgcc
+
+MAKE_OBJ_PATH := $(shell mkdir -p $(TDR_OBJ_DIR) $(TDR_SO_OBJ_DIR) \
+	 $(TDR_SO_OBJ_DIR)/$(TDR_DBMS_WRAPPER_PATH) $(TDR_SO_OBJ_DIR)/$(TDR_XML_WRAPPER_PATH))
+
+
+DEPS = $(TDR_SO_OBJ:.o=.d) $(TDR_DBMS_WRAPPER_OBJ:.o=.d) $(TDR_XML_WRAPPER_OBJ:.o=.d)
+
+ 
+TDR_SO=libtdr.so
+TDR_SO_RALATIVE=$(TDR_SO).${TDR_MAJOR}.${TDR_MINOR}.$(TDR_PATCH)
+TDR_SO_REAL=$(TSF4G_LIB)/${TDR_SO_RALATIVE}
+TDR_SO_NAME=$(TDR_SO).${TDR_MAJOR}
+
+TDR_SO_WITH_XML=libtdr_xml.so
+TDR_SO_WITH_XML_RALATIVE=$(TDR_SO_WITH_XML).${TDR_MAJOR}.${TDR_MINOR}.$(TDR_PATCH)
+TDR_SO_WITH_XML_REAL=$(TSF4G_LIB)/$(TDR_SO_WITH_XML_RALATIVE)
+TDR_SO_WITH_XML_NAME=$(TDR_SO_WITH_XML).${TDR_MAJOR}
+
+TDR_SO_WITH_DBMS_XML=libtdr_dbms_xml.so
+TDR_SO_WITH_DBMS_XML_RALATIVE=$(TDR_SO_WITH_DBMS_XML).${TDR_MAJOR}.${TDR_MINOR}.$(TDR_PATCH)
+TDR_SO_WITH_DBMS_XML_REAL=$(TSF4G_LIB)/$(TDR_SO_WITH_DBMS_XML_RALATIVE)
+TDR_SO_WITH_DBMS_XML_NAME=libtdr_dbms_xml.so.${TDR_MAJOR}
+
+
+all: $(TDR_SO_REAL) $(TDR_SO_WITH_XML_REAL) $(TDR_SO_WITH_DBMS_XML_REAL)
+	@cp $(TDR_SO_OBJ_DIR)/*.o  $(TSF4G_LIB_PUB_OBJ_DIR)
+	@cp $(TDR_SO_OBJ_DIR)/$(TDR_DBMS_WRAPPER_PATH)/*.o  $(TSF4G_LIB_PUB_OBJ_DIR)
+	@cp $(TDR_SO_OBJ_DIR)/$(TDR_XML_WRAPPER_PATH)/*.o  $(TSF4G_LIB_PUB_OBJ_DIR)
+	@$(LN) $(TSF4G_LIB)  $(TDR_SO_RALATIVE) $(TDR_SO_NAME) 
+	@$(LN) $(TSF4G_LIB) $(TDR_SO_NAME) $(TDR_SO)
+	@$(LN) $(TSF4G_LIB)  $(TDR_SO_WITH_XML_RALATIVE) $(TDR_SO_WITH_XML_NAME) 
+	@$(LN) $(TSF4G_LIB) $(TDR_SO_WITH_XML_NAME) $(TDR_SO_WITH_XML)
+	@$(LN) $(TSF4G_LIB)  $(TDR_SO_WITH_DBMS_XML_RALATIVE) $(TDR_SO_WITH_DBMS_XML_NAME) 
+	@$(LN) $(TSF4G_LIB) $(TDR_SO_WITH_DBMS_XML_NAME) $(TDR_SO_WITH_DBMS_XML)
+
+	
+
+
+$(TDR_SO_OBJ_DIR)/%.d: %.c
+	$(CC)  $< $(TDR_CFLAGS)  -MM -MD -MQ'$(TDR_SO_OBJ_DIR)/$*.o' -o $@
+
+$(TDR_SO_OBJ_DIR)/%.o: %.c $(TDR_SO_OBJ_DIR)/%.d
+	$(CC) -o $@ -c $< $(TDR_CFLAGS)
+	
+
+$(TDR_SO_REAL):	$(TDR_SO_OBJ)
+	$(CC) $(SHARED) $(TDR_CFLAGS) -Wl,-soname,$(TDR_SO_NAME) -o $(TDR_SO_REAL)    $^  
+	
+
+
+$(TDR_SO_WITH_XML_REAL):	$(TDR_SO_OBJ) $(TDR_XML_WRAPPER_OBJ)
+	$(CC) $(SHARED) $(TDR_CFLAGS) -Wl,-soname,$(TDR_SO_WITH_XML_NAME) -o $(TDR_SO_WITH_XML_REAL)    $(TDR_SO_OBJ) $(TDR_XML_WRAPPER_OBJ) $(LDPATH)  $(TSF4G_XML_LIBS)
+	
+
+$(TDR_SO_WITH_DBMS_XML_REAL):	$(TDR_SO_OBJ) $(TDR_DBMS_WRAPPER_OBJ) $(TDR_XML_WRAPPER_OBJ)
+	$(CC) $(SHARED) $(TDR_CFLAGS) -Wl,-soname,$(TDR_SO_WITH_DBMS_XML_NAME) -o $(TDR_SO_WITH_DBMS_XML_REAL)    $(TDR_SO_OBJ) $(TDR_DBMS_WRAPPER_OBJ) $(TDR_XML_WRAPPER_OBJ) $(LDPATH) $(TSF4G_XML_LIBS) -lgcc  $(TSF4G_DBMS_LIB)
+	
+	
+	
+
+clean:
+	$(RM) $(TDR_SO_OBJ_DIR)/*.o  
+	$(RM) $(TDR_SO_OBJ_DIR)/*.d
+	$(RM) $(TDR_SO_OBJ_DIR)/$(TDR_XML_WRAPPER_PATH)/*.o  
+	$(RM) $(TDR_SO_OBJ_DIR)/$(TDR_XML_WRAPPER_PATH)/*.d  
+	$(RM) $(TDR_SO_OBJ_DIR)/$(TDR_DBMS_WRAPPER_PATH)/*.o
+	$(RM) $(TDR_SO_OBJ_DIR)/$(TDR_DBMS_WRAPPER_PATH)/*.d	
+	$(RM) $(TDR_SO_REAL)
+	$(RM) $(TDR_SO_WITH_DBMS_XML_REAL)
+	$(RM) $(TDR_SO_WITH_XML_REAL)
+
+	
+-include $(DEPS)
+
+.PHONY: all clean
+

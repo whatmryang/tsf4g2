@@ -1,0 +1,121 @@
+#!/bin/bash
+
+
+if [ -z "$1" ];then
+  if [ -z $TSF4G_INSTALL_HOME ];then
+    echo "Error: please export TSF4G_INSTALL_HOME"
+    exit
+  fi
+else
+  if [ -z $TSF4G_INSTALL_HOME ];then
+    echo "Warn: please export TSF4G_INSTALL_HOME"
+  fi
+  TSF4G_INSTALL_HOME=$1
+fi
+
+echo "Install tsdm under directory" $TSF4G_INSTALL_HOME
+
+#if [ -z "$1" ];then
+#  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+#else
+#  TSF4G_INSTALL_HOME=$1
+#fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/include/apps
+  mkdir $TSF4G_INSTALL_HOME/lib
+#  mkdir $TSF4G_INSTALL_HOME/tools
+#  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+  mkdir $TSF4G_INSTALL_HOME/docs
+  mkdir $TSF4G_INSTALL_HOME/docs/apps
+fi
+
+rm -rf $TSF4G_INSTALL_HOME/apps/tsdm
+rm -rf $TSF4G_INSTALL_HOME/include/apps/tsdmapi
+rm -rf $TSF4G_INSTALL_HOME/docs/apps/tsdm
+rm -rf $TSF4G_INSTALL_HOME/examples/apps/tsdm
+rm -rf $TSF4G_INSTALL_HOME/benchmark/apps/tsdm
+rm -rf $TSF4G_INSTALL_HOME/lib/libsdm*
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsdm ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsdm
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsdm/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsdm/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsdm/cfg ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsdm/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tsdm/sql ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tsdm/sql
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/lib ];then
+  mkdir $TSF4G_INSTALL_HOME/lib
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include ];then
+  mkdir $TSF4G_INSTALL_HOME/include
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps
+fi
+  
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tsdmapi ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/tsdmapi
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs ];then
+  mkdir $TSF4G_INSTALL_HOME/docs
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/docs/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs/apps/tsdm ];then
+  mkdir $TSF4G_INSTALL_HOME/docs/apps/tsdm
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/examples ];then
+  mkdir $TSF4G_INSTALL_HOME/examples
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/examples/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/examples/apps
+fi
+
+mkdir $TSF4G_INSTALL_HOME/apps/tsdm/data
+mkdir $TSF4G_INSTALL_HOME/apps/tsdm/data/operd
+mkdir $TSF4G_INSTALL_HOME/apps/tsdm/data/transd
+mkdir $TSF4G_INSTALL_HOME/apps/tsdm/data/dmsd
+mkdir $TSF4G_INSTALL_HOME/apps/tsdm/log
+
+echo "Install tsdm...."
+cp -P ./version             $TSF4G_INSTALL_HOME/apps/tsdm/
+cp -P -rf ./apps/tsdm/bin/       $TSF4G_INSTALL_HOME/apps/tsdm/
+cp -P -rf ./apps/tsdm/cfg/       $TSF4G_INSTALL_HOME/apps/tsdm/
+cp -P -rf ./apps/tsdm/sql/       $TSF4G_INSTALL_HOME/apps/tsdm/
+#cp -P -rf ./apps/tsdm/tools/       $TSF4G_INSTALL_HOME/apps/tsdm/
+cp -P -rf ./apps/tsdm/docs/*   $TSF4G_INSTALL_HOME/docs/apps/tsdm/
+cp -P -rf ./apps/tsdm/docs/   $TSF4G_INSTALL_HOME/apps/tsdm/
+cp -P -rf ./apps/tsdm/depends/   $TSF4G_INSTALL_HOME/apps/tsdm/
+
+cp -P -rf ./include/apps/tsdmapi/ ${TSF4G_INSTALL_HOME}/include/apps/
+
+cp -P ./lib/libsdm*   ${TSF4G_INSTALL_HOME}/lib/
+
+cp -P -rf ./apps/tsdm/example_tcp  $TSF4G_INSTALL_HOME/apps/tsdm/
+
+echo "Install tsdm done"

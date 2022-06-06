@@ -1,0 +1,16 @@
+<TbusGCIM>
+	<GCIMShmKey>7000</GCIMShmKey>
+  
+  <Channels>
+    <Priority>8</Priority>
+    <Address>0.0.0.2</Address>
+    <Address>0.0.0.3</Address>
+    <SendSize>10240</SendSize>
+    <RecvSize>10240</RecvSize>
+    <Desc>Some description for this route</Desc>
+  </Channels>
+	
+</TbusGCIM>
+
+
+

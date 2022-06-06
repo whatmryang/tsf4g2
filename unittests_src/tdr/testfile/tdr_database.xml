@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib name="itemdb"  version="7" tagsetversion="1" >
+
+<!--  本示例文档定义了数据存储于数据库中的描述 -->
+
+<macro name="MAX_GAME_NUM" value="256" />
+<macro name="USER_TABLE_SPLIT_FACTOR" value="2" />
+<macro name="ITEM_TABLE_SPLIT_FACTOR" value="4" />
+
+<struct name="GameItem" version="1" primarykey=",gameid,itemid,,," splittablefactor=" ITEM_TABLE_SPLIT_FACTOR" splittablekey="gameid" >
+<entry name="gameid" type="uint" />
+<entry name="itemid" type="uint" />
+<entry name="buytime" type="Datetime" />
+<entry name="validtime" type="Datetime" />
+</struct>
+
+
+<struct name="UserItemInfo" version="1" primarykey="uin,"  splittablefactor="USER_TABLE_SPLIT_FACTOR" splittablekey ="uin" splittablerule=" modulebyfactor" >
+<entry name="uin" type="uint"  />
+<entry name="money" type="bigint" defaultvalue="10000" />
+<entry name="longnum" type="int" />
+<entry name="OffLineNum" type="int" />
+<entry name="lastlogintime" type="Datetime" />
+<entry name="items" type="GameItem"   extendtotable="true" />
+</struct>
+
+
+
+
+
+
+
+<struct name="GameInfo" version="2" >
+	<entry name="gameid" type="int" />
+	<entry name="gamepoint" type="int" />
+	<entry name="reserve" type="byte" count="247" />
+	<entry name="level" type="int" version="3" />
+</struct>
+
+<struct name="AttachInfo" version="2" >
+	<entry name="level" type="int" unique="true"  />
+	<entry name="age" type="int" />
+	<entry name="reserver" type="int" count="4" version="3" />
+</struct>
+
+<struct name="TestExtendTable" version="2" primarykey="item.uin,item.items.gameid,item.items.itemid,seq">
+	<entry name="seq" type="int" unique="true" version="3"/>
+	<entry name="UserAttachInfo" type="AttachInfo" extendtotable="true"/>
+	<entry name="game" type="GameInfo" />
+	<entry name="item" type="UserItemInfo" extendtotable="true"/>
+	
+</struct>
+
+<struct name="AllBaseTypeData" version="1" primarykey="seq" >
+	<entry name="iRefer" type="int"  />
+	<entry name="intDataArray" type="int" count="4" refer="iRefer"/>
+	<entry name="wstringData" type="wstring" size="32" defaultvalue="hell你好o" />
+	<entry name="seq" type="uint" version="3" unique="true"/>
+	<entry name="charData" type="tinyint" defaultvalue="-66" />
+	<entry name="charDataArr" type="tinyuint" count="255" />
+	<entry name="ucharData" type="tinyuint" defaultvalue="238" />
+	<entry name="shortData" type="smallint" defaultvalue="-6688" />
+	<entry name="ushortData" type="smalluint" defaultvalue="36830" />
+	<entry name="intData" type="int" defaultvalue="-2146290688" />
+	
+	<entry name="uintData" type="uint" defaultvalue="4146290688" />
+	<entry name="bigintData" type="bigint" defaultvalue="-5146290688" />
+	<entry name="biguintData" type="biguint" defaultvalue="6146290688" />
+	<entry name="floatData" type="float" defaultvalue="34.678" />
+	<entry name="doubleData" type="double" defaultvalue="67.67890878" />
+	<entry name="DatatimeData" type="Datetime" defaultvalue="2007-06-13 11:53:43" />
+	<entry name="DataData" type="Date" defaultvalue="2007-09-13" />
+	<entry name="timeData" type="time" defaultvalue="-838:07:34" />
+	<entry name="ipData" type="ip" defaultvalue="192.168.1.66" />
+	<entry name="wcharData" type="wchar" defaultvalue="腾" />
+	<entry name="byteData" type="byte" defaultvalue="0xFE" />
+	<entry name="stringData" type="string" size="32" defaultvalue="通讯" />
+	<entry name="strings" type="string" count="2"  size="32"/>
+	
+</struct>
+
+<struct name="primary" version="2">
+<entry name="uin" type="uint" />
+</struct>
+
+<struct name="UserlonginInfo" dependonstruct="UserItemInfo" version="2">
+<entry name="longnum" type="int" />
+<entry name="primaryInfo" type="primary"   extendtotable="true"/>
+<entry name="OffLineNum" type="int" />
+<entry name="lastlogintime" type="Datetime" />
+</struct>
+
+<struct name="TransNodeAttachInfo"  version="4">
+<entry name="name" type="string" size="32" />
+<entry name="mapid" type="int" />
+</struct>
+
+<macro name="TRANS_NODE_ENTRY_NUM" value="4" />
+<struct name="TransNodeAttach" version="4" uniqueentryname="false" >
+    <entry name="Attach" type="TransNodeAttachInfo" count="2" extendtotable="true"/>
+</struct>
+
+<struct name="TransNodeEntryDesc" version="4">
+   <entry name="TransDstDescID" type="int" unique="true"   />
+   <entry name="price" type="int"/>
+   <entry name="AttachInfo" type="TransNodeAttach"  version="5"  extendtotable="true" />
+ </struct>
+
+ <struct name="TransNodeDesc" primarykey="id"   sortkey="id" version="4" uniqueentryname="false">
+    <entry name="DefaultTransNode" type="TransNodeEntryDesc"   version="6" extendtotable="true"/>	
+   <entry name="id" type="int"   />
+     <entry name="EntryNum" type="int"/>
+    <entry name="TransNodeEntryDesc" type="TransNodeEntryDesc" refer = "EntryNum" count="TRANS_NODE_ENTRY_NUM"  extendtotable="true"/>
+     
+      <entry name="SencodTransNode" type="TransNodeEntryDesc"   version="6" extendtotable="true"/>
+</struct>
+
+  <struct name="TestAutoIncrement" version="6" >
+    <entry name="ID" type="uint"  autoincrement="true" defaultvalue="10000000" />
+    <entry name="name" type="string"  size="128" />
+  </struct>
+  
+</metalib>
+

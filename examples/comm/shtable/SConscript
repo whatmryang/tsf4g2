@@ -1,0 +1,6 @@
+import os
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Return('src_local')

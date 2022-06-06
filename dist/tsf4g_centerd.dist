@@ -1,0 +1,75 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_centerd_01_0001 "
+}
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+TSF4G_TCENTERD_RELEASE=tsf4g_centerd`date +%Y%m%d`.tgz
+TCENTERD_HOME=tsf4g_centerd`date +%Y%m%d`
+
+echo "mkdir ${TCENTERD_HOME}"
+mkdir -p ${TCENTERD_HOME}
+mkdir ${TCENTERD_HOME}/lib
+mkdir ${TCENTERD_HOME}/bin
+mkdir ${TCENTERD_HOME}/cfg
+mkdir ${TCENTERD_HOME}/master
+mkdir ${TCENTERD_HOME}/master/tdirty
+mkdir ${TCENTERD_HOME}/master/mac
+
+echo "copy include files"
+
+echo "copy base lib files"
+
+echo "copy tdirapi lib files"
+
+echo "copy bin"
+cp   ${TSF4G_DIR}/apps/tcenterd/bin/tcenterd		${TCENTERD_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tcenterd/bin/*.sh			${TCENTERD_HOME}/bin/
+cp   ${TSF4G_DIR}/tools/tbusmgr						${TCENTERD_HOME}/bin/
+
+echo "copy cfg"
+cp  -rf ${TSF4G_DIR}/apps/tcenterd/cfg/*			${TCENTERD_HOME}/cfg/
+cp  -rf ${TSF4G_DIR}/apps/tcenterd/tbus/*.xml		${TCENTERD_HOME}/cfg/
+
+echo "copy module"
+echo "copy tdirty"
+cp  -rf ${TSF4G_DIR}/apps/tdirty/tdirtyd/bin		${TCENTERD_HOME}/master/tdirty
+cp  -rf ${TSF4G_DIR}/apps/tdirty/tdirtyd/cfg		${TCENTERD_HOME}/master/tdirty
+cp  -rf ${TSF4G_DIR}/apps/tdirty/tdirtyd/dat		${TCENTERD_HOME}/master/tdirty
+cp  -rf ${TSF4G_DIR}/apps/tdirty/tdirtyd/log		${TCENTERD_HOME}/master/tdirty
+cp  -rf ${TSF4G_DIR}/apps/tdirty/sql				${TCENTERD_HOME}/master/tdirty
+
+echo "copy tools"
+
+echo "copy docs"
+
+echo "copy example"
+
+echo "copy module"
+echo "copy mac"
+cp  -rf ${TSF4G_DIR}/apps/tcenterd/mac/tmacsvr		${TCENTERD_HOME}/master/mac
+cp  -rf ${TSF4G_DIR}/apps/tcenterd/mac/*.sh			${TCENTERD_HOME}/master/mac
+cp  -rf ${TSF4G_DIR}/apps/tcenterd/mac/macsvr.xml	${TCENTERD_HOME}/master/mac
+
+echo "copy installshell"
+cp  ./tsf4g_centerd.install ${TCENTERD_HOME}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TCENTERD_HOME}/version
+
+find ${TCENTERD_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_TCENTERD_RELEASE} ${TCENTERD_HOME}
+#rm -rf ${TCENTERD_HOME}

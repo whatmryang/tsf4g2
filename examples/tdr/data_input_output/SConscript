@@ -1,0 +1,10 @@
+Import("buildenv")
+Export('buildenv')
+
+buildenv.xml2h("./net_protocol.xml")
+
+src = Glob('*.c')
+if buildenv._isLinux:
+	buildenv.buildExec('ex_data_io',src,a_tsf4g_static_lib="tsf4g",LIBS="pthread ")
+else:
+	buildenv.buildExec('ex_data_io',src,a_tsf4g_static_lib="tsf4g",CPPDEFINES=["_TSF4G_LARGE_LIB_"])

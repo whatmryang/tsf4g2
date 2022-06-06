@@ -1,0 +1,23 @@
+#!/usr/local/bin/python
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+
+buildenv.xml2h(Split('tbus_head.xml'))
+buildenv.xml2c('tbus_head', Split('tbus_head.xml'))
+
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+if buildenv.vcVariant == "vc6" or buildenv.vcVariant == "vc7":
+	src_local = list()
+	Return("src_local")
+
+
+buildenv.buildStaticLib('tbus_r',src_local,CPPPATH=Split('../'),OBJPREFIX='mt_',CPPDEFINES=Split('TSF4G_SMALL_LIB TSF4G_THREAD_SAFE TBUS_OPTIMIZE_ENCODING_HEAD'),MODULE='base')
+
+
+buildenv.buildStaticLib('tbus',src_local,CPPPATH=Split('../'),CPPDEFINES=Split('TSF4G_SMALL_LIB TBUS_OPTIMIZE_ENCODING_HEAD'),MODULE='base')
+
+Return('src_local')

@@ -1,0 +1,62 @@
+本目录下提供了一些使用tdr api接口的一些示例程序。TDR API 详细说明请参考文档<TSF-G-DR-API.chm>
+
+1. Create_metalib
+	本目录下的示例在于演示调用tdr的接口创建元数据描述库和保存元数据库
+	tdr_create_lib_file: 利用xml描述文件创建元数据描述库
+	tdr_save_xml_file: 将元数据描述保存为xml格式的描述文件
+	
+2.data_input_output
+	本目录下的示例程序演示了调用tdr的接口进行数据输入输出。即将xml数据文件读入内存和将内存数据保存为xm格式的
+	l数据文件。
+	a)此程序先利用net_protocol.xml描述文件创建元数据描述库并获取结构体"Pkg"的描述
+	b) 调用tdr_input_file将Pkg.xml文件中的数目读入内存数据结构中
+	c) 调用tdr_output_file将读入内存的数据导出到pkg2.xml文件中
+	e) 本程序的前提是 使用tdr工具通过net_protocol.xml 生成net_protocol.h
+	
+3. db_ORMapping
+ 	本目录下的程序演示了调用tdr的相关接口进行数据存储。
+ 	这个程序通过 调用tdr的相关接口生成 insert、update、select、delete操作语言，并通过tdr
+ 	相关接口来执行这些sql语句。
+	本程序使用方法如下：
+	a) 修改tdr_dbms_conf.xml中的配置，将dbms的相关连接信息及帐号信息
+	b) 通过mysql将 tdr_createtable.sql导入，以创建相关的数据库表
+	c）执行程序进行测试
+
+ 4. insert_metalib_in_application
+ 	本目录下的程序演示.c格式的元数据描述文件的使用。
+ 	目前元数据描述库有四种存在方式
+ 	a)内存数据结构方式，所有的tdr接口都依赖内存格式的元数据库
+ 	b)xml格式的元数据描述文件。此格式元数据描述的库源格式其他两个格式
+ 		由这个格式生成。但这种格式生成内存格式的元数据描述库文件时，需要
+ 		进行xml解析，因此导致了另外两个存储格式
+ 	c) 二进制文件格式，此文件中的信息为内存数据的镜像
+ 	d).c文件格式，将元数据描述内存结构信息保存到一个字符数组的.c文件中
+ 	后面两种格式处理数据快，各有优缺点，.c文件格式可以与应用程序绑定在一起，
+ 	而二进制描述库形势则需要与程序一起发布，但二进制文件格式可以动态更新
+
+
+ 5 load_save_metalib
+	inert_metalib_in_apps主要演示.c格式的元数据描述库格式到内存描述格式的转换，本演示
+	程序主要演示二进制元数据库格式到内存描述格式的转换
+
+6 net_pack_unpack
+	本示例程序演示了调用tdr_hton/tdr_ntoh接口实现网络消息打包和解包
+
+7 sort_data
+	本程序演示通过tdr的接口对内存数据进行排序
+
+8. get_meta_entry
+	本程序演示通过tdr接口获取数据描述的方法
+
+9. init_normalize_data
+	本目录下的程序演示通过调用tdr的接口用缺省值对内存数据进行初始化的方法
+
+10 print_data
+	本目录下的程序演示通过tdr的接口将内存数据以可视化的方式打印出来的方法
+
+
+    
+    
+    
+    
+

@@ -1,0 +1,91 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_namesvr_01_0001 "
+}
+
+#检查参数
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+#创建目录变量
+TSF4G_DIR=../
+#打包文件
+APPNAME=`echo $0 | sed -e 's:.dist$::g'`
+#echo $APPNAME
+TSF4G_RELEASE=$APPNAME`date +%Y%m%d`.tgz
+#发布临时目录
+DIST_HOME=$APPNAME`date +%Y%m%d`
+DEV_HOME=$TSF4G_DIR/apps/tnamesvr/
+echo "发布包名：$TSF4G_RELEASE"
+
+#删除临时目录
+rm -rf $DIST_HOME
+
+#检查当前目录状态
+echo "检查当前目录状态"
+nUnknown=`svn status ../ | awk '{print $1}' | grep -v '?' | wc -l`
+if [ $nUnknown -eq 0 ] ;then 
+	echo "目录状态正常"
+else
+	echo "Error：当前目录状态异常，请在tsf4g目录下运行svn status查看"
+	svn status ../ | grep -v '?'
+	exit 1
+fi	
+
+#创建版本文件
+echo "创建版本文件"
+svn info ../ > Version
+
+#创建临时目录
+echo "创建临时目录"
+mkdir -p ${DIST_HOME}
+mkdir -p ${DIST_HOME}/doc/
+#拷贝标准目录
+cp -rf $DEV_HOME/bin $DIST_HOME/
+cp -rf $DEV_HOME/cfg $DIST_HOME/
+cp -rf $DEV_HOME/tools $DIST_HOME/
+cp -rf $DEV_HOME/example $DIST_HOME/
+cp -rf $DEV_HOME/example/Makefile.dist $DIST_HOME/example/Makefile
+cp -rf $DEV_HOME/log $DIST_HOME/
+cp $DEV_HOME/test.sh $DIST_HOME/
+
+cp   ${TSF4G_DIR}/docs/apps/tnamesvr/*	${DIST_HOME}/doc/
+cp   ./tsf4g_namesvr.install			${DIST_HOME}/
+#拷贝版本文件
+echo "拷贝版本文件"
+cp Version ${DIST_HOME}
+echo "$1 build at `date +%Y%m%d`">>${DIST_HOME}/Version
+
+#拷贝文件
+echo "拷贝文件"
+
+mkdir -p ${DIST_HOME}/src/
+cp -rf $DEV_HOME/src/include $DIST_HOME/src/
+cp -rf $DEV_HOME/src/lib $DIST_HOME/src/
+cp -rf $DEV_HOME/src/nameapi $DIST_HOME/src/
+cp -rf $DEV_HOME/src/protocol $DIST_HOME/src/
+cp -rf $DEV_HOME/src/Makefile.dist $DIST_HOME/src/Makefile
+cp -rf $DEV_HOME/Makefile.dist $DIST_HOME/Makefile
+
+#删除SVN目录
+echo "删除svn目录"
+find ${DIST_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+find ${DIST_HOME} -name "*.d" -exec rm -rf {} \;>/dev/null 2>&1
+
+#打包
+echo "打包"
+tar czf ${TSF4G_RELEASE} ${DIST_HOME}
+#删除临时目录
+echo "删除临时目录"
+rm -rf ${DIST_HOME}
+echo "发布完成"

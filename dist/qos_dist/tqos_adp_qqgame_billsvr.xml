@@ -1,0 +1,6 @@
+<tqos_adp_qqgame_billsvr_conf version="10">
+	<ListenIP>10.1.44.60</ProxyIP>
+	<ListenPort>42332</ProxyPort>
+	<QosIP>10.1.44.60</QosIP>
+	<QosPort>34577</QosPort>
+</tqos_adp_qqgame_billsvr_conf>	

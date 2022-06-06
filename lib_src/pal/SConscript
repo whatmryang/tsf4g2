@@ -1,0 +1,13 @@
+import os
+Import('buildenv')
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+#if buildenv.vcVariant == "vc6":
+#	src_local.remove(Glob("shortcut.cpp")[0])
+
+
+buildenv.buildStaticLib('pal',src_local,CPPDEFINES=Split(" TSF4G_SMALL_LIB "),MODULE='base')
+#buildenv.buildSharedLib('pal',src_local)
+
+Return('src_local')

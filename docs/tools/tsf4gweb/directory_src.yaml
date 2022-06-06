@@ -1,0 +1,72 @@
+root:
+    -
+        desc: 架构平台组介绍
+        uri: tsf4ggroup.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 架构平台组愿景
+            uri: tsf4ggroup\tsf4g_vision.htm\
+            src: _no_needs_
+        -
+            desc: 产品介绍
+            uri: tsf4ggroup\tsf4gintro.htm
+            src: _no_needs_
+        -
+            desc: 使用指南
+            uri: tsf4ggroup\tsf4g_guide.htm
+            src: _no_needs_
+    -
+        desc: 统一登录组件
+        uri: unifiedenroll.htm
+        src: _no_needs_
+        children:
+        -
+            desc: 网络接入组件(TCONND)
+            uri: unifiedenroll\tconnd.htm
+            src: _no_needs_
+            children:
+            -
+                desc: 协议说明文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Develop.htm
+                src: _no_needs_
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Maintenance.htm
+                src: _no_needs_
+
+            -
+                desc: 性能参考文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Performance.htm
+                src: _no_needs_
+
+            -
+                desc: FAQ
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_FAQ.htm
+                src: _no_needs_
+
+            -
+                desc: 下载发布包
+                uri: ..\Publish\Publish.aspx
+                src: _no_needs_
+
+        -
+            desc: 新建网页
+            uri: newpage.htm
+            src: _no_needs_
+    -
+        desc: 通用逻辑组件
+        uri: CommonLogic.htm
+        src: _no_needs_
+    -
+        desc: 数据存储组件
+        uri: DataStoreage.htm
+        src: _no_needs_
+    -
+        desc: 集中管理系统
+        uri: CentralManagement.htm
+        src: _no_needs_
+    -
+        desc: 其它
+        uri: other.htm
+        src: _no_needs_

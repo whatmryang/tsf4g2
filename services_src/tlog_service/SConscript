@@ -1,0 +1,32 @@
+# The set of source files associated with this SConscript file.
+import os
+
+
+Import('buildenv')
+
+print "Building tlog version header"
+buildenv.VersionHeader(major=buildenv.getMajor('base'),minor=buildenv.getMinor('base'))
+
+if buildenv._isLinux:
+	xml='../../lib_src/tlog/tlogmemdef.xml ../../lib_src/tlog/tlogdatadef.xml ../../lib_src/tlog/tlog_priority_def.xml ../../lib_src/tlog/tlogfilterdef.xml ../../lib_src/tlog/tlogfiledef.xml ../../lib_src/tlog/tlognetdef.xml ../../lib_src/tlog/tlogvecdef.xml ../../lib_src/tlog/tloganydef.xml ../../lib_src/tlog/tlogbindef.xml tlogddef.xml'
+	buildenv.xml2dr('tlogddef',Split(xml))
+	buildenv.xml2hs('tlogddef',Split(xml))
+	buildenv.xml2c('tlogddef',Split(xml))
+	
+	src_local=Glob('tlogd.c') 
+	src_local+=Glob('tlogddef.c')
+	src_local+=Glob('tlogdmgr.c')
+	
+	
+	
+	buildenv.buildServices('tlog','tlogd',src_local,a_tsf4g_static_lib="tsf4g",CPPPATH=Split('../../lib_src'),CPPDEFINES=Split("TDR_WITH_XML"),LIBS='pthread')
+	
+	src_local = Glob('test_tlogd.c')
+	buildenv.buildServices('tlog','test_tlogd',src_local,a_tsf4g_static_lib="tsf4g",CPPDEFINES=Split("TDR_WITH_XML"))
+	
+	exteraFiles = Split('tlogd.xml tlogddef.tdr start_tlogd_bin.sh start_tlogd.sh stop_tlogd.sh tlogd_bin.xml tlogd_log.xml test_file.xml test_net.xml test_vec.xml')
+	
+	if buildenv.isInstall('services'):
+		Install(buildenv.getServicesPath('tlog'),exteraFiles)
+		Install(buildenv.getServicesInstallPath('tlog'),exteraFiles)
+		

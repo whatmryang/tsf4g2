@@ -1,0 +1,116 @@
+#/bin/bash
+
+usage{}
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_dir_01_0001 "
+}
+
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+
+TSF4G_DIR=../
+TSF4G_DIR_RELEASE=tsf4g_tdir`date +%Y%m%d`.tgz
+TDIR_HOME=tsf4g_tdir`date +%Y%m%d`
+
+echo "mkdir ${TDIR_HOME}"
+mkdir -p ${TDIR_HOME}/include/apps/
+mkdir ${TDIR_HOME}/lib
+mkdir -p ${TDIR_HOME}/win32_lib/vc7/debug
+mkdir -p ${TDIR_HOME}/win32_lib/vc7/release
+mkdir -p ${TDIR_HOME}/win32_lib/vc8/debug
+mkdir -p ${TDIR_HOME}/win32_lib/vc8/release
+mkdir -p ${TDIR_HOME}/win32_lib/vc9/debug
+mkdir -p ${TDIR_HOME}/win32_lib/vc9/release
+mkdir ${TDIR_HOME}/bin
+mkdir ${TDIR_HOME}/cfg
+mkdir ${TDIR_HOME}/tools
+mkdir ${TDIR_HOME}/protocol
+mkdir ${TDIR_HOME}/docs
+mkdir ${TDIR_HOME}/examples/
+
+
+echo "copy include files"
+cp  -rf ${TSF4G_DIR}/include/apps/tdirapi ${TDIR_HOME}/include/apps/
+
+
+echo "copy tdirapi lib files"
+cp   ${TSF4G_DIR}/lib/libtdirapi.* ${TDIR_HOME}/lib/
+
+
+echo "copy tdirapi win32 lib"
+cp   ${TSF4G_DIR}/win32_lib/vc7/debug/libtdirapi_d.lib  ${TDIR_HOME}/win32_lib/vc7/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc7/debug/libtdirapi_d_vc70.pdb  ${TDIR_HOME}/win32_lib/vc7/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc7/release/libtdirapi.lib  ${TDIR_HOME}/win32_lib/vc7/release/
+cp   ${TSF4G_DIR}/win32_lib/vc7/release/libtdirapi_vc70.pdb  ${TDIR_HOME}/win32_lib/vc7/release/
+
+cp   ${TSF4G_DIR}/win32_lib/vc8/debug/libtdirapi_d.lib  ${TDIR_HOME}/win32_lib/vc8/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc8/debug/libtdirapi_d_vc80.pdb  ${TDIR_HOME}/win32_lib/vc8/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc8/release/libtdirapi.lib  ${TDIR_HOME}/win32_lib/vc8/release/
+cp   ${TSF4G_DIR}/win32_lib/vc8/release/libtdirapi_vc80.pdb  ${TDIR_HOME}/win32_lib/vc8/release/
+
+cp   ${TSF4G_DIR}/win32_lib/vc9/debug/libtdirapi_d.lib  ${TDIR_HOME}/win32_lib/vc9/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc9/debug/libtdirapi_d_vc90.pdb  ${TDIR_HOME}/win32_lib/vc9/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc9/release/libtdirapi.lib  ${TDIR_HOME}/win32_lib/vc9/release/
+cp   ${TSF4G_DIR}/win32_lib/vc9/release/libtdirapi_vc90.pdb  ${TDIR_HOME}/win32_lib/vc9/release/
+
+
+echo "copy bin"
+cp   ${TSF4G_DIR}/apps/tdir/bin/tconnd            ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/tdir_svrd         ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/starttconnd.sh    ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/starttdir.sh      ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/stoptconnd.sh     ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/stoptdir.sh        ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/tdir_svrd_log*     ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/tconnd_log*     ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/udptconnd_log*     ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/startudptconnd.sh  ${TDIR_HOME}/bin/
+cp   ${TSF4G_DIR}/apps/tdir/bin/stopudptconnd.sh   ${TDIR_HOME}/bin/
+
+echo "copy cfg"
+cp  -rf ${TSF4G_DIR}/apps/tdir/cfg/* ${TDIR_HOME}/cfg/
+
+echo "copy protocol"
+cp -rf ${TSF4G_DIR}/apps/tdir/protocol/* ${TDIR_HOME}/protocol/
+
+
+echo "copy tools"
+cp ${TSF4G_DIR}/tools/tbusmgr ${TDIR_HOME}/tools/
+cp ${TSF4G_DIR}/tools/tdr ${TDIR_HOME}/tools/
+cp ${TSF4G_DIR}/apps/tdir/tools/tbusmgr.xml.dir ${TDIR_HOME}/tools/
+cp ${TSF4G_DIR}/apps/tdir/tools/tdir_init_bus.sh ${TDIR_HOME}/tools/
+
+
+
+
+echo "copy docs"
+cp  ${TSF4G_DIR}docs/apps/tdir/*   ${TDIR_HOME}/docs/
+
+
+echo "copy examples"
+cp  -rf ${TSF4G_DIR}/apps/tdir/examples/* ${TDIR_HOME}/examples/
+
+
+
+
+
+echo "copy installshell"
+cp  ./tsf4g_dir.install ${TDIR_HOME}/tsf4g_dir.install
+cp  ./tsf4g_dir.dependency ${TDIR_HOME}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TDIR_HOME}/version
+
+find ${TDIR_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_DIR_RELEASE} ${TDIR_HOME}
+rm -rf ${TDIR_HOME}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib name="" tagsetversion="1" version="1"  >
+
+<macro name="TLOGMEM_STRING_LEN" value="256" />
+<macro name="TLOGMEM_MIN_SIZE" value="10000000" desc="10M" />
+
+<struct name="TLOGDevMem" version="1" >
+	<entry name="enable" type="int" defaultvalue="0" desc="0:disable memlog !0 enable memlog" />
+	<entry name="uri" type="string" size="TLOGMEM_STRING_LEN"/>
+	<entry name="BuffSize" type="int" defaultvalue="TLOGMEM_MIN_SIZE" />
+	
+	<entry name="Pattern" type="string" defaultvalue="tlogmem" size="TLOGMEM_STRING_LEN" />	
+	<entry name="SizeLimit" type="uint" defaultvalue="10000000"/>
+</struct>
+
+</metalib>
+

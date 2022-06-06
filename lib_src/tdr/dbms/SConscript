@@ -1,0 +1,13 @@
+
+# The set of source files associated with this SConscript file.
+import os
+
+if os.path.isfile('conv.bat'):
+	#Cd to the dir and exec conv.bat
+	os.system('conv.bat')
+	#
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Return('src_local')

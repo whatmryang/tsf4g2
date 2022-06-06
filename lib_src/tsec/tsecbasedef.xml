@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="" version="12" >
+
+<macrosgroup name="TSEC_ENC" >
+	<macro name="TSEC_ENC_NONE" value="0" />
+	<macro name="TSEC_ENC_TEA" value="1" />
+	<macro name="TSEC_ENC_QQ" value="2" />
+	<macro name="TSEC_ENC_AES" value="3" version="11" />
+	<macro name="TSEC_ENC_AES2" value="4" version="12" 
+	desc="与TSEC_ENC_AES算法不同的是修改了数据填充算法"/>
+</macrosgroup>
+
+<macrosgroup name="TSEC_AUTH" >
+	<macro name="TSEC_AUTH_NONE"      value="0" />
+	<macro name="TSEC_AUTH_QQV1"      value="1" />
+	<macro name="TSEC_AUTH_QQV2"      value="2" />
+	<macro name="TSEC_AUTH_QQUNIFIED" value="3" />
+</macrosgroup>
+
+</metalib>

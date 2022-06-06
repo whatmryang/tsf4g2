@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<TPDUHead version="11">
+    <Base type="TPDUBase">
+        <Magic>0x55 </Magic>
+        <Version>0xb </Version>
+        <Cmd>0x0 </Cmd>
+        <HeadLen>0x9 </HeadLen>
+        <EncHeadLen>0x4 </EncHeadLen>
+        <BodyLen>128 </BodyLen>
+    </Base>
+</TPDUHead>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="net"  version="3">
+
+    <include name="msg_type" file="net_msg_type.xml" />
+
+    <macrosgroup name="NET_CMD_ID" >
+        <macro name="CMD_LOGIN" value="0" />
+        <macro name="CMD_LOGOUT" value="1" />
+    </macrosgroup>
+
+    <struct name="PkgHead" version="1" >
+        <entry name="version" type="smallint" />
+        <entry name="magic" type="smallint" />
+        <entry name="cmd" type="smallint" />
+        <entry name="len" type="smallint" />
+        <entry name="msgid" type="uint" desc = "message id" />
+        <entry name="srcIp" type="ip" version="2" />
+        <entry name="datetime" type="datetime" version="3" />
+    </struct>
+
+    <union name="PkgBody" version="1" >
+        <entry name="login" type="CmdLogin" id="CMD_LOGIN" />
+        <entry name="logout" type="CmdLogout" id="CMD_LOGOUT" />
+    </union>
+
+
+    <struct name="Pkg" version="1" sizeinfo="head.len" versionindicator="head.version" >
+        <entry name="head" type="PkgHead" />
+        <entry name="body" type="PkgBody" select="head.cmd" />
+    </struct>
+
+
+</metalib>

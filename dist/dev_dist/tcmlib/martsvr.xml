@@ -1,0 +1,28 @@
+<martconf>
+	<LogLevel>700</LogLevel>
+	<RunDirEnv></RunDirEnv>
+	
+	<WorldId>0</WorldId>
+	<Threading>2</Threading>
+	<Shmkey>9503</Shmkey>
+	
+	<MartSysTdr>../../../../../mmog_run/etc/protocol/mart_ss.tdr </MartSysTdr>
+	<MartResTdr>../../../../../mmog_run/etc/protocol/mart_res.tdr</MartResTdr>
+	<MartResBin>../../../../../mmog_run/etc/martsvr/mart_res.bin</MartResBin>
+	<MartRackBin>../../../../../mmog_run/etc/martsvr/mart_rack.bin</MartRackBin>
+	
+	<itcIP>10.6.221.106</itcIP>
+	<itcPort>5691</itcPort>
+	<threadLogInterval>5</threadLogInterval>
+	
+	<ZoneList>
+		<Zone>##GAMESVRD##</Zone>
+	</ZoneList>
+
+	<Portal>
+		<PortalId>100</PortalId>
+		<ServiceCode>MMOGXYZ</ServiceCode>
+		<YBRate>10</YBRate>
+	</Portal>
+	
+</martconf>

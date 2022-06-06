@@ -1,0 +1,72 @@
+#/bin/bash
+
+#IP_ADDR="127.0.0.1"
+
+ifconfig  | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'
+
+echo "Please enter the ip addr you want to use."
+
+IP_ADDR="127.0.0.1"
+while false 
+do
+	read IP_ADDR
+	#echo $IP_ADDR
+	t_ip=`ifconfig  | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}'| cut -d: -f2 |cut -d" " -f1| grep $IP_ADDR | wc -l`
+	if [ $t_ip -eq 1 ];then
+		break
+	else
+		echo "Error! Wrong IP addr format, It should be within the list" 
+		ifconfig  | grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | cut -d: -f2 |cut -d" " -f1
+		echo "Please try again"
+	fi
+done
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcenterd ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcenterd
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcenterd/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcenterd/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcenterd/cfg ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcenterd/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/ ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tcenterd/master ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tcenterd/master
+fi
+
+echo "Install tcenterd...."
+cp -f ./version					$TSF4G_INSTALL_HOME/apps/tcenterd/
+cp -f ./bin/tcenterd				$TSF4G_INSTALL_HOME/apps/tcenterd/bin/
+cp -f ./bin/tbusmgr				$TSF4G_INSTALL_HOME/apps/tcenterd/bin/
+cp -f ./bin/*.sh					$TSF4G_INSTALL_HOME/apps/tcenterd/bin/
+cp -f ./cfg/*						$TSF4G_INSTALL_HOME/apps/tcenterd/cfg/
+cp -rf ./master/*				$TSF4G_INSTALL_HOME/apps/tcenterd/master/
+
+for x in tcenterd
+do
+	cat $TSF4G_INSTALL_HOME/apps/$x/cfg/centerd.cfg.tpl | sed "s:##IP##:${IP_ADDR}:g"  > $TSF4G_INSTALL_HOME/apps/$x/cfg/centerd.cfg
+done
+
+echo "Install tcenterd done"

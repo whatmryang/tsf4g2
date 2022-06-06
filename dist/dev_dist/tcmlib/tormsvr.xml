@@ -1,0 +1,61 @@
+<tormsvrconf version="2147483647">
+ 	<StatTimer> 600</StatTimer>
+	<MaxProcessTime> 100</MaxProcessTime>
+
+    <MetaLibInfo type="TORMMetaLibInfo">
+        <MetaLibNum> 3 </MetaLibNum>
+        <MetaLibName>roledb</MetaLibName>
+        <MetaLibName>mail</MetaLibName>
+		<MetaLibName>namesvr_app</MetaLibName>
+    </MetaLibInfo>
+    
+    <ProtoVerHashShm type="TORMShmConf">
+        <Key> 3005101</Key>
+        <Size> 1048576</Size>
+    </ProtoVerHashShm>
+    
+    <ConnectDBNum> 1</ConnectDBNum>
+    <ConnectDBInfo type="TORMConnectDBInfo">
+        <IDX> 1</IDX>
+        <MajorVersion> 0</MajorVersion>
+        <MinVersion> 0</MinVersion>
+        <DBMSName>mysql</DBMSName>
+        <DBMSConnectionInfo>localhost</DBMSConnectionInfo>
+        <DBMSCurDatabaseName>##XYZ_DB##</DBMSCurDatabaseName>
+        <DBMSUser>##MYSQL_USR##</DBMSUser>
+        <DBMSPassword>##MYSQL_PWD##</DBMSPassword>
+    </ConnectDBInfo>
+    
+    <TableNum>7</TableNum>
+    <TableConf type="TORMTableConf">
+        <TableName>RoleData_0</TableName>
+        <TableDBConnIdx> 1</TableDBConnIdx>
+    </TableConf>
+    <TableConf type="TORMTableConf">
+        <TableName>RoleData_1</TableName>
+        <TableDBConnIdx> 1</TableDBConnIdx>
+    </TableConf>
+    <TableConf type="TORMTableConf">
+        <TableName>RoleInfo</TableName>
+        <TableDBConnIdx> 1</TableDBConnIdx>
+    </TableConf>
+	<TableConf type="TORMTableConf">
+        <TableName>MailInfo_0</TableName>
+    	<TableDBConnIdx> 1</TableDBConnIdx>
+    </TableConf>
+    <TableConf type="TORMTableConf">
+        <TableName>MailInfo_1</TableName>
+    	<TableDBConnIdx> 1</TableDBConnIdx>
+    </TableConf>
+
+     <TableConf type="TORMTableConf">
+         <TableName>RoleName_0</TableName>
+	     <TableDBConnIdx> 1</TableDBConnIdx>
+	  </TableConf>
+
+    <TableConf type="TORMTableConf">
+        <TableName>RoleName_1</TableName>
+	    <TableDBConnIdx> 1</TableDBConnIdx>
+    </TableConf>
+    
+</tormsvrconf>

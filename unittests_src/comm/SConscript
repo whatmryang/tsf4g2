@@ -1,0 +1,32 @@
+#!/usr/local/bin/python
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+if os.path.isfile('conv.py'):
+	#Cd to the dir and exec conv.bat
+	os.system('./conv.py')
+	#
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+#if buildenv._isLinux:
+buildenv.buildUnittests("comm","comm",Split("comm.c AllTests.c"),a_tsf4g_static_lib=' comm cutest pal')
+buildenv.buildUnittests("comm","tlist",Split("uttlist.c AllTests.c"),OBJPREFIX="tlist",a_tsf4g_static_lib=' comm cutest pal')
+buildenv.buildUnittests("comm","shtable",Split("ut_shtable.c AllTests.c"),OBJPREFIX="shtable",a_tsf4g_static_lib='comm cutest')
+buildenv.buildUnittests("comm","commshm",Split("uttcommshm.c AllTests.c"),OBJPREFIX="commshm",a_tsf4g_static_lib='comm cutest pal')
+#else:
+#	buildenv.buildUnittests("comm","comm",src_local,CPPDEFINES=Split('TDR_WITH_XML'),a_tsf4g_static_lib= ("pal "))
+
+buildenv.buildUnittests("comm","memlog",Split("utmemlog.c AllTests.c"),OBJPREFIX="memlog",a_tsf4g_static_lib='comm tlog pal cutest')
+if buildenv._isLinux:
+	buildenv.env.ttest('shtable.txml','shtable',TESTRETV=0)
+	buildenv.env.ttest('comm.txml','comm',TESTRETV=0)
+	buildenv.env.ttest('commshm.txml','commshm',TESTRETV=0)
+else:
+	buildenv.env.ttest('shtable.txml','shtable.exe',TESTRETV=0)
+	buildenv.env.ttest('comm.txml','comm.exe',TESTRETV=0)
+	buildenv.env.ttest('commshm.txml','commshm.exe',TESTRETV=0)
+	buildenv.env.ttest('tlist.txml','tlist.exe',TESTRETV=0)
+
+Return('src_local')

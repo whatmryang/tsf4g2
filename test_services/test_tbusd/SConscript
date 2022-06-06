@@ -1,0 +1,11 @@
+Import('buildenv')
+import os
+
+source = Glob('test*.cpp')
+
+if buildenv._isLinux:
+
+    libFlags="-L%s " % os.path.abspath('../../lib_src/gtest/')
+    target = buildenv.buildExec('test',source,a_tsf4g_static_lib="tsf4g",\
+            LINKFLAGS=libFlags,LIBS='gtest pthread',\
+            CPPPATH=['../../lib_src/gtest/', '../../services_src/tbus_service/'])

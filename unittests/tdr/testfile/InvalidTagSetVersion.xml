@@ -1,0 +1,4 @@
+<!-- invalid tagsetversion -->
+<metalib name= "test" version = "12" tagsetversion = "24">
+	<macro name="TDR_TEST" define="3" />
+</metalib>

@@ -1,0 +1,14 @@
+import os
+Import('buildenv')
+
+buildenv.xml2h(Split('example_conf_desc.xml'))
+buildenv.xml2c('example_conf_desc','example_conf_desc.xml')
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+if buildenv.isLinux():
+	buildenv.buildExamples('tlog',"example",src_local,a_cppdefs='TDR_XML',a_tsf4g_static_lib='tsf4g',LIBS='pthread')
+else:
+	buildenv.buildExamples("tlog","example",src_local,CPPDEFINES=Split('_TSF4G_LARGE_LIB_'),a_tsf4g_static_lib='tsf4g')
+#PostAction(buildenv.execKey("TappTlog"),buildenv.postCmd('python '+os.path.abspath('test.py')))
+

@@ -1,0 +1,45 @@
+<mailconf>
+	<LogLevel>700</LogLevel>
+	<WorldID>0</WorldID>
+	
+	<MailDB>##TORMSVR##</MailDB>
+	<ZoneID>##GAMESVRD##</ZoneID>
+	<ExpireID>100.1.7.2</ExpireID>
+	<!-- tdr lib -->
+	<RunDirEnv></RunDirEnv>
+	<SysMailTdr>../../../../../mmog_run/etc/protocol/mail_ss.tdr</SysMailTdr>
+	<AppMailTdr>../../../../../mmog_run/etc/protocol/mail_app.tdr</AppMailTdr>
+	
+	<!-- GM Account -->
+	<GM></GM>
+	
+	<!-- mail cache -->
+	<ScanRange>2</ScanRange>
+	<AliasCheck>1</AliasCheck>
+	<AutoInsertRole>0</AutoInsertRole>
+	
+	<CacheShmkey>9403</CacheShmkey>
+    <CachePattern>0</CachePattern>
+	<CacheConfig>
+		<EntryCount>50</EntryCount>
+		<MemoCount>0</MemoCount>
+		<MemoUnit>20</MemoUnit>
+		<OnlineCount>50</OnlineCount>
+		<TaskCount>50</TaskCount>
+		<TaskBodyCount>50</TaskBodyCount>
+	</CacheConfig>
+	
+	<!-- mail type unit -->
+	<MTUList>
+		<MTUs>
+			<Id>0</Id>
+			<Total>10</Total>
+			<Pages>10</Pages>
+			<OnRead>0</OnRead>
+			<OnFull>0</OnFull>
+			<LiveDay>5</LiveDay>
+			<ReLiveDay>5</ReLiveDay>
+		</MTUs>
+	</MTUList>
+	
+</mailconf>

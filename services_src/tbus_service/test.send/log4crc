@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE log4c SYSTEM "">
+
+<log4c version="1.2.0">
+
+	<config>
+		<bufsize>0</bufsize>
+		<debug level="2"/>
+		<nocleanup>0</nocleanup>
+		<reread>1</reread>
+	</config>
+
+    <category name="tsf4g.tbus" priority="error" appender="tbus" />
+    <appender name="tbus" type="rollingfile" logdir="/home/huwu/tmp/tsf4g/test" prefix="tbus" layout="dated" rollingpolicy="myrollingpolicy" />
+
+    <category name="tsf4g.tbus.test" priority="error" appender="test" />
+    <appender name="test" type="rollingfile" logdir="/home/huwu/tmp/tsf4g/test" prefix="test" layout="dated" rollingpolicy="myrollingpolicy" />
+
+
+    <rollingpolicy name="myrollingpolicy" type="sizewin" maxsize="81920000" maxnum="100" />
+    <layout name="dated" type="dated"/>
+
+</log4c>
+

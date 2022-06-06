@@ -1,0 +1,108 @@
+#/bin/bash
+
+
+TSF4G_DIR=../
+
+TSF4G_ORM_RELEASE=tsf4g_torm`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy/tsf4g_orm"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g_orm
+mkdir tmpdeploy/tsf4g_orm/apps
+mkdir tmpdeploy/tsf4g_orm/apps/torm
+mkdir tmpdeploy/tsf4g_orm/apps/torm/bin
+mkdir tmpdeploy/tsf4g_orm/apps/torm/bin_static
+mkdir tmpdeploy/tsf4g_orm/apps/torm/cfg
+mkdir tmpdeploy/tsf4g_orm/apps/torm/docs
+mkdir tmpdeploy/tsf4g_orm/include
+mkdir tmpdeploy/tsf4g_orm/include/apps
+mkdir tmpdeploy/tsf4g_orm/lib
+mkdir tmpdeploy/tsf4g_orm/apps/torm/example
+mkdir tmpdeploy/tsf4g_orm/apps/torm/benchmark
+
+
+echo "copy torm lib files"
+cp  -P  ${TSF4G_DIR}/lib/libtorm* tmpdeploy/tsf4g_orm/lib/
+#cp  -P  ${TSF4G_DIR}/lib/libobus* tmpdeploy/tsf4g_orm/lib/
+cp  -P  ${TSF4G_DIR}/lib/libtproxyapi* tmpdeploy/tsf4g_orm/lib/
+
+echo "cp tormapi include"
+cp -P -rf ${TSF4G_DIR}/include/apps/tormapi  tmpdeploy/tsf4g_orm/include/apps/tormapi
+#cp -P -rf ${TSF4G_DIR}/include/obus tmpdeploy/tsf4g_orm/include/obus
+
+echo "cp tsf4g orm bin"
+cp -P ${TSF4G_DIR}/apps/torm/tormsvr/tormsvr tmpdeploy/tsf4g_orm/apps/torm/bin/
+cp -P ${TSF4G_DIR}/apps/torm/tormsvr/tormsvr_static tmpdeploy/tsf4g_orm/apps/torm/bin_static/tormsvr
+
+echo "cp tsf4g orm example"
+cp_dir ${TSF4G_DIR}/apps/torm/example tmpdeploy/tsf4g_orm/apps/torm/example 
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/excli/Makefile
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/excli/Makefile.real
+mv tmpdeploy/tsf4g_orm/apps/torm/example/excli/Makefile.release tmpdeploy/tsf4g_orm/apps/torm/example/excli/Makefile
+mv tmpdeploy/tsf4g_orm/apps/torm/example/excli/Makefile.real.release tmpdeploy/tsf4g_orm/apps/torm/example/excli/Makefile.real
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/exsvr
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/performance3
+#rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/exsvr/Makefile.real
+#mv tmpdeploy/tsf4g_orm/torm/apps/example/exsvr/Makefile.release tmpdeploy/tsf4g_orm/apps/torm/example/exsvr/Makefile
+#mv tmpdeploy/tsf4g_orm/torm/apps/example/exsvr/Makefile.real.release tmpdeploy/tsf4g_orm/apps/torm/example/exsvr/Makefile.real
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/api_wrapper_exclt/Makefile
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/example/api_wrapper_exclt/Makefile.real
+mv tmpdeploy/tsf4g_orm/apps/torm/example/api_wrapper_exclt/Makefile.release tmpdeploy/tsf4g_orm/apps/torm/example/api_wrapper_exclt/Makefile
+mv tmpdeploy/tsf4g_orm/apps/torm/example/api_wrapper_exclt/Makefile.real.release tmpdeploy/tsf4g_orm/apps/torm/example/api_wrapper_exclt/Makefile.real
+
+echo "cp tsf4g orm benchmark"
+cp_dir ${TSF4G_DIR}/apps/torm/benchmark tmpdeploy/tsf4g_orm/apps/torm/benchmark
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_complex/Makefile
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_complex/Makefile.real
+mv tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_complex/Makefile.release tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_complex/Makefile
+mv tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_complex/Makefile.real.release tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_complex/Makefile.real
+
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_simple/Makefile
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_simple/Makefile.real
+mv tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_simple/Makefile.release tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_simple/Makefile
+mv tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_simple/Makefile.real.release tmpdeploy/tsf4g_orm/apps/torm/benchmark/performance_simple/Makefile.real
+
+
+rm -rf tmpdeploy/tsf4g_orm/apps/torm/benchmark/tdr_dbormapping_proformance
+
+
+
+
+echo "cp tsf4g orm doc"
+cp_dir ${TSF4G_DIR}/docs/apps/torm tmpdeploy/tsf4g_orm/apps/torm/docs
+
+cp -P ./tsf4g_orm.install tmpdeploy/tsf4g_orm/
+
+echo "cp tsf4g orm bin"
+cp -P ./orm_dist/bin/* tmpdeploy/tsf4g_orm/apps/torm/bin/
+cp -P ./orm_dist/bin/* tmpdeploy/tsf4g_orm/apps/torm/bin_static/
+
+echo "cp tsf4g orm cfg"
+cp -P ./orm_dist/cfg/* tmpdeploy/tsf4g_orm/apps/torm/cfg/
+cp -P ${TSF4G_DIR}/apps/torm/tormsvr/tormsvr_conf_desc.xml tmpdeploy/tsf4g_orm/apps/torm/cfg/
+
+cd tmpdeploy
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">tsf4g_orm/version
+
+find ./  -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_ORM_RELEASE} tsf4g_orm 
+mv ${TSF4G_ORM_RELEASE} ../
+cd ../
+rm -rf tmpdeploy
+

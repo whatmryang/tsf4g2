@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<tormsvrconf __version="13">
+
+    <MetaLibInfo>
+        <MetaLibNum>1 </MetaLibNum>
+        <MetaLibName>itemdb</MetaLibName>
+    </MetaLibInfo>
+
+    <ConnectDBNum>1 </ConnectDBNum>
+    <ConnectDBInfo>
+        <IDX>1 </IDX>
+        <DBMSConnectionInfo>localhost</DBMSConnectionInfo>
+        <DBMSCurDatabaseName>dbOrmTest</DBMSCurDatabaseName>
+        <DBMSUser>mmog</DBMSUser>
+	<DBMSPassword>mmog1234</DBMSPassword>
+        <DBMSSock>/tmp/mysql.sock</DBMSSock>
+    </ConnectDBInfo>
+
+    <TableNum>2 </TableNum>
+    <TableConf>
+        <TableName>UserInfo_0</TableName>
+        <TableDBConnIdx>1 </TableDBConnIdx>
+    </TableConf>
+    <TableConf>
+        <TableName>UserInfo_1</TableName>
+        <TableDBConnIdx>1 </TableDBConnIdx>
+   </TableConf>
+
+</tormsvrconf>

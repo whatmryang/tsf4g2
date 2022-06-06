@@ -1,0 +1,29 @@
+#/bin/bash
+
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/include/apps
+  mkdir $TSF4G_INSTALL_HOME/include/apps/tdirtyapi
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tdirtyapi ];then
+  mkdir -p $TSF4G_INSTALL_HOME/include/apps/tdirtyapi
+fi
+
+cp ./lib/libtdirty.a				$TSF4G_INSTALL_HOME/lib
+cp ./lib/libtdirty.so               $TSF4G_INSTALL_HOME/lib
+cp ./include/tdirtyapi.h		    $TSF4G_INSTALL_HOME/include/apps/tdirtyapi
+
+echo "Install tdirty done"

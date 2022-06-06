@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="gbk" standalone="yes" ?>
+<!-- This file is for tbus relay application -->
+
+<Tbusd version="2147483647">
+
+  <BussinessID>0</BussinessID>
+  
+  <!-- relay配置信息所在共享内存的key -->
+  <RelayShmKey>5101</RelayShmKey> 
+
+  <!-- 路由信息所在共享内存的key -->
+  <GCIMShmKey>5000</GCIMShmKey> 
+
+  <!-- 本进程监听URL-->
+  <Listen>tcp://127.0.0.1:25001?reuse=1</Listen>
+
+   <!--指指定中转数据包的最大长度 -->
+   <PkgMaxSize>65536</PkgMaxSize>
+
+  <NeedAckPkg>0</NeedAckPkg>   
+
+  <DisabledChannelTimeGap>10</DisabledChannelTimeGap>
+</Tbusd>
+
+

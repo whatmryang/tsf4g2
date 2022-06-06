@@ -1,0 +1,555 @@
+root:
+    -
+        desc: 架构平台组介绍
+        uri: introduce\introduce.htm
+        src: _no_needs_
+        moduleName: introduce
+        children:
+        -
+            desc: 架构平台组愿景
+            uri: introduce\tsf4g_vision.htm
+            src: _no_needs_
+            moduleName: introduce
+        -
+            desc: 产品介绍
+            uri: introduce\tsf4gintro.htm
+            src: _no_needs_
+            moduleName: introduce
+        -
+            desc: 使用指南
+            uri: introduce\tsf4g_guide.htm
+            src: _no_needs_
+            moduleName: introduce
+    -
+        desc: 基础库(PAL,Tcomm,TDR,Tbus,Tlog,Tmng,TSec,Tapp)
+        uri: lib\lib.htm
+        src: _no_needs_
+        moduleName: base
+        children:
+        -
+            desc: PAL-平台无关层组件
+            uri: lib\pal.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: 使用说明
+                uri: lib\pal\user_guide.htm
+                src: docs\pal\dist\TSF4G-PAL-技术白皮书.doc
+                moduleName: base
+            -
+                desc: API使用说明
+                uri: lib\pal\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+            -
+                desc: FAQ
+                uri: lib\pal\pal_faq.htm
+                src: docs\pal\dist\TSF4G-PAL-FAQ.doc
+                moduleName: base
+        -
+            desc: Tcomm-公共数据结构和算法库
+            uri: lib\tcomm.htm
+            src: _no_needs_
+            moduleName: comm
+            children:
+            -
+                desc: 使用说明
+                uri: lib\comm\user_guide.htm
+                src: _no_needs_
+                moduleName: comm
+            -
+                desc: API使用说明
+                uri: libtcommapi\index.html
+                src: _no_needs_
+                moduleName: comm
+        -
+            desc: TDR-数据表示中间件
+            uri: lib\tdr.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: 开发指导手册
+                uri: lib\tdr\user_guide.htm
+                src: docs\tdr\dist\TSF4G_DR_开发指导手册.doc
+                moduleName: base
+            -
+                desc: 元数据描述规则
+                uri: lib\tdr\meta.htm
+                src: docs\tdr\dist\TSF4G_DR_元数据描述规则.doc
+                moduleName: base
+            -
+                desc: API使用说明
+                uri: lib\tdr\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+            -
+                desc: 工具使用说明书
+                uri: lib\tdr\tools.htm
+                src: docs\tdr\dist\TSF4G_DR_工具使用说明书.doc
+                moduleName: base
+            -
+                desc: 性能测试报告
+                uri: lib\tdr\performance.htm
+                src: docs\tdr\dist\TSF4G_DR_性能测试报告.doc
+                moduleName: base
+            -
+                desc: FAQ
+                uri: lib\tdr\FAQ.htm
+                src: docs\tdr\dist\TSF4G_DR_FAQ.doc
+                moduleName: base
+        -
+            desc: TBUS-进程通信中间件
+            uri: lib\tbus.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: 开发指导手册
+                uri: lib\tbus\user_guide.htm
+                src: docs\tbus\dist\TSF4G_BUS_开发指导手册.doc
+                moduleName: base
+            -
+                desc: 运维指导手册
+                uri: lib\tbus\maintence.htm
+                src: docs\tbus\dist\TSF4G_BUS_运维指导手册.doc
+                moduleName: base
+            -
+                desc: API使用说明
+                uri: lib\tbus\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+            -
+                desc: 性能测试报告
+                uri: lib\tbus\tbus_performance.htm
+                src: docs\tbus\dist\TSF4G_BUS_性能测试报告.doc
+                moduleName: tbus
+            -
+                desc: 工具使用说明书
+                uri: lib\tbus\tbus_tools.htm
+                src: docs\tbus\dist\TSF4G_BUS_工具使用说明书.doc
+                moduleName: base
+            -
+                desc: FAQ
+                uri: lib\tbus\tbus_faq.htm
+                src: docs\tbus\dist\TSF4G_BUS_FAQ.doc
+                moduleName: base
+        -
+            desc: TLOG-日志中间件
+            uri: lib\tlog.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: 开发指导手册
+                uri: lib\tlog\api\html\tloguserguide.htm
+                src: docs\tlog\dist\TSF4G_LOG系统开发指导手册.doc
+                moduleName: base
+            -
+                desc: 运维指导手册
+                uri: lib\tlog\api\html\tlogd.html
+                src: docs\tlog\dist\TSF4G_LOG系统运维指导手册.doc
+                moduleName: base
+            -
+                desc: API使用说明
+                uri: lib\tlog\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+        -
+            desc: TAPP-进程框架
+            uri: lib\tapp.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: 开发指导手册
+                uri: lib\tapp\userguide.htm
+                src: docs\tapp\dist\TSF4G_TAPP_开发指导手册.doc
+                moduleName: base
+            -
+                desc: API使用说明
+                uri: lib\tapp\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+            -
+                desc: FAQ
+                uri: lib\tapp\faq.htm
+                src: docs\tapp\dist\TSF4G_TAPP_FAQ.doc
+                moduleName: base
+        -
+            desc: TMNG-元数据管理组件
+            uri: lib\tmng.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: TSF4G_TMNG_维护使用文档
+                uri: lib\tmng\tmng_used.htm
+                src: docs\tmng\dist\TSF4G_TMNG_维护使用文档.doc
+                moduleName: base
+            -
+                desc: API使用说明
+                uri: lib\tmng\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+        -
+            desc: Tsec-安全相关组件
+            uri: lib\tsec.htm
+            src: _no_needs_
+            moduleName: base
+            children:
+            -
+                desc: API使用说明
+                uri: lib\tsec\api\html\index.html
+                src: _no_needs_
+                moduleName: base
+        -
+            desc: 使用约束
+            uri: lib\constraints.htm
+            src: docs\base\dist\TSF4G_BASE_系统限制.doc
+            moduleName: base
+        -
+            desc: FAQ
+            uri: lib\faq.htm
+            src: docs\base\dist\TSF4G_BASE_FAQ.doc
+            moduleName: base
+    -
+        desc: 统一登录组件(Tconnd,TDir,Tcus,Tacc,Tqos)
+        uri: unifiedenroll\unifiedenroll.htm
+        src: _no_needs_
+        moduleName: tconnd
+        children:
+        -
+            desc: 接入及API使用
+            uri: unifiedenroll\tconnd.htm
+            src: _no_needs_
+            moduleName: tconnd
+            children:
+            -
+                desc: 概要设计文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Develop.htm
+                src: docs\apps\tconnd\TSF4G_TCONND_概要设计文档.doc
+                moduleName: tconnd
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Maintenance.htm
+                src: docs\apps\tconnd\TSF4G_TCONND_维护使用文档.doc
+                moduleName: tconnd
+            -
+                desc: 性能参考文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Performance.htm
+                src: docs\apps\tconnd\TSF4G_TCONND_性能参考文档.doc
+                moduleName: tconnd
+            -
+                desc: 接入及API使用
+                uri: unifiedenroll\tconnd\TSF4G_tconnd_API.htm
+                src: docs\apps\tconnd\TSF4G_TCONND_接入及API使用.doc
+                moduleName: tconnd
+            -
+                desc: 下载发布包
+                uri: ..\Publish\Publish.aspx
+                src: _no_needs_
+                moduleName: tconnd
+            -
+                desc: 常见使用问题
+                uri: unifiedenroll\tconnd\TSF4G_tconnd_FAQ.htm
+                src: docs\apps\tconnd\TSF4G_TCONND_常见使用问题.doc
+                moduleName: tconnd
+            -
+                desc: API使用手册
+                uri: unifiedenroll\tconnd\html\index.html
+                src: _no_needs_
+                moduleName: tconnd
+        -
+            desc: 目录服务组件(tdir)
+            uri: unifiedenroll\tdir.htm
+            src: _no_needs_
+            moduleName: None
+            children:
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tdir\TSF4G_Dir_Maintenance.htm
+                src: docs\apps\tdir\TSF4G_TDIR_维护使用文档.doc
+                moduleName: tconnd
+        -
+            desc: 版本更新组件(tcus)
+            uri: unifiedenroll\tcus.htm
+            src: _no_needs_
+            moduleName: tconnd
+            children:
+            -
+                desc: 介绍PPT
+                uri: unifiedenroll\tcus\TSF4G_VERSIONSVR_统一登录版本升级系统介绍.htm
+                src: _no_needs_
+                moduleName: tconnd
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tcus\TSF4G_cus_Maintenance.htm
+                src: _no_needs_
+                moduleName: tconnd
+            -
+                desc: 性能参考文档
+                uri: unifiedenroll\tcus\TSF4G_cus_performance.htm
+                src: _no_needs_
+                moduleName: tconnd
+        -
+            desc: 帐号信息服务器(tacc)
+            uri: unifiedenroll\tacc.htm
+            src: _no_needs_
+            moduleName: tconnd
+            children:
+            -
+                desc: 介绍PPT
+                uri: unifiedenroll\tacc\TSF4G_ACC_Introduction.htm
+                src: _no_needs_
+                moduleName: tconnd
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tacc\TSF4G_acc_Maintenance.htm
+                src: apps\tacc\docs\TSF4G_ACC_Maintenance.doc
+                moduleName: tconnd
+        -
+            desc: 服务质量服务器(tqos)
+            uri: tqos_index.htm
+            src: _no_needs_
+            moduleName: tconnd
+            children:
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tqos\tqos_maintainous.htm
+                src: docs\apps\tqos\dist\TSF4G_QOS_维护使用文档.doc
+                moduleName: tconnd
+            -
+                desc: 开发参考文档
+                uri: unifiedenroll\tqos\tqos_dev_manual.htm
+                src: docs\apps\tqos\dist\TSF4G_QOS_开发参考文档.doc
+                moduleName: tconnd
+    -
+        desc: 通用逻辑组件(Tnamesvr,Tdirty,Tmail,Tmart)
+        uri: apps\apps.htm
+        src: _no_needs_
+        moduleName: apps
+        children:
+        -
+            desc: 名字服务器(tnamesvr)
+            uri: apps\namesvr\tnamesvr.htm
+            src: _no_needs_
+            moduleName: apps
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\namesvr\namesvrgeneral.htm
+                src: docs\apps\tnamesvr\TSF4G-Namesvr-介绍说明文档.doc
+                moduleName: apps
+            -
+                desc: 维护使用文档
+                uri: apps\namesvr\maintain.htm
+                src: docs\apps\tnamesvr\TSF4G-Namesvr-维护使用文档.doc
+                moduleName: apps
+            -
+                desc: 性能参考文档
+                uri: apps\namesvr\namesvrbenchmark.htm
+                src: docs\apps\tnamesvr\TSF4G-Namesvr-性能测试报告.doc
+                moduleName: apps
+        -
+            desc: 敏感词系统 (tdirty)
+            uri: apps\tdirty\tdirty.htm
+            src: _no_needs_
+            moduleName: apps
+            children:
+            -
+                desc: 接入指导文档
+                uri: apps\tdirty\guide.htm
+                src: docs\tdirty\TSF4G-Dirty-接入指引文档.doc
+                moduleName: apps
+            -
+                desc: 概要设计文档
+                uri: apps\tdirty\general.htm
+                src: docs\tdirty\TSF4G-Dirty-概要设计文档.doc
+                moduleName: apps
+            -
+                desc: 接口说明文档
+                uri: apps\tdirty\develop.htm
+                src: _no_needs_
+                moduleName: apps
+            -
+                desc: 接口说明文档-kr
+                uri: apps\tdirty\develop-kr.htm
+                src: _no_needs_
+                moduleName: apps
+        -
+            desc: 通用邮件系统 (tmail)
+            uri: apps\tmail\tmail.htm
+            src: _no_needs_
+            moduleName: apps
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\tmail\general.htm
+                src: docs\tmail\TSF4G-Mail-概要设计文档.doc
+                moduleName: apps
+            -
+                desc: 开发指导文档
+                uri: apps\tmail\develop.htm
+                src: docs\tmail\TSF4G-Mail-开发指导文档.doc
+                moduleName: apps
+            -
+                desc: 性能参考文档
+                uri: apps\tmail\benchmark.htm
+                src: docs\tmail\TSF4G-Mail-性能测试文档.doc
+                moduleName: apps
+        -
+            desc: 通用商城系统 (tmart)
+            uri: apps\tmart\tmart.htm
+            src: _no_needs_
+            moduleName: apps
+            children:
+            -
+                desc: 概要设计文档
+                uri: apps\tmart\general.htm
+                src: _no_needs_
+                moduleName: apps
+            -
+                desc: 维护使用文档
+                uri: apps\tmart\maintenance.htm
+                src: _no_needs_
+                moduleName: apps
+            -
+                desc: 性能测试文档
+                uri: apps\tmart\tmartbenchmark.htm
+                src: _no_needs_
+                moduleName: apps
+    -
+        desc: 数据存储组件(Torm,Tsdm)
+        uri: storage\storage.htm
+        src: _no_needs_
+        moduleName: storage
+        children:
+        -
+            desc: 对象关系映射(torm)
+            uri: storage\torm\torm.htm
+            src: _no_needs_
+            moduleName: storage
+            children:
+            -
+                desc: 维护使用文档
+                uri: storage\torm\torm_maintence.htm
+                src: docs\apps\torm\TSF-G-TORM-运维文档.doc
+                moduleName: storage
+            -
+                desc: 问题解答(FAQ)
+                uri: storage\torm\torm_faq.htm
+                src: docs\apps\torm\TSF-G-TORM-常见问题.doc
+                moduleName: storage
+            -
+                desc: 客户端API使用
+                uri: storage\torm\api_introduction.htm
+                src: docs\apps\torm\TSF-G-TORM-CLIENT-API使用概述文档.doc
+                moduleName: storage
+            -
+                desc: 概要设计文档
+                uri: storage\torm\torm_design.htm
+                src: docs\apps\torm\TSF-G-TORM_SERVER设计文档.doc
+                moduleName: storage
+            -
+                desc: 性能参考文档
+                uri: storage\torm\performance.htm
+                src: docs\apps\torm\TSF-G-TORM-性能测试报告.doc
+                moduleName: storage
+        -
+            desc: 敏感数据管理系统(Tsdm)
+            uri: storage\tsdm\tsdm.htm
+            src: _no_needs_
+            moduleName: storage
+            children:
+            -
+                desc: 维护使用文档
+                uri: storage\tsdm\tsdm_maintence.htm
+                src: docs\apps\tsdm\TSF_G_SDM_维护文档.doc
+                moduleName: storage
+            -
+                desc: 设计文档
+                uri: storage\tsdm\tsdm_design.htm
+                src: docs\apps\tsdm\TSF_G_SDM_设计文档.doc
+                moduleName: storage
+            -
+                desc: API使用文档
+                uri: storage\tsdm\api_introduction.htm
+                src: docs\apps\tsdm\TSF_G_SDM_API使用文档.doc
+                moduleName: storage
+            -
+                desc: 测试文档
+                uri: storage\tsdm\test.htm
+                src: docs\apps\tsdm\TSF_G_SDM_测试文档.doc
+                moduleName: storage
+    -
+        desc: 系统管理组件(Tcm,Tcenterd-Agent)
+        uri: sysmng\sysmng.htm
+        src: _no_needs_
+        moduleName: tcm
+        children:
+        -
+            desc: 集中管理系统(tcm)
+            uri: sysmng\tcm\tcm.htm
+            src: _no_needs_
+            moduleName: tcm
+            children:
+            -
+                desc: 概要设计文档
+                uri: sysmng\tcm\tcm_design.htm
+                src: docs\apps\tcm\TSF-G-TCM-设计文档.doc
+                moduleName: tcm
+            -
+                desc: 系统维护文档
+                uri: sysmng\tcm\tcm_maintence.htm
+                src: docs\apps\tcm\TSF-G-TCM-维护文档.doc
+                moduleName: tcm
+            -
+                desc: 例子系统使用指南
+                uri: sysmng\tcm\tcm_example.htm
+                src: docs\apps\tcm\TSF-G-TCM-Example操作指南.doc
+                moduleName: tcm
+        -
+            desc: tagent
+            uri: sysmng\tagent\tagent.htm
+            src: _no_needs_
+            moduleName: tcm
+            children:
+            -
+                desc: 概要设计文档
+                uri: sysmng\tagent\general.htm
+                src: apps\tagent\doc\TSF4G-Agent-Centerd-General.doc
+                moduleName: tcm
+        -
+            desc: tcenterd
+            uri: sysmng\tcenterd\tcenterd.htm
+            src: _no_needs_
+            moduleName: tcm
+            children:
+            -
+                desc: 概要设计
+                uri: sysmng\tcenterd\general.htm
+                src: apps\tcenterd\doc\TSF4G-Centerd-General.doc
+                moduleName: tcm
+    -
+        desc: 内部开发环境(Dev)
+        uri: dev\index.htm
+        src: _no_needs_
+        moduleName: dev
+        children:
+        -
+            desc: 介绍说明文档
+            uri: dev\introduce.htm
+            src: docs\dev\TSF4G-Dev-介绍说明文档.doc
+            moduleName: dev
+        -
+            desc: 概要设计文档
+            uri: dev\general.htm
+            src: docs\dev\TSF4G-Dev-概要设计文档.doc
+            moduleName: dev
+        -
+            desc: 维护说明文档
+            uri: dev\maintenance.htm
+            src: docs\dev\TSF4G-Dev-维护说明文档.doc
+            moduleName: dev

@@ -1,0 +1,39 @@
+#  @file $RCSfile: Makefile,v $
+#    Makefile for tsf4g-tbus test tool
+#  $Id: Makefile,v 1.8 2009-08-13 01:46:22 jacky Exp $
+#  @author $Author: jacky $
+#  @date $Date: 2009-08-13 01:46:22 $
+#  @version $Revision: 1.8 $
+#  @note Editor: Vim 6.3, Gcc 4.0.2, tab=4
+#  @note Platform: Linux
+
+include ../../../tsf4g.mk
+
+TBUS_TEST_CFILE=$(wildcard *.c)
+TBUS_TEST_OBJ=$(TBUS_TEST_CFILE:.c=.o)
+TEST_TOOL=tbustest
+
+CINC += -I../ -I$(TSF4G_LIBSRC)
+
+#LOG_LIB = -ltlog
+LIBS +=  ${TSF4G_LIB}/libtsf4g.a -Wl,-Bstatic -lscew -lexpat -Wl,-Bdynamic -lpthread
+
+.PHONY: all clean
+
+all: $(TEST_TOOL)
+
+-include $(TBUS_TEST_CFILE:.c=.d)
+
+%.d: %.c
+	$(CC) -MM $(CFLAGS) $< -o $@
+
+%.o: %.c %.d
+	$(CC) -c $(CFLAGS) $(DEBUG) $<
+
+$(TEST_TOOL): $(TBUS_TEST_OBJ)
+	$(CC) -o $@ $(CFLAGS) $^ $(LDPATH)  $(LIBS)
+
+clean:
+	$(RM) core *.o  *.d
+	$(RM) $(TEST_TOOL)
+

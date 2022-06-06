@@ -1,0 +1,122 @@
+#!/bin/bash
+
+
+if [ -z "$1" ];then
+  if [ -z $TSF4G_INSTALL_HOME ];then
+    echo "Error: please export TSF4G_INSTALL_HOME"
+    exit
+  fi
+else
+  if [ -z $TSF4G_INSTALL_HOME ];then
+    echo "Warn: please export TSF4G_INSTALL_HOME"
+  fi
+  TSF4G_INSTALL_HOME=$1
+fi
+
+echo "Install torm under directory" $TSF4G_INSTALL_HOME
+
+#if [ -z "$1" ];then
+#  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+#else
+#  TSF4G_INSTALL_HOME=$1
+#fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+#  mkdir $TSF4G_INSTALL_HOME/tools
+#  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+  mkdir $TSF4G_INSTALL_HOME/docs
+  mkdir $TSF4G_INSTALL_HOME/docs/apps
+fi
+
+rm -rf $TSF4G_INSTALL_HOME/apps/torm
+rm -rf $TSF4G_INSTALL_HOME/include/apps/tormapi
+rm -rf $TSF4G_INSTALL_HOME/docs/apps/torm
+rm -rf $TSF4G_INSTALL_HOME/examples/apps/torm
+rm -rf $TSF4G_INSTALL_HOME/benchmark/apps/torm
+rm -rf $TSF4G_INSTALL_HOME/lib/libtorm*
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/torm ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/torm
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/torm/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/torm/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/torm/bin_static ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/torm/bin_static
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/torm/cfg ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/torm/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps
+fi
+  
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tormapi ];then
+  mkdir $TSF4G_INSTALL_HOME/include/apps/tormapi
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs ];then
+  mkdir $TSF4G_INSTALL_HOME/docs
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/docs/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs/apps/torm ];then
+  mkdir $TSF4G_INSTALL_HOME/docs/apps/torm
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/examples ];then
+  mkdir $TSF4G_INSTALL_HOME/examples
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/examples/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/examples/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/benchmark ];then
+  mkdir $TSF4G_INSTALL_HOME/benchmark
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/benchmark/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/benchmark/apps
+fi
+
+echo "Install torm...."
+cp -P ./version             $TSF4G_INSTALL_HOME/apps/torm/
+cp -P -rf ./apps/torm/bin/       $TSF4G_INSTALL_HOME/apps/torm/
+cp -P -rf ./apps/torm/bin_static/       $TSF4G_INSTALL_HOME/apps/torm/
+cp -P -rf ./apps/torm/cfg/       $TSF4G_INSTALL_HOME/apps/torm/
+cp -P -rf ./apps/torm/docs/*   $TSF4G_INSTALL_HOME/docs/apps/torm/
+cp -P -rf ./apps/torm/docs/   $TSF4G_INSTALL_HOME/apps/torm/
+cp -P -rf ./apps/torm/example/    $TSF4G_INSTALL_HOME/apps/torm/
+cp -P -rf ./apps/torm/bin/       $TSF4G_INSTALL_HOME/apps/torm/example/
+cp -P -rf ./apps/torm/cfg/       $TSF4G_INSTALL_HOME/apps/torm/example/
+cp -P -rf ./apps/torm/benchmark/    $TSF4G_INSTALL_HOME/apps/torm/
+
+cp -P -rf ./include/apps/tormapi/ ${TSF4G_INSTALL_HOME}/include/apps/
+#cp -P -rf ./include/obus/ ${TSF4G_INSTALL_HOME}/include/
+
+cp -P ./lib/libtorm*   ${TSF4G_INSTALL_HOME}/lib/
+cp -P ./lib/libtproxy*   ${TSF4G_INSTALL_HOME}/lib/
+#cp -P ./lib/libobus* ${TSF4G_INSTALL_HOME}/lib/
+
+ln -s $TSF4G_INSTALL_HOME/apps/torm/example $TSF4G_INSTALL_HOME/examples/apps/torm
+
+ln -s $TSF4G_INSTALL_HOME/apps/torm/benchmark $TSF4G_INSTALL_HOME/benchmark/apps/torm
+
+
+echo "Install torm done"

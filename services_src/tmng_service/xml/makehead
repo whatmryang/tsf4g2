@@ -1,0 +1,4 @@
+../../../tools/tdr --xml2h deploy_def.xml
+../../../tools/tdr --xml2h mng_protocol.xml
+mv deploy_def.h ../../../include/tmng
+mv mng_protocol.h ../../../include/tmng

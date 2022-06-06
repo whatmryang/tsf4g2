@@ -1,0 +1,14 @@
+
+# The set of source files associated with this SConscript file.
+import os
+
+
+
+src_local = Glob('*.c')
+src_local += Glob('*.cc')
+
+Import('buildenv')
+buildenv.buildStaticLib('gtest',src_local, CPPPATH=[os.path.abspath(os.getcwd()+"/..")])
+#buildenv.buildSharedLib('pal',src_local)
+src_local = list()
+Return('src_local')

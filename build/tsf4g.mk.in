@@ -1,0 +1,114 @@
+#Makefile template for tsf4g.mk
+# $Id: tsf4g.mk.in,v 1.9 2009-08-18 11:30:15 jacky Exp $
+#
+# Date:   2008-04-21
+#
+# Copyright (C) 2008 Architechure IRED TENCENT
+#
+# ================================================================
+
+
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+datadir = @datadir@
+includedir = @includedir@
+infodir = @infodir@
+libdir = @libdir@
+libexecdir = @libexecdir@
+localstatedir = @localstatedir@
+mandir = @mandir@
+moduledir = @libexecdir@
+sbindir = @sbindir@
+sharedstatedir = @sharedstatedir@
+
+#----------------------------------------------------
+withobus=@tsf4g_with_obus@
+enabledebug=@tsf4g_enable_debug@
+withsec=@tsf4g_with_sec@
+enable64bit=@tsf4g_enable_64bit@
+
+#--------------work directories----------------------
+TSF4G_HOME=@TSF4G_HOME@
+TSF4G_ARCH=@TSF4G_ARCH@
+TSF4G_INC  = $(TSF4G_HOME)/include
+
+TSF4G_SERVICES = $(TSF4G_HOME)/services
+TSF4G_SERVICESRC = $(TSF4G_HOME)/services_src
+
+TSF4G_UNITTESTS = $(TSF4G_HOME)/unittests
+TSF4G_UNITTESTSRC = $(TSF4G_HOME)/unittests_src
+
+
+TSF4G_LIB  = $(TSF4G_HOME)/lib
+TSF4G_LIBSRC  = $(TSF4G_HOME)/lib_src
+
+TSF4G_TOOLS = $(TSF4G_HOME)/tools
+TSF4G_TOOLSRC  = $(TSF4G_HOME)/tools_src
+
+TSF4G_LIB_PUB_OBJ_DIR=$(TSF4G_HOME)/.obj/lib/tsf4g_pub
+TSF4G_ST_LIB_OBJ_DIR=$(TSF4G_HOME)/.obj/lib/tsf4g
+TSF4G_MT_LIB_OBJ_DIR=$(TSF4G_HOME)/.obj/lib/tsf4g_r
+
+TSF4G_UNITTEST = $(TSF4G_HOME)/unittests
+
+TSF4G_SERVICES = $(TSF4G_HOME)/services
+TSF4G_APPS_INC=$(TSF4G_INC)/apps
+
+#---------------------------------------
+#dirctory for mysql installed 
+MYSQL_INSTALL_DIR=@MYSQL_INSTALL_DIR@
+
+CC =@CC@
+RM = /bin/rm -f
+LN = $(TSF4G_HOME)/build/ln.sh 
+
+# -----------include files -----------------------------------
+
+#TSF4G_DBMS_INCLUDE = -I$(MYSQL_INSTALL_DIR)/include/mysql
+TSF4G_DBMS_INCLUDE =
+
+CINC  =  -I$(TSF4G_INC)/ 
+
+
+
+
+#----------------libraris --------------------------
+LDPATH += @LDFLAGS@
+ifeq  ($(TSF4G_ARCH),x86_64)
+	LDPATH  += -L/usr/lib64/ -L/usr/local/lib64   
+	TSF4G_DEPS = $(TSF4G_HOME)/deps/lib64
+else
+	LDPATH  += -L/usr/lib/ -L/usr/local/lib
+	TSF4G_DEPS = $(TSF4G_HOME)/deps/lib
+endif
+
+LDPATH += -L$(TSF4G_LIB)/
+    
+
+LIBS = -lnsl -lpthread -ldl
+
+# useed to static link 
+LTSTATIC=@LTSTATIC@
+
+#libraries for XML parse
+TSF4G_XML_LIBS =  -Wl,-Bstatic -lscew -lexpat -Wl,-Bdynamic 
+
+#library for mysqlclient
+TSF4G_DBMS_LIB = -lmysqlclient_r  -lz -lcrypt -lnsl -lm
+
+#C compiler flags
+SHARED = -shared -z defs
+CFLAGS=@CFLAGS@ 
+
+CFLAGS += @CPPFLAGS@ 
+
+CFLAGS+= -Wall -pipe -D_NEW_LIC -D_GNU_SOURCE -D_REENTRANT 
+
+CFLAGS += $(CINC)
+
+	
+CEXTRAFLAGS = $(CFLAGS) -fpic
+
+

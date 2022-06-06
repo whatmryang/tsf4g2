@@ -1,0 +1,18 @@
+
+# The set of source files associated with this SConscript file.
+import os
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+Import('buildenv')
+if buildenv._isLinux:
+	buildenv.buildStaticLib('obus',src_local)
+else:
+	src_local=list()
+
+#Not build into the lib tsf4g for error
+
+src_local = list()
+
+Return('src_local')

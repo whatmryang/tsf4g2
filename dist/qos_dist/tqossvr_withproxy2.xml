@@ -1,0 +1,8 @@
+<tqossvrconf version="10">
+	<BindIP> 10.1.44.60</BindIP>
+	<Port> 34579</Port>
+	<UdpFlag> 1</UdpFlag>
+	<IpCityCfgPath>../../cfg/tqossvr/city_ip_region.txt</IpCityCfgPath>
+    	<IpISPCfgPath>../../cfg/tqossvr/IPDatabase.cfg</IpISPCfgPath>
+	<QosConfig> ../../cfg/tqossvr/tqos.xml</QosConfig>
+</tqossvrconf>	

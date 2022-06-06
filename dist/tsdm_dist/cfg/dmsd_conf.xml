@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!-- This file is for dms module -->
+
+<DmsConf>
+  <BillLogPath>../log/dmsd/</BillLogPath>
+  <Verbose>1</Verbose>
+
+  <DmsThreads>28</DmsThreads> <!-- how many threads should be created -->
+  <DmsDB>../cfg/dmsdb.xml</DmsDB>
+
+</DmsConf>
+

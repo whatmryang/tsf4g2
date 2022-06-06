@@ -1,0 +1,68 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release
+else
+  TSF4G_INSTALL_HOME=$1
+fi  
+
+echo "install dir ${TSF4G_INSTALL_HOME}"
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tqos ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tqos
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tqos/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tqos/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tqos/cfg ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tqos/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tqos/doc ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/tqos/doc
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/ ];then
+  mkdir ${TSF4G_INSTALL_HOME}/include/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/tqos ];then
+  mkdir ${TSF4G_INSTALL_HOME}/include/apps/tqos
+fi  
+
+
+echo "Install tqos...."
+cp ./version             $TSF4G_INSTALL_HOME/apps/tqos/
+cp ./bin/tqosconnd/tqosconnd       $TSF4G_INSTALL_HOME/apps/tqos/bin/
+cp ./bin/tqosproxy/tqosproxy       $TSF4G_INSTALL_HOME/apps/tqos/bin/
+cp ./bin/tqossvr/tqossvr         $TSF4G_INSTALL_HOME/apps/tqos/bin/
+cp ./doc/*qos*           $TSF4G_INSTALL_HOME/apps/tqos/doc/
+cp ./doc/*QOS*           $TSF4G_INSTALL_HOME/apps/tqos/doc/
+cp ./include/tqos*       ${TSF4G_INSTALL_HOME}/include/apps/tqos
+cp ./lib/libtqosapi.a    ${TSF4G_INSTALL_HOME}/lib/
+
+if [ "$2" != "withcfg" ]
+then
+   echo "Install tqos done"
+else
+   echo "with cfg"
+   cp ./cfg/*  $TSF4G_INSTALL_HOME/apps/tqos/cfg/
+fi   
+   
+echo "Install tqos done"
+
+
+
+
+

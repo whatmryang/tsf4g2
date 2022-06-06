@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="gbk" standalone="yes" ?>
+<!-- This file is for tbus routes tool application-->
+
+<metalib tagsetversion="1" name="TbusConf" version="10">
+
+    <include file="tbus_macros.xml" />
+    <include file="tbus_comm.xml" />
+    <include file="tbus_desc.xml" />
+    <include file="tbusd_desc.xml" />
+
+    <!-- 这个macorsgroup中的每个entry的value是不能改动的 -->
+    <macrosgroup name="TBUS_CONF_META_INDEXES" >
+        <macro name="TBUS_CONF_META_GCIM"       value="0x00" />
+        <macro name="TBUS_CONF_META_GRM"        value="0x01" />
+        <macro name="TBUS_CONF_META_TBUSD"      value="0x02" />
+        <macro name="TBUS_CONF_META_TBUSCONF"   value="0x03" />
+        <macro name="TBUS_CONF_META_COUNT"      value="0x04" />
+    </macrosgroup>
+
+    <macro name="TBUS_CONF_MAX_FILE_NAME" value="1024" />
+
+    <struct name="TbusConf" version="10"  >
+        <entry name="BussinessID" type="int"
+            defaultvalue="TBUS_DEFAUL_BUSSINESS_ID"
+            desc="TCM系统分配的业务ID.不使用TCM系统的,配置成 0" io="nooutput" />
+
+        <entry name="AddrTemplet" type="string"
+            size="TBUS_MAX_ADDR_TEMPLET_STRING_LEN" defaultvalue="8.8.8.8"
+            desc="TBUS地址解析模板,默认值为: 8.8.8.8" />
+
+        <entry name="GCIMConf"     type="TbusGCIM" desc="通道配置." />
+        <entry name="GCIMConfFile" type="string" size="TBUS_CONF_MAX_FILE_NAME"
+            desc="通道配置文件路径名.如果该配置项的值非空,则GCIMConf项无效." io="nooutput" />
+
+        <entry name="GRMConf"    type="RelayMnger"
+            desc="路由配置.只有在进行跨物理机器TBUS通信时,才需要该配置项." />
+        <entry name="GRMConfFile" type="string" size="TBUS_CONF_MAX_FILE_NAME"
+            desc="路由配置文件路径名.如果该配置项的值非空,则GRMConf项无效." io="nooutput" />
+
+        <entry name="TBUSDConf"  type="Tbusd"
+            desc="TBUSD配置.只有在进行跨物理机器TBUS通信时,才需要该配置项." />
+    </struct>
+
+</metalib>

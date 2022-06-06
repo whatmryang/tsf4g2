@@ -1,0 +1,413 @@
+<ComposeSort version="12">
+  <select1> 1  </select1>
+   <tinyuintArr> 0xab 0x31 0x11 0x8c 0x79 0x85   </tinyuintArr>
+   <tinyuintArr> 0x15 0xbe 0x69 0x68 0x98 0xec   </tinyuintArr>
+   <tinyuintArr> 0xf7 0xb0 0x2d 0x2e 0x71 0xc4   </tinyuintArr>
+   <tinyuintArr> 0xa7 0xd8 0x66 0x48 0x2f 0x44   </tinyuintArr>
+   <tinyuintArr> 0x5c 0xfd 0x93 0xd2 0xc1 0xe2   </tinyuintArr>
+   <tinyuintArr> 0xe1 0x2c 0x24 0xa0 0x35 0xcf   </tinyuintArr>
+  <sortMetaArr1 type="composeArr" version="12">
+   <strArrNum> 1   </strArrNum>
+   <strArr>bv</strArr>
+   <floatArrNum> 4   </floatArrNum>
+   <floatArr> 17506.000000 11517.000000 32068.000000 20106.000000   </floatArr>
+   <doubleArr> 655.672164 11081.459270 26817.591204 9367.316342 246.876562 9628.185907   </doubleArr>
+  </sortMetaArr1>
+  <sortMetaArr1 type="composeArr" version="12">
+   <strArrNum> 0   </strArrNum>
+   <floatArrNum> 5   </floatArrNum>
+   <floatArr> 31142.000000 23901.000000 6392.000000 28949.000000 1114.000000   </floatArr>
+   <doubleArr> 32693.653173 13472.263868 3816.091954 12119.940030 32375.812094 7062.468766   </doubleArr>
+  </sortMetaArr1>
+  <sortMetaArr1 type="composeArr" version="12">
+   <strArrNum> 0   </strArrNum>
+   <floatArrNum> 3   </floatArrNum>
+   <floatArr> 11946.000000 22280.000000 10103.000000   </floatArr>
+   <doubleArr> 29458.270865 12626.686657 32282.858571 4259.870065 27297.351324 6924.537731   </doubleArr>
+  </sortMetaArr1>
+  <sortMetaArr1 type="composeArr" version="12">
+   <strArrNum> 0   </strArrNum>
+   <floatArrNum> 2   </floatArrNum>
+   <floatArr> 10865.000000 28473.000000   </floatArr>
+   <doubleArr> 30923.538231 29847.076462 5965.017491 2449.775112 27968.015992 8506.746627   </doubleArr>
+  </sortMetaArr1>
+  <sortMetaArr1 type="composeArr" version="12">
+   <strArrNum> 3   </strArrNum>
+   <strArr>eky</strArr>
+   <strArr>wwslj</strArr>
+   <strArr>q</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 29192.000000   </floatArr>
+   <doubleArr> 3001.499250 4618.690655 30125.937031 21044.477761 1409.295352 6485.757121   </doubleArr>
+  </sortMetaArr1>
+  <sortMetaArr1 type="composeArr" version="12">
+   <strArrNum> 4   </strArrNum>
+   <strArr>cm</strArr>
+   <strArr>k</strArr>
+   <strArr>kd</strArr>
+   <strArr>i</strArr>
+   <floatArrNum> 3   </floatArrNum>
+   <floatArr> 9127.000000 27902.000000 10592.000000   </floatArr>
+   <doubleArr> 14045.977011 6634.682659 29967.016492 28544.727636 31636.181909 20716.641679   </doubleArr>
+  </sortMetaArr1>
+  <sortMetaArr2 type="composeArr" version="12">
+   <strArrNum> 4   </strArrNum>
+   <strArr>jq</strArr>
+   <strArr>yqm</strArr>
+   <strArr>mt</strArr>
+   <strArr>v</strArr>
+   <floatArrNum> 4   </floatArrNum>
+   <floatArr> 6971.000000 3682.000000 14791.000000 17907.000000   </floatArr>
+   <doubleArr> 23216.391804 20892.553723 5110.444778 4582.708646 10649.675162 2226.886557   </doubleArr>
+  </sortMetaArr2>
+  <sortMetaArr2 type="composeArr" version="12">
+   <strArrNum> 2   </strArrNum>
+   <strArr>jdrc</strArr>
+   <strArr>jdjiw</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 29387.000000   </floatArr>
+   <doubleArr> 25514.242879 29062.468766 2102.948526 4620.689655 24881.559220 2622.688656   </doubleArr>
+  </sortMetaArr2>
+  <sortMetaArr2 type="composeArr" version="12">
+   <strArrNum> 1   </strArrNum>
+   <strArr>uqd</strArr>
+   <floatArrNum> 3   </floatArrNum>
+   <floatArr> 32294.000000 2440.000000 12274.000000   </floatArr>
+   <doubleArr> 17385.307346 25687.156422 10818.590705 4003.998001 14042.978511 6475.762119   </doubleArr>
+  </sortMetaArr2>
+  <sortMetaArr2 type="composeArr" version="12">
+   <strArrNum> 2   </strArrNum>
+   <strArr>q</strArr>
+   <strArr>pj</strArr>
+   <floatArrNum> 4   </floatArrNum>
+   <floatArr> 32147.000000 25263.000000 13879.000000 22664.000000   </floatArr>
+   <doubleArr> 24870.564718 1061.469265 3772.113943 23844.077961 11887.056472 22127.936032   </doubleArr>
+  </sortMetaArr2>
+  <sortMetaArr2 type="composeArr" version="12">
+   <strArrNum> 2   </strArrNum>
+   <strArr>f</strArr>
+   <strArr>g</strArr>
+   <floatArrNum> 2   </floatArrNum>
+   <floatArr> 11041.000000 6031.000000   </floatArr>
+   <doubleArr> 2233.883058 25913.043478 19344.327836 2789.605197 19129.435282 26010.994503   </doubleArr>
+  </sortMetaArr2>
+  <sortMetaArr2 type="composeArr" version="12">
+   <strArrNum> 2   </strArrNum>
+   <strArr>bgny</strArr>
+   <strArr>agn</strArr>
+   <floatArrNum> 4   </floatArrNum>
+   <floatArr> 16298.000000 16049.000000 25388.000000 25498.000000   </floatArr>
+   <doubleArr> 26084.957521 14641.679160 3104.447776 906.546727 27547.226387 28746.626687   </doubleArr>
+  </sortMetaArr2>
+  <sortMetaArr3 type="composeArr" version="12">
+   <strArrNum> 5   </strArrNum>
+   <strArr>jlc</strArr>
+   <strArr>wngy</strArr>
+   <strArr>oj</strArr>
+   <strArr>vnhj</strArr>
+   <strArr>a</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 15499.000000   </floatArr>
+   <doubleArr> 15964.017991 2736.631684 30455.772114 28686.656672 18952.523738 22958.520740   </doubleArr>
+  </sortMetaArr3>
+  <sortMetaArr3 type="composeArr" version="12">
+   <strArrNum> 3   </strArrNum>
+   <strArr>qm</strArr>
+   <strArr>hgj</strArr>
+   <strArr>jyodk</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 10928.000000   </floatArr>
+   <doubleArr> 15025.487256 18520.739630 9112.443778 31899.050475 28884.557721 31096.451774   </doubleArr>
+  </sortMetaArr3>
+  <sortMetaArr3 type="composeArr" version="12">
+   <strArrNum> 5   </strArrNum>
+   <strArr>o</strArr>
+   <strArr>qexpl</strArr>
+   <strArr>ifgc</strArr>
+   <strArr>rwi</strArr>
+   <strArr>ea</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 12593.000000   </floatArr>
+   <doubleArr> 16580.709645 3204.397801 17502.248876 29037.481259 20605.697151 31987.006497   </doubleArr>
+  </sortMetaArr3>
+  <sortMetaArr3 type="composeArr" version="12">
+   <strArrNum> 0   </strArrNum>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 5896.000000   </floatArr>
+   <doubleArr> 6855.572214 17152.423788 18095.952024 1350.324838 20026.986507 12932.533733   </doubleArr>
+  </sortMetaArr3>
+  <sortMetaArr3 type="composeArr" version="12">
+   <strArrNum> 1   </strArrNum>
+   <strArr>ror</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 25839.000000   </floatArr>
+   <doubleArr> 3352.323838 9538.230885 25618.190905 29215.392304 6848.575712 20668.665667   </doubleArr>
+  </sortMetaArr3>
+  <sortMetaArr3 type="composeArr" version="12">
+   <strArrNum> 1   </strArrNum>
+   <strArr>d</strArr>
+   <floatArrNum> 1   </floatArrNum>
+   <floatArr> 29885.000000   </floatArr>
+   <doubleArr> 24521.739130 22380.809595 12888.555722 30196.901549 26415.792104 23775.112444   </doubleArr>
+  </sortMetaArr3>
+  <sortSimpleSort1 type="SimpleSort" version="12">
+   <intArrCount> 5   </intArrCount>
+   <sortint> 27941 14950 17527 21110 24275   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0xcb 0x90 0x7f 0x29 0x37 0x99    </tinyuintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 22417 10937 16932 5422 11363 24888    </smalluintArr>
+   <sortuint> 4365 7550 20360 29125 26290 9967   </sortuint>
+   <select3> 1   </select3>
+    <ulongArr> 26656 14176 19940 22204 2942 8716    </ulongArr>
+   <select4> 0   </select4>
+    <longlongArr> 237211351 341746800 829986298 13140881 239912064 459409467    </longlongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 3    </strArrNum>
+    <strArr>dhbfx</strArr>
+    <strArr>titbn</strArr>
+    <strArr>ew</strArr>
+    <floatArrNum> 2    </floatArrNum>
+    <floatArr> 30881.000000 16372.000000    </floatArr>
+    <doubleArr> 1857.071464 14915.542229 22519.740130 3932.033983 9887.056472 17231.384308    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort1>
+  <sortSimpleSort1 type="SimpleSort" version="12">
+   <intArrCount> 5   </intArrCount>
+   <sortint> 20757 718 16935 31227 22167   </sortint>
+   <select1> 0   </select1>
+    <tinyintArr> 22 4 63 106 125 -6    </tinyintArr>
+   <select2> 0   </select2>
+    <smallintArr> 23302 26018 20961 13213 31475 32642    </smallintArr>
+   <sortuint> 16784 11744 11378 5478 24317 7569   </sortuint>
+   <select3> 1   </select3>
+    <ulongArr> 16311 16315 25987 9122 14355 14017    </ulongArr>
+   <select4> 0   </select4>
+    <longlongArr> 312566688 265132500 849430296 356567653 40778011 164350680    </longlongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 2    </strArrNum>
+    <strArr>esrf</strArr>
+    <strArr>qx</strArr>
+    <floatArrNum> 1    </floatArrNum>
+    <floatArr> 5870.000000    </floatArr>
+    <doubleArr> 28209.895052 26291.854073 25742.128936 1519.240380 21812.093953 11962.018991    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort1>
+  <sortSimpleSort1 type="SimpleSort" version="12">
+   <intArrCount> 3   </intArrCount>
+   <sortint> 27980 11803 6170   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0xfd 0x9c 0x1d 0x2c 0x38 0x9b    </tinyuintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 22608 748 13148 14514 11884 7930    </smalluintArr>
+   <sortuint> 28494 4814 15241 21910 8416 12321   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 12016 26517 18931 27815 6932 12379    </longArr>
+   <select4> 1   </select4>
+    <ulonglongArr> 299254410 267609889 241021432 330548301 552503700 24336928    </ulonglongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 0    </strArrNum>
+    <floatArrNum> 2    </floatArrNum>
+    <floatArr> 7030.000000 8023.000000    </floatArr>
+    <doubleArr> 17040.479760 21952.023988 15999.000500 30207.896052 6029.985007 15727.136432    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort1>
+  <sortSimpleSort1 type="SimpleSort" version="12">
+   <intArrCount> 0   </intArrCount>
+   <sortint>   </sortint>
+   <select1> 0   </select1>
+    <tinyintArr> -79 61 52 110 -111 33    </tinyintArr>
+   <select2> 0   </select2>
+    <smallintArr> 3197 22832 5409 28386 7633 28062    </smallintArr>
+   <sortuint> 29916 5598 32405 20837 8583 18720   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 1818 20786 27910 290 19505 23116    </longArr>
+   <select4> 0   </select4>
+    <longlongArr> 646109682 169920686 519384140 15282380 280046624 713134080    </longlongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 5    </strArrNum>
+    <strArr>qa</strArr>
+    <strArr>u</strArr>
+    <strArr>wk</strArr>
+    <strArr>g</strArr>
+    <strArr>fry</strArr>
+    <floatArrNum> 2    </floatArrNum>
+    <floatArr> 9722.000000 30526.000000    </floatArr>
+    <doubleArr> 30211.894053 16177.911044 10242.878561 9420.289855 8133.933033 17404.297851    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort1>
+  <sortSimpleSort1 type="SimpleSort" version="12">
+   <intArrCount> 0   </intArrCount>
+   <sortint>   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0x24 0xd4 0x1c 0x27 0x8c 0x3f    </tinyuintArr>
+   <select2> 0   </select2>
+    <smallintArr> 23569 17521 19690 17507 27198 22280    </smallintArr>
+   <sortuint> 11272 30619 7965 3094 21533 25317   </sortuint>
+   <select3> 1   </select3>
+    <ulongArr> 23299 19133 29200 10367 4143 18327    </ulongArr>
+   <select4> 0   </select4>
+    <longlongArr> 194003205 671664584 98840223 550999000 71923139 149738091    </longlongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 3    </strArrNum>
+    <strArr>ycmlo</strArr>
+    <strArr>bhgbr</strArr>
+    <strArr>vw</strArr>
+    <floatArrNum> 3    </floatArrNum>
+    <floatArr> 29792.000000 15942.000000 3931.000000    </floatArr>
+    <doubleArr> 20091.954023 6969.515242 1500.249875 23765.117441 18141.929035 25749.125437    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort1>
+  <sortSimpleSort1 type="SimpleSort" version="12">
+   <intArrCount> 2   </intArrCount>
+   <sortint> 6674 3955   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0xdc 0x32 0x11 0x3d 0x13 0x72    </tinyuintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 373 16337 6465 8344 7180 20474    </smalluintArr>
+   <sortuint> 28989 1658 2853 25009 23380 13768   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 12163 5161 29609 29249 3809 24761    </longArr>
+   <select4> 0   </select4>
+    <longlongArr> 579392376 388742240 130844664 237563320 226014408 418487100    </longlongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 0    </strArrNum>
+    <floatArrNum> 1    </floatArrNum>
+    <floatArr> 21658.000000    </floatArr>
+    <doubleArr> 5788.105947 31253.373313 26663.668166 15169.415292 21990.004998 9869.065467    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort1>
+  <sortSimpleSort2 type="SimpleSort" version="12">
+   <intArrCount> 3   </intArrCount>
+   <sortint> 5652 21732 11822   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0x3c 0xa1 0x9b 0x9f 0x68 0x81    </tinyuintArr>
+   <select2> 0   </select2>
+    <smallintArr> 26200 2908 10121 1153 8079 9531    </smallintArr>
+   <sortuint> 2469 20041 29730 2807 16968 10778   </sortuint>
+   <select3> 1   </select3>
+    <ulongArr> 17420 13650 15713 12544 5230 18998    </ulongArr>
+   <select4> 1   </select4>
+    <ulonglongArr> 662101705 283390860 433346324 330688100 155130076 722344693    </ulonglongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 1    </strArrNum>
+    <strArr>xscs</strArr>
+    <floatArrNum> 3    </floatArrNum>
+    <floatArr> 30168.000000 17794.000000 5054.000000    </floatArr>
+    <doubleArr> 4810.594703 7925.037481 1412.293853 3400.299850 32195.902049 7105.447276    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort2>
+  <sortSimpleSort2 type="SimpleSort" version="12">
+   <intArrCount> 3   </intArrCount>
+   <sortint> 18567 3240 31910   </sortint>
+   <select1> 0   </select1>
+    <tinyintArr> -72 66 -102 -98 -102 -2    </tinyintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 32759 213 28602 25411 18928 3134    </smalluintArr>
+   <sortuint> 29634 15770 31706 22258 2198 23954   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 4258 1006 21396 2798 18733 7164    </longArr>
+   <select4> 1   </select4>
+    <ulonglongArr> 22439000 159068591 38712798 15551850 99780506 296604    </ulonglongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 4    </strArrNum>
+    <strArr>xd</strArr>
+    <strArr>n</strArr>
+    <strArr>cr</strArr>
+    <strArr>f</strArr>
+    <floatArrNum> 2    </floatArrNum>
+    <floatArr> 8483.000000 3075.000000    </floatArr>
+    <doubleArr> 28831.584208 27575.212394 6658.670665 5362.318841 6807.596202 10258.870565    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort2>
+  <sortSimpleSort2 type="SimpleSort" version="12">
+   <intArrCount> 3   </intArrCount>
+   <sortint> 10419 26030 106   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0x94 0x7c 0xe9 0x69 0x2 0x9b    </tinyuintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 24211 22345 32434 966 13009 6735    </smalluintArr>
+   <sortuint> 14242 3887 14631 11220 15034 28467   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 10744 299 32141 28584 23550 9659    </longArr>
+   <select4> 1   </select4>
+    <ulonglongArr> 158818450 38218253 871679704 45786048 511053280 16226910    </ulonglongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 4    </strArrNum>
+    <strArr>dhab</strArr>
+    <strArr>rw</strArr>
+    <strArr>kssgj</strArr>
+    <strArr>c</strArr>
+    <floatArrNum> 1    </floatArrNum>
+    <floatArr> 21565.000000    </floatArr>
+    <doubleArr> 17422.288856 14878.560720 2313.843078 31983.008496 17535.232384 13182.408796    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort2>
+  <sortSimpleSort2 type="SimpleSort" version="12">
+   <intArrCount> 2   </intArrCount>
+   <sortint> 31479 9206   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0x0 0x68 0xbb 0xd0 0x51 0xbe    </tinyuintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 14550 9505 26597 5661 16287 8075    </smalluintArr>
+   <sortuint> 16285 24663 31240 32070 30413 25569   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 17868 31002 6046 28533 30651 29113    </longArr>
+   <select4> 0   </select4>
+    <longlongArr> 244981320 551179789 147966334 840588650 27197280 69924096    </longlongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 2    </strArrNum>
+    <strArr>nwioq</strArr>
+    <strArr>f</strArr>
+    <floatArrNum> 4    </floatArrNum>
+    <floatArr> 18226.000000 14489.000000 13666.000000 30119.000000    </floatArr>
+    <doubleArr> 2112.943528 32215.892054 15497.251374 20360.819590 6326.836582 25718.140930    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort2>
+  <sortSimpleSort2 type="SimpleSort" version="12">
+   <intArrCount> 1   </intArrCount>
+   <sortint> 11006   </sortint>
+   <select1> 0   </select1>
+    <tinyintArr> -93 23 -93 -11 15 -62    </tinyintArr>
+   <select2> 1   </select2>
+    <smalluintArr> 29798 23149 22737 13997 4782 23512    </smalluintArr>
+   <sortuint> 28425 5855 13004 15777 30337 8250   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 22074 14585 20045 2890 31826 5229    </longArr>
+   <select4> 1   </select4>
+    <ulonglongArr> 503811534 358418734 929563656 292393821 270254370 519628500    </ulonglongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 5    </strArrNum>
+    <strArr>rs</strArr>
+    <strArr>xx</strArr>
+    <strArr>i</strArr>
+    <strArr>pcquj</strArr>
+    <strArr>b</strArr>
+    <floatArrNum> 1    </floatArrNum>
+    <floatArr> 22358.000000    </floatArr>
+    <doubleArr> 28785.607196 19522.238881 31850.074963 22782.608696 15701.149425 23003.498251    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort2>
+  <sortSimpleSort2 type="SimpleSort" version="12">
+   <intArrCount> 1   </intArrCount>
+   <sortint> 30844   </sortint>
+   <select1> 1   </select1>
+    <tinyuintArr> 0xd7 0xe4 0xe0 0xb6 0x47 0xb    </tinyuintArr>
+   <select2> 0   </select2>
+    <smallintArr> 825 23022 18627 17497 22150 14755    </smallintArr>
+   <sortuint> 2582 5966 28705 12195 28889 21745   </sortuint>
+   <select3> 0   </select3>
+    <longArr> 26586 9185 18712 6078 21086 19060    </longArr>
+   <select4> 1   </select4>
+    <ulonglongArr> 580468613 8126748 19886744 11467814 664093275 47329821    </ulonglongArr>
+   <sortMetaArr type="composeArr" version="12">
+    <strArrNum> 3    </strArrNum>
+    <strArr>wiyn</strArr>
+    <strArr>r</strArr>
+    <strArr>jnkc</strArr>
+    <floatArrNum> 3    </floatArrNum>
+    <floatArr> 8166.000000 4896.000000 5873.000000    </floatArr>
+    <doubleArr> 20285.857071 8252.873563 18856.571714 17475.262369 28024.987506 11483.258371    </doubleArr>
+   </sortMetaArr>
+  </sortSimpleSort2>
+</ComposeSort>

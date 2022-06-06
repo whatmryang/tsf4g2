@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="tlogdtest" version="10" >
+	
+	<struct name="tlogdtestconf" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="tlogdtestrun_cumulate" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="tlogdtestrun_status" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+</metalib>

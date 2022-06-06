@@ -1,0 +1,20 @@
+import os
+import shutil
+import os.path
+
+Import('buildenv')
+
+headers=Split('tlogmemdef.xml tlogdatadef.xml tlog_priority_def.xml tlogfilterdef.xml tlogfiledef.xml tlognetdef.xml tlogvecdef.xml tloganydef.xml tlogbindef.xml tlog_category_def.xml tlogconf.xml')
+buildenv.xml2h(headers)
+Install('../../include/tlog','tlog_priority_def.h')
+
+buildenv.xml2c('tlogconf',headers)
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+buildenv.buildStaticLib('tlog',src_local,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB', '_FILE_OFFSET_BITS=64'])
+
+#buildenv.buildStaticLib('tlog_r',src_local,MODULE='base', OBJPREFIX='mt_', CPPDEFINES=['TSF4G_SMALL_LIB', 'TSF4G_TLOG_THREAD_SAFE', '_FILE_OFFSET_BITS=64'])
+
+Return('src_local')

@@ -1,0 +1,26 @@
+Import("buildenv")
+Export('buildenv')
+
+import os
+if buildenv._isLinux:
+	os.system('chmod 777 *.sh')
+"""
+
+"""
+
+buildenv.xml2h("transfer_conf_desc.xml")
+buildenv.xml2h("../protocol/transfer_fore_proto.xml")
+buildenv.xml2h("../protocol/transfer_backsvr_proto.xml");
+
+buildenv.xml2c("transfer_conf_desc", "transfer_conf_desc.xml")
+buildenv.xml2c("transfer_fore_proto", "../protocol/transfer_fore_proto.xml");
+buildenv.xml2c("transfer_backsvr_proto", "../protocol/transfer_backsvr_proto.xml");
+
+src = Glob('*.c')
+src += Glob('*.cpp')
+
+if buildenv._isLinux:
+	buildenv.buildExec('example',src,a_tsf4g_static_lib="tconnapi tsf4g",LIBS="pthread ", CPPPATH=Split("../protocol ../../../../include/apps"))
+else:
+	buildenv.buildExec('example',src,a_tsf4g_static_lib="tsf4g tconnapi",CPPDEFINES=["_TSF4G_LARGE_LIB_"], CPPPATH=Split("../protocol ../../../../include/apps"))
+

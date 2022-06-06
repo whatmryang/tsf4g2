@@ -1,0 +1,10 @@
+Import("buildenv")
+
+if buildenv._isLinux:
+	if buildenv._is64:
+		Install('../lib','lib64/libscew.a')
+		Install('../lib','lib64/libexpat.a')
+
+	else:
+		Install('../lib','lib/libscew.a')
+		Install('../lib','lib/libexpat.a')

@@ -1,0 +1,73 @@
+#/bin/bash
+TSF4G_DIR=../
+TSvd_HOME=${TSF4G_DIR}apps/tsvd
+TSF4G_TSVD_RELEASE=tsf4g_tsvd`date +%Y%m%d`.tgz
+TSvd_RELEASE_DIR=tsf4g_tsvd`date +%Y%m%d`
+
+echo ${TSvd_RELEASE_DIR}
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir ${TSvd_RELEASE_DIR}"
+mkdir ${TSvd_RELEASE_DIR}
+mkdir ${TSvd_RELEASE_DIR}/bin
+mkdir ${TSvd_RELEASE_DIR}/conf
+mkdir ${TSvd_RELEASE_DIR}/docs
+mkdir ${TSvd_RELEASE_DIR}/tools
+
+
+
+echo "cp tsvd bin"
+cp  ${TSvd_HOME}/server/tsvd ${TSvd_RELEASE_DIR}/bin
+cp  ${TSvd_HOME}/server/start.sh ${TSvd_RELEASE_DIR}/bin
+cp  ${TSvd_HOME}/server/stop.sh ${TSvd_RELEASE_DIR}/bin
+cp   ${TSF4G_DIR}apps/tconnd/tconndsvr/tconnd ${TSvd_RELEASE_DIR}/bin/
+cp  ${TSvd_HOME}/bin/tconnd_start ${TSvd_RELEASE_DIR}/bin
+cp  ${TSvd_HOME}/bin/tconnd_stop ${TSvd_RELEASE_DIR}/bin
+
+
+echo "cp tsvd conf"
+cp  ${TSvd_HOME}/conf/tconnd.xml ${TSvd_RELEASE_DIR}/conf
+cp  ${TSvd_HOME}/conf/tsvd_net.tdr ${TSvd_RELEASE_DIR}/conf
+cp  ${TSvd_HOME}/conf/tsvd.xml ${TSvd_RELEASE_DIR}/conf
+cp  ${TSvd_HOME}/conf/tsvd_log.xml ${TSvd_RELEASE_DIR}/conf
+cp ${TSvd_HOME}/conf/tbusmgr.xml ${TSvd_RELEASE_DIR}/conf
+
+echo "cp docs"
+cp   ${TSvd_HOME}/doc/安全校验系统-维护文档.doc ${TSvd_RELEASE_DIR}/docs/
+cp   ${TSF4G_DIR}docs/tconnd/TSF4G_TCONND_Maintenance.doc ${TSvd_RELEASE_DIR}/docs/
+cp   ${TSF4G_DIR}docs/tbus/TSF-G-bus_maintenance.doc ${TSvd_RELEASE_DIR}/docs/
+
+
+
+echo "cp tools"
+cp ${TSF4G_DIR}tools/tbusmgr ${TSvd_RELEASE_DIR}/tools
+
+
+
+echo "copy installshell"
+cp  ./tsvd_dist/tsf4g_tsvd.install ${TSvd_RELEASE_DIR}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TSvd_RELEASE_DIR}/version
+
+
+find ${TSvd_RELEASE_DIR} -name "CVS" -exec rm -rf {} \;
+find ${TSvd_RELEASE_DIR} -name "\*.d" -exec rm -rf {} \;
+find ${TSvd_RELEASE_DIR} -name "\*.o" -exec rm -rf {} \;
+tar czvf ${TSF4G_TSVD_RELEASE} ${TSvd_RELEASE_DIR}
+rm -rf ${TSvd_RELEASE_DIR}
+
+

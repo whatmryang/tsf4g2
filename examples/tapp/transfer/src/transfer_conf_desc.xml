@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="transfer" version="1" >
+
+    <macro name="BUSADDRSIZE" value="16" />
+
+    <struct name="ServerType" version="1" >
+        <entry name="busAddr" type="string" size="BUSADDRSIZE"/>
+    </struct>
+
+    <!--keep align with ./conf/transfer.xml-->
+	<struct name="transferconf" version ="1" >
+
+        <!--session number to check in a tick-->
+        <entry name="checkNumPerTick"    type="uint" />
+
+        <!--session timeout gap, ms-->
+        <entry name="sessionTimeout"     type="uint" />
+
+        <!--max supported current session number-->
+        <entry name="maxDirtyCheckSessionNum"      type="uint" />
+
+        <!--max request accpeted in one call to pfnProc-->
+        <entry name="maxReqPerProc"   type="uint" />
+
+        <!--max response accpeted in one call to pfnProc-->
+        <entry name="maxResPerProc"    type="uint" />
+
+        <!--when no session number is avalible-->
+        <!-- how to process request in tbus-channel from tconnd-->
+        <!--0: delete it;  !0: keep it-->
+        <entry name="keepReqWhenFull"    type="int"  />
+
+        <!--foreground tconnd server-->
+        <entry name="tconnd"   type="ServerType" />
+
+        <!--background servers-->
+        <entry name="dirtyCheckSvr"  type="ServerType" />
+        <!--add other background servers here-->
+	</struct>
+
+	<struct name="transferrun_cumulate" version ="1" >
+        <entry name="totalRequestNum"       type="ulonglong" />
+        <entry name="totalTimeoutNum"       type="ulonglong" />
+        <!--add other cumulate global statistics here-->
+
+
+        <!--cumulate statistics for dirtyCheck-server-->
+        <entry name="totalDirtyCheckReqDroped"    type="ulonglong" />
+        <entry name="totalDirtyCheckReqNum"       type="ulonglong" />
+        <entry name="totalDirtyCheckResNum"       type="ulonglong" />
+        <entry name="totalIllDirtyCheckRes"       type="ulonglong" />
+
+        <!--add cumulate statistics for other servers here-->
+
+	</struct>
+
+	<struct name="transferrun_status" version ="1" >
+        <entry name="status"  type="int" />
+	</struct>
+
+</metalib>

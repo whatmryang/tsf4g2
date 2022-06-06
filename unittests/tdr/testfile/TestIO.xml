@@ -1,0 +1,14 @@
+<TestIO version="10">
+    <CSStatus>
+        <Type> 2</Type>
+            <testAlignA>
+                <a> 1234</a>
+                <b> 34</b>
+                <c> 454</c>
+            </testAlignA>
+    </CSStatus>
+    <CSStatus>
+        <Type> 1</Type>
+            <Dummy> 5678</Dummy>
+    </CSStatus>
+</TestIO>

@@ -1,0 +1,12 @@
+Import("buildenv")
+
+if buildenv._isLinux:
+	if buildenv.isInstall("base"):
+		confs = Glob('build/*')
+		confs += Glob('base_dist/install.sh')
+		confs += Glob('base_dist/README')
+		Install(buildenv.getInstallBase(),confs)
+		Install(buildenv.libInstallPath,buildenv.getStaticLib('scew'))
+		Install(buildenv.libInstallPath,buildenv.getStaticLib('expat'))	
+else:
+	print "Windows Using installer"

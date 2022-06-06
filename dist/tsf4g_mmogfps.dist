@@ -1,0 +1,47 @@
+#/bin/bash
+
+usage()
+{
+	echo "Usage: "
+	echo "  $0 LabelName"
+	echo " "
+	echo "Example: "
+	echo "  $0  tsf4g_mmogfps_01_0001"
+}
+
+if [ $# -ne 1 ]; then
+	echo "paramter list uncorrect"
+	usage
+	exit 1
+fi	
+
+TSF4G_DIR=../
+TSF4G_MMOGFPS_DIR=${TSF4G_DIR}/apps/mmogfps
+TSF4G_RELEASE_DIR=/usr/local/tsf4g_release
+TSF4G_MMOGFPS_RELEASE=tsf4g_mmogfps`date +%Y%m%d`
+
+echo "mkdir tmpdeploy"
+mkdir tmpdeploy
+
+echo "cp mmogfps files"
+cp -rf ${TSF4G_DIR}/apps/mmogfps tmpdeploy/
+
+echo "cp tsf4g include files"
+cp -rf ${TSF4G_DIR}/include/pal tmpdeploy/mmogfps/src/windows/include/
+cp -rf ${TSF4G_DIR}/include/tdr tmpdeploy/mmogfps/src/windows/include/
+cp -rf ${TSF4G_DIR}/include/apps tmpdeploy/mmogfps/src/windows/include/
+
+echo "cp tsf4g win32 lib files"
+cp ${TSF4G_DIR}/win32_lib/vc8/debug/* tmpdeploy/mmogfps/src/windows/vc8lib/
+cp ${TSF4G_DIR}/win32_lib/vc8/release/* tmpdeploy/mmogfps/src/windows/vc8lib/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">tmpdeploy/mmogfps/version
+
+cd tmpdeploy
+find ./mmogfps -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_MMOGFPS_RELEASE}.tgz mmogfps 
+cp ${TSF4G_MMOGFPS_RELEASE}.tgz ${TSF4G_RELEASE_DIR}/
+cd ../
+cp tmpdeploy/${TSF4G_MMOGFPS_RELEASE}.tgz ./
+rm -rf tmpdeploy

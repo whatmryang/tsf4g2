@@ -1,0 +1,86 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example\n "
+      echo "  $0  tsf4g_base_01_0001"
+}
+
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+
+TSF4G_DIR=../
+TSF4G_SIGAPI_RELEASE=tsf4g_sigapi`date +%Y%m%d`.tgz
+TSIGAPI_HOME=tsf4g_sigapi`date +%Y%m%d`
+
+echo "mkdir ${TSIGAPI_HOME}"
+mkdir ${TSIGAPI_HOME}
+mkdir ${TSIGAPI_HOME}/include/
+mkdir ${TSIGAPI_HOME}/include/tqqsig/
+mkdir ${TSIGAPI_HOME}/lib
+mkdir ${TSIGAPI_HOME}/lib_64
+mkdir ${TSIGAPI_HOME}/win32_lib
+
+mkdir ${TSIGAPI_HOME}/win32_lib/vc6/
+mkdir ${TSIGAPI_HOME}/win32_lib/vc6/debug
+mkdir ${TSIGAPI_HOME}/win32_lib/vc6/release
+
+mkdir ${TSIGAPI_HOME}/win32_lib/vc7/
+mkdir ${TSIGAPI_HOME}/win32_lib/vc7/debug
+mkdir ${TSIGAPI_HOME}/win32_lib/vc7/release
+
+mkdir ${TSIGAPI_HOME}/win32_lib/vc8/
+mkdir ${TSIGAPI_HOME}/win32_lib/vc8/debug
+mkdir ${TSIGAPI_HOME}/win32_lib/vc8/release
+
+
+mkdir ${TSIGAPI_HOME}/cfg
+mkdir ${TSIGAPI_HOME}/docs
+mkdir ${TSIGAPI_HOME}/sample
+
+
+echo "copy include files"
+cp   ${TSF4G_DIR}/include/tqqsig/tqqsig_api.h ${TSIGAPI_HOME}/include/tqqsig/
+
+
+echo "copy  lib files"
+cp   ${TSF4G_DIR}/lib/libtqqsig.*  ${TSIGAPI_HOME}/lib/
+
+echo "copy  lib_64 files"
+cp   ${TSF4G_DIR}/lib_src/tqqsig/libtqqsig.*  ${TSIGAPI_HOME}/lib_64/
+
+echo "copy  win32_lib files"
+cp   ${TSF4G_DIR}/win32_lib/vc6/debug/libtqqsig_d.lib  ${TSIGAPI_HOME}/win32_lib/vc6/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc6/release/libtqqsig.lib  ${TSIGAPI_HOME}/win32_lib/vc6/release/
+cp   ${TSF4G_DIR}/win32_lib/vc7/debug/libtqqsig_d.lib  ${TSIGAPI_HOME}/win32_lib/vc7/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc7/release/libtqqsig.lib  ${TSIGAPI_HOME}/win32_lib/vc7/release/
+cp   ${TSF4G_DIR}/win32_lib/vc8/debug/libtqqsig_d.lib  ${TSIGAPI_HOME}/win32_lib/vc8/debug/
+cp   ${TSF4G_DIR}/win32_lib/vc8/release/libtqqsig.lib  ${TSIGAPI_HOME}/win32_lib/vc8/release/
+
+
+echo "copy cfg"
+cp   ${TSF4G_DIR}/lib_src/tqqsig/tqqsig_api.ini ${TSIGAPI_HOME}/cfg/
+
+
+
+echo "copy sample"
+cp  -rf ${TSF4G_DIR}/lib/example/tqqsig/* ${TSIGAPI_HOME}/sample/
+
+echo "copy docs"
+cp  -rf ${TSF4G_DIR}/docs/tqqsig/* ${TSIGAPI_HOME}/docs/
+
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TSIGAPI_HOME}/version
+
+find ${TSIGAPI_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_SIGAPI_RELEASE} ${TSIGAPI_HOME} 
+rm -rf ${TSIGAPI_HOME}

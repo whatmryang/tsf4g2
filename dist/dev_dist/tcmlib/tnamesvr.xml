@@ -1,0 +1,13 @@
+<namesvrconf>
+	<RunDirEnv></RunDirEnv>
+	<NameShmkey>##SHM_NAMESVRCACHESHM##</NameShmkey>
+	<NameShmkeyMaxSize>50000</NameShmkeyMaxSize>
+	<TaskShmkey>##SHM_NAMESVRTASKQUEUE##</TaskShmkey>
+	<TaskShmkeyMaxSize>1000</TaskShmkeyMaxSize>	
+	<TaskPerTick>800</TaskPerTick>	
+	<TormsvrAddr>##TORMSVR##</TormsvrAddr>
+	<MarkDel>0</MarkDel>	
+	<TaskTimeOut>5</TaskTimeOut>	
+	<DropPackWhenQueueFull>0 </DropPackWhenQueueFull>	
+	<NameAppTdr>../protocol/namesvr_app.tdr</NameAppTdr>
+</namesvrconf>

@@ -1,0 +1,15 @@
+Test tool of bus module for IERD. Version 1.0
+
+tbus_test <-c configured file> [-s source address] [-r remote address] [-l loop tries] [-b batch package counts] [-h] [-v]
+ Usage: -c <configured file>       # xml file for bus test tool settings 
+        -s [source address]        # source bus address, format xxx.xxx.xxx.xxx
+        -r [remote address]        # remote bus address, format xxx.xxx.xxx.xxx
+        -l [loop tries]            # loop times, default is 1
+        -b [batch package counts]  # batch package counts, send -b packages before receiving, default is 1
+        -k                         # only send data and not receive from source address
+        -v                         # verbose output
+        -h                         # print this screen
+
+
+Authors: ARCH,IERD,Tencent
+

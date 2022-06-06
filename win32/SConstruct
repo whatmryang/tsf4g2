@@ -1,0 +1,267 @@
+import os
+import os.path
+#global
+
+class vcenv():
+	def __init__(self,vc8version,suffix):
+		self.env=Environment(MSVC_VERSION=vc8version)
+		self.vcversion=suffix
+		self.envDebug=self.env.Clone()
+		includeList=['../include','../deps/scew/','../deps/mysql/include/','../deps/expat/lib','../lib_src/','../lib_src/tdr/dbms','../lib_src/tdr/xml_metalib']
+		
+		self.envDebug.Append(CPPPATH=includeList)
+		#self.envDebug.Append(CPPDEFINES = Split(debugMacro))
+		#self.envDebug.Append(CCPDBFLAGS='/Zi /Fd$.pdb')
+		
+		self.envRelease=self.env.Clone()
+		#releaseMacro='WIN32 TSF4G_STATIC _USE_32BIT_TIME_T'
+		self.envRelease.Append(CPPPATH=includeList)
+		#self.envRelease.Append(CPPDEFINES = Split(releaseMacro))
+		#self.envRelease.Append(CCPDBFLAGS='/Zi /Fd$.pdb')
+		#self.envRelease.Append(CFLAGS='/TP /Od')
+
+		
+	def debugLibAdd(self,libName,additionalFlag='',libSrc="NULL",OutPath="NULL",BuildVariaty="debug",sconsScriptPath=''):
+		if libSrc == "NULL":
+			sourcePath='../lib_src/'+libName
+		else:
+			sourcePath=libSrc
+			
+		if OutPath=="NULL":
+			outPutPath='..\\win32_lib\\'+self.vcversion+'\\'+BuildVariaty+'\\'
+		else:
+			outPutPath=OutPath+'\\'+BuildVariaty+'\\'
+			
+		if sconsScriptPath=='':
+			sconsScriptPath = sourcePath+'/SConscript';
+		
+			
+		objprefix=self.vcversion+BuildVariaty
+		objdir='../win32_build/'+self.vcversion+'/'+libName+'/'+BuildVariaty
+		
+		
+		libBaseName='lib'+libName+'_d'
+		libtarget=libBaseName+self.vcversion
+		libName=libBaseName+'.lib'
+	
+		postAction='copy '+libtarget+'.lib '+outPutPath+libName
+		#os.system(postAction)
+		pdbflag='/Fd'+outPutPath+libBaseName+'.pdb'
+		
+		
+		debugMacro='XML_STATIC _BIND_TO_CURRENT_VCLIBS_VERSION WIN32 _DEBUG TSF4G_STATIC _USE_32BIT_TIME_T _LIB TDR_WITH_XML'+' ' +additionalFlag
+		cflags='/Od /Gm /EHsc /RTC1 /MDd  /nologo /ZI /Gd /W1'
+		
+		libtmp=self.envDebug.Clone()
+		sourcelist=libtmp.SConscript(sconsScriptPath,variant_dir=objdir, duplicate=0)
+		target=libtmp.StaticLibrary(libtarget,sourcelist,OBJPREFIX=objprefix,CCPDBFLAGS=pdbflag,CFLAGS=cflags,CPPDEFINES = Split(debugMacro))
+		libtmp.AddPostAction(target,postAction)
+
+	def releaseLibAdd(self,libName,additionalFlag='',libSrc="NULL",OutPath="NULL",BuildVariaty="release",sconsScriptPath=''):
+		if libSrc == "NULL":
+			sourcePath='../lib_src/'+libName
+		else:
+			sourcePath=libSrc
+			
+		if OutPath=="NULL":
+			outPutPath='..\\win32_lib\\'+self.vcversion+'\\'+BuildVariaty+'\\'
+		else:
+			outPutPath=OutPath+'\\'+BuildVariaty+'\\'
+
+		if sconsScriptPath=='':
+			sconsScriptPath = sourcePath+'/SConscript'		
+
+		
+		objprefix=self.vcversion+'release'
+		objdir='../win32_build/'+self.vcversion+'/'+libName+'/release'
+		outPutPath='..\\win32_lib\\'+self.vcversion+'\\release\\'
+		
+		libBaseName='lib'+libName
+		libtarget=libBaseName+self.vcversion
+		libName=libBaseName+'.lib'
+
+		
+		postAction='copy '+libtarget+'.lib '+outPutPath+libName
+		#os.system(postAction)
+		cflags='/O2 /nologo /W1'
+		pdbflag=' /FD /MD /Zi /Fd'+outPutPath+libBaseName+'.pdb'
+		releaseMacro='XML_STATIC _BIND_TO_CURRENT_VCLIBS_VERSION WIN32 TSF4G_STATIC _USE_32BIT_TIME_T _LIB TDR_WITH_XML NDEBUG'+' '+additionalFlag
+		libtmp=self.envRelease.Clone()
+		sourcelist=libtmp.SConscript(sconsScriptPath,variant_dir=objdir, duplicate=0)
+		libtmp.Append(LINKFLAGS='WinMm.lib')
+		#print libtmp['LINKFLAGS']
+
+		target=libtmp.Library(libtarget,sourcelist,ARFLAGS=['/nologo','WinMm.lib'],CPPDEFINES=Split(releaseMacro),OBJPREFIX=objprefix,CCPDBFLAGS=pdbflag,CFLAGS=cflags,LDFLAGS='WinMm.lib')
+		libtmp.AddPostAction(target,postAction)
+		
+	def libAdd(self,libName,CFLAGS='',scripPath='',debugFlags='',releaseFlags=''):
+		dbgf=CFLAGS+' '+debugFlags
+		relf=CFLAGS+' '+releaseFlags
+		self.debugLibAdd(libName,dbgf,sconsScriptPath = scripPath)
+		self.releaseLibAdd(libName,relf,sconsScriptPath = scripPath)
+		
+	def releaseAppAdd(self,appName,sourceDir='.\\',TargetDir='.\\',additionalFlag=''):
+		sourcePath=sourceDir
+		
+		objprefix=self.vcversion+'release'
+		objdir='../win32_build/'+self.vcversion+'/'+appName+'/release'
+		outPutPath=TargetDir
+		ldLibPath='../win32_lib/'+self.vcversion+'/release'
+		
+		libBaseName=appName
+		libtarget=libBaseName+self.vcversion+'release'
+		libName=libBaseName+'.exe'
+		
+		destDir=os.path.abspath(TargetDir+'\\'+self.vcversion+'\\'+'release')
+		if not os.path.isdir(destDir):
+			print 'No such dir'
+			os.makedirs(destDir)
+			
+
+		
+		postAction='copy '+libtarget+'.* ' +destDir+'\\'
+
+		cflags='/O2 /nologo /W1'
+		pdbflag=' /FD /MD /Zi /Fd'+destDir+'\\'+libBaseName+'.pdb'
+		releaseMacro='XML_STATIC WIN32 TSF4G_STATIC _USE_32BIT_TIME_T _LIB TDR_WITH_XML NDEBUG'+' '+additionalFlag
+		libtmp=self.envRelease.Clone()
+		sourcelist=libtmp.SConscript(sourcePath+'/SConscript',variant_dir=objdir, duplicate=0)
+		libtmp.Append(LINKFLAGS='WinMm.lib kernel32.lib user32.lib gdi32.lib winspool.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ws2_32.lib')
+
+		target=libtmp.Program(libtarget,sourcelist,CPPDEFINES=Split(releaseMacro),OBJPREFIX=objprefix,CCPDBFLAGS=pdbflag,CFLAGS=cflags,LIBPATH=ldLibPath)
+		libtmp.AddPostAction(target,postAction)		
+		
+	def debugAppAdd(self,appName,sourceDir='.\\',TargetDir='.\\',additionalFlag=''):
+		sourcePath=sourceDir
+		
+		objprefix=self.vcversion+'debug'
+		objdir='../win32_build/'+self.vcversion+'/'+appName+'/debug'
+		outPutPath=TargetDir
+		ldLibPath='../win32_lib/'+self.vcversion+'/debug'
+		
+		libBaseName=appName
+		libtarget=libBaseName+self.vcversion+'debug'
+		libName=libBaseName+'.exe'
+		
+		destDir=os.path.abspath(TargetDir+'\\'+self.vcversion+'\\'+'debug')
+		if not os.path.isdir(destDir):
+			print 'No such dir'
+			os.makedirs(destDir)
+		
+		postAction='copy '+libtarget+'.* ' +destDir+'\\'
+
+		cflags='/Od /nologo /W1'
+		pdbflag=' /FD /MD /ZI /Fd'+destDir+'\\'+libBaseName+'.pdb'
+		releaseMacro='XML_STATIC WIN32 _DEBUG TSF4G_STATIC _USE_32BIT_TIME_T _LIB TDR_WITH_XML NDEBUG'+' '+additionalFlag
+		libtmp=self.envRelease.Clone()
+		sourcelist=libtmp.SConscript(sourcePath+'/SConscript',variant_dir=objdir, duplicate=0)
+		libtmp.Append(LINKFLAGS='WinMm.lib kernel32.lib user32.lib gdi32.lib winspool.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ws2_32.lib')
+
+		target=libtmp.Program(libtarget,sourcelist,CPPDEFINES=Split(releaseMacro),OBJPREFIX=objprefix,CCPDBFLAGS=pdbflag,CFLAGS=cflags,LIBPATH=ldLibPath)
+		libtmp.AddPostAction(target,postAction)	
+		
+	def appAdd(self,appName,sourceDir,TargetDir,additionalFlag=''):
+		self.releaseAppAdd(appName,sourceDir,TargetDir,additionalFlag)
+		self.debugAppAdd(appName,sourceDir,TargetDir,additionalFlag)
+		
+
+		
+vc9=vcenv('9.0','vc9')
+vc8=vcenv('8.0','vc8')
+vc7=vcenv('7.1','vc7')
+vc6=vcenv('6.0','vc6')
+
+#Third party libs
+vc9.debugLibAdd('scew',libSrc='../deps/scew/scew')
+vc9.releaseLibAdd('scew',libSrc='../deps/scew/scew')
+
+vc8.debugLibAdd('scew',libSrc='../deps/scew/scew')
+vc8.releaseLibAdd('scew',libSrc='../deps/scew/scew')
+
+vc7.debugLibAdd('scew',libSrc='../deps/scew/scew')
+vc7.releaseLibAdd('scew',libSrc='../deps/scew/scew')
+
+vc6.debugLibAdd('scew',libSrc='../deps/scew/scew')
+vc6.releaseLibAdd('scew',libSrc='../deps/scew/scew')
+
+vc9.debugLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag=' /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+vc9.releaseLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag='/DNDEBUG /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+
+vc8.debugLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag='/DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+vc8.releaseLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag='/DNDEBUG /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+
+vc7.debugLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag=' /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+vc7.releaseLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag='/DNDEBUG /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+
+vc6.debugLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag=' /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+vc6.releaseLibAdd('expat',libSrc='../deps/expat/lib',additionalFlag='/DNDEBUG /DCOMPILED_FROM_DSP /DXML_STATIC /D_WINDOWS /D_LIB')
+
+
+tdr_dbms_flags='/DWIN32  /D_LIB /DTSF4G_STATIC'
+tdr_dbms_dbg_flags=''
+tdr_dbms_rel_flags=' /DNDEBUG '
+
+vc9.libAdd('tdr_dbms',scripPath = '../lib_src/tdr/SConscript_dbms',CFLAGS=tdr_dbms_flags,debugFlags=tdr_dbms_dbg_flags,releaseFlags=tdr_dbms_rel_flags)	
+vc8.libAdd('tdr_dbms',scripPath = '../lib_src/tdr/SConscript_dbms',CFLAGS=tdr_dbms_flags,debugFlags=tdr_dbms_dbg_flags,releaseFlags=tdr_dbms_rel_flags)	
+vc7.libAdd('tdr_dbms',scripPath = '../lib_src/tdr/SConscript_dbms',CFLAGS=tdr_dbms_flags,debugFlags=tdr_dbms_dbg_flags,releaseFlags=tdr_dbms_rel_flags)	
+vc6.libAdd('tdr_dbms',scripPath = '../lib_src/tdr/SConscript_dbms',CFLAGS=tdr_dbms_flags,debugFlags=tdr_dbms_dbg_flags,releaseFlags=tdr_dbms_rel_flags)	
+
+tdr_xml_flags='/DWIN32 /D_USE_32BIT_TIME_T /D_LIB /DTSF4G_STATIC'
+tdr_xml_dbg_flags=''
+tdr_xml_rel_flags=' /DNDEBUG '
+
+vc9.libAdd('tdr_xml',scripPath = '../lib_src/tdr/SConscript_xml',CFLAGS=tdr_xml_flags,debugFlags=tdr_xml_dbg_flags,releaseFlags=tdr_xml_rel_flags)	
+vc8.libAdd('tdr_xml',scripPath = '../lib_src/tdr/SConscript_xml',CFLAGS=tdr_xml_flags,debugFlags=tdr_xml_dbg_flags,releaseFlags=tdr_xml_rel_flags)	
+vc7.libAdd('tdr_xml',scripPath = '../lib_src/tdr/SConscript_xml',CFLAGS=tdr_xml_flags,debugFlags=tdr_xml_dbg_flags,releaseFlags=tdr_xml_rel_flags)	
+vc6.libAdd('tdr_xml',scripPath = '../lib_src/tdr/SConscript_xml',CFLAGS=tdr_xml_flags,debugFlags=tdr_xml_dbg_flags,releaseFlags=tdr_xml_rel_flags)	
+
+
+tdr_dbms_xml_flags='/DWIN32 /D_LIB /DXML_STATIC /DTSF4G_STATIC'
+tdr_dbms_xml_dbg_flags=' '
+tdr_dbms_xml_rel_flags='/DNDEBUG'
+
+vc9.libAdd('tdr_dbms_xml',scripPath = '../lib_src/tdr/SConscript_dbms_xml',CFLAGS=tdr_dbms_xml_flags,debugFlags=tdr_dbms_xml_dbg_flags,releaseFlags=tdr_dbms_xml_rel_flags)
+vc8.libAdd('tdr_dbms_xml',scripPath = '../lib_src/tdr/SConscript_dbms_xml',CFLAGS=tdr_dbms_xml_flags,debugFlags=tdr_dbms_xml_dbg_flags,releaseFlags=tdr_dbms_xml_rel_flags)
+vc7.libAdd('tdr_dbms_xml',scripPath = '../lib_src/tdr/SConscript_dbms_xml',CFLAGS=tdr_dbms_xml_flags,debugFlags=tdr_dbms_xml_dbg_flags,releaseFlags=tdr_dbms_xml_rel_flags)
+vc6.libAdd('tdr_dbms_xml',scripPath = '../lib_src/tdr/SConscript_dbms_xml',CFLAGS=tdr_dbms_xml_flags,debugFlags=tdr_dbms_xml_dbg_flags,releaseFlags=tdr_dbms_xml_rel_flags)
+
+
+
+libs=Split('comm pal tdr tloghelp tmng taa tsec tqqsig tlog')
+for lib in libs:
+	vc9.libAdd(lib)
+	vc8.libAdd(lib)	
+	vc7.libAdd(lib)
+	vc6.libAdd(lib)
+
+#libs=Split('tapp')
+#for lib in libs:
+#	vc9.libAdd(lib)
+#	vc8.libAdd(lib)	
+	#vc7.libAdd(lib)
+	#vc6.libAdd(lib)
+
+		
+libs=Split('tbus tapp')
+for lib in libs:
+	vc9.libAdd(lib)
+	vc8.libAdd(lib)	
+	#vc7.libAdd(lib)
+	#vc6.libAdd(lib)
+
+commCase=Split('shtable tmempool')
+for case in commCase:
+	srcdir='../lib/examples/comm/'+case+'//'
+	vc8.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+	vc9.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+	vc7.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+	vc6.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+
+commCase=Split('HelloWorld OnlyFileApi VecFilter TappReload TappTlog tlogtdr')
+for case in commCase:
+	srcdir='../lib/examples/tlog/'+case+'//'
+	vc8.appAdd(case,sourceDir=srcdir,TargetDir=srcdir,additionalFlag='/NODEFAULTLIB:"libcmt.lib"')
+	vc9.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+	#vc7.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+	#vc6.appAdd(case,sourceDir=srcdir,TargetDir=srcdir)
+

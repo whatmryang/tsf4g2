@@ -1,0 +1,14 @@
+Import('buildenv')
+
+buildenv.xml2h("mtexample_cs.xml")
+buildenv.xml2c("mtexample_cs.c","mtexample_cs.xml")
+
+buildenv.xml2h("mtexample_ss.xml")
+buildenv.xml2c("mtexample_ss.c","mtexample_ss.xml")
+
+Install("../mtexample/",Split("mtexample_cs.h mtexample_cs.c"))
+Install("../mtexample",Split("mtexample_ss.h mtexample_ss.c"))
+
+
+Install("../client/",Split("mtexample_cs.h mtexample_cs.c"))
+Install("../client",Split("mtexample_ss.h mtexample_ss.c"))

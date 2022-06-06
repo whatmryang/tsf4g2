@@ -1,0 +1,10 @@
+<DBMSInfo>
+	<MajorVersion>4</MajorVersion>
+	<MinVersion>0 </MinVersion>
+	<DBMSName>mysql</DBMSName>
+	<DBMSConnectionInfo>localhost</DBMSConnectionInfo>
+	<DBMSCurDatabaseName>test</DBMSCurDatabaseName>
+	<DBMSUser>root</DBMSUser>
+	<DBMSPassword></DBMSPassword>
+</DBMSInfo>
+

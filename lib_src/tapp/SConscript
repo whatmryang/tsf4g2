@@ -1,0 +1,22 @@
+import os
+Import('buildenv')
+
+
+if buildenv.vcVariant == "vc6" or buildenv.vcVariant == "vc7":
+	src_local = list()
+	Return("src_local")
+
+
+buildenv.xml2h(Split('tapp_basedata_def.xml'))
+buildenv.xml2h(Split('tapp_rundata_timer_def.xml'))
+buildenv.xml2h(Split('tappctrl_proto.xml'))
+buildenv.xml2c('tapp_basedata_def','tapp_basedata_def.xml')
+buildenv.xml2c('tapp_rundata_timer_def','tapp_rundata_timer_def.xml')
+buildenv.xml2c('tappctrl_proto','tappctrl_proto.xml')
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+
+buildenv.buildStaticLib('tapp',src_local,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB'])
+
+Return('src_local')

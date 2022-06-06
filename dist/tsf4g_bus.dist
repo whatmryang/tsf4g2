@@ -1,0 +1,82 @@
+#/bin/bash
+TSF4G_DIR=../
+TSF4G_BUS_RELEASE=tsf4g_tbus`date +%Y%m%d`.tgz
+TBUS_HOME=tsf4g_tbus`date +%Y%m%d`
+
+echo ${TBUS_HOME}
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir ${TBUS_HOME}"
+mkdir ${TBUS_HOME}
+mkdir ${TBUS_HOME}/demo
+mkdir ${TBUS_HOME}/demo/example
+mkdir ${TBUS_HOME}/include
+mkdir ${TBUS_HOME}/lib
+mkdir ${TBUS_HOME}/tbusd
+mkdir ${TBUS_HOME}/tools
+mkdir ${TBUS_HOME}/docs
+
+
+
+echo "cp include files"
+cp  -rf ${TSF4G_DIR}/include/comm ${TBUS_HOME}/include/
+cp  -rf ${TSF4G_DIR}/include/pal ${TBUS_HOME}/include/
+cp  -rf ${TSF4G_DIR}/include/tdr ${TBUS_HOME}/include/
+cp  -rf ${TSF4G_DIR}/include/tlog ${TBUS_HOME}/include/
+cp  -rf ${TSF4G_DIR}/include/tbus ${TBUS_HOME}/include/
+
+echo "cp lib files"
+cp   ${TSF4G_DIR}/lib/libcomm* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libpal* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtdr* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtbus* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtdr* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtmng* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtapp* ${TBUS_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtlog.* ${TBUS_HOME}/lib/
+echo "cp demo"
+cp  -rf ${TSF4G_DIR}/lib/example/tbus ${TBUS_HOME}/demo/example
+
+
+echo "cp tools"
+cp ${TSF4G_DIR}/tools/relaymgr ${TBUS_HOME}/tools/
+cp ${TSF4G_DIR}/tools/relaymgr.xml ${TBUS_HOME}/tools/
+cp ${TSF4G_DIR}/tools/tbusmgr ${TBUS_HOME}/tools/
+cp ${TSF4G_DIR}/tools/tbusmgr.xml ${TBUS_HOME}/tools/
+
+echo "cp service"
+cp   ${TSF4G_DIR}/services/tbus_service/start_tbusd ${TBUS_HOME}/tbusd
+cp   ${TSF4G_DIR}/services/tbus_service/stop_tbusd ${TBUS_HOME}/tbusd
+cp   ${TSF4G_DIR}/services/tbus_service/tbusd ${TBUS_HOME}/tbusd
+cp   ${TSF4G_DIR}/services/tbus_service/tbusd.xml ${TBUS_HOME}/tbusd
+cp   ${TSF4G_DIR}/services/tbus_service/tbusdlog.xml ${TBUS_HOME}/tbusd
+
+echo "cp docs"
+cp  -rf ${TSF4G_DIR}/docs/tbus ${TBUS_HOME}/docs
+
+
+
+echo "cp Makefile"
+cp ${TSF4G_DIR}/tsf4g.mk  ${TBUS_HOME}/
+
+
+
+
+find ${TBUS_HOME} -name ".svn" -exec rm -rf {} \;
+tar czvf ${TSF4G_BUS_RELEASE} ${TBUS_HOME}
+rm -rf ${TBUS_HOME}
+
+

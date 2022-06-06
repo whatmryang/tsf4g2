@@ -1,0 +1,46 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_mmogxyz_01_0001"
+}
+
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+TSF4G_MMOGXYZ_RELEASE=tsf4g_mmogxyz`date +%Y%m%d`.tgz
+TSF4G_MMOGXYZ_HOME=tsf4g_mmogxyz`date +%Y%m%d`
+
+echo "mkdir ${TSF4G_MMOGXYZ_HOME}"
+mkdir ${TSF4G_MMOGXYZ_HOME}
+
+echo "copy depend files"
+cp -rf  ${TSF4G_DIR}/include/*   ${TSF4G_DIR}/apps/mmogxyz/dev/tsf4g_depends/include/
+cp -rf  ${TSF4G_DIR}/lib/lib*.*  ${TSF4G_DIR}/apps/mmogxyz/dev/tsf4g_depends/lib/
+
+
+
+echo "copy mmogxyz files"
+cp  -rf ${TSF4G_DIR}/apps/mmogxyz/* ${TSF4G_MMOGXYZ_HOME}/
+
+
+
+echo "MMOG_XYZ_VERSION=\"$1 build at `date +%Y%m%d`\"">${TSF4G_MMOGXYZ_HOME}/build/VERSION
+
+
+find ${TSF4G_MMOGXYZ_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+find ${TSF4G_MMOGXYZ_HOME}/dev  -name "\*.o" -exec rm -rf {} \;>/dev/null 2>&1
+find ${TSF4G_MMOGXYZ_HOME}/dev  -name "\*.d" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_MMOGXYZ_RELEASE} ${TSF4G_MMOGXYZ_HOME}
+rm -rf ${TSF4G_MMOGXYZ_HOME}
+
+

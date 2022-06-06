@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<tframehead version="10">
+    <Ver>0 </Ver>
+    <Cmd>2 </Cmd>
+    <ExtraType>1 </ExtraType>
+    <TimeStampType>0 </TimeStampType>
+    <ID>10240 </ID>
+    <ConnIdx>1025 </ConnIdx>
+    <ExtraInfo type="TFrameHeadData">
+        <IPInfo type="TIPInfo">
+            <family>2 </family>
+            <port>43194 </port>
+            <ip>172.25.40.97 </ip>
+        </IPInfo>
+    </ExtraInfo>
+    <CmdData type="TFrameCmdData">
+        <InProc type="TFrameCmdInProc">
+            <Valid>1 </Valid>
+            <NoEnc>0 </NoEnc>
+            <Count>1 </Count>
+            <Idents type="TFrameIdent">
+                <ID>10240 </ID>
+                <ConnIdx>1025 </ConnIdx>
+            </Idents>
+        </InProc>
+    </CmdData>
+</tframehead>

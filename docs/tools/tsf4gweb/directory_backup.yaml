@@ -1,0 +1,81 @@
+root:
+    -
+        desc: 架构平台组介绍
+        uri: tsf4ggroup.htm
+        children:
+        -
+            desc: 架构平台组愿景
+            uri: tsf4ggroup\tsf4g_vision.htm
+        -
+            desc: 产品介绍
+            uri: tsf4ggroup\tsf4gintro.htm
+        -
+            desc: 使用指南
+            uri: tsf4ggroup\tsf4g_guide.htm
+    -
+        desc: 统一登录组件
+        uri: unifiedenroll.htm
+        children:
+        -
+            desc: 网络接入组件(TCONND)
+            uri: unifiedenroll\tconnd.htm
+            children:
+            -
+                desc: tconnd介绍PPT
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Introduction.htm
+            -
+                desc: 协议说明文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Develop.htm
+            -
+                desc: 维护使用文档
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Maintenance.htm
+            -
+                desc: 性能测试数据
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_Performance.htm
+            -
+                desc: FAQ
+                uri: unifiedenroll\tconnd\TSF4G_TCONND_FAQ.htm
+            -
+                desc: 下载发布包
+                uri: ..\Publish\Publish.aspx
+        -
+            desc: 目录服务组件(TDIR)
+            uri: unifiedenroll\tdir.htm
+        -
+            desc: 版本更新组件(TCUS)
+            uri: unifiedenroll\tcus.htm
+            children:
+            -
+                desc: 新建网页
+                uri: newpage.htm
+        -
+            desc: 帐号信息服务组件
+            uri: unifiedenroll\tacc.htm
+            children:
+            -
+                desc: 新建网页
+                uri: newpage2.htm
+    -
+        desc: 通用逻辑组件
+        uri: CommonLogic.htm
+        children:
+        -
+            desc: test2
+            uri: index.htm
+    -
+        desc: 数据存储组件
+        uri: DataStoreage.htm
+    -
+        desc: 集中管理系统
+        uri: CentralManagement.htm
+    -
+        desc: 其它
+        uri: other.htm
+        children:
+        -
+            desc: 案例分享
+            uri: other\case.htm
+            children:
+            -
+                desc: 经典案例分析(一)_TCP协议栈丢包
+                uri: other\经典案例分析(一)_TCP协议栈丢包.htm

@@ -1,0 +1,9 @@
+import os
+
+Import('buildenv')
+
+src_local=Glob('tdr_meta_checker.cpp')
+if buildenv.isLinux():
+	buildenv.buildTools('tdrio',src_local,a_tsf4g_static_lib='tdr_xml tdr pal scew expat')
+else:
+	buildenv.buildTools('tdrio',src_local,CPPDEFINES=Split("TDR_WITH_XML"),a_tsf4g_static_lib='tdr_xml tdr pal scew expat')

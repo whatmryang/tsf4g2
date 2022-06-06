@@ -1,0 +1,63 @@
+#/bin/bash
+
+
+TSF4G_DIR=../
+
+TSF4G_PROXY_RELEASE=tsf4g_tproxy`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy/tsf4_proxy"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g_proxy
+mkdir tmpdeploy/tsf4g_proxy/lib
+mkdir tmpdeploy/tsf4g_proxy/conf
+mkdir tmpdeploy/tsf4g_proxy/bin
+mkdir tmpdeploy/tsf4g_proxy/include
+mkdir tmpdeploy/tsf4g_proxy/plugin
+mkdir tmpdeploy/tsf4g_proxy/docs
+
+
+echo "cp include"
+cp -rf ${TSF4G_DIR}/include/apps/tproxy  tmpdeploy/tsf4g_proxy/include/
+
+echo "cp docs"
+cp -rf ${TSF4G_DIR}/apps/proxy/docs/* tmpdeploy/tsf4g_proxy/docs
+
+echo "cp bin"
+cp -rf ${TSF4G_DIR}/apps/proxy/bin/proxy tmpdeploy/tsf4g_proxy/bin/
+cp -rf ${TSF4G_DIR}/apps/proxy/bin/start_proxy.sh tmpdeploy/tsf4g_proxy/bin/
+cp -rf ${TSF4G_DIR}/apps/proxy/bin/stop_proxy.sh tmpdeploy/tsf4g_proxy/bin/
+cp -rf ${TSF4G_DIR}/apps/proxy/bin/*.so tmpdeploy/tsf4g_proxy/bin/
+
+echo "cp plugin"
+cp_dir ${TSF4G_DIR}/apps/proxy/plugin tmpdeploy/tsf4g_proxy/plugin 
+
+cp ./proxy_dist/proxy.install tmpdeploy/tsf4g_proxy/
+
+cp ./proxy_dist/conf/* tmpdeploy/tsf4g_proxy/conf/
+
+cd tmpdeploy
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">tsf4g_proxy/version
+
+find ./  -name ".svn" -exec rm -rf {} \;
+
+tar czvf ${TSF4G_PROXY_RELEASE} tsf4g_proxy 
+mv ${TSF4G_PROXY_RELEASE} ../
+cd ../
+rm -rf tmpdeploy
+

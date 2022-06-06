@@ -1,0 +1,26 @@
+<xyz_gamesvr version="1">
+	<ConnectorAddr>##TCONND##</ConnectorAddr>
+	<TormsvrAddr>##TORMSVR##</TormsvrAddr>
+	<TdirsvrAddr>udp://##IP_UDPCONND##:##PORT_TCONND1PORT##</TdirsvrAddr>
+	<TAccessAddr>tcp://127.0.0.1:8500</TAccessAddr>
+	<martsvrAddr>##TMARTSVR##</martsvrAddr>
+    <mailsvrAddr>##MAILSVR##</mailsvrAddr>
+    <namesvrAddr>##TNAMESVR##</namesvrAddr>
+	
+	<MetaLibNum> 1</MetaLibNum>
+	<MetaLibName>roledb</MetaLibName>
+	<RunLogName>gamesvr </RunLogName>
+	<StatLogName>gamesvrstat </StatLogName>
+	<SaveRoleGap>60 </SaveRoleGap>
+	<MaxSavedRolePerScan>50 </MaxSavedRolePerScan>
+	<MaxOnlineRole>2500 </MaxOnlineRole>
+
+	<Dirtyword>../../etc/tdirty/dirtyword.txt </Dirtyword>
+
+    <MartSSTdr>../../etc/protocol/mart_ss.tdr </MartSSTdr>
+    <MartCSTdr>../../etc/protocol/mart_cs.tdr </MartCSTdr>
+    <MailSSTdr>../../etc/protocol/mail_ss.tdr </MailSSTdr>
+    <MailCSTdr>../../etc/protocol/mail_cs.tdr </MailCSTdr>
+
+    <NameApiTdr>../../etc/protocol/namesvr_api.tdr</NameApiTdr>
+</xyz_gamesvr>

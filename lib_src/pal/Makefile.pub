@@ -1,0 +1,5 @@
+include ../../tsf4g.mk
+
+PAL_MAJOR=1
+PAL_MINOR=1
+PAL_PATCH=0

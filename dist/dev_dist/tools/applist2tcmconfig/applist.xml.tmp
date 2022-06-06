@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<applist baseDir="/data/mickey/tsf4g_dev_install/mmog_deps/tsf4g_install/apps/">
+    <app name="mart" dir="tmart" enable="true" layer="cluster">
+        <Proc
+            FuncName = "tmartsvr"
+            WorkPath="martsvr"
+            ProcName="tmartsvr"
+            Agrs="--tlogconf=../../../../../mmog_run/etc/martsvr/martsvr_log.xml  --conf-file=../../../../../mmog_run/etc/martsvr/martsvr.xml"
+            ConfigPath="../../../../../mmog_run/etc/martsvr/"
+			enable="true"
+			ConfigFileName="martsvr.xml"
+        />
+		<ExportBusChannel FuncName="tmartsvr"/>
+	</app>
+	
+    <app name="namesvr" dir="tnamesvr" enable="true" layer="cluster">
+        <Proc 
+            FuncName = "tnamesvr"
+            WorkPath="namesvr"
+            ProcName="tnamesvr"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tnamesvr/tnamesvr.xml --tlogconf=../../../../../mmog_run/etc/tnamesvr/tnamesvr_log.xml  --metabase-key=##SHM_TORMSHM##"
+			ConfigPath="../../../../../mmog_run/etc/tnamesvr/"
+			enable="true"
+			ConfigFileName="tnamesvr.xml"
+        />
+        
+        <Shm
+            name="Tormshm"
+            type="metabase"
+			initCmd=''
+        >
+			<metalib name="namesvr" file="../../../mmog_run/etc/tormsvr/xyz_database.tdr "/>
+			<metalib name="tormsvr" file="../../../mmog_run/etc/tormsvr/mail_db.tdr"/>
+			<metalib name="gamedb"  file="../../../mmog_run/etc/tormsvr/namesvr_db.tdr"/>
+		</Shm>
+        
+        <Shm
+            name="NamesvrTaskQueue"
+            initCmd=''
+        />
+        
+        <Shm
+            name="NamesvrCacheShm"
+            initCmd=''
+        />
+        
+        <!--Channel ProcSet1="namesvrd" ProcSet2="tormsvr" Mask="0.0.0.0"/-->
+        <ExportBusChannel FuncName="tnamesvr"/>
+    </app>
+    
+    <app name="tconnd" dir="tconnd" enable="true" layer="cluster">
+        <Proc 
+            FuncName="tconnd"
+            WorkPath="bin"
+            ProcName="tconnd"
+            Agrs="--tlogconf=../../../../../mmog_run/etc/tconnd/tconnd_log.xml --conf-file=../../../../../mmog_run/etc/tconnd/tconnd.xml --log-level 1000000 "
+			ConfigPath="../../../../../mmog_run/etc/tconnd/"
+			ConfigFileName="tconnd.xml"
+        />
+		<Port
+			name="ZoneTconndPort"
+		/>
+		
+		<BindIP
+			name="zoneConnd"
+			type="innerIP"
+		/>
+		
+		<ExportBusChannel FuncName="tconnd"/>
+    </app>
+	
+	<app name="zone" dir="../../../mmog_run/bin/gamesvr">
+		<Proc
+			FuncName="gamesvrd"
+            WorkPath=""
+            ProcName="gamesvrd"
+            Agrs="--conf-file=../../etc/gamesvr/gamesvrd.xml --tlogconf=../../etc/gamesvr/gamesvrd_log.xml  --metabase-key=##SHM_TORMSHM## "
+			ConfigPath="../../etc/gamesvr/"
+			ConfigFileName="gamesvrd.xml"
+		/>
+		
+		<ExportBusChannel FuncName="gamesvrd"/>
+	</app>
+	
+	<app name="client1" dir="../../../mmog_run/bin/client1">
+		<Proc
+			FuncName="client1"
+            WorkPath=""
+            ProcName="client"
+            Agrs="stop"
+			Flag="stop"
+			ConfigPath="etc/"
+			ConfigFileName="client.xml"
+		/>
+	</app>
+	
+	<app name="client2" dir="../../../mmog_run/bin/client2">
+		<Proc
+			FuncName="client2"
+            WorkPath=""
+            ProcName="client"
+            Agrs="stop"
+			Flag="stop"
+			ConfigPath="etc/"
+			ConfigFileName="client.xml"
+		/>
+	</app>
+	
+	<app name="zonetorm" dir="torm">
+		<Proc 
+            FuncName="tormsvr"
+            WorkPath="bin"
+            ProcName="tormsvr"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tormsvr/tormsvr.xml --tlogconf=../../../../../mmog_run/etc/tormsvr/tormsvr_log.xml --metabase-key=##SHM_TORMSHM## "
+			ConfigPath="../../../../../mmog_run/etc/tormsvr/"
+			enable="true"
+			ConfigFileName="tormsvr.xml"
+        >
+		<!-- reletive dir to tsf4g_dev_install_home -->
+			<db name="xyz_db" dir="../mmog_run/etc/tormsvr/">	
+				<createSql name="namesvr" script="role_info.sql"/>
+				<createSql name="mailsvr" script="mail_info.sql"/>
+				<createSql name="xyz" script="xyz_create_table.sql"/>
+				<createSql name="role_name" script="role_name.sql"/>
+			</db>
+		
+		</Proc>
+		
+		<ExportBusChannel FuncName="tormsvr"/>
+	</app>
+	
+	<app name="mailsvr" dir="mail">
+		<Proc 
+            FuncName="mailsvr"
+            WorkPath="mailsvr"
+            ProcName="mailsvr"
+            Agrs="--tlogconf=../../../../../mmog_run/etc/mailsvr/mailsvr_log.xml --conf-file=../../../../../mmog_run/etc/mailsvr/mailsvr.xml --metabase-key=##SHM_TORMSHM## "
+			ConfigPath="../../../../../mmog_run/etc/mailsvr/"
+			enable="true"
+			ConfigFileName="mailsvr.xml"
+        />
+		<ExportBusChannel FuncName="mailsvr"/>
+	</app>
+	
+	<app name="tcussvr" dir="">
+        <Proc 
+            FuncName="tconnd_cus"
+            WorkPath="tconnd/bin"
+            ProcName="tconnd"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tcus/tconnd_cus.xml --tlogconf=../../../../../mmog_run/etc/tconnd/tconnd_cus_log.xml"
+			ConfigPath="../../../../../mmog_run/etc/tcus/"
+			ConfigFileName="tconnd_cus.xml"
+        >
+			<BindIP
+				name="cusconnd"
+				type="innerIP"
+			/>
+		</Proc>
+		
+		<Port
+			name="tcusPort"
+		/>
+		
+		<Proc 
+            FuncName="versionserver"
+            WorkPath="tcus/bin"
+            ProcName="versionserver"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tcus/versionserver.xml"
+			ConfigPath="../../../../../mmog_run/etc/tcus/"
+			ConfigFileName="versionserver.xml"
+        />
+		<Channel ProcSet1="tconnd_cus" ProcSet2="versionserver" Mask="0.0.0.0"/>
+		<ExportBusChannel FuncName="versionserver"/>
+	</app>
+	
+	<app name="tdirsvr" dir="">
+        <Proc 
+            FuncName="tconnd_dir"
+            WorkPath="tconnd/bin"
+            ProcName="tconnd"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tdir/tconnd_dir.xml --tlogconf=../../../../../mmog_run/etc/tdir/tconnd_dir_log.xml"
+			ConfigPath="../../../../../mmog_run/etc/tdir/"
+			ConfigFileName="tconnd_dir.xml"
+        >
+			<BindIP
+				name="dirconnd"
+				type="innerIP"
+			/>
+		</Proc>
+		
+		<Port
+			name="tconnd1Port"
+		/>
+        <Proc 
+            FuncName="tconnd_dir_udp"
+            WorkPath="tconnd/bin"
+            ProcName="tconnd"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tdir/tconnd_udp.xml --tlogconf=../../../../../mmog_run/etc/tdir/tconnd_udp_log.xml"
+			ConfigPath="../../../../../mmog_run/etc/tdir/"
+			ConfigFileName="tconnd_udp.xml"
+        >	
+			<BindIP
+				name="udpconnd"
+				type="innerIP"
+			/>
+		</Proc>
+		
+		<Port
+			name="tconnd2Port"
+		/>
+		<Proc 
+            FuncName="tdir_svrd"
+            WorkPath="tdir/bin"
+            ProcName="tdir_svrd"
+            Agrs="--conf-file=../../../../../mmog_run/etc/tdir/tdir_data_level3.xml --tlogconf=../../../../../mmog_run/etc/tdir/tdir_svrd_log.xml --sys-file=../../../../../mmog_run/etc/tdir/tdir.cfg --tdr-file=../../../../../mmog_run/etc/tdir/tdir_def_level3.tdr "
+			ConfigPath="../../../../../mmog_run/etc/tdir/"
+			ConfigFileName="tdir_data_level3.xml#tdir.cfg"
+        />
+
+		<Channel ProcSet1="tconnd_dir" ProcSet2="tdir_svrd" Mask="0.0.0.0"/>
+		<Channel ProcSet1="tconnd_dir_udp" ProcSet2="tdir_svrd" Mask="0.0.0.0"/>
+		<ExportBusChannel FuncName="tdir_svrd"/>
+	</app>
+
+     <IChannel  Port1 = "namesvr:tnamesvr" Port2 = "zone:gamesvrd"/>
+	 <IChannel  Port1 = "zone:gamesvrd" Port2="tconnd:tconnd"/>
+	 <IChannel  Port1 = "zone:gamesvrd" Port2="mart:tmartsvr"/>
+	 <IChannel  Port1 = "zone:gamesvrd" Port2="zonetorm:tormsvr"/>
+	 <IChannel  Port1 = "namesvr:tnamesvr" Port2="zonetorm:tormsvr"/>
+	 <IChannel  Port1 = "zone:gamesvrd" Port2="mailsvr:mailsvr"/>
+	 <IChannel  Port1 = "zone:gamesvrd" Port2="tcussvr:versionserver"/>
+	 <IChannel  Port1 = "zone:gamesvrd" Port2="tdirsvr:tdir_svrd"/>
+	 <IChannel  Port1 = "mailsvr:mailsvr" Port2="zonetorm:tormsvr"/>
+	 <!-- The default shm and port for app tbus communications.-->
+	 <Shm
+		name="gcim"
+	 />
+	 <Shm
+		name="grm"
+	 />
+	<Port
+		name="tbusd"
+	/>
+	
+	<Host name="localhost"
+		innerIP='172.25.40.107'
+		outterIP='127.0.0.1'
+	>
+		<SharedMem
+		/>
+		<InnerPort
+		/>
+		<OutterPort
+		/>
+	</Host>
+	
+	<Database name="mysql"
+		username="root"
+		password=""
+	>
+	</Database>
+</applist>

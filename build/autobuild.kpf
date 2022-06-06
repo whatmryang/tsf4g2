@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Komodo Project File - DO NOT EDIT -->
+<project id="4bb5d3cc-4dcd-471e-85bc-c5d80014b532" kpf_version="4" name="autobuild.kpf">
+<file id="b9c36556-b2a7-4cf5-b39d-8a02291ac993" idref="4bb5d3cc-4dcd-471e-85bc-c5d80014b532" name="pybuild.py" url="file:///I:/work/trunk/pybuild.py">
+</file>
+<preference-set idref="4bb5d3cc-4dcd-471e-85bc-c5d80014b532">
+  <boolean id="import_live">1</boolean>
+</preference-set>
+</project>

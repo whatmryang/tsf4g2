@@ -1,0 +1,59 @@
+#  @file $RCSfile: Makefile_r.so,v $
+#    Makefile for tsf4g-tbus module
+#  $Id: Makefile_r.so,v 1.2 2009-09-16 06:37:58 flyma Exp $
+#  @author $Author: flyma $
+#  @date $Date: 2009-09-16 06:37:58 $
+#  @version $Revision: 1.2 $
+#  @note Editor: Vim 6.3, Gcc 4.0.2, tab=4
+#  @note Platform: Linux
+
+include Makefile.pub
+
+TBUS_OBJ_DIR=$(TSF4G_HOME)/.obj/lib/tbus
+TBUS_SO_OBJ_DIR=$(TBUS_OBJ_DIR)/mthread_so
+
+MAKE_OBJ_PATH := $(shell mkdir -p $(TBUS_OBJ_DIR) $(TBUS_SO_OBJ_DIR))
+
+TBUS_CFILE=$(wildcard *.c)
+TBUS_OBJ=$(addprefix $(TBUS_SO_OBJ_DIR)/, $(subst .c,.o, ${TBUS_CFILE}))
+TBUS_SO=libtbus_r.so
+TBUS_SO_RALATIVE=$(TBUS_SO).${TBUS_MAJOR}.${TBUS_MINOR}.$(TBUS_PATCH)
+TBUS_SO_REAL=$(TSF4G_LIB)/$(TBUS_SO_RALATIVE)
+TBUS_SO_NAME=$(TBUS_SO).${TBUS_MAJOR}
+
+
+TBUS_LIBS= $(TSF4G_LIB)/libtlog.a $(TSF4G_LIB)/libtaa.a $(TSF4G_LIB)/libcomm.a $(TSF4G_LIB)/libtdr.a $(TSF4G_LIB)/libpal.a -lpthread
+
+
+ifeq ($(build), debug)
+CFLAGS+=-D_DEBUG_
+endif
+
+CFLAGS += -DTBUS_OPTIMIZE_ENCODING_HEAD -fPIC -DTSF4G_THREAD_SAFE
+
+.PHONY: all clean
+
+all: $(TBUS_SO_REAL) 
+	#@cp $(TBUS_SO_OBJ_DIR)/*  $(TSF4G_SO_OBJ_DIR)
+	@$(LN) $(TSF4G_LIB)  $(TBUS_SO_RALATIVE) $(TBUS_SO_NAME) 
+	@$(LN) $(TSF4G_LIB) $(TBUS_SO_NAME) $(TBUS_SO)
+
+
+$(TBUS_SO_OBJ_DIR)/%.d: %.c
+	$(CC)  $< $(CFLAGS)  -MM -MD -MQ'$(TBUS_SO_OBJ_DIR)/$*.o' -o $@
+
+$(TBUS_SO_OBJ_DIR)/%.o: %.c $(TBUS_SO_OBJ_DIR)/%.d
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+$(TBUS_SO_REAL): $(TBUS_OBJ)
+	$(CC) $(SHARED) $(CFLAGS) -Wl,-soname,$(TBUS_SO_NAME) -o $@    $(TBUS_OBJ) $(LDPATH)  $(TBUS_LIBS)
+
+
+
+clean:
+	$(RM) $(TBUS_SO_OBJ_DIR)/*.o  
+	$(RM)	$(TBUS_SO_OBJ_DIR)/*.d
+	$(RM) $(TBUS_SO_REAL) 
+	
+
+-include $(TBUS_OBJ:.o=.d)=.d)

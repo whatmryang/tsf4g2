@@ -1,0 +1,69 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_tagent_01_0001 "
+}
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+TSF4G_DIR=../
+TSF4G_TAGENT_RELEASE=tsf4g_agent`date +%Y%m%d`.tgz
+TAGENT_HOME=tsf4g_agent`date +%Y%m%d`
+
+echo "mkdir ${TAGENT_HOME}"
+mkdir -p ${TAGENT_HOME}
+mkdir ${TAGENT_HOME}/lib
+mkdir ${TAGENT_HOME}/bin
+mkdir ${TAGENT_HOME}/cfg
+mkdir ${TAGENT_HOME}/doc
+mkdir ${TAGENT_HOME}/example/
+mkdir ${TAGENT_HOME}/example/tsf4g/
+mkdir ${TAGENT_HOME}/example/tsf4g/include
+mkdir ${TAGENT_HOME}/example/tsf4g/lib
+
+echo "copy include files"
+
+echo "copy base lib files"
+cp  -rf ${TSF4G_DIR}/apps/tagent/lib/* 	${TAGENT_HOME}/lib/
+
+echo "copy tdirapi lib files"
+
+echo "copy bin"
+cp   ${TSF4G_DIR}apps/tagent/bin/tagent	${TAGENT_HOME}/bin/
+cp   ${TSF4G_DIR}apps/tagent/bin/*.sh	${TAGENT_HOME}/bin/
+
+echo "copy cfg"
+cp  -rf ${TSF4G_DIR}/apps/tagent/cfg/*	${TAGENT_HOME}/cfg/
+
+echo "copy tools"
+
+echo "copy docs"
+cp  -rf ${TSF4G_DIR}apps/tagent/doc/*	${TAGENT_HOME}/doc/
+
+echo "copy example"
+cp  -rf ${TSF4G_DIR}/apps/tagent/example/tsf4g.mk 		 ${TAGENT_HOME}/example/
+cp  -rf ${TSF4G_DIR}/apps/tagent/example/mod_skeleton 	 ${TAGENT_HOME}/example/
+cp  -rf ${TSF4G_DIR}/apps/tagent/example/master_skeleton ${TAGENT_HOME}/example/
+
+mv ${TAGENT_HOME}/example/mod_skeleton/Makefile.dev ${TAGENT_HOME}/example/mod_skeleton/Makefile
+mv ${TAGENT_HOME}/example/master_skeleton/Makefile.dev ${TAGENT_HOME}/example/master_skeleton/Makefile
+
+echo "copy installshell"
+cp  ./tsf4g_tagent.install ${TAGENT_HOME}/
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TAGENT_HOME}/version
+
+find ${TAGENT_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_TAGENT_RELEASE} ${TAGENT_HOME}
+rm -rf ${TAGENT_HOME}

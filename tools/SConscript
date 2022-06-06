@@ -1,0 +1,9 @@
+Import('buildenv')
+import os
+import os.path
+if buildenv.isInstall("base"):
+	buildenv.InstallDir(os.path.join(buildenv.toolsInstallPath,'tapp_frame'),'tapp_frame')
+	if buildenv._isLinux:
+		Install(buildenv.toolsInstallPath,Split('tbusmgr.xml trelaymgr.xml tbus_single_desc.xml tbus_multi_desc.xml readme.doc'))
+	else:
+		Install(buildenv.toolsInstallPath,Split('tbusmgr.xml trelaymgr.xml tbus_single_desc.xml tbus_multi_desc.xml readme.doc'))

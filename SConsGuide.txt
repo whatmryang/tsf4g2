@@ -1,0 +1,5 @@
+1. scons -u 编译当前目录下所有目标
+
+2. scons -h查看帮助文件，查看编译选项
+
+3. scons --enable-debug=0编译release版本

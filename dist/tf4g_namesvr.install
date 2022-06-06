@@ -1,0 +1,56 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+DEPS="tools/tbusmgr "
+
+echo "检测依赖工具"
+
+for DEP in $DEPS
+do
+	if [ -f $TSF4G_INSTALL_HOME/$DEP ] ;then
+		echo "找到：$DEP"
+	else
+		echo "没找到: $DEP"
+		exit 1;
+	fi
+done
+
+echo "开始安装"
+
+echo "Install namesvr...."
+DATE=`date +%Y%m%d%H%M%S`
+SUFFIX="--suffix=$DATE"
+
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/bin/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/cfg/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/cfg/tdr/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/example/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/tools/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/src/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/src/lib/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/src/protocol/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/src/include/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/apps/tnamesvr/src/nameapi/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/include/apps/tnameapi/
+install -d  $SUFFIX $TSF4G_INSTALL_HOME/lib/apps/libtnameapi/
+
+
+
+install -b -v $SUFFIX  ./*							$TSF4G_INSTALL_HOME/apps/tnamesvr/
+install -b -v $SUFFIX  ./bin/*						$TSF4G_INSTALL_HOME/apps/tnamesvr/bin/
+install -b -v $SUFFIX -D ./cfg/*					$TSF4G_INSTALL_HOME/apps/tnamesvr/cfg/
+install -b -v $SUFFIX -D ./cfg/tdr/*				$TSF4G_INSTALL_HOME/apps/tnamesvr/cfg/tdr/
+install -b -v $SUFFIX -D ./tools/*					$TSF4G_INSTALL_HOME/apps/tnamesvr/tools/
+install -b -v $SUFFIX -D ./example/*				$TSF4G_INSTALL_HOME/apps/tnamesvr/example/
+install -b -v $SUFFIX -D ./src/*					$TSF4G_INSTALL_HOME/apps/tnamesvr/src/
+install -b -v $SUFFIX -D ./src/protocol/*			$TSF4G_INSTALL_HOME/apps/tnamesvr/src/protocol/
+install -b -v $SUFFIX -D ./src/include/*				$TSF4G_INSTALL_HOME/apps/tnamesvr/src/include/
+install -b -v $SUFFIX -D ./src/include/*				$TSF4G_INSTALL_HOME/include/apps/tnameapi/
+install -b -v $SUFFIX -D ./src/nameapi/*			$TSF4G_INSTALL_HOME/apps/tnamesvr/src/nameapi/
+echo "Install namesvr done"

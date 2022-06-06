@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="gb2312" standalone="yes" ?>
+<!-- This file is for tbus module -->
+
+<metalib tagsetversion="1" name="tbusdctrl" version="1">
+
+  <macrosgroup name="TbusCtrlCmd">
+    <macro name="TBUSCTRLCMD_GET_CONNINFO_RES" value="0"  />
+    <macro name="TBUSCTRLCMD_GET_ENVINFO_RES" value="1"  />
+    <macro name="TBUSCTRLCMD_GET_RELAYINFO_RES" value="2"  />
+    <macro name="TBUSCTRLCMD_GET_EXPCT_RELAYINFO_RES" value="3" />
+    <macro name="TBUSCTRLCMD_LIST_RELAYINFO_RES" value="4" />
+  </macrosgroup>
+
+  <macro name="TBUSD_CTRL_MAX_INFO_LEN" value="4096" />
+  <macro name="TBUSD_CTRL_MAX_PKG_LEN"  value="65535" />
+  <macro name="TBUSD_CTRL_PROTO_MAGIC" value="0x44555343" />
+
+  <struct name="TbusCtrlHead" version="1" >
+    <entry name="Magic" type="uint" defaultvalue="TBUSD_CTRL_PROTO_MAGIC" />
+    <entry name="Version"      type="uint" />
+    <entry name="Cmd"     type="uint"  bindmacrosgroup="TbusCtrlCmd" />
+  </struct>
+
+  <struct name="TbusCtrlGetEnvInfoRes" version="1" >
+    <entry name="GCIMKey" type="uint"  />
+    <entry name="GCIMVer" type="uint"  />
+    <entry name="GRMKey" type="uint"  />
+    <entry name="GRMVer" type="uint"  />
+    <entry name="RelayCount" type="uint"  />
+    <entry name="LastCheckHandShake" type="datetime"  />
+    <entry name="LastRefreshConf" type="datetime"  />
+    <entry name="MaxSendPkgPerLoop" type="int"  />
+    <entry name="ConnPoolMax" type="int"  desc="链接池最大容量" />
+    <entry name="ConnPoolUsed" type="int" desc="链接池已使用量" />
+  </struct>
+
+  <macro name="TBUSD_CTRL_ADDR_LEN" value="32" />
+  <macro name="TBUSD_CTRL_HOST_LEN" value="128" />
+  <struct name="TbusCtrlRelayConf" version="1" >
+    <entry name="RelayAddr" type="string" size="TBUSD_CTRL_ADDR_LEN"  />
+    <entry name="RelayHost" type="string" size="TBUSD_CTRL_HOST_LEN"  />
+  </struct>
+
+  <struct name="TbusCtrlQueueVar" version="1" >
+    <entry name="Size" type="uint"   />
+    <entry name="Head" type="uint"   />
+    <entry name="Tail" type="uint"   />
+    <entry name="Get" type="uint"   />
+    <entry name="Seq" type="int"   />
+    <entry name="RecvSeq" type="int"   />
+  </struct>
+
+  <struct name="TbusCtrlChannelHead" version="1" >
+    <entry name="ShmID" type="int"   />
+    <entry name="AlignLevel" type="uint"  />
+    <entry name="RecvQueueVar" type="TbusCtrlQueueVar"  />
+    <entry name="SendQueueVar" type="TbusCtrlQueueVar"  />
+  </struct>
+
+  <macro name="TBUSD_CTRL_CONN_FLAG_LEN" value="64" />
+  <struct name="TbusCtrlChannelInfo" version="1" >
+    <entry name="Flag" type="string"  size="TBUSD_CTRL_CONN_FLAG_LEN" />
+    <entry name="RecvAddr" type="string" size="TBUSD_CTRL_ADDR_LEN"  />
+    <entry name="SendAddr" type="string" size="TBUSD_CTRL_ADDR_LEN"  />
+    <entry name="ShmID" type="int"   />
+    <entry name="ChannelHead" type="TbusCtrlChannelHead"  />
+    <entry name="BeginDisabled" type="datetime"  />
+  </struct>
+
+  <macro name="TBUSD_CTRL_CONN_TYPE_LEN" value="16" />
+  <macro name="TBUSD_CTRL_SEND_DATA_TYPE_LEN" value="16" />
+  <struct name="TbusCtrlConnNode" version="1" >
+    <entry name="IdxInPool" type="int"   />
+    <entry name="IsConnected" type="int"   />
+    <entry name="Type" type="string" size="TBUSD_CTRL_CONN_TYPE_LEN"   />
+    <entry name="Fd" type="int"   />
+    <entry name="PeerIP" type="ip"   />
+    <entry name="PeerPort" type="uint" />
+    <entry name="Create" type="datetime"   />
+    <entry name="NeedFree" type="int"   />
+    <entry name="BindRelayID" type="int"   />
+    <entry name="NeedSynSeq" type="int"   />
+    <entry name="LastAckSeq" type="int"   />
+    <entry name="LastSynSeq" type="datetime"   />
+    <entry name="SendingDataLen" type="int"   />
+    <entry name="SendingDataPos" type="int"   />
+    <entry name="SendingDataType" type="string" size="TBUSD_CTRL_SEND_DATA_TYPE_LEN"  />
+    <entry name="RecvBuffSize" type="int"   />
+    <entry name="RecvedDataLen" type="int"   />
+  </struct>
+
+  <macro name="TBUSD_CTRL_RELAY_FLAG_LEN" value="64" />
+  <macro name="TBUSD_CTRL_RELAY_STATUS_LEN" value="16" />
+  <struct name="TbusCtrlRelayInfo" version="1" >
+    <entry name="ID" type="int"  />
+    <entry name="Flag" type="string"  size="TBUSD_CTRL_RELAY_FLAG_LEN" />
+    <entry name="Status"  type="string"  size="TBUSD_CTRL_RELAY_STATUS_LEN"  />
+    <entry name="RelayConf" type="TbusCtrlRelayConf"  />
+    <entry name="ChannelInfo" type="TbusCtrlChannelInfo"  />
+    <entry name="IsBindConn" type="int"  />
+    <entry name="ConnNode" type="TbusCtrlConnNode" refer="IsBindConn"  />
+    <entry name="LastConnectPeer" type="datetime"  />
+    <entry name="LastHeartbeat" type="datetime"  />
+    <entry name="BeginDisabled" type="datetime"  />
+  </struct>
+
+  <struct name="TbusCtrlExpctRelayInfo" version="1" >
+    <entry name="ID" type="int"  />
+    <entry name="ConnIdx" type="int" />
+    <entry name="Flag" type="string"  size="TBUSD_CTRL_RELAY_FLAG_LEN" />
+    <entry name="Status"  type="string"  size="TBUSD_CTRL_RELAY_STATUS_LEN"  />
+    <entry name="IsBindConn" type="int"  />
+    <entry name="ConnID" type="int" refer="IsBindConn"  />
+    <entry name="LastConnectPeer" type="datetime"  />
+    <entry name="LastHeartbeat" type="datetime"  />
+    <entry name="BeginDisabled" type="datetime"  />
+  </struct>
+
+  <macro name="TBUSD_CTRL_MAX_RELAY_NUM_PERRES" value="20" />
+  <struct name="TbusCtrlGetExpctRelayInfo" version="1" >
+    <entry name="Count"  type="int"  />
+    <entry name="ExpctRelay"  type="TbusCtrlExpctRelayInfo" count="TBUSD_CTRL_MAX_RELAY_NUM_PERRES" refer="Count" />
+  </struct>
+
+
+  <struct name="TbusCtrlRelaySumInfo" version="1" >
+    <entry name="ID" type="int"  />
+    <entry name="ConnIdx" type="int" />
+    <entry name="Flag" type="string"  size="TBUSD_CTRL_RELAY_FLAG_LEN" />
+    <entry name="Status"  type="string"  size="TBUSD_CTRL_RELAY_STATUS_LEN"  />
+    <entry name="RecvAddr" type="string" size="TBUSD_CTRL_ADDR_LEN"  />
+    <entry name="SendAddr" type="string" size="TBUSD_CTRL_ADDR_LEN"  />
+  </struct>
+
+  <struct name="TbusCtrlListRelayInfo" version="1" >
+    <entry name="Count"  type="int"  />
+    <entry name="Relay"  type="TbusCtrlRelaySumInfo" count="TBUSD_CTRL_MAX_RELAY_NUM_PERRES" refer="Count" />
+  </struct>
+
+
+
+  <union name="TbusCtrlBody" version="1" >
+    <entry name="EnvInfo" type="TbusCtrlGetEnvInfoRes" id="TBUSCTRLCMD_GET_ENVINFO_RES" />
+    <entry name="RelayInfo" type="TbusCtrlRelayInfo" id="TBUSCTRLCMD_GET_RELAYINFO_RES" />
+    <entry name="ExpctRelayInfo" type="TbusCtrlGetExpctRelayInfo" id="TBUSCTRLCMD_GET_EXPCT_RELAYINFO_RES" />
+    <entry name="ConnInfo" type="TbusCtrlConnNode" id="TBUSCTRLCMD_GET_CONNINFO_RES" />
+    <entry name="ListRelay" type="TbusCtrlListRelayInfo" id="TBUSCTRLCMD_LIST_RELAYINFO_RES" />
+  </union>
+
+  <struct name="TbusCtrlPkg" versionindicator="Head.Version"  version="1" >
+    <entry name="Head" type="TbusCtrlHead" />
+    <entry name="Body" type="TbusCtrlBody" select="Head.Cmd"  />
+  </struct>
+
+</metalib>

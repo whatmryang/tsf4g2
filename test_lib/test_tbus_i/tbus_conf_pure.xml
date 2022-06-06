@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<TbusConf __version="10">
+
+    <!--AddrTemplet: TBUS地址字符串模板,默认值为: 8.8.8.8-->
+    <!--DEFAULT VALUE: '8.8.8.8'-->
+    <AddrTemplet>8.8.8.8</AddrTemplet>
+
+    <!--GCIMConf: 通道配置.-->
+    <GCIMConf>
+        <GCIMShmKey>1688</GCIMShmKey>
+
+        <Channels>
+            <Priority>8</Priority>
+            <Address>0.0.0.1</Address>
+            <Address>0.0.0.2</Address>
+            <SendSize>2048000</SendSize>
+            <RecvSize>2048000</RecvSize>
+            <Desc>Some description for this route</Desc>
+        </Channels>
+
+        <Channels>
+            <Priority>8</Priority>
+            <Address>1.0.0.1</Address>
+            <Address>1.0.0.2</Address>
+            <SendSize>2048000</SendSize>
+            <RecvSize>2048000</RecvSize>
+            <Desc>Some description for this route</Desc>
+        </Channels>
+
+    </GCIMConf>
+
+    <!--GRMConf: 路由配置.只有在进行跨物理机器TBUS通信时,才需要该配置.-->
+    <GRMConf>
+        <RelayShmKey>2688</RelayShmKey>
+
+        <Relays>
+            <Addr>0.0.0.1</Addr>
+            <Priority>8</Priority>
+            <MConn>tcp://10.1.44.61:1027</MConn>
+            <Desc>Some description for this relay</Desc>
+        </Relays>
+
+        <Relays>
+            <Addr>1.0.0.2</Addr>
+            <Priority>8</Priority>
+            <MConn>tcp://10.1.44.61:1027</MConn>
+
+            <Desc>Some description for this relay</Desc>
+        </Relays>
+    </GRMConf>
+
+    <!--TBUSDConf: TBUSD配置.只有在进行跨物理机器TBUS通信时,才需要该配置.-->
+    <TBUSDConf>
+        <!--Listen: 本tbusd服务进程监听的地址和端口-->
+        <!--DEFAULT VALUE: 'tcp://127.0.0.1:1027?reuse=1'-->
+        <Listen>tcp://127.0.0.1:1027?reuse=1</Listen>
+
+        <!--PkgMaxSize: 中转数据包最大字节数-->
+        <!--DEFAULT VALUE: '131072'-->
+        <PkgMaxSize>131072 </PkgMaxSize>
+
+        <!--SendBuff: relay连接的发送缓冲区大小-->
+        <!--DEFAULT VALUE: '131072'-->
+        <SendBuff>131072 </SendBuff>
+
+        <!--RecvBuff: relay连接的发送缓冲区大小-->
+        <!--DEFAULT VALUE: '131072'-->
+        <RecvBuff>131072 </RecvBuff>
+
+        <!--StatGap: 统计信息输出间隔，单位为秒-->
+        <!--DEFAULT VALUE: '60'-->
+        <StatGap>60 </StatGap>
+
+        <!--NeedAckPkg: 是否需要对发送的数据包做确认-->
+        <!--DEFAULT VALUE: '1'-->
+        <NeedAckPkg>1 </NeedAckPkg>
+
+        <!--RefreshTbusConfGap: TBUSD刷新TBUS配置的时间间隔，单位秒-->
+        <!--DEFAULT VALUE: '60'-->
+        <RefreshTbusConfGap>60 </RefreshTbusConfGap>
+
+        <!--EnableCheckPeerIP: 是否验证中转通道对方tbusd服务的ip地址与本地配置信息是否一致-->
+        <!--DEFAULT VALUE: '1'-->
+        <EnableCheckPeerIP>1 </EnableCheckPeerIP>
+
+        <!--DisabledChannelTimeGap: 被disabled的通道的生存时间,单位秒,-1表示不删除-->
+        <!--DEFAULT VALUE: '604800'-->
+        <DisabledChannelTimeGap>604800 </DisabledChannelTimeGap>
+
+        <!--IdleTickNumBeforeSleep: 持续空转计数到该值后，进程sleep一次，默认 sleep 10ms-->
+        <!--DEFAULT VALUE: '2'-->
+        <IdleTickNumBeforeSleep>2 </IdleTickNumBeforeSleep>
+
+    </TBUSDConf>
+
+</TbusConf>

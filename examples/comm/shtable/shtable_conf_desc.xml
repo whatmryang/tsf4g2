@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="shtable" version="10" >
+	
+	<struct name="shtableconf" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="shtablerun_cumulate" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="shtablerun_status" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+</metalib>

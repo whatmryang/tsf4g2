@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<!--keep align with ../transfer_conf_desc.xml-->
+<transferconf version="10">
+
+    <checkNumPerTick>200</checkNumPerTick>
+
+    <sessionTimeout>10000</sessionTimeout>
+
+    <maxDirtyCheckSessionNum>5000</maxDirtyCheckSessionNum>
+
+    <maxAcceptPerProc>100</maxAcceptPerProc>
+
+    <maxResPerProc>100</maxResPerProc>
+
+    <dropReqWhenFull>0</dropReqWhenFull>
+
+    <timeoutGap>1000000</timeoutGap>
+
+    <tconnd>
+        <busAddr>1.1.1.1</busAddr>
+    </tconnd>
+
+    <!--configuration for background servers-->
+    <echoSvr>
+        <busAddr>3.3.3.3</busAddr>
+    </echoSvr>
+
+    <!--add configuration for other background servers here-->
+
+</transferconf>

@@ -1,0 +1,16 @@
+This directory contains three executable file: send, trsf, recv.
+These three executable files demonstrate a message pass.
+A msg was sent from 'send', through 'trsf', to 'recv',
+and then, a response msg was sent from 'recv', through 'trsf', to 'send'.
+
+In order to have a good experience with tbus,
+we sugguest that you open three terminals,
+and in each terminals starts one command of following:
+./send 4000
+./trsf 4000
+./recv 4000
+
+P.S.
+The number 4000 is a GCIMShmkey, which should be the same with that in file 'tbus_mgr.xml'.
+Before you can execute these command, you should have write channel fomation
+into shared-memory, using the tool 'tbusmgr'with '-C tbus_mgr.xml -W' as command-line parameters.

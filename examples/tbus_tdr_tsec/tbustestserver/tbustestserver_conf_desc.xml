@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="tbustestserver" version="10" >
+	
+	<struct name="tbustestserverconf" version ="10" >
+		<entry name="EncryptMsg" type="int" defaultvalue="1"  />
+		<entry name="EncryptType" type="int" defaultvalue="1"/>
+	</struct>
+	
+	<struct name="tbustestserverrun_cumulate" version ="10" >
+		<entry name="RecvPackCount" type="int"/>
+		<entry name="SendPackCount" type="int"/>
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="tbustestserverrun_status" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+</metalib>

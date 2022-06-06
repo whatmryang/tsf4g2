@@ -1,0 +1,56 @@
+#!/bin/bash
+
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release/
+else
+  TSF4G_INSTALL_HOME=$1
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+  mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/services
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/apps
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/procmng ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/procmng
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/procmng/bin ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/procmng/bin
+fi
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/procmng/conf ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/procmng/conf
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/procmng/include ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/procmng/include
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/procmng/doc ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/procmng/doc
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/procmng/log ];then
+  mkdir $TSF4G_INSTALL_HOME/apps/procmng/log
+fi
+
+echo "Install procmng...."
+cp -rf ./version             $TSF4G_INSTALL_HOME/apps/procmng/
+cp -rf ./bin/       $TSF4G_INSTALL_HOME/apps/procmng/
+cp -rf ./conf/       $TSF4G_INSTALL_HOME/apps/procmng/
+cp -rf ./include/ ${TSF4G_INSTALL_HOME}/apps/procmng/
+cp -rf ./lib/   ${TSF4G_INSTALL_HOME}/apps/procmng/
+cp -rf ./src/   ${TSF4G_INSTALL_HOME}/apps/procmng/
+cp -rf ./doc/   ${TSF4G_INSTALL_HOME}/apps/procmng/
+
+echo "Install procmng  done"

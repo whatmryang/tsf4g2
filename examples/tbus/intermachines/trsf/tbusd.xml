@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gbk" standalone="yes" ?>
+<!-- This file is for tbus relay application -->
+
+<Tbusd version="2147483647">
+  <RelayShmKey>6101</RelayShmKey> 
+  <GCIMShmKey>6000</GCIMShmKey> 
+
+  <Listen>tcp://127.0.0.1:26001?reuse=1</Listen>
+
+  <NeedAckPkg>1</NeedAckPkg>  
+  <DisabledChannelTimeGap>10</DisabledChannelTimeGap>
+  <RefreshTbusConfGap>1</RefreshTbusConfGap>
+</Tbusd>
+

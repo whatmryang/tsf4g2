@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="gbk" standalone="yes" ?>
+
+<TbusGCIM>
+
+  <BussinessID>0</BussinessID>
+   
+  <AddrTemplet>8.8.8.8</AddrTemplet>
+   
+  <GCIMShmKey>2012</GCIMShmKey>
+
+     
+
+  <Channels>
+  	<Priority>8</Priority>
+	<Address>1.2.33.30</Address>
+	<Address>1.2.33.20</Address>
+	<SendSize>10240</SendSize>
+	<RecvSize>20480</RecvSize>
+	<Desc>udptconnd and master tdir</Desc>
+  </Channels>	
+  
+  <Channels>
+  	<Priority>8</Priority>
+	<Address>1.2.33.31</Address>
+	<Address>1.2.33.21</Address>
+	<SendSize>20480</SendSize>
+	<RecvSize>20480</RecvSize>
+	<Desc>udptconnd and bakup tdir</Desc>
+  </Channels>
+
+
+
+  <Channels>
+  	<Priority>8</Priority>
+	<Address>1.2.33.10</Address>
+	<Address>1.2.33.20</Address>
+	<SendSize>20480</SendSize>
+	<RecvSize>20480</RecvSize>
+	<Desc>tconnd beteen master dir</Desc>
+  </Channels>
+
+   <Channels>
+	    <Priority>8</Priority>
+	    <Address>1.2.33.11</Address>
+		<Address>1.2.33.21</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>tconnd between bakup dir</Desc>
+   </Channels>
+	 
+    <Channels>
+	    <Priority>8</Priority>
+	    <Address>1.2.33.12</Address>
+		<Address>1.2.33.22</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>tconnd and slave dir</Desc>
+	 </Channels>
+	 
+    	 
+       <Channels>
+	    <Priority>8</Priority>
+	    <Address>1.2.33.22</Address>
+		<Address>1.2.33.21</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>masterdir and bakup dir</Desc>
+	 </Channels>
+	 
+     <Channels>
+	    <Priority>8</Priority>
+	    <Address>1.2.33.20</Address>
+		<Address>1.2.33.21</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>slave dir and bakup dir</Desc>
+	 </Channels>
+	 
+	  <Channels>
+	    <Priority>8</Priority>
+	    <Address>1.2.33.20</Address>
+		<Address>1.2.33.22</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>slave dir and master dir</Desc>
+	 </Channels>
+
+     <Channels>
+	    <Priority>8</Priority>
+	    <Address>4.2.2.1</Address>
+		<Address>1.2.33.20</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>gameserver and master dir</Desc>
+	 </Channels>
+
+     <Channels>
+	    <Priority>8</Priority>
+	    <Address>4.2.2.1</Address>
+		<Address>1.2.33.21</Address>
+		<SendSize>20480</SendSize>
+		<RecvSize>20480</RecvSize>
+		<Desc>gameserver and bakup dir</Desc>
+	 </Channels>
+
+</TbusGCIM>
+

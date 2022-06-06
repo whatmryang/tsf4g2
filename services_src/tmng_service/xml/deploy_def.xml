@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="managing"  version="1">
+
+<!--  本示例文档定义进程部署数据结构 -->
+
+<macro name="MAX_PROC_NUM"  value="256" />
+<macro name="MAX_NAME_LEN"  value="128" />
+<macro name="MAX_CMD_LEN"   value="256" />
+<macro name="BUS_ID_LEN"    value="32" />
+<macro name="USER_LEN"    value="32" />
+
+
+<struct name="MNGPRocAttr" version="1" >
+	<entry name="ProcName"  type="string" size="MAX_NAME_LEN" />
+	<entry name="WorkDir"   type="string" size="MAX_CMD_LEN" />
+	<entry name="ProcID" 	type="string" size="BUS_ID_LEN"  />
+	<entry name="User" 	type="string" size="USER_LEN"    />
+	<entry name="StartCmd"  type="string" size="MAX_CMD_LEN" />
+	<entry name="StopCmd"   type="string" size="MAX_CMD_LEN" />
+	<entry name="Pid"       type="int"  />
+	<entry name="Status"    type="int"  />
+	<entry name="Start"     type="uint" />
+	<entry name="Stop"      type="uint" />
+	<entry name="Active"    type="uint" />
+	<entry name="MFlag"     type="int"  defaultvalue="1" desc = "mark if be managed!"/>
+</struct>
+
+<struct name="HostDeploy" version="1" >
+	<entry name="AgentId" type="string" size="BUS_ID_LEN" />
+       	<entry name="ProcNum"  type="int" />
+	<entry name="ProcessList" type="MNGPRocAttr" count="MAX_PROC_NUM" refer="ProcNum"/>
+</struct>
+
+
+
+</metalib>

@@ -1,0 +1,15 @@
+<TbusGCIM>
+	<GCIMShmKey>5000</GCIMShmKey>
+
+<Channels>
+    <Priority>8</Priority>
+    <Address>0.0.0.1</Address>
+    <Address>0.0.0.2</Address>
+    <SendSize>10240</SendSize>
+    <RecvSize>10240</RecvSize>
+    <Desc>test channel for send </Desc>
+  </Channels>
+  
+</TbusGCIM>
+
+

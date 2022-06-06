@@ -1,0 +1,20 @@
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+
+tdrSource = Glob('*.c')
+tdrSource += Glob('*.cpp')
+xmlSource = SConscript('xml_metalib/SConscript')
+dbmsSource = SConscript('dbms/SConscript')
+
+tdrObjs = buildenv.buildStaticObj(tdrSource,MODULE='base',CPPDEFINES=['TSF4G_SMALL_LIB'])
+buildenv.buildStaticLib('tdr', tdrObjs, MODULE='base')
+
+xmlObjs = buildenv.buildStaticObj(xmlSource,MODULE='base',CPPPATH=Split('../ xml_metalib'),CPPDEFINES=['TSF4G_SMALL_LIB'])
+buildenv.buildStaticLib('tdr_xml', tdrObjs + xmlObjs, MODULE='base')
+
+dbmsObjs = buildenv.buildStaticObj(dbmsSource,MODULE='base',CPPPATH=Split('../ xml_metalib dbms'),CPPDEFINES=['TSF4G_SMALL_LIB'])
+buildenv.buildStaticLib('tdr_dbms_xml', tdrObjs + xmlObjs + dbmsObjs, MODULE='base')
+
+allSrcFile = tdrSource+dbmsSource+xmlSource
+Return('allSrcFile')

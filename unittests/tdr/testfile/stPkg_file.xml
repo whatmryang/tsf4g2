@@ -1,0 +1,34 @@
+<Pkg version="10">
+    <head type="PkgHead" version="9">
+        <magic> 13124</magic>
+        <version> 9</version>
+        <time>2007-05-12 12:34:36</time>
+        <cmd> 0</cmd>
+        <bodylen> 0</bodylen>
+        <msgid> 100</msgid>
+    </head>
+    <bodycount> 2</bodycount>
+        <login type="CmdLogin">
+            <name>haha</name>
+            <pass>secret</pass>
+            <zone>shenzhen</zone>
+            <zone>beijing</zone>
+        </login>
+        <login type="CmdLogin">
+            <name>hihi</name>
+            <pass>secret1</pass>
+            <zone>hunan</zone>
+            <zone>hubei</zone>
+        </login>
+    <body2 type="testAlignB">
+        <len> 0</len>
+        <a> 86</a>
+        <magic> 108.879997</magic>
+    </body2>
+    <body2 type="testAlignB">
+        <len> 0</len>
+        <a> 4660</a>
+        <magic> 1586.780029</magic>
+    </body2>
+    <checksum> 305419896</checksum>
+</Pkg>

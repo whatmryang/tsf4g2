@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+
+<metalib tagsetversion="1" name="TappTlog" version="10" >
+	
+	<struct name="TappTlogconf" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="TappTlogrun_cumulate" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+	<struct name="TappTlogrun_status" version ="10" >
+		<entry name="Res" type="int" />
+	</struct>
+	
+</metalib>

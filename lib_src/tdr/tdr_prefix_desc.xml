@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="GBK" standalone="yes" ?>
+<metalib tagsetversion="1" name="tdr_prefix"  version="1" >
+
+    <macro name="TDR_MAX_TYPE_LEN" value="16" />
+    <macro name="TDR_MAX_PREFIX_LEN" value="32"/>
+
+    <struct name="structPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="st"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ast"/>
+    </struct>
+    <struct name="unionPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="st"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ast"/>
+    </struct>
+    <struct name="bytePrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="b"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="decimalPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="f"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="tinyintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ch"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="tinyuintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="b"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="smallintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="n"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="smalluintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="w"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="intPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="i"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="uintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="dw"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="bigintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ll"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="biguintPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ull"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="floatPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="f"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="doublePrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="d"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="datePrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="t"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="timePrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="t"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="datetimePrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="t"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="stringPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="asz"/>
+    </struct>
+    <struct name="wcharPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="w"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="wstringPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="asz"/>
+    </struct>
+    <struct name="ipPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ul"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="voidPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+        <entry name="ArrayPrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="int8Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ch"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="uint8Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="b"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="int16Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="n"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="uint16Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="w"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="int32Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="i"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="uint32Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="dw"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="int64Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ll"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="uint64Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ull"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="charPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ch"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="ucharPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="b"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="sz"/>
+    </struct>
+    <struct name="shortPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="n"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="ushortPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="w"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="longPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="l"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="ulongPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ul"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="longlongPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ll"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="ulonglongPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="ull"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <struct name="moneyPrefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="m"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue=""/>
+    </struct>
+    <!--struct name="Prefix" version="1" >
+        <entry name="SinglePrefix" type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="flyma"/>
+        <entry name="ArrayPrefix"  type="string" size="TDR_MAX_TYPE_LEN" defaultvalue="flyma"/>
+    </struct-->
+
+    <struct name="CustomedPrefix" version="1" >
+        <entry name="union" type="unionPrefix" />
+        <entry name="struct" type="structPrefix" />
+
+        <entry name="tinyint" type="tinyintPrefix" />
+        <entry name="tinyuint" type="tinyuintPrefix" />
+        <entry name="smallint" type="smallintPrefix" />
+        <entry name="smalluint" type="smalluintPrefix" />
+        <entry name="int" type="intPrefix" />
+        <entry name="uint" type="uintPrefix" />
+        <entry name="bigint" type="bigintPrefix" />
+        <entry name="biguint" type="biguintPrefix" />
+
+        <entry name="int8" type="int8Prefix" />
+        <entry name="uint8" type="uint8Prefix" />
+        <entry name="int16" type="int16Prefix" />
+        <entry name="uint16" type="uint16Prefix" />
+        <entry name="int32" type="int32Prefix" />
+        <entry name="uint32" type="uint32Prefix" />
+        <entry name="int64" type="int64Prefix" />
+        <entry name="uint64" type="uint64Prefix" />
+
+        <entry name="float" type="floatPrefix" />
+        <entry name="double" type="doublePrefix" />
+        <entry name="decimal" type="decimalPrefix" />
+        <entry name="date" type="datePrefix" />
+        <entry name="time" type="timePrefix" />
+        <entry name="datetime" type="datetimePrefix" />
+        <entry name="string" type="stringPrefix" />
+        <entry name="byte" type="bytePrefix" />
+        <entry name="ip" type="ipPrefix" />
+        <entry name="wchar" type="wcharPrefix" />
+        <entry name="wstring" type="wstringPrefix" />
+        <entry name="void" type="voidPrefix" />
+
+        <entry name="char" type="charPrefix" />
+        <entry name="uchar" type="ucharPrefix" />
+        <entry name="short" type="shortPrefix" />
+        <entry name="ushort" type="ushortPrefix" />
+        <entry name="long" type="longPrefix" />
+        <entry name="ulong" type="ulongPrefix" />
+        <entry name="longlong" type="longlongPrefix" />
+        <entry name="ulonglong" type="ulonglongPrefix" />
+        <entry name="money" type="moneyPrefix" />
+
+        <!--entry name="flyma" type="Prefix" /-->
+    </struct>
+
+</metalib>

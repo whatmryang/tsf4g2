@@ -1,0 +1,4 @@
+Import("buildenv")
+if buildenv._buildDeps:
+    print "Build Depends"
+SConscript("SConscript")

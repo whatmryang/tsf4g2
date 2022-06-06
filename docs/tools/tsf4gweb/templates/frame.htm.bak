@@ -1,0 +1,35 @@
+<html>
+    <head>
+    <style>
+        td,div {font-size:14; font-family:Tahoma}
+        a:link, a:visited {color:black; text-decoration:none}
+        a:hover, a:active {color:blue}
+        a.titlelink:link,a.titlelink:active,a.titlelink:visited {color:white; text-decoration:none;}
+        .article1 {font-size:14; padding:15px; line-height:28px; font-family:Tahoma}
+    </style>
+    <title>Welcome to TSF4G online</title>
+    </head>
+    <body>
+        <table align=center style="border-collapse:collapse;width:894">
+        <tr style="background-image:url('$(resouce)res/headbg.jpg');width:894;height:130">
+        <td>
+	<div style="position:relative; left:560px; top:-40px; color:white">
+		<a class="titlelink" href="http://ied.oa.com/TSF4G/Publish/Publish.aspx">发布系统</a> | 
+		<a class="titlelink" href="http://tapd.oa.com/v3/frame/prong/stories/add">提提需求</a> | 
+		<a class="titlelink" href="http://tapd.oa.com/v2/bugtrace/1002191/bugs/add">提交Bug</a> | 
+		<a class="titlelink" href="http://tapd.oa.com/v3/frame/comments">随便聊聊</a> | 
+		<a class="titlelink" href="contactus.htm">联系我们</a>
+
+	</div>
+        <div style="position:relative; left:15px; top:42px; color:white">您的位置 : $(location)
+        </tr>
+        </table>
+        <br>
+        <table align=center border=1 style="border-collapse:collapse;width:894;border-style:solid; border-width:1px">
+        $(listview)
+        </table>
+        <br>
+        <div align='center' style='color:#aaaaaa'>互娱研发中心架构组<br>
+        Copyright&copy; 2006-2009 TSF4G All Rights Reserved</div>
+    </body>
+</html>

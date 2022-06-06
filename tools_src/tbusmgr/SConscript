@@ -1,0 +1,28 @@
+# The set of source files associated with this SConscript file.
+import os
+
+if os.path.isfile('conv.bat'):
+	#Cd to the dir and exec conv.bat
+	os.system('conv.bat')
+	#
+Import('buildenv')
+
+src_local = Glob('*.c')
+src_local += Glob('*.cpp')
+src_local += Glob('../../lib_src/tbus_i/*.c')
+#src_local=Glob('tdr.c')
+#src_local+=Glob('tgetopt.c')
+#src_local+=Glob('tdr_tools.c')
+
+buildenv.VersionHeader(target = ["version.h"],
+                       major=buildenv.getMajor('base'),
+                       minor=buildenv.getMinor('base'))
+
+if buildenv._isLinux:
+	buildenv.buildTools('tbusmgr',src_local,CPPDEFINES=Split("TDR_WITH_XML"),
+    OBJPREFIX="gcim",CPPPATH=Split('../../lib_src'),a_tsf4g_static_lib='tsf4g',LIBS='pthread')
+else:
+	buildenv.buildTools('tbusmgr',src_local,CPPDEFINES=Split("_TSF4G_LARGE_LIB_"),
+    OBJPREFIX="gcim",CPPPATH=Split('../../lib_src'),a_tsf4g_static_lib='tsf4g')
+
+Return('src_local')

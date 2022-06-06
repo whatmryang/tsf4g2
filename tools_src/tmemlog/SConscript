@@ -1,0 +1,10 @@
+Import("buildenv")
+src_local = Glob("*.c")
+src_local += Glob("*.cpp")
+
+buildenv.VersionHeader(major=buildenv.getMajor('base'),minor=buildenv.getMinor('base'))
+
+if buildenv._isLinux:
+	buildenv.buildTools('tmemlog',src_local,CPPDEFINES=Split("TDR_WITH_XML"),CPPPATH=Split('../../lib_src'),a_tsf4g_static_lib='tsf4g',LIBS='pthread')
+else:
+	buildenv.buildTools('tmemlog',src_local,CPPDEFINES=Split("_TSF4G_LARGE_LIB_"),CPPPATH=Split('../../lib_src'),a_tsf4g_static_lib='tsf4g')

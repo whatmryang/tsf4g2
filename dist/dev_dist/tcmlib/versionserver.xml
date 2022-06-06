@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="gbk"?>
+<VersionServer version="2">
+	
+	<MainConf type="VersionServerConf">
+		<TconndEntityID>##TCONND_CUS##</TconndEntityID>
+		<BusinessSOFile>../../../../../mmog_run/etc/tcus/libcusmmogbusiness.so </BusinessSOFile>
+		<BusinessConfFile>../../../../../mmog_run/etc/tcus/mmogbusinessconf.xml</BusinessConfFile>
+		<BusinessTDRLIB>../../../../../mmog_run/etc/tcus/mmog_data.tdr </BusinessTDRLIB>
+	</MainConf>
+	
+	<VersionsConf type="UpdatingVersionsConf">
+		<AllowedLowVer>0.0.1.0 </AllowedLowVer>
+		<MidVersion>0.0.1.0</MidVersion>
+		<MidVersion>0.0.2.0</MidVersion>
+		<MidVersion>0.0.2.1</MidVersion>
+		<MidVersion>0.0.3.0</MidVersion>  
+		
+		<HttpURLAddr>http://127.0.0.1:8000 </HttpURLAddr>
+        
+		<RollBackPackageS type="RollBackPackage">
+			<RollBackFrom>0.0.3.0</RollBackFrom>
+			<RollBackTo>0.0.2.1</RollBackTo>
+			<RollBackToVerStr>0.2.1</RollBackToVerStr>
+		</RollBackPackageS>
+		
+		<GrayUpdatePolicy type="GrayUpdate"> 
+			<Version>0.0.3.0 </Version> 
+			<EnableBusinessLimit>1 </EnableBusinessLimit> 
+		</GrayUpdatePolicy>  
+        
+		<Package type="UpdatePackage">
+			<VersionFrom>0.0.1.0</VersionFrom>
+			<VersionTo>0.0.2.0</VersionTo>
+			<Name>LQ-0.0.1-0.0.2-zhCN.pk0</Name>
+			<Description>0.2.0</Description>
+			<HttpURL>/LQ-0.0.1-0.0.2-zhCN.pk0</HttpURL>
+			<FileHash>1c18bd23087951316cfecdf187d61e6c </FileHash>
+			<Size>4051037</Size>
+			<UpdateStrategy> 1</UpdateStrategy>
+			<DownloadMechanishm>1</DownloadMechanishm>  
+		</Package>
+		
+		<Package type="UpdatePackage">
+			<VersionFrom>0.0.2.0</VersionFrom>
+			<VersionTo>0.0.2.1</VersionTo>
+			<Name>LQ-0.0.2-0.2.1-zhCN.pk0</Name>
+			<Description>0.2.1</Description>
+			<HttpURL>/LQ-0.0.2-0.2.1-zhCN.pk0</HttpURL>
+			<FileHash>95c2353fa31f71873c7cb805866911da </FileHash>
+			<Size>3989212</Size>
+			<UpdateStrategy> 1</UpdateStrategy>
+			<DownloadMechanishm>1</DownloadMechanishm>  
+		</Package>	
+			
+		<Package type="UpdatePackage">
+			<VersionFrom>0.0.2.1</VersionFrom>
+			<VersionTo>0.0.3.0</VersionTo>
+			<Name>LQ-0.2.1-0.0.3-zhCN.pk0</Name>
+			<Description>0.3.0</Description>
+			<HttpURL>/LQ-0.2.1-0.0.3-zhCN.pk0</HttpURL>
+			<FileHash>95c2353fa31f71873c7cb805866911da </FileHash>
+			<Size>3989212</Size>
+			<UpdateStrategy> 1</UpdateStrategy>
+			<DownloadMechanishm>1</DownloadMechanishm>  
+		</Package>			
+	 </VersionsConf>
+</VersionServer>

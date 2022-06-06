@@ -1,0 +1,123 @@
+#/bin/bash
+
+usage()
+{
+      echo "Usage: "
+      echo "  $0 LabelName"
+      echo " "
+      echo "Example: "
+      echo "  $0  tsf4g_base_01_0001"
+      echo "  $0  tsf4g_tconnd_01_0001 "
+}
+
+
+if [ $# -ne 1 ]; then
+  echo "paramter list uncorrect"
+  usage
+  exit 1
+fi
+
+
+TSF4G_DIR=../
+TSF4G_CONND_RELEASE=tsf4g_tconnd`date +%Y%m%d`.tgz
+TCONND_HOME=tsf4g_tconnd`date +%Y%m%d`
+
+echo "mkdir ${TCONND_HOME}"
+mkdir ${TCONND_HOME}
+mkdir ${TCONND_HOME}/include/
+mkdir ${TCONND_HOME}/include/apps/
+mkdir ${TCONND_HOME}/lib
+mkdir ${TCONND_HOME}/win32_lib
+mkdir -p ${TCONND_HOME}/win32_lib/vc6/debug
+mkdir -p ${TCONND_HOME}/win32_lib/vc6/release
+mkdir -p ${TCONND_HOME}/win32_lib/vc7/debug
+mkdir -p ${TCONND_HOME}/win32_lib/vc7/release
+mkdir -p ${TCONND_HOME}/win32_lib/vc8/debug
+mkdir -p ${TCONND_HOME}/win32_lib/vc8/release
+mkdir -p ${TCONND_HOME}/win32_lib/vc9/debug
+mkdir -p ${TCONND_HOME}/win32_lib/vc9/release
+mkdir ${TCONND_HOME}/tconnd
+mkdir ${TCONND_HOME}/tconnd/bin
+mkdir ${TCONND_HOME}/tconnd/cfg
+mkdir ${TCONND_HOME}/tools
+mkdir ${TCONND_HOME}/docs
+mkdir ${TCONND_HOME}/examples
+
+
+
+
+echo "copy include files"
+cp  -rf ${TSF4G_DIR}/include/apps/tconnapi ${TCONND_HOME}/include/apps/
+cp  -rf ${TSF4G_DIR}/include/apps/tcltapi ${TCONND_HOME}/include/apps/
+
+
+
+echo "copy win32 lib files"
+cp   ${TSF4G_DIR}/win32_lib/vc6/debug/tcltapi_d.lib ${TCONND_HOME}/win32_lib/vc6/debug    
+cp   ${TSF4G_DIR}/win32_lib/vc6/debug/tcltapi_d_vc60.pdb ${TCONND_HOME}/win32_lib/vc6/debug    
+
+cp   ${TSF4G_DIR}/win32_lib/vc6/release/tcltapi.lib ${TCONND_HOME}/win32_lib/vc6/release    
+cp   ${TSF4G_DIR}/win32_lib/vc6/release/tcltapi_vc60.pdb ${TCONND_HOME}/win32_lib/vc6/release    
+
+
+cp   ${TSF4G_DIR}/win32_lib/vc7/debug/tcltapi_d.lib ${TCONND_HOME}/win32_lib/vc7/debug    
+cp   ${TSF4G_DIR}/win32_lib/vc7/debug/tcltapi_d_vc70.pdb ${TCONND_HOME}/win32_lib/vc7/debug    
+
+cp   ${TSF4G_DIR}/win32_lib/vc7/release/tcltapi.lib ${TCONND_HOME}/win32_lib/vc7/release    
+cp   ${TSF4G_DIR}/win32_lib/vc7/release/tcltapi_vc70.pdb ${TCONND_HOME}/win32_lib/vc7/release    
+
+cp   ${TSF4G_DIR}/win32_lib/vc8/debug/tcltapi_d.lib ${TCONND_HOME}/win32_lib/vc8/debug    
+cp   ${TSF4G_DIR}/win32_lib/vc8/debug/tcltapi_d_vc80.pdb ${TCONND_HOME}/win32_lib/vc8/debug    
+
+cp   ${TSF4G_DIR}/win32_lib/vc8/release/tcltapi.lib ${TCONND_HOME}/win32_lib/vc8/release 
+cp   ${TSF4G_DIR}/win32_lib/vc8/release/tcltapi_vc80.pdb ${TCONND_HOME}/win32_lib/vc8/release 
+
+cp   ${TSF4G_DIR}/win32_lib/vc9/debug/tcltapi_d.lib ${TCONND_HOME}/win32_lib/vc9/debug    
+cp   ${TSF4G_DIR}/win32_lib/vc9/debug/tcltapi_d_vc90.pdb ${TCONND_HOME}/win32_lib/vc9/debug    
+
+cp   ${TSF4G_DIR}/win32_lib/vc9/release/tcltapi.lib ${TCONND_HOME}/win32_lib/vc9/release 
+cp   ${TSF4G_DIR}/win32_lib/vc9/release/tcltapi_vc90.pdb ${TCONND_HOME}/win32_lib/vc9/release 
+
+
+
+echo "copy tconnd lib files"
+cp   ${TSF4G_DIR}/lib/libtconnapi.* ${TCONND_HOME}/lib/
+cp   ${TSF4G_DIR}/lib/libtcltapi.* ${TCONND_HOME}/lib/
+
+
+echo "copy bin"
+cp   ${TSF4G_DIR}/apps/tconnd/bin/tconnd ${TCONND_HOME}/tconnd/bin/
+
+echo "copy cfg"
+cp   ${TSF4G_DIR}/apps/tconnd/cfg/*.xml ${TCONND_HOME}/tconnd/cfg/
+
+
+echo "copy tools"
+cp ${TSF4G_DIR}/tools/tbusmgr ${TCONND_HOME}/tools/
+cp ${TSF4G_DIR}/apps/tconnd/tools/tbusmgr.xml.connd ${TCONND_HOME}/tools/
+cp ${TSF4G_DIR}/apps/tconnd/tools/tconnd_init_bus.sh ${TCONND_HOME}/tools/
+cp ${TSF4G_DIR}/tools/tdr ${TCONND_HOME}/tools/
+
+
+echo "copy docs"
+cp  -rf ${TSF4G_DIR}/docs/apps/tconnd/*.chm ${TCONND_HOME}/docs/
+cp  -rf ${TSF4G_DIR}/docs/apps/tconnd/*.doc ${TCONND_HOME}/docs/
+cp  -rf ${TSF4G_DIR}/docs/apps/tconnd/*.pdf ${TCONND_HOME}/docs/
+cp  -rf ${TSF4G_DIR}/docs/introduction/TSF4G_TCONND_½éÉÜËµÃ÷.ppt ${TCONND_HOME}/docs/
+
+
+echo "copy sample"
+cp  -rf ${TSF4G_DIR}/apps/tconnd/examples/*  ${TCONND_HOME}/examples/
+
+
+echo "copy installshell"
+cp  -rf ./tsf4g_connd.install ${TCONND_HOME}/
+cp  -rf ./tsf4g_connd.dependency ${TCONND_HOME}/
+cp  -rf ./tsf4g_connd.bat  ${TCONND_HOME}/ 
+
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">${TCONND_HOME}/version
+
+find ${TCONND_HOME} -name ".svn" -exec rm -rf {} \;>/dev/null 2>&1
+tar czvf ${TSF4G_CONND_RELEASE} ${TCONND_HOME}
+rm -rf ${TCONND_HOME}

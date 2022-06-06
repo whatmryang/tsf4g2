@@ -1,0 +1,28 @@
+
+实际上，这不是一个示例程序，它的目标不是演示如何使用TDR工具或者API，
+而是一个半成品的工具，其目的是帮助你定位调用tdr_hton/tdr_ntoh时遇到的错误。
+这个工具需要你提供一份.tdr文件，并且对现有代码做少许改动。
+
+
+具体的操作如下：
+1. 使用TDR工具(根据你的XML协议描述文件)生成.tdr文件
+2. 拷贝.tdr文件到当前目录下，重命令为checker.tdr
+3. 修改main.cpp第19行，改net为你的XML协议描述文件中metalib标签的name属性的值
+4. 修改main.cpp第67行，改模板参数Pkg为调用tdr_hton(或tdr_ntoh)时传入的meta的name
+5. 使用make命令编译、链接，生成可执行程序checker
+6. 执行./checker -h查看使用帮助
+7. 把调用tdr_hton(或tdr_ntoh)时传入的数据源导入到host_data.txt(或net_data.txt)中
+8. 参考./checker -h输出的使用信息，选择适合你的命令，并执行
+
+
+如果是相同的数据、相同的meta，调用tdr_hton或tdr_hton时返回了错误，
+执行上述操作后，预期同样会出现错误，同时输出若干行类似 "TSF4G_TDR_TRACE... checker.cpp:*" 的信息。
+最上面的信息是最近的调用输出的，直接打开checker.cpp文件，并跳转到相应的代码行，
+这行代码所在的 if 语句的条件，就是导致tdr_hton(或tdr_ntoh)失败的直接原因。
+如果你需要查看执行出错时各变量的值，可以在 "TSF4G_TDR_TRACE... checker.cpp:*" 所对应的各行语句加上断点，逐步调试。
+
+
+如果发现了错误所在，可能你还需要参考TDR的打解包规则，来确定错误的根本原因。
+以下是TDR相关的在线文档，供你参考:
+http://ied.oa.com/tsf4g/tsf4gonline/lib/tdr.htm
+

@@ -1,0 +1,32 @@
+#!/usr/local/bin/python
+# The set of source files associated with this SConscript file.
+import os
+Import('buildenv')
+
+buildenv.xml2h(Split('tbus_macros.xml tbus_comm.xml\
+        tbus_desc.xml tbusd_desc.xml tbus_desc_ex.xml'))
+
+Install("../tbus/", "tbus_macros.h")
+Install("../tbus/", "tbus_comm.h")
+Install("../tbus/", "tbus_desc.h")
+
+Install("../../include/tbus","tbus_macros.h")
+
+Install("../../tools_src/tbusconf/", "tbus_macros.h")
+Install("../../tools_src/tbusconf/", "tbus_comm.h")
+Install("../../tools_src/tbusconf/", "tbus_desc.h")
+Install("../../tools_src/tbusconf/", "tbusd_desc.h")
+
+Install("../../services_src/tbus_service/", "tbus_macros.h")
+Install("../../services_src/tbus_service/", "tbusd_desc.h")
+
+buildenv.xml2c('tbus_desc', Split('tbus_macros.xml\
+        tbus_comm.xml tbus_desc.xml tbusd_desc.xml tbus_desc_ex.xml'))
+
+InstallAs("../../test_lib/test_tdr/test_tbus_desc.cpp", "tbus_desc.c")
+InstallAs("../../test_lib/test_tbus_i/test_tbus_desc.cpp", "tbus_desc.c")
+
+tbus_i_sources = Glob('*.c')
+tbus_i_objs = buildenv.buildStaticObj(tbus_i_sources, MOUDLE='base');
+
+Return('tbus_i_objs');

@@ -1,0 +1,41 @@
+#  general description of this module
+#  $Id: Makefile,v 1.2 2009-02-17 11:17:25 jackyai Exp $
+#  @author $Author: jackyai $
+#  @date $Date: 2009-02-17 11:17:25 $
+#  @version 1.0
+#  @note Editor: Vim 6.1, Gcc 4.0.2, tab=4
+#  @note Platform: Linux
+
+include ../../../../../tsf4g.mk
+
+TDR_CFILE=$(wildcard *.c)
+TDR_OBJ=$(TDR_CFILE:.c=.o)
+TDR_BIN = server4as
+
+
+TDR_IMPORT_LIBS = $(LDPATH) ${TSF4G_LIB}/libtdr_xml.a  -lscew   -lexpat
+
+.PHONY: all clean
+
+
+all: $(TDR_BIN)
+
+-include $(TDR_CFILE:.c=.d)
+
+%.d: %.c
+	$(CC) -MM $(CFLAGS)  $< -o $@
+
+%.o: %.c %.d
+	$(CC) -c $(CFLAGS)  $(DEBUG) $<
+
+
+$(TDR_BIN): $(TDR_OBJ)
+	$(CC) -o $@  $(CFLAGS) $(DEBUG)   $^  $(TDR_IMPORT_LIBS)
+
+clean:
+	$(RM) *.o  *.d
+	$(RM) *.h
+	$(RM) *.tdr
+	$(RM) $(TDR_BIN)
+run:
+	./$(TDR_BIN)

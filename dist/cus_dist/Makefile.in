@@ -1,0 +1,27 @@
+#  @file $RCSfile: Makefile.in,v $
+#  define variable of cus
+#  $Id: Makefile.in,v 1.1 2009-01-04 09:28:06 jackyai Exp $
+#  @author $Author: jackyai $
+#  @date $Date: 2009-01-04 09:28:06 $
+#  @version $Revision: 1.1 $
+#  @note Editor: Vim 6.1, Gcc 4.0.1, tab=4
+#  @note Platform: Linux
+#
+
+#include ../../../tsf4g.mk
+
+TSF4G_HOME=$(TSF4G_INSTALL_HOME)
+TSF4G_INCLUDE = $(TSF4G_HOME)/include
+TSF4G_LIB = $(TSF4G_HOME)/lib
+TSF4G_TOOLS = $(TSF4G_HOME)/tools
+
+VERSRVR = cus
+
+
+CC = gcc
+CDBG  = -g 
+SHARED = -shared -z defs
+INC= -I $(TSF4G_INCLUDE) -I $(TSF4G_INCLUDE)/tlog2
+LDPATH  = -L$(TSF4G_LIB)/ -L./ -L/usr/lib/ -L/usr/local/lib
+
+CFLAGS  = -Wall -Wextra -pipe -D_NEW_LIC -D_GNU_SOURCE -D_REENTRANT -fPIC  $(CDBG) $(INC)

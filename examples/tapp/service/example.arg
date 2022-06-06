@@ -1,0 +1,7 @@
+argc:6
+argv[0]:example
+argv[1]:example
+argv[2]:--conf-file=conf/example.xml
+argv[3]:-D
+argv[4]:start
+argv[5]:start

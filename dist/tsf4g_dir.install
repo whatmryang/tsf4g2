@@ -1,0 +1,158 @@
+#/bin/bash
+
+if [ -z "$1" ];then
+  TSF4G_INSTALL_HOME=/usr/local/tsf4g_release
+else
+  TSF4G_INSTALL_HOME=$1
+fi  
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME} ];then
+   mkdir -p $TSF4G_INSTALL_HOME
+  mkdir $TSF4G_INSTALL_HOME/include
+  mkdir $TSF4G_INSTALL_HOME/lib
+  mkdir $TSF4G_INSTALL_HOME/tools
+  mkdir $TSF4G_INSTALL_HOME/apps
+  mkdir $TSF4G_INSTALL_HOME/docs
+  mkdir $TSF4G_INSTALL_HOME/docs/apps
+  mkdir $TSF4G_INSTALL_HOME/examples
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tdir ];then
+  mkdir -p $TSF4G_INSTALL_HOME/apps/tdir
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tdir/bin ];then
+  mkdir -p $TSF4G_INSTALL_HOME/apps/tdir/bin
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tdir/cfg ];then
+  mkdir -p $TSF4G_INSTALL_HOME/apps/tdir/cfg
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tdir/examples ];then
+  mkdir -p $TSF4G_INSTALL_HOME/apps/tdir/examples
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tdir/protocol ];then
+  mkdir -p $TSF4G_INSTALL_HOME/apps/tdir/protocol
+fi
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/include/apps/ ];then
+  mkdir -p $TSF4G_INSTALL_HOME/include/apps/
+fi
+
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/docs/apps/tdir ];then
+  mkdir $TSF4G_INSTALL_HOME/docs/apps/tdir/
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/examples/apps ];then
+  mkdir $TSF4G_INSTALL_HOME/examples/apps/
+fi
+
+
+CheckDependency()
+{   
+	 if [ $1 = "base" ];then
+       SearchPath=$TSF4G_INSTALL_HOME/version        
+     elif [ $1 = "tconnd" ];then
+       SearchPath=$TSF4G_INSTALL_HOME/apps/tconnd/version   
+     else
+       echo "unknown dependency module"
+       return 0
+     fi
+	 
+	
+		 DependencyVersion=`cat $BasePath/tsf4g_dir.dependency|grep -v "#"|grep -i "$1_min"|sed -n -e "s/^[ ]*$1_min[ ]*=//p" `
+
+	 
+     if [ -a $SearchPath ];then
+       CurrentVersion=`cat $SearchPath|grep -v "#"|grep -i "tsf4g"|awk '{ print $1; }'|sed -n -e "s/[a-zA-Z0-9]*_[a-zA-Z0-9]*_\(.*\)/\1/p" `
+     else
+       echo "Warning:module $1 was not installed in standard path,pls make sure version of $var installed  higher than dependent version:$DependencyVersion"
+       return 1  
+     fi
+     
+     if [[ $DependencyVersion > $CurrentVersion ]];then
+        echo "Warning:module $1 current installed is $CurrentVersion ;less than installed required:$DependencyVersion,pelease check version"
+        return 1
+     else
+        return 0
+     fi       
+}
+
+echo "check dir dependent module ...."
+
+BasePath=`echo $0|sed -n -e "s/\(.*\)\/[^\/]*$/\1/p" ` 
+
+Dependencys=` cat $BasePath/tsf4g_dir.dependency|grep -v "#"|grep -i "dependency"|sed -n -e "s/^[ ]*dependency[ ]*=//p" `
+ 
+for var in $Dependencys
+do 
+   CheckDependency $var
+   if [ $? != 0 ];then
+     echo "Warning:module $var current installed version check unsuccess! ,Do you want to continue install Anyall?[yes/no]"
+     read input
+     case "$input" in
+     yes|Yes|Y|y)
+        continue
+        ;;
+     no|No|N|n)
+        exit 1
+        ;;
+     *)
+        exit 0
+        ;;
+     esac
+   fi
+done
+
+echo "check dir dependent module done"
+
+
+
+echo "Install tdir...."
+cp ./version                      $TSF4G_INSTALL_HOME/apps/tdir/
+cp ./bin/*                        $TSF4G_INSTALL_HOME/apps/tdir/bin/
+
+if [ "$2" != "-C" ]
+then
+   echo "Install tdir template config"
+   cp ./cfg/*  $TSF4G_INSTALL_HOME/apps/tdir/cfg/
+fi
+		 
+
+cp -rf ./include/apps/tdirapi/ ${TSF4G_INSTALL_HOME}/include/apps/
+cp ./lib/libtdirapi.*   ${TSF4G_INSTALL_HOME}/lib/
+cp ./lib/libtdirapi_s.*   ${TSF4G_INSTALL_HOME}/lib/
+
+if [ ! -a ${TSF4G_INSTALL_HOME}/apps/tdr ];then
+  cp ./tools/tdr ${TSF4G_INSTALL_HOME}/tools/
+fi
+
+if [ ! -d ${TSF4G_INSTALL_HOME}/apps/tbusmgr ];then
+  cp ./tools/tbusmgr ${TSF4G_INSTALL_HOME}/tools/
+fi
+
+cp ./protocol/*        $TSF4G_INSTALL_HOME/apps/tdir/protocol/     
+
+
+
+cp ./tools/tbusmgr.xml.dir ${TSF4G_INSTALL_HOME}/tools/
+cp ./tools/tdir_init_bus.sh ${TSF4G_INSTALL_HOME}/tools/
+
+cp -rf ./examples/* ${TSF4G_INSTALL_HOME}/apps/tdir/examples/
+ln -s -f ${TSF4G_INSTALL_HOME}/apps/tdir/examples  ${TSF4G_INSTALL_HOME}/examples/apps/tdir
+
+
+cp ./docs/*   ${TSF4G_INSTALL_HOME}/docs/apps/tdir/
+
+
+echo "Install tdir done"
+
+
+
+
+

@@ -1,0 +1,89 @@
+#/bin/bash
+
+
+TSF4G_DIR=../
+
+TSF4G_TCM_RELEASE=tsf4g_tcm`date +%Y%m%d`.tgz
+
+cp_dir()
+{
+	src_dir=$1
+	dst_dir=$2
+	cp -a ${src_dir}/* ${dst_dir}/
+	shift
+	shift
+	for i in "$@"
+	do
+		find ${dst_dir} -name "$1" -exec rm -rf {} \; 
+		shift
+	done	
+}
+
+#main()
+echo "mkdir tmpdeploy/tsf4g_tcm"
+mkdir tmpdeploy
+mkdir tmpdeploy/tsf4g_tcm
+mkdir tmpdeploy/tsf4g_tcm/apps/
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm/lib
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm/bin
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm/cfg
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm/example
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm/docs
+mkdir tmpdeploy/tsf4g_tcm/apps/tcm/protocol
+mkdir tmpdeploy/tsf4g_tcm/include
+mkdir tmpdeploy/tsf4g_tcm/include/apps
+mkdir tmpdeploy/tsf4g_tcm/include/apps/tcmapi
+mkdir tmpdeploy/tsf4g_tcm/lib
+
+
+echo "cp tcm include"
+cp -rf ${TSF4G_DIR}/include/apps/tcmapi/tcm_config_api.h  tmpdeploy/tsf4g_tcm/include/apps/tcmapi/
+cp -rf ${TSF4G_DIR}/include/apps/tcmapi/tcm_config_plunin.h  tmpdeploy/tsf4g_tcm/include/apps/tcmapi/
+
+echo "cp tcm lib"
+cp -rf ${TSF4G_DIR}/apps/tcm/lib/mod* tmpdeploy/tsf4g_tcm/apps/tcm/lib/
+cp -rf ${TSF4G_DIR}/apps/tcm/lib/mmogxyz_config.so tmpdeploy/tsf4g_tcm/apps/tcm/lib/
+cp -rf ${TSF4G_DIR}/apps/tcm/lib/libtcmapi.a tmpdeploy/tsf4g_tcm/lib/
+
+echo "cp tcm docs"
+cp -rf ${TSF4G_DIR}//docs/apps/tcm/* tmpdeploy/tsf4g_tcm/apps/tcm/docs/
+
+echo "cp tcm bin"
+cp -rf ./tcm_dist/bin/* tmpdeploy/tsf4g_tcm/apps/tcm/bin/
+cp ${TSF4G_DIR}/apps/tcm/bin/tcmcenter tmpdeploy/tsf4g_tcm/apps/tcm/bin/
+cp ${TSF4G_DIR}/apps/tcm/bin/tcmconsole tmpdeploy/tsf4g_tcm/apps/tcm/bin/
+
+echo "cp tcm cfg"
+cp -rf ./tcm_dist/cfg/* tmpdeploy/tsf4g_tcm/apps/tcm/cfg/
+
+echo "cp tcm example"
+cp_dir ${TSF4G_DIR}/apps/tcm/example tmpdeploy/tsf4g_tcm/apps/tcm/example 
+rm -rf tmpdeploy/tsf4g_tcm/apps/tcm/example/src/Makefile
+mv tmpdeploy/tsf4g_tcm/apps/tcm/example/src/Makefile.release tmpdeploy/tsf4g_tcm/apps/tcm/example/src/Makefile
+
+rm -rf tmpdeploy/tsf4g_tcm/apps/tcm/example/src/mmogxyz_conf/Makefile
+mv tmpdeploy/tsf4g_tcm/apps/tcm/example/src/mmogxyz_conf/Makefile.release tmpdeploy/tsf4g_tcm/apps/tcm/example/src/mmogxyz_conf/Makefile
+rm -rf tmpdeploy/tsf4g_tcm/apps/tcm/example/src/mmogxyz_conf/Makefile.real
+mv tmpdeploy/tsf4g_tcm/apps/tcm/example/src/mmogxyz_conf/Makefile.real.release tmpdeploy/tsf4g_tcm/apps/tcm/example/src/mmogxyz_conf/Makefile.real
+
+rm -rf tmpdeploy/tsf4g_tcm/apps/tcm/example/src/test_config/Makefile
+mv tmpdeploy/tsf4g_tcm/apps/tcm/example/src/test_config/Makefile.release tmpdeploy/tsf4g_tcm/apps/tcm/example/src/test_config/Makefile
+
+
+echo "cp protocol"
+cp -rf ${TSF4G_DIR}/apps/tcm/cfg/tcm_proto.tdr tmpdeploy/tsf4g_tcm/apps/tcm/protocol/
+
+cp ./tsf4g_cm.install tmpdeploy/tsf4g_tcm/
+
+cd tmpdeploy
+echo "Generate version"
+echo "$1 build at `date +%Y%m%d`">tsf4g_tcm/version
+
+find ./  -name ".svn" -exec rm -rf {} \;
+
+tar czvf ${TSF4G_TCM_RELEASE} tsf4g_tcm 
+mv ${TSF4G_TCM_RELEASE} ../
+cd ../
+rm -rf tmpdeploy
+
